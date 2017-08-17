@@ -378,7 +378,7 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
         if($.jStorage.get("id") == null || $.jStorage.get("id") == "" || $.jStorage.get("id")==0)
         {
             $.jStorage.set("notloggedin",true);
-            $state.go("login");
+            //$state.go("login");
         }    
         else
         {
@@ -461,7 +461,7 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
     
 
 })
-    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService,CsrfTokenService, $timeout,$http,apiService,$state,$uibModal,Menuservice,tts) {
+    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService,CsrfTokenService, $timeout,$http,apiService,$state,$uibModal,Menuservice,tts,$sce) {
         
         $rootScope.autocompletelist = [];
         $rootScope.chatOpen = false;
@@ -471,11 +471,15 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
         $rootScope.chatmsgid = "";
         
         $rootScope.msgSelected = false;
-        var mylist = $.jStorage.get("chatlist");
+        //var mylist = $.jStorage.get("chatlist");
+        var mylist = [];
         if(!mylist || mylist == null)
             $rootScope.chatlist = [];
         else
-            $rootScope.chatlist = $.jStorage.get("chatlist");
+        {
+            //$rootScope.chatlist = $.jStorage.get("chatlist");
+            $rootScope.chatlist = mylist;
+        }
         $rootScope.autolistid="";
         $rootScope.autolistvalue="";
         $rootScope.showMsgLoader=false;
@@ -557,17 +561,17 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
                 $rootScope.autocompletelist = [];
             else {
                 $rootScope.chatdata = { string:$rootScope.chatText};
-                apiService.getautocomplete($rootScope.chatdata).then(function (response){
-                       // console.log(response.data);
-                    $rootScope.autocompletelist = response.data.data;
-                });
+                // apiService.getautocomplete($rootScope.chatdata).then(function (response){
+                //        // console.log(response.data);
+                //     $rootScope.autocompletelist = response.data.data;
+                // });
             }
         };
         $rootScope.pushSystemMsg = function(id,value) {
             $rootScope.chatmsgid = id;
             $rootScope.chatmsg = value;
             $rootScope.chatlist.push({id:"id",msg:value,position:"left",curTime: $rootScope.getDatetime()});
-            $.jStorage.set("chatlist",$rootScope.chatlist);
+            //$.jStorage.set("chatlist",$rootScope.chatlist);
             $timeout(function(){
                 $rootScope.scrollChatWindow();
             });
@@ -690,108 +694,88 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
             $('#myCarousel').find('.item').first().addClass('active');
             $rootScope.showMsgLoader = false; 
         };
+        $rootScope.trustSrc = function(src) {
+            return $sce.trustAsResourceUrl(src);
+        };
         $rootScope.getSystemMsg = function(id,value){
-            //console.log("id",id);
-            //CsrfTokenService.getCookie("csrftoken").then(function(token) {
-                //$rootScope.formData = {user_id:1164,user_input:value,auto_id:parseInt(id),auto_value:value,'csrfmiddlewaretoken':token};
-                var mysessiondata = $.jStorage.get("sessiondata");
-                //mysessiondata = mysessiondata.toObject();
-                mysessiondata.data = {auto_id:parseInt(id),Text:value};
-                $rootScope.formData = mysessiondata;
+                var myscript = "<script type='text/javascript'>";
+                if(value == "chart1")
+                {
+                    myscript += "app.visualization.create('barchart',";
+                    myscript += "['City','=Avg([Sales Amount])'],"; // one dimension, one measure
+                    myscript += "{'title':'On the fly barchart'})";                   // and we set the title
+                    myscript += "   .then(   ";
+                    myscript += " function(vis){";
+                    myscript += " vis.show('QV03'); });";
+                    myscript += "</script>";                            
+                    iframedata = {type:"iframe",url:"http://localhost:4848/extensions/PRJ4/PRJ4.html",text:"Lorem ipsum dolor sit amet"};
+                    
+                    $rootScope.currentProjectUrl = iframedata.url;
+                    var myIframe = document.getElementById("framechart");
+                    //var script = myIframe.contentWindow.document.createElement("script");
+                    // script.type = "text/javascript";
+                    // script.src = src;
+                    //myIframe.contentWindow.document.body.appendChild(script);
+                    //myIframe.contentWindow.document.body.appendChild(myscript);
+                    //$('.framechart').contents().find('body').append(myscript);
+                    // var qlikIsolatedLoadConfig = {
+                    //     url : 'http://localhost:4848',
+                    //     prefix : '/'
+                    // }
+                    // var prefix = window.location.pathname.substr( 0, window.location.pathname.toLowerCase().lastIndexOf( "/extensions" ) + 1 );
+                    var config = {
+                        host: "localhost",
+                        prefix: "/",
+                        port: 4848,
+                        isSecure: window.location.protocol === "https:",
+                        baseUrl: "http://localhost:4848"
+                    };
+                    qlikIsolated.getQlik('http://localhost:4848')
+                    .then(function(qlik){
+                        // qlik object can be access here 
+                        //console.log(qlik);
+                        var app = qlik.openApp('Consumer_Sales.qvf', config);
+                        //console.log(app);
+                        //var newobj = app.getObject("qFrame","prgzES");
+                        //console.log(newobj);
+                        app.visualization.create('barchart',                       // we want a barchart
+                        ["City","=Avg([Sales Amount])"], // one dimension, one measure
+                        {"title":"On the fly barchart"}).then(function(vis){
+                            vis.show("qFrame");                              // show the chart in a HTML element with id "QV03"
+                        }, function(error){
+                            console.log(error);
+                            /* error info */
+                        });
+                        
+                    })
+                    // qlikIsolated.getObjectIsolated(	$('#qlikdiv'),  // element
+                    //     'Consumer_Sales.qvf', // app id
+                    //     'zswLzs',     // object id
+                    //     '',
+                    //     //'eRxSeT',     // sheet id (optional, if object id is specified)
+                    //     'http://localhost:4848'
+                    // ); 
+                }
+                if(value == "chart1")
+                {
+                    iframedata = {type:"iframe",url:"http://localhost:4848/extensions/PRJ2/PRJ2.html",text:"Lorem ipsum dolor sit amet"};
+                    
+                    $rootScope.currentProjectUrl = iframedata.url;
+                }
+                else
+                {
+                    iframedata = {type:"iframe",url:"http://localhost:4848/extensions/PRJ3/PRJ3.html",text:"Lorem ipsum dolor sit amet"};
+                    
+                    $rootScope.currentProjectUrl = iframedata.url;
+                }
+                //console.log($rootScope.currentProjectUrl);
+                $rootScope.pushSystemMsg(0,iframedata);
+                $rootScope.showMsgLoader = false;
                 $timeout(function(){
                     $(".chatinput").val("");
                 });
-                apiService.getSysMsg($rootScope.formData).then(function (data){
-                    
-                    angular.forEach(data.data.data.tiledlist, function(value, key) {
-                        //console.log(value);
-                        if(value.type=="text")
-                        {
-                        	$rootScope.pushSystemMsg(0,data.data.data);
-                            $rootScope.showMsgLoader = false;
-                            
-                            
-                            return false;
-                        }
-                        if(value.type=="rate card")
-                        {
-                            $rootScope.pushSystemMsg(0,data.data.data);
-                            $rootScope.showMsgLoader = false;
-                            
-                            
-                            return false;
-                        }
-                        else if(value.type=="DTHyperlink")
-                        {
-                           $rootScope.DthResponse(0,data.data.data);  
-                        }
-                        else if(value.type=="Instruction")
-                        {
-                           $rootScope.InstructionResponse(0,data.data.data);  
-                        }
-                        
-                    });
-                    $timeout(function(){
-                        var textspeech = data.data.data.tiledlist[0].Script[0];
-                        $.jStorage.set("texttospeak",textspeech);
-
-                        $('#mybtn_trigger').trigger('click');
-                        
-                    },200);
-                    // apiService.getttsSpeech({text:data.data.data.tiledlist[0].Script[0]}).then(function (data){
-
-                    // });
-                    // $('#mybtn_trigger').bind('click', function(event, textspeech) {
-                       
-
-                    // }); 
-                    // var msg = new SpeechSynthesisUtterance(data.data.data.tiledlist[0].Script[0]);
-                    // window.speechSynthesis.speak(msg);
-                    // var speech = new SpeechSynthesisUtterance();
-                    // speech.text = data.data.data.tiledlist[0].Script[0];
-                    // speech.volume = 1; // 0 to 1
-                    // speech.rate = 1; // 0.1 to 9
-                    // speech.pitch = 1; // 0 to 2, 1=normal
-                    // speech.lang = "en-US";
-                    // speechSynthesis.speak(speech);
-                    tts.speech({
-                        src: data.data.data.tiledlist[0].Script[0],
-                        hl: 'en-us',
-                        r: 0, 
-                        c: 'mp3',
-                        f: '44khz_16bit_stereo',
-                        ssml: false,
-                       
-                    });
-                    $http({
-                        url: "http://api.voicerss.org/?key=5a1cc1a178c24b89ba23fd6e3b1bb6c5&hl=en-us&src="+data.data.data.tiledlist[0].topic,
-                        method: 'POST',
-                        //data:(formData),
-                        withCredentials: false,
-                        //headers: {'Content-Type': 'application/json','X-CSRFToken': "Vfpx6pWJYBx7dbX35vwXm7P9xj3xNPyUJbSx9IlwgcRHReN974ZC5rEbvgpRQdY2"},
-                    }).then(function (data){
-                       console.log(data); 
-                        // var audioElement = document.getElementById('ttsaudio');
-                        // audioElement.setAttribute('src', src);
-                        // // Load src of the audio file
-                        // audioElement.load();
-                        // audioElement.play();
-                        // output =  '<audio id="ttsaudio1">';
-                        // // you can add more source tag
-                        // output +=  '<source src='+data.data+'" type="audio/mp3" />';
-                        // output +=  '</audio>';
-                        //  //var newAudio = $(createAudio(src));
-                        // $("#ttsaudio").replaceWith(output);
-                        // $("#ttsaudio1").load();
-                        // $("#ttsaudio1").play();
-                    });
-                    
-
-                    $("#topic").text(data.data.data.tiledlist[0].topic);
-                    $.jStorage.set("sessiondata",data.data.data.session_obj_data);
-                });
-            //});
-            
+                
+              
         };
         
         $rootScope.Speaktext = function() {
@@ -903,8 +887,9 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
                     $(".chatinput").val("");
                     $rootScope.pushMsg("",$rootScope.chatText);
                 }
-                else
-                    $rootScope.pushMsg($rootScope.autolistid,$rootScope.autolistvalue);
+                else {
+                    $rootScope.pushMsg($rootScope.autolistid,$rootScope.chatText);
+                }
             }
         };
         $rootScope.crnSubmit = function(crnno) {

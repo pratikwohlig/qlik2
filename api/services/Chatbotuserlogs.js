@@ -29,7 +29,7 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('Chatbotuserlogs', schema,'chatbot_user_logs');
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "Chatbotuserlogs", "Chatbotuserlogs"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema));
 var model = {
     logoutuser:function (data, callback) {
         

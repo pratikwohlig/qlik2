@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*
- * jQuery FlexSlider v2.6.3
+ * jQuery FlexSlider v2.6.4
  * http://www.woothemes.com/flexslider/
  *
  * Copyright 2012 WooThemes
@@ -10236,6 +10236,17 @@ li.ui-menu-item {
   right: 12px;
   width: 30%; }
 
+#chat_window_1 .panel-footer {
+  width: 100% !important; }
+
+.framechart {
+  width: 90%;
+  height: 300px;
+  border: 0px; }
+
+p.systext {
+  margin-left: 25px; }
+
 .profileDetail span {
   font-weight: bold;
   color: #204d74; }
@@ -10340,7 +10351,7 @@ button.headerbtns:focus {
   border-color: transparent; }
 
 .panel-body {
-  background-color: #fafafa; }
+  background-color: #fff; }
 
 .chat {
   list-style: none;

@@ -28,6 +28,7 @@ module.exports = [
   "bower_components/ng-idle/angular-idle.js",
   "bower_components/angular-ui-carousel/dist/ui-carousel.min.js",
   "bower_components/angular-bowser/src/angular-bowser.js",
+  "bower_components/qlik-isolated/qlik-isolated.min.js",
   //App.js
   'frontend/js/app.js',
 

@@ -93,6 +93,16 @@ li.ui-menu-item {
     right:12px;
     width: 30%;
 }
+
+#chat_window_1 .panel-footer  { width:100% !important; }
+.framechart {
+    width:90%;
+    height:300px;
+    border: 0px;
+}
+p.systext {
+    margin-left:25px;
+}
 .profileDetail span { 
     font-weight:bold;
     color:#204d74;
@@ -198,7 +208,7 @@ width:90%;
 }
 
 .panel-body{
-background-color: #fafafa;
+background-color: #fff;
 }
 .chat
 {
