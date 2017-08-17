@@ -63,6 +63,7 @@
     "passport-twitter": "^1.0.4",
     "postcss-cli": "^3.0.0-beta",
     "python-shell": "^0.4.0",
+    "qlik-isolated": "^1.0.6",
     "rand-token": "^0.2.1",
     "rc": "1.0.1",
     "request": "^2.74.0",

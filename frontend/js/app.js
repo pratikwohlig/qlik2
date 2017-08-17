@@ -157,7 +157,7 @@ myApp.run(['$http','$cookies','beforeUnload','$document','$rootScope','Idle','bo
             }
         });
         $(document).bind("contextmenu",function(e) {
-            e.preventDefault();
+            //e.preventDefault();
         });
         $rootScope.$on('IdleTimeout', function() {
             var scope = angular.element(document.getElementById('changepwd')).scope();

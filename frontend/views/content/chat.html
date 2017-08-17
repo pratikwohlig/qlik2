@@ -1,12 +1,11 @@
 <div id="chat_window_1" ng-controller="ChatCtrl" chatbotHeight >
         <div class="panel panel-primary " id="chat_panel" ng-init="chat_tab = 1">
             <div class="panel-heading container-fluid" id="accordion">
-                <!--<span class="glyphicon glyphicon-comment"></span> Chat-->
-                <ul class="nav nav-tabs" id="chatTabs">
+                <span class="glyphicon glyphicon-comment"></span> Chat
+                <!--<ul class="nav nav-tabs" id="chatTabs">
                     <li class="active" data-toggle="tab" ng-click="chat_tab=1"><a href="#chattab">Chat</a></li>
-                    <li><a href="#crntab" data-toggle="tab" ng-click="chat_tab=2">CRN NO.</a></li>
-                    <li><a href="#srtab" data-toggle="tab" ng-click="chat_tab=3">SR NO.</a></li>
-                </ul>
+                    
+                </ul>-->
                 <div class="btn-group pull-right">
                     <a type="button" class="btn btn-default btn-xs hidden" href="#">
                         <span id="minim_chat_window " class="glyphicon glyphicon-minus icon_minim"></span>
@@ -17,16 +16,16 @@
                 </div>
             </div>
             <div class="container-fluid chatbody">
-                <div class="tab-content chattab-content">
+                <!-- <div class="tab-content chattab-content"> -->
                     
-                    <div class="tab-pane active row" id="chattab" ng-if="chat_tab === 1">
-                        <div class="panel-body"> 
+                    <!-- <div class="tab-pane active row" id="chattab" ng-if="chat_tab === 1"> -->
+                        <div class="panel-body row"> 
                             <ul class="chat">
                                 <li class="{{list.position}} lastchat clearfix" ng-repeat="list in chatlist track by $index">
                                     <span class="chat-img pull-{{list.position}}">
                                         <img ng-src="img/{{list.position == 'left' && 'logo5.jpg' || 'logo7.png'}}" alt="BOT" class="img-circle " />
                                     </span>
-                                    <div ng-class="{'chat-body':list.position==='right' || list.msg.tiledlist[0].type !== 'Instruction'}">
+                                    <div ng-class="{'chat-body':list.position==='right'}">
                                         <div class="clearfix" ng-if="list.position==='right'">
                                             <p class="lastmsg" >
                                                 <ng-bind-html ng-bind-html = "list.msg">
@@ -34,123 +33,19 @@
                                                 </ng-bind-html>
                                             </p>
                                         </div>
-                                        <div class=" clearfix" ng-if="list.position==='left' && list.msg.tiledlist ">
-                                            <div class="sysChatRes"  ng-repeat="chatRes in list.msg.tiledlist">
-                                                <div class="chatType" ng-if="list.msg.tiledlist[0].type==='text'">
-                                                    <p class="lastmsg" >
-                                                        <ng-bind-html ng-bind-html = "chatRes.Text|newlines">
-                                                            
-                                                            {{chatRes.Text}}
-                                                        </ng-bind-html>
-                                                        
-                                                        <!-- <small class="chatTime">
-                                                            <span class="glyphicon glyphicon-time">
-                                                            </span>
-                                                            {{list.curTime | date: 'HH:mm:ss'}}
-                                                        </small> -->
+                                        <div class=" clearfix" ng-if="list.position==='left' ">
+                                            <div class="sysChatRes"  >
+                                                <br>
+                                                <div class="chatType" ng-if="list.msg.type==='iframe'">
+                                                    <p ng-if="list.msg.text !==''" class="systext">
+                                                        {{list.msg.text}}
                                                     </p>
-                                                </div>
-                                                <div class="chatType" ng-if="list.msg.tiledlist[0].type==='rate card'">
-                                                    <p class="lastmsg" >
-                                                        <ng-bind-html >
-                                                            <label for="col_val_[chatRes.col_name]">{{chatRes.col_name}} : </label>
-                                                            <select ng-attr-id="{{'col_val_'+rate_count}}" ng-model="r[rate_count].ratecard_col_select" ng-options="coldata for coldata in chatRes.data_col" class="form-control">
-                                                                
-                                                            </select>
-                                                            <br>
-                                                            <label for="lcol_val_[chatRes.row_name]">{{chatRes.row_name}} : </label>
-                                                            <select ng-attr-id="{{'data_val_'+rate_count}}" ng-model="r[rate_count].ratecard_data_select" ng-options="rowdata for rowdata in chatRes.data_row" class="form-control">
-                                                                
-                                                            </select>
-                                                            <br>
-                                                            <input class='rate_btn btn btn-default pull-right' id='rate_btn' type='button' value='Get Limit' ng-click="ratecardSubmit(r[rate_count].ratecard_col_select,r[rate_count].ratecard_data_select);" />
-                                                        </ng-bind-html>
-<!--                                                         
-                                                        <small class="chatTime">
-                                                            <span class="glyphicon glyphicon-time">
-                                                            </span>
-                                                            {{list.curTime | date: 'HH:mm:ss'}}
-                                                        </small> -->
-                                                    </p>
-                                                </div>
-                                                <div class="chatType" ng-if="list.msg.tiledlist[0].type==='DTHyperlink'">
+                                                    <!-- <iframe id="framechart" class="framechart" ng-src="{{trustSrc(list.msg.url);}}"> content </iframe> -->
+                                                    <object data="{{trustSrc(list.msg.url);}}" class="framechart" >
+                                                        <embed ng-src="{{trustSrc(list.msg.url);}}"  > </embed>
+                                                    </object>
+                                                    <div class="qlikdiv qvobject" id="qlikdiv">
                                                     
-                                                    <ng-bind-html ng-if="chatRes.Text != ''" ng-bind-html="chatRes.Text|newlines">
-                                                        <p class="lastmsg" >
-                                                            {{chatRes.Text}}     
-                                                        </p>
-                                                    </ng-bind-html>
-                                                    <!-- <p class="lastmsg redtext" ng-repeat="scrpttext in chatRes.Script">
-                                                        <ng-bind-html ng-bind-html="scrpttext|newlines">
-                                                            {{scrpttext}}
-                                                        </ng-bind-html>
-                                                    </p>
-                                                    <p class="lastmsg" ng-repeat="processtext in chatRes.Process">
-                                                        <ng-bind-html ng-bind-html="processtext|newlines">
-                                                            {{processtext}}
-                                                        </ng-bind-html>
-                                                    </p> -->
-                                                    </p>
-                                                    <div class="dthyperlink lastmsg" ng-repeat="dthlink in chatRes.DTHyperlink" data-id="{{dthlink}}" data-url-id="innerLink" data-line="{{chatRes.line_no[$index]}}" data-col="{{chatRes.col_no[$index]}}" ng-click="getDthlinkRes(chatRes.col_no[$index],chatRes.line_no[$index],dthlink);">
-                                                        {{dthlink}}
-                                                    </div>
-                                                </div>
-                                                <div class="chatType" ng-if="list.msg.tiledlist[0].type==='Instruction'">
-                                                    <!-- <ui-carousel slides="chatRes.imagelist" slides-to-show="3" slides-to-scroll="1" initial-slide="1" autoplay="true" autoplay-speed="2000" dots="true">
-                                                        <carousel-item>
-                                                            <h3>{{ item + 1 }}</h3>
-                                                        </carousel-item>
-                                                    </ui-carousel> -->
-                                                                                                      
-                                                    <div class='carousel slide' id='myCarousel'>
-                                                        <div class='carousel-inner'>
-                                                            <div class='item carousel_item' ng-class="{active:!$index}" ng-repeat="imglist in chatRes.imagelist track by $index" ng-if="$index % 3 == 0">
-                                                                <div class="col-xs-4" >
-                                                                    <div class="img-box">
-                                                                        <a ng-href="{{chatRes.imagelist[$index].Image}}"  data-fancybox="group" rel="gallary" fancybox >
-                                                                            <img ng-src="{{chatRes.imagelist[$index].Image}}" class="img-full">
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="text-box" ng-if="chatRes.imagelist[$index].Text!='Text'">
-                                                                        <span>
-                                                                            <ng-bind-html  ng-bind-html="chatRes.imagelist[$index].Text|newlines">
-                                                                                {{chatRes.imagelist[$index].Text}}
-                                                                            </ng-bind-html>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xs-4" ng-if="chatRes.imagelist[$index+1] != null">
-                                                                    <div class="img-box">
-                                                                        <a ng-href="{{chatRes.imagelist[$index+1].Image}}"  data-fancybox="group" rel="gallary" fancybox >
-                                                                            <img ng-src="{{chatRes.imagelist[$index+1].Image}}" class="img-full">
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="text-box" ng-if="chatRes.imagelist[$index+1].Text!='Text'">
-                                                                        <span>
-                                                                            <ng-bind-html  ng-bind-html="chatRes.imagelist[$index+1].Text|newlines">
-                                                                                {{chatRes.imagelist[$index+1].Text}}
-                                                                            </ng-bind-html>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xs-4" ng-if="chatRes.imagelist[$index+1] != null">
-                                                                    <div class="img-box">
-                                                                        <a ng-href="{{chatRes.imagelist[$index+2].Image}}"  data-fancybox="group" rel="gallary" fancybox >
-                                                                            <img ng-src="{{chatRes.imagelist[$index+2].Image}}" class="img-full">
-                                                                        </a>
-                                                                    </div>
-                                                                    <div class="text-box" ng-if="chatRes.imagelist[$index+2].Text!='Text'">
-                                                                        <span>
-                                                                            <ng-bind-html  ng-bind-html="chatRes.imagelist[$index+2].Text|newlines">
-                                                                                {{chatRes.imagelist[$index+2].Text}}
-                                                                            </ng-bind-html>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <a class='left carousel-control' href='#myCarousel' data-slide='prev'><i class='glyphicon glyphicon-chevron-left'></i></a>
-                                                        <a class='right carousel-control' href='#myCarousel' data-slide='next'><i class='glyphicon glyphicon-chevron-right'></i></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -173,7 +68,7 @@
                                 </li>    
                             </ul>
                         </div>
-                        <div class="panel-footer ">
+                        <div class="panel-footer row">
                             <div class="form-group">
                                 <span  class="thumbsIcon">
                                     <span class="chatbottomtext">Was this information useful ? 
@@ -211,28 +106,8 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane" id="crntab" ng-show="chat_tab === 2">
-                        <div class="form-inline input-group-sm">
-                            <input type="text" class="form-control" placeholder="CRN no" ng-model="crnno" name="crn" required>
-                            <button id="crnsr1" type="submit" class="btn btn-primary btn-sm" ng-click="crnSubmit(crnno);">Query</button>
-                            <button id="" type="submit" class="btn btn-primary btn-sm">Tag with CRN</button>
-                        </div>
-                        <div class="crn">
-                            <p id="crn_details"></p>
-                        </div>
-                    </div>
-                    <div class="tab-pane" id="srtab" ng-show="chat_tab === 3">
-                        <div class="form-inline input-group-sm">
-                            <input type="text" class="form-control" placeholder="SR no" name="sr" ng-model="srno">
-                            <button id="crnsr" type="submit" class="btn btn-primary btn-sm" ng-click="srnSubmit(srno,crnno);">Query</button>
-                            <button id="" type="submit" class="btn btn-primary btn-sm srbtn" >Create SR</button>
-                        </div>
-                        <div class="crn">
-                            <p id="sr_details"></p>
-                        </div>
-                    </div>
-                </div>
+                    <!-- </div> -->  
+                <!-- </div> -->
             </div>
         </div>
     </div>
