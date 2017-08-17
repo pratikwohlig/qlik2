@@ -185,6 +185,42 @@ myApp.factory('apiService', function ($http, $q, $timeout,CsrfTokenService,$http
             
             
         },
+        startRecording:function(formData,callback){
+            //console.log(formData);
+            return    $http({
+                //url:adminurl+'out/'+formData.user_id+"/",
+                url: adminUrl3 + 'Chatbotvoice/startRecording',
+                method: 'POST',
+                data:(formData),
+                withCredentials: false
+            });
+            
+            
+        },
+        stopRecording:function(formData,callback){
+            //console.log(formData);
+            return    $http({
+                //url:adminurl+'out/'+formData.user_id+"/",
+                url: adminUrl3 + 'Chatbotvoice/stopRecording',
+                method: 'POST',
+                data:(formData),
+                withCredentials: false
+            });
+            
+            
+        },
+        tts:function(formData,callback){
+            //console.log(formData);
+            return    $http({
+                //url:adminurl+'out/'+formData.user_id+"/",
+                url: adminUrl3 + 'Chatbotvoice/startRecoding1',
+                method: 'POST',
+                data:(formData),
+                withCredentials: false
+            });
+            
+            
+        },
     };
     //return responsedata;
 });

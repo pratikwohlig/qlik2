@@ -4,11 +4,11 @@
  * Usage: Add this directive in your Directives folder.
  */
 
-angular.module('app.directives', []).directive('ngSpeechRecognitionStart', function ($timeout, $rootScope) {
+angular.module('app.directives', []).directive('ngSpeechRecognitionStart', function ($timeout, $rootScope,apiService) {
 	return {
 		restrict: 'A',
 		link: function ($scope, $element, $attrs) {
-
+			
 			// if (typeof Windows !== 'undefined' &&
 			// 	typeof Windows.UI !== 'undefined' &&
 			// 	typeof Windows.ApplicationModel !== 'undefined') 
@@ -46,7 +46,9 @@ angular.module('app.directives', []).directive('ngSpeechRecognitionStart', funct
 			// else {
 			// console.log("Windows namespace is unavaiable");
 			// }
-			
+			//if($rootScope.browser=="safari") 
+			{
+
 			if($rootScope.browser=="chrome") {
 				var recognition = new window.webkitSpeechRecognition();
 			} else if($rootScope.browser=="firefox") {
@@ -154,6 +156,22 @@ angular.module('app.directives', []).directive('ngSpeechRecognitionStart', funct
 					});
 				}
 			});
+			}
+			// /else
+			// {
+			// 	$element.bind('touchstart mousedown', function (event) {
+			// 		apiService.startRecording("").then(function (response){
+            //            // console.log(response.data);
+			// 			//$rootScope.autocompletelist = response.data.data;
+			// 		});
+			// 	});
+			// 	$element.bind('touchend mouseup', function (event) {
+			// 		// apiService.stopRecording("").then(function (response){
+            //         //    // console.log(response.data);
+			// 		// 	//$rootScope.autocompletelist = response.data.data;
+			// 		// });
+			// 	});
+			// }
 		}
 	};
 })
