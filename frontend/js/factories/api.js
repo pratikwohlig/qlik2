@@ -256,6 +256,19 @@ myApp.factory('apiService', function ($http, $q, $timeout,CsrfTokenService,$http
             
             
         },
+        getQlikChart:function(formData,callback){
+            
+            return    $http({
+                url:adminurl+'getQlikChart/',
+                method: 'POST',
+                data:$.param(formData),
+                dataType:"json",
+                //xsrfHeaderName :"X-CSRFToken",
+                //xsrfCookieName :"csrftoken",
+                //withCredentials: false,
+                //headers: {'X-CSRFToken': formData.csrfmiddlewaretoken},
+            });
+        }
     };
     //return responsedata;
 });

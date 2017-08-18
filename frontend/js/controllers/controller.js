@@ -698,82 +698,91 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
             return $sce.trustAsResourceUrl(src);
         };
         $rootScope.getSystemMsg = function(id,value){
-                var myscript = "<script type='text/javascript'>";
-                if(value == "chart1")
-                {
-                    myscript += "app.visualization.create('barchart',";
-                    myscript += "['City','=Avg([Sales Amount])'],"; // one dimension, one measure
-                    myscript += "{'title':'On the fly barchart'})";                   // and we set the title
-                    myscript += "   .then(   ";
-                    myscript += " function(vis){";
-                    myscript += " vis.show('QV03'); });";
-                    myscript += "</script>";                            
-                    iframedata = {type:"iframe",url:"http://localhost:4848/extensions/PRJ4/PRJ4.html",text:"Lorem ipsum dolor sit amet"};
-                    
-                    $rootScope.currentProjectUrl = iframedata.url;
-                    var myIframe = document.getElementById("framechart");
-                    //var script = myIframe.contentWindow.document.createElement("script");
-                    // script.type = "text/javascript";
-                    // script.src = src;
-                    //myIframe.contentWindow.document.body.appendChild(script);
-                    //myIframe.contentWindow.document.body.appendChild(myscript);
-                    //$('.framechart').contents().find('body').append(myscript);
-                    // var qlikIsolatedLoadConfig = {
-                    //     url : 'http://localhost:4848',
-                    //     prefix : '/'
-                    // }
-                    // var prefix = window.location.pathname.substr( 0, window.location.pathname.toLowerCase().lastIndexOf( "/extensions" ) + 1 );
-                    var config = {
-                        host: "localhost",
-                        prefix: "/",
-                        port: 4848,
-                        isSecure: window.location.protocol === "https:",
-                        baseUrl: "http://localhost:4848"
-                    };
-                    qlikIsolated.getQlik('http://localhost:4848')
-                    .then(function(qlik){
-                        // qlik object can be access here 
-                        //console.log(qlik);
-                        var app = qlik.openApp('Consumer_Sales.qvf', config);
-                        //console.log(app);
-                        //var newobj = app.getObject("qFrame","prgzES");
-                        //console.log(newobj);
-                        app.visualization.create('barchart',                       // we want a barchart
-                        ["City","=Avg([Sales Amount])"], // one dimension, one measure
-                        {"title":"On the fly barchart"}).then(function(vis){
-                            vis.show("qFrame");                              // show the chart in a HTML element with id "QV03"
-                        }, function(error){
-                            console.log(error);
-                            /* error info */
-                        });
-                        
-                    })
-                    // qlikIsolated.getObjectIsolated(	$('#qlikdiv'),  // element
-                    //     'Consumer_Sales.qvf', // app id
-                    //     'zswLzs',     // object id
-                    //     '',
-                    //     //'eRxSeT',     // sheet id (optional, if object id is specified)
-                    //     'http://localhost:4848'
-                    // ); 
-                }
-                if(value == "chart1")
-                {
-                    iframedata = {type:"iframe",url:"http://localhost:4848/extensions/PRJ2/PRJ2.html",text:"Lorem ipsum dolor sit amet"};
-                    
-                    $rootScope.currentProjectUrl = iframedata.url;
-                }
-                else
-                {
-                    iframedata = {type:"iframe",url:"http://localhost:4848/extensions/PRJ3/PRJ3.html",text:"Lorem ipsum dolor sit amet"};
-                    
-                    $rootScope.currentProjectUrl = iframedata.url;
-                }
-                //console.log($rootScope.currentProjectUrl);
-                $rootScope.pushSystemMsg(0,iframedata);
+            formData = {text:value};
+            console.log(formData);
+            apiService.getQlikChart(formData).then(function (data){
+                framedata = data.data.data;
+                framedata.type = "iframe";
+                $rootScope.currentProjectUrl = framedata.url;
+                console.log(framedate,"Response");
+                $rootScope.pushSystemMsg(0,framedata);
                 $rootScope.showMsgLoader = false;
                 $timeout(function(){
                     $(".chatinput").val("");
                 });
+            });
+                // var myscript = "<script type='text/javascript'>";
+                // if(value == "chart1")
+                // {
+                //     myscript += "app.visualization.create('barchart',";
+                //     myscript += "['City','=Avg([Sales Amount])'],"; // one dimension, one measure
+                //     myscript += "{'title':'On the fly barchart'})";                   // and we set the title
+                //     myscript += "   .then(   ";
+                //     myscript += " function(vis){";
+                //     myscript += " vis.show('QV03'); });";
+                //     myscript += "</script>";                            
+                //     iframedata = {type:"iframe",url:"http://localhost:4848/extensions/PRJ4/PRJ4.html",text:"Lorem ipsum dolor sit amet"};
+                    
+                //     $rootScope.currentProjectUrl = iframedata.url;
+                //     var myIframe = document.getElementById("framechart");
+                //     //var script = myIframe.contentWindow.document.createElement("script");
+                //     // script.type = "text/javascript";
+                //     // script.src = src;
+                //     //myIframe.contentWindow.document.body.appendChild(script);
+                //     //myIframe.contentWindow.document.body.appendChild(myscript);
+                //     //$('.framechart').contents().find('body').append(myscript);
+                //     // var qlikIsolatedLoadConfig = {
+                //     //     url : 'http://localhost:4848',
+                //     //     prefix : '/'
+                //     // }
+                //     // var prefix = window.location.pathname.substr( 0, window.location.pathname.toLowerCase().lastIndexOf( "/extensions" ) + 1 );
+                //     var config = {
+                //         host: "localhost",
+                //         prefix: "/",
+                //         port: 4848,
+                //         isSecure: window.location.protocol === "https:",
+                //         baseUrl: "http://localhost:4848"
+                //     };
+                //     qlikIsolated.getQlik('http://localhost:4848')
+                //     .then(function(qlik){
+                //         // qlik object can be access here 
+                //         //console.log(qlik);
+                //         var app = qlik.openApp('Consumer_Sales.qvf', config);
+                //         //console.log(app);
+                //         //var newobj = app.getObject("qFrame","prgzES");
+                //         //console.log(newobj);
+                //         app.visualization.create('barchart',                       // we want a barchart
+                //         ["City","=Avg([Sales Amount])"], // one dimension, one measure
+                //         {"title":"On the fly barchart"}).then(function(vis){
+                //             vis.show("qFrame");                              // show the chart in a HTML element with id "QV03"
+                //         }, function(error){
+                //             console.log(error);
+                //             /* error info */
+                //         });
+                        
+                //     })
+                //     // qlikIsolated.getObjectIsolated(	$('#qlikdiv'),  // element
+                //     //     'Consumer_Sales.qvf', // app id
+                //     //     'zswLzs',     // object id
+                //     //     '',
+                //     //     //'eRxSeT',     // sheet id (optional, if object id is specified)
+                //     //     'http://localhost:4848'
+                //     // ); 
+                // }
+                // if(value == "chart1")
+                // {
+                //     iframedata = {type:"iframe",url:"http://localhost:4848/extensions/PRJ2/PRJ2.html",text:"Lorem ipsum dolor sit amet"};
+                    
+                //     $rootScope.currentProjectUrl = iframedata.url;
+                // }
+                // else
+                // {
+                //     iframedata = {type:"iframe",url:"http://localhost:4848/extensions/PRJ3/PRJ3.html",text:"Lorem ipsum dolor sit amet"};
+                    
+                //     $rootScope.currentProjectUrl = iframedata.url;
+                // }
+                //console.log($rootScope.currentProjectUrl);
+                
                 
               
         };
