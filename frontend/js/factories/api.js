@@ -1,6 +1,6 @@
 myApp.factory('apiService', function ($http, $q, $timeout,CsrfTokenService,$httpParamSerializer) {
     //adminurl = "http://wohlig.co.in/chatbotapi/index.php/json/";
-    adminurl = "http://35.161.160.7:8091/";
+    adminurl = "http://localhost:8000/";
     var adminUrl2 = "http://wohlig.io/api/";
     var adminUrl3 = "http://192.168.0.107/api/"
     //var adminUrl3 = "http://localhost/api/";
@@ -259,14 +259,14 @@ myApp.factory('apiService', function ($http, $q, $timeout,CsrfTokenService,$http
         getQlikChart:function(formData,callback){
             
             return    $http({
-                url:adminurl+'getQlikChart/',
+                url:adminurl+'chat/',
                 method: 'POST',
                 data:$.param(formData),
-                dataType:"json",
+                //dataType:"json",
                 //xsrfHeaderName :"X-CSRFToken",
                 //xsrfCookieName :"csrftoken",
                 //withCredentials: false,
-                //headers: {'X-CSRFToken': formData.csrfmiddlewaretoken},
+                headers: {'X-CSRFToken': formData.csrfmiddlewaretoken},
             });
         }
     };

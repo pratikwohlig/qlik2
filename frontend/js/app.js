@@ -23,8 +23,10 @@ var myApp = angular.module('myApp', [
 myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider,$resourceProvider,IdleProvider,ttsProvider,$qProvider) {
     var tempateURL = "views/template/template.html"; //Default Template URL
     $resourceProvider.defaults.stripTrailingSlashes = false;
-    // $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-    // $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+    //$httpProvider.defaults.headers = 'application/x-www-form-urlencoded';
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     
     // for http request with session
     //$httpProvider.defaults.withCredentials = false;
@@ -76,6 +78,7 @@ myApp.run(['$http','$cookies','beforeUnload','$document','$rootScope','Idle','bo
     
     //$http.defaults.xsrfCookieName = 'csrftoken';
     //$http.defaults.xsrfHeaderName = 'X-CSRFToken';
+    
     //$http.defaults.headers.post['X-CSRFToken'] = $cookies.get('csrftoken');
     //** django urls loves trailling slashes which angularjs removes by default.
     //$resourceProvider.defaults.stripTrailingSlashes = false;

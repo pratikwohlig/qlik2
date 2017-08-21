@@ -698,13 +698,14 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
             return $sce.trustAsResourceUrl(src);
         };
         $rootScope.getSystemMsg = function(id,value){
-            formData = {text:value};
-            console.log(formData);
+            formData = {input:value,csrfmiddlewaretoken:"DapgmpQ2uiWHYVhBZspLD0o9rjce2H3NJHJbc1FOhYYYZ6TuaGyNwVFxO4Sie0my"};
+            //console.log(formData);
             apiService.getQlikChart(formData).then(function (data){
-                framedata = data.data.data;
+                console.log(data);
+                framedata = data.data;
                 framedata.type = "iframe";
                 $rootScope.currentProjectUrl = framedata.url;
-                console.log(framedate,"Response");
+                console.log(framedata,"Response");
                 $rootScope.pushSystemMsg(0,framedata);
                 $rootScope.showMsgLoader = false;
                 $timeout(function(){
