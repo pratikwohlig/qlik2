@@ -23,10 +23,10 @@ var myApp = angular.module('myApp', [
 myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider,$qProvider) {
     var tempateURL = "views/template/template.html"; //Default Template URL
     //$resourceProvider.defaults.stripTrailingSlashes = false;
-    $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-    $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+    // $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+    // $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
     //$httpProvider.defaults.headers = 'application/x-www-form-urlencoded';
-    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    // $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     
     // for http request with session
     //$httpProvider.defaults.withCredentials = false;
