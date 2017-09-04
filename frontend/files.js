@@ -28,7 +28,7 @@ module.exports = [
   //"bower_components/ng-idle/angular-idle.js",
   "bower_components/angular-ui-carousel/dist/ui-carousel.min.js",
   "bower_components/angular-bowser/src/angular-bowser.js",
-  "frontend/js/services/qlik-isolated.min.js",
+  //"frontend/js/services/qlik-isolated.min.js",
   //App.js
   'frontend/js/app.js',
 
@@ -39,7 +39,7 @@ module.exports = [
   // Directives
   'frontend/js/directives/directive.js',
   'frontend/js/directives/SpeechRecognitionDirective.js',
-  'frontend/js/directives/angularjs.voicerss-tts.min.js',
+  //'frontend/js/directives/angularjs.voicerss-tts.min.js',
 
   // Filters
   'frontend/js/filters/filter.js',
@@ -47,7 +47,7 @@ module.exports = [
   // Services
   'frontend/js/services/template.js',
   //'frontend/js/services/chatwindow.js',
-  'frontend/js/services/csrftoken.js',
+  //'frontend/js/services/csrftoken.js',
   //'frontend/js/services/sha256.js',
   //'frontend/js/services/angular-cookies.min.js',
   //'frontend/js/services/angular-resource.js',
