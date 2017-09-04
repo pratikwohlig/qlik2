@@ -14,7 +14,7 @@ var myApp = angular.module('myApp', [
     //'ngCookies',
     //'ngResource',
     //'ngIdle',
-    //'app.directives',
+    'app.directives',
     //'voiceRss',
     'jlareau.bowser'
 ]);
