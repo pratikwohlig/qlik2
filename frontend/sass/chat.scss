@@ -2,7 +2,8 @@
 #chat_panel{
     display: none;
     font-family: 'Roboto', sans-serif;
-    height:455px;
+    // height:455px;
+    height: 590px;
     position: relative;
 }
 div#suggestionList {
@@ -91,7 +92,7 @@ li.ui-menu-item {
     position: fixed;
     bottom: 0;
     right:12px;
-    width: 30%;
+    width: 35%;
 }
 
 #chat_window_1 .panel-footer  { width:100% !important; }
@@ -330,7 +331,8 @@ height:30px!important;
 .panel-body
 {
     overflow-y: auto;
-    height: 320px;
+    // height: 320px;
+    height: 460px;
 }
 
 ::-webkit-scrollbar-track

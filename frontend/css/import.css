@@ -10140,7 +10140,7 @@ div.scriptData {
 #chat_panel {
   display: none;
   font-family: 'Roboto', sans-serif;
-  height: 455px;
+  height: 590px;
   position: relative; }
 
 div#suggestionList {
@@ -10234,7 +10234,7 @@ li.ui-menu-item {
   position: fixed;
   bottom: 0;
   right: 12px;
-  width: 30%; }
+  width: 35%; }
 
 #chat_window_1 .panel-footer {
   width: 100% !important; }
@@ -10467,7 +10467,7 @@ button.headerbtns:focus {
 
 .panel-body {
   overflow-y: auto;
-  height: 320px; }
+  height: 460px; }
 
 ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);

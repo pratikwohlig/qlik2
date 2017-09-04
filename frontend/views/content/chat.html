@@ -25,7 +25,7 @@
                                     <span class="chat-img pull-{{list.position}}">
                                         <img ng-src="img/{{list.position == 'left' && 'logo5.jpg' || 'logo7.png'}}" alt="BOT" class="img-circle " />
                                     </span>
-                                    <div ng-class="{'chat-body':list.position==='right'}">
+                                    <div class="chat-body">
                                         <div class="clearfix" ng-if="list.position==='right'">
                                             <p class="lastmsg" >
                                                 <ng-bind-html ng-bind-html = "list.msg">
@@ -35,7 +35,6 @@
                                         </div>
                                         <div class=" clearfix" ng-if="list.position==='left' ">
                                             <div class="sysChatRes"  >
-                                                <br>
                                                 <div class="chatType" ng-if="list.msg.type==='iframe'">
                                                     <p ng-if="list.msg.text !==''" class="systext">
                                                         {{list.msg.text}}

@@ -578,16 +578,16 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
             
         };
         $rootScope.showChatwindow = function () {
-            newlist = $.jStorage.get("chatlist");
-            if(!newlist || newlist == null)
-            {
-                $rootScope.firstMsg = false;
-            }
-            else
-            { 
-                $rootScope.firstMsg = true;
-            }
-            $.jStorage.set("showchat",true);
+            // newlist = $.jStorage.get("chatlist");
+            // if(!newlist || newlist == null)
+            // {
+            //     $rootScope.firstMsg = false;
+            // }
+            // else
+            // { 
+            //     $rootScope.firstMsg = true;
+            // }
+            // $.jStorage.set("showchat",true);
             if(!$rootScope.firstMsg)
             {
                 $rootScope.firstMsg = true;
@@ -604,7 +604,7 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
             $rootScope.scrollChatWindow();
         };
         $rootScope.minimizeChatwindow = function() {
-            $.jStorage.set("showchat",false);
+            //$.jStorage.set("showchat",false);
             $rootScope.showTimeoutmsg = false;
             $rootScope.autocompletelist = [];
             $('#chat_panel').slideUp();
@@ -622,15 +622,15 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
             $rootScope.chatlist.push({id:"id",msg:value,position:"right",curTime: $rootScope.getDatetime()});
             //console.log("msgid="+id+"chatmsg="+$rootScope.msgSelected);
             $rootScope.getSystemMsg(id,value);
-            $.jStorage.set("chatlist",$rootScope.chatlist);
+            //$.jStorage.set("chatlist",$rootScope.chatlist);
             $rootScope.msgSelected = false;
             $rootScope.showMsgLoader=true;
             $rootScope.scrollChatWindow();
         };
-        if($.jStorage.get("showchat"))
-            $rootScope.showChatwindow();
-        else
-            $rootScope.minimizeChatwindow();
+        // if($.jStorage.get("showchat"))
+        //     $rootScope.showChatwindow();
+        // else
+        //     $rootScope.minimizeChatwindow();
 
         $rootScope.ratecardSubmit = function(coldata,rowdata) {
             console.log(coldata,rowdata);
