@@ -49,7 +49,7 @@ angular.module('app.directives', []).directive('ngSpeechRecognitionStart', funct
 			//if($rootScope.browser=="safari") 
 			{
 
-			if($rootScope.browser=="chrome") {
+			/*if($rootScope.browser=="chrome") {
 				var recognition = new window.webkitSpeechRecognition();
 			} else if($rootScope.browser=="firefox") {
 				//var recognition = new ( SpeechRecognition || webkitSpeechRecognition || mozSpeechRecognition)();
@@ -69,7 +69,8 @@ angular.module('app.directives', []).directive('ngSpeechRecognitionStart', funct
 			}
 			else if($rootScope.browser=="ios") {
 				var recognition = new window.webkitSpeechRecognition();
-			}
+			}*/
+			var recognition = new window.webkitSpeechRecognition();
 			var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 
 			var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent

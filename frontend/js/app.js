@@ -16,7 +16,7 @@ var myApp = angular.module('myApp', [
     //'ngIdle',
     'app.directives',
     //'voiceRss',
-    'jlareau.bowser'
+    //'jlareau.bowser'
 ]);
 //angular.module('manage', ['ngResource']);
 // Define all the routes below
@@ -64,7 +64,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 });
 
 
-myApp.run(['$http','$document','$rootScope','bowser', function run(  $http,$document,$rootScope,bowser ){
+myApp.run(['$http','$document','$rootScope', function run(  $http,$document,$rootScope ){
     // For CSRF token compatibility with Django
     
     //$http.defaults.xsrfCookieName = 'csrftoken';
@@ -74,7 +74,7 @@ myApp.run(['$http','$document','$rootScope','bowser', function run(  $http,$docu
     //** django urls loves trailling slashes which angularjs removes by default.
     //$resourceProvider.defaults.stripTrailingSlashes = false;
      //return function(scope, elm, attrs) {
-    if ( bowser.msie )
+    /*if ( bowser.msie )
         $rootScope.browser = "msie";
     if ( bowser.firefox )
         $rootScope.browser = "firefox";
@@ -91,7 +91,7 @@ myApp.run(['$http','$document','$rootScope','bowser', function run(  $http,$docu
     if ( bowser.samsungBrowser )
         $rootScope.browser = "samsungBrowser"; //native
     if ( bowser.msedge )
-        $rootScope.browser = "msedge";
+        $rootScope.browser = "msedge";*/
     console.log($rootScope.browser);
     $rootScope.transcript="";
     $rootScope.tabvalue={};
