@@ -20,7 +20,7 @@ var myApp = angular.module('myApp', [
 ]);
 //angular.module('manage', ['ngResource']);
 // Define all the routes below
-myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider,$qProvider) {
+myApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     var tempateURL = "views/template/template.html"; //Default Template URL
     //$resourceProvider.defaults.stripTrailingSlashes = false;
     // $httpProvider.defaults.xsrfCookieName = 'csrftoken';
