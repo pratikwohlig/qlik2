@@ -92,7 +92,7 @@ myApp.run(['$http','$document','$rootScope','bowser', function run(  $http,$docu
         $rootScope.browser = "samsungBrowser"; //native
     if ( bowser.msedge )
         $rootScope.browser = "msedge";
-    
+    console.log($rootScope.browser);
     $rootScope.transcript="";
     $rootScope.tabvalue={};
     

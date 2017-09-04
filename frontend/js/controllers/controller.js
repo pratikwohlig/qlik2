@@ -1,7 +1,5 @@
-var globalLocale = moment.locale('hi');
-var localLocale = moment();
 
-myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, NavigationService,Menuservice, $timeout,$http,apiService,$state) {
+    myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, NavigationService,Menuservice, $timeout,$http,apiService,$state) {
         $scope.template = TemplateService.getHTML("content/home.html");
         TemplateService.title = "Home"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -37,44 +35,44 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
     
     .controller('SpeechRecognitionController', function ($scope, $rootScope) {
 
-    var vm = this;
+        var vm = this;
 
-    vm.displayTranscript = displayTranscript;
-    vm.transcript = '';
-    function displayTranscript() {
-        vm.transcript = $rootScope.transcript;
-        console.log("transcript",$rootScope.transcript);
-        $(".chatinput").val($rootScope.transcript);
-        $rootScope.pushMsg(0,$rootScope.transcript);
-        //This is just to refresh the content in the view.
-        if (!$scope.$$phase) {
-            $scope.$digest();
+        vm.displayTranscript = displayTranscript;
+        vm.transcript = '';
+        function displayTranscript() {
+            vm.transcript = $rootScope.transcript;
             console.log("transcript",$rootScope.transcript);
+            $(".chatinput").val($rootScope.transcript);
+            $rootScope.pushMsg(0,$rootScope.transcript);
+            //This is just to refresh the content in the view.
+            if (!$scope.$$phase) {
+                $scope.$digest();
+                console.log("transcript",$rootScope.transcript);
+            }
         }
-    }
-    $rootScope.startspeech = function() {
-        var recognition = new webkitSpeechRecognition();
-        recognition.continuous = true;
-        recognition.interimResults = true;
-        console.log("new func");
-       // recognition.onresult = function(event) 
-        { 
-            console.log(event); 
-        }
-        recognition.start();
-    };
-    /**
-     * Handle the received transcript here.
-     * The result from the Web Speech Recognition will
-     * be set inside a $rootScope variable. You can use it
-     * as you want.
-     */
-    $rootScope.speechStarted = function() {
-        console.log("speech Started");
-    };
+        $rootScope.startspeech = function() {
+            var recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            console.log("new func");
+        // recognition.onresult = function(event) 
+            { 
+                console.log(event); 
+            }
+            recognition.start();
+        };
+        /**
+         * Handle the received transcript here.
+         * The result from the Web Speech Recognition will
+         * be set inside a $rootScope variable. You can use it
+         * as you want.
+         */
+        $rootScope.speechStarted = function() {
+            console.log("speech Started");
+        };
     
 
-})
+    })
     .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService, $timeout,$http,apiService,$state,$uibModal,Menuservice,$sce) {
         
         $rootScope.autocompletelist = [];
@@ -99,10 +97,10 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
         $rootScope.showMsgLoader=false;
         $rootScope.rate_count= 0;
         
-        var vm = this;
+        // var vm = this;
         
-        vm.displayTranscript = displayTranscript;
-        vm.transcript = '';
+        // vm.displayTranscript = displayTranscript;
+        // vm.transcript = '';
         //  //$rootScope.transcript = "";
         // // $rootScope.displayTranscript = function() {
         // //     //vm.transcript = $rootScope.transcript;

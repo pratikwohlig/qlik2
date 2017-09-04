@@ -1,5 +1,5 @@
 <div id="chat_window_1" ng-controller="ChatCtrl" chatbotHeight >
-        <div class="panel panel-primary " id="chat_panel" ng-init="chat_tab = 1">
+        <div class="panel panel-primary " id="chat_panel" >
             <div class="panel-heading container-fluid" id="accordion">
                 <span class="glyphicon glyphicon-comment"></span> Chat
                 <!--<ul class="nav nav-tabs" id="chatTabs">
@@ -97,13 +97,13 @@
                                 <div id="field_id"></div>
                             </div>
                             <a id="mybtn_trigger" class="hidden" ng-click="Speaktext(text);">Speakme</a>
-                            <!--<div id= "suggestionList">
+                            <div id= "suggestionList">
                                 <ul ng-if="autocompletelist.length > 0" class="{{autocompletelist.length}}  ui-menu ui-widget ui-widget-content ui-autocomplete ui-front" id="ui-id-1">
                                     <div class="ui-menu-item-wrapper">
                                         <li class="ui-menu-item autolist" data-id="{{list.id}}" data-value="{{list.value}}"  ng-repeat="list in autocompletelist | filter:chatText  " ng-click="pushMsg(list.id,list.value);"  ng-bind-html="list.value | highlight:chatText" >{{list.value}}</li>
                                     </div>
                                 </ul>
-                            </div>-->
+                            </div>
                         </div>
                     <!-- </div> -->  
                 <!-- </div> -->
