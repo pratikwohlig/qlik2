@@ -1,6 +1,6 @@
 apps:
   - script: "app.js"
-    name: "Chatbot - 8095"
+    name: "Qlikchatbot - 8095"
     watch: false
     args: "--prod"
     exec_mode: "cluster"
