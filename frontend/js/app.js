@@ -6,7 +6,7 @@ var myApp = angular.module('myApp', [
     'angulartics.google.analytics',
     'ui.bootstrap',
     'ngAnimate',
-    'ngSanitize',
+    //'ngSanitize',
     'angular-flexslider',
     'ui.swiper',
     'angularPromiseButtons',
@@ -92,9 +92,9 @@ myApp.run(['$http','$document','$rootScope', function run(  $http,$document,$roo
         $rootScope.browser = "samsungBrowser"; //native
     if ( bowser.msedge )
         $rootScope.browser = "msedge";*/
-    console.log($rootScope.browser);
+    //console.log($rootScope.browser);
     $rootScope.transcript="";
-    $rootScope.tabvalue={};
+    //$rootScope.tabvalue={};
     
         // Idle.watch();
         
