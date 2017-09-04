@@ -64806,18 +64806,18 @@ var myApp = angular.module('myApp', [
     'ui.swiper',
     'angularPromiseButtons',
     'toastr',
-    'ngCookies',
+    //'ngCookies',
     'ngResource',
-    'ngIdle',
-    'app.directives',
+    //'ngIdle',
+    //'app.directives',
     'voiceRss',
     'jlareau.bowser'
 ]);
 //angular.module('manage', ['ngResource']);
 // Define all the routes below
-myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider,$resourceProvider,IdleProvider,ttsProvider,$qProvider) {
+myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider,$resourceProvider,$qProvider) {
     var tempateURL = "views/template/template.html"; //Default Template URL
-    $resourceProvider.defaults.stripTrailingSlashes = false;
+    //$resourceProvider.defaults.stripTrailingSlashes = false;
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
     //$httpProvider.defaults.headers = 'application/x-www-form-urlencoded';
@@ -64825,9 +64825,9 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
     
     // for http request with session
     //$httpProvider.defaults.withCredentials = false;
-    ttsProvider.setSettings({ key: '5a1cc1a178c24b89ba23fd6e3b1bb6c5' });
+    //ttsProvider.setSettings({ key: '5a1cc1a178c24b89ba23fd6e3b1bb6c5' });
     //$qProvider.errorOnUnhandledRejections(false);
-    IdleProvider.idle(10*60); // 10 minutes idle
+    //IdleProvider.idle(10*60); // 10 minutes idle
     $stateProvider
         .state('home', {
             url: "/",
@@ -64858,17 +64858,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider, $httpProvider, $locat
     $locationProvider.html5Mode(isproduction);
 });
 
-/*var xhRequest = new XMLHttpRequest();
-xhRequest.open("GET", "http://localhost:8080", false);
-xhRequest.send(null);
 
-myApp.constant("CSRF_TOKEN", xhRequest.responseText);
-myApp.run(['$http', 'CSRF_TOKEN', function($http, CSRF_TOKEN) {    
-    $http.defaults.headers.common['X-Csrf-Token'] = CSRF_TOKEN;
-}]);*/
-
-
-myApp.run(['$http','$cookies','beforeUnload','$document','$rootScope','Idle','bowser', function run(  $http, $cookies,beforeUnload,$document,$rootScope,Idle,bowser ){
+myApp.run(['$http','$document','$rootScope','bowser', function run(  $http,$document,$rootScope,bowser ){
     // For CSRF token compatibility with Django
     
     //$http.defaults.xsrfCookieName = 'csrftoken';
@@ -64900,103 +64891,14 @@ myApp.run(['$http','$cookies','beforeUnload','$document','$rootScope','Idle','bo
     $rootScope.transcript="";
     $rootScope.tabvalue={};
     
-         Idle.watch();
-        $document.on("keydown", function(e) {
-            if(e.ctrlKey && (e.key == "p" || e.charCode == 16 || e.charCode == 112 || e.keyCode == 80) ){
-                //alert("Please use the Print PDF button below for a better rendering on the document");
-                //e.cancelBubble = true;
-                e.preventDefault();
-                window.stop(); // Works in all browsers but IE    
-                document.execCommand("Stop"); // Works in IE
-                return false; // Don't even know why it's here. Does nothing.  
-            }  
-            else if(e.ctrlKey && (e.which == 16 || e.keyCode == 73))
-            {
-                e.preventDefault();
-                window.stop(); // Works in all browsers but IE    
-                document.execCommand("Stop"); // Works in IE
-                return false; // Don't even know why it's here. Does nothing.  
-            }
-            else if(e.ctrlKey && (e.which == 67 ))
-            {
-                e.preventDefault();
-                window.stop(); // Works in all browsers but IE    
-                document.execCommand("Stop"); // Works in IE
-                return false; // Don't even know why it's here. Does nothing.  
-            }
-            else if(e.ctrlKey && (e.which == 85 ))
-            {
-                e.preventDefault();
-                window.stop(); // Works in all browsers but IE    
-                document.execCommand("Stop"); // Works in IE
-                return false; // Don't even know why it's here. Does nothing.  
-            }
-            else if((e.which == 44 ))
-            {
-                e.preventDefault();
-                window.stop(); // Works in all browsers but IE    
-                document.execCommand("Stop"); // Works in IE
-                return false; // Don't even know why it's here. Does nothing.  
-            }
-            if(e.which === 123){
-                e.preventDefault();
-                window.stop(); // Works in all browsers but IE    
-                document.execCommand("Stop"); // Works in IE
-                return false; // Don't even know why it's here. Does nothing.  
-            }
-        });
-        $document.on("keyup", function(e) {
-            if((e.keyCode == 44 ))
-            {
-                e.preventDefault();
-                window.stop(); // Works in all browsers but IE    
-                document.execCommand("Stop"); // Works in IE
-                return false; // Don't even know why it's here. Does nothing.  
-            }
-        });
-        $(document).bind("contextmenu",function(e) {
-            //e.preventDefault();
-        });
+        // Idle.watch();
+        
+       /*
         $rootScope.$on('IdleTimeout', function() {
             var scope = angular.element(document.getElementById('changepwd')).scope();
             scope.logout();
             // end their session and redirect to login
-        });
-    //};
-    //Hide Code
-    // var currentInnerHtml;
-    // var element = new Image();
-    // var elementWithHiddenContent = document.querySelector("script");
-    // var innerHtml = elementWithHiddenContent.innerHTML;
-
-    // element.__defineGetter__("id", function() {
-    //     currentInnerHtml = "";
-    // });
-
-    // setInterval(function() {
-    //     currentInnerHtml = innerHtml;
-    //     //console.log(element);
-    //     //console.clear();
-    //     elementWithHiddenContent.innerHTML = currentInnerHtml;
-    // }, 1000);
-
-
-    var checkStatus;
-
-    var element2 = new Image();
-    // var element = document.createElement('any');
-    element2.__defineGetter__('id', function() {
-        checkStatus = 'on';
-    });
-    setInterval(function() {
-        
-        // if(checkStatus == 'on')
-        //     alert("Disable Developer Tool");
-        checkStatus = 'off';
-        //console.log(element2);
-        //console.clear();
-        //document.querySelector('#devtool-status').innerHTML = checkStatus;
-    }, 1000)
+        });*/
      
 }])
 // For Language JS
@@ -65004,31 +64906,6 @@ myApp.config(function ($translateProvider) {
     $translateProvider.translations('en', LanguageEnglish);
     $translateProvider.translations('hi', LanguageHindi);
     $translateProvider.preferredLanguage('en');
-});
-
-myApp.factory('beforeUnload', function ($rootScope, $window,CsrfTokenService,apiService) {
-    // Events are broadcast outside the Scope Lifecycle
-    
-    $window.onbeforeunload = function (e) {
-        var confirmation = {};
-        var event = $rootScope.$broadcast('onBeforeUnload', confirmation);
-        // CsrfTokenService.getCookie("csrftoken").then(function(token) {
-        //     // $rootScope.formData = {sessionid:$.jStorage.get("sessionid"),user:$.jStorage.get("id"),csrfmiddlewaretoken:token};
-        //     // apiService.logout($rootScope.formData).then(function (callback){
-        //     //     $.jStorage.flush();
-                
-        //     // });
-        
-        // });
-        if (event.defaultPrevented) {
-            //return confirmation.message;
-        }
-    };
-    
-    $window.onunload = function () {
-        //$rootScope.$broadcast('onUnload');
-    };
-    return {};
 });
 
 var LanguageEnglish = {
@@ -65446,7 +65323,7 @@ myApp.service('ChatwindowService', function () {
     
 
 });
-myApp.service('CsrfTokenService', function ($timeout,$cookies,$filter) {
+myApp.service('CsrfTokenService', function ($timeout,$filter) {
     csrfservice = {};
     this.getCookie = function(c_name)
     {
@@ -65488,7 +65365,7 @@ myApp.service('CsrfTokenService', function ($timeout,$cookies,$filter) {
             }
             else
             {
-                $cookies.put("csrftoken",sha256_digest($filter('date')(new Date(), 'hh:mm:ss a')));
+                //$cookies.put("csrftoken",sha256_digest($filter('date')(new Date(), 'hh:mm:ss a')));
             }
             //console.log(document.cookie,"cookie");
             
@@ -66653,275 +66530,30 @@ myApp.factory('NavigationService', function ($http) {
         
     };
 });
-myApp.factory('apiService', function ($http, $q, $timeout,CsrfTokenService,$httpParamSerializer) {
+myApp.factory('apiService', function ($http, $q, $timeout) {
     
-    adminurl = "http://localhost:8000/";
-    adminurl = "http://104.46.103.162:8000/";
-    var adminUrl2 = "http://wohlig.io/api/";
-    var adminUrl3 = "http://192.168.0.107/api/"
-    //var adminUrl3 = "http://localhost/api/";
-    //return
+    //adminurl2 = "http://localhost:8000/";
+    adminurl2 = "http://104.46.103.162:8000/";
     return {
 
         // This is a demo Service for POST Method.
         getDemo: function (formData, callback) {
             $http({
-                url: adminurl + 'demo/demoService',
+                url: adminurl2 + 'demo/demoService',
                 method: 'POST',
                 data: formData
             }).success(callback);
         },
         // This is a demo Service for POST Method.
-        getautocomplete: function(formData, callback) {
-            
-            // $http.post(adminurl + "api.php?func=getautocomplete&string=" + request).then(function (response) {
-            //     console.log("Hello",response);
-            //     return response;
-            // });
-            return $http({
-                url:adminUrl3+ "Chatbotautocomplete/getautocomplete",
-                //url: "http://wohlig.co.in/chatbotapi/index.php/json/" + 'getautocomplete',
-                //headers: {'X-CSRFToken': "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"},
-                method: 'POST',
-                data: formData
-            })
-        },
-        login:function(formData, callback) {
-            
-            // $http.post(adminurl + "api.php?func=getautocomplete&string=" + request).then(function (response) {
-            //     console.log("Hello",response);
-            //     return response;
-            // });
-            
-            return $http({
-                //url: "http://wohlig.co.in/chatbotapi/index.php/json/" + 'login/',
-                url:adminUrl3+ "Chatbotuser/loginuser",
-                //headers: {'X-CSRFToken': "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"},
-                method: 'POST',
-                data: formData,
-                //withCredentials: false,
-                //dataType:"json",
-            });
-            /*
-            return    $http({
-                url:adminurl+'authenticate/',
-                method: 'POST',
-                data:{username : "pratik", password : "asdf",'csrfmiddlewaretoken': "Vfpx6pWJYBx7dbX35vwXm7P9xj3xNPyUJbSx9IlwgcRHReN974ZC5rEbvgpRQdY2"},
-                //xsrfHeaderName :"X-CSRFToken",
-                //xsrfCookieName :"csrftoken",
-                withCredentials: true,
-                headers: {'Content-Type': 'application/json; charset=utf-8','X-CSRFToken': "Vfpx6pWJYBx7dbX35vwXm7P9xj3xNPyUJbSx9IlwgcRHReN974ZC5rEbvgpRQdY2"},
-            });
-             */
-        },
-        logout:function(formData, callback) {
-            
-           
-            return $http({
-                //url: "http://wohlig.co.in/chatbotapi/index.php/json/" + 'login/',
-                url:adminUrl3+ "Chatbotuserlogs/logoutuser",
-                //headers: {'X-CSRFToken': "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"},
-                method: 'POST',
-                data: formData,
-                //withCredentials: false,
-                //dataType:"json",
-            });
-            
-        },
-        changepassword:function(formData, callback) {
-            
-            return $http({
-                url: adminUrl3 + 'Chatbotuser/changepassword',
-                method: 'POST',
-                data: formData
-            });
-            // $.ajax({
-            //     url : adminurl+"changepassword",
-            //     data: formData,
-            //     headers: {'X-CSRFToken': CsrfTokenService.getCookie("csrftoken")},
-            //     type: "POST",
-            //     dataType: "json",
-                
-            // });
-        },
-        crnsubmit:function(formData,callback){
-            return    $http({
-                url:adminurl+'srandcrn/',
-                method: 'POST',
-                data:{user_input : 2, user_id : 1,number_type:'CRN','csrfmiddlewaretoken': "Vfpx6pWJYBx7dbX35vwXm7P9xj3xNPyUJbSx9IlwgcRHReN974ZC5rEbvgpRQdY2"},
-                //xsrfHeaderName :"X-CSRFToken",
-                //xsrfCookieName :"csrftoken",
-                //withCredentials: false,
-                headers: {'Content-Type': 'application/json; charset=utf-8','X-CSRFToken': "Vfpx6pWJYBx7dbX35vwXm7P9xj3xNPyUJbSx9IlwgcRHReN974ZC5rEbvgpRQdY2"},
-            });
-        },
-        gettabdata:function(formData,callback){
-            
-            return    $http({
-                url:adminurl+'get_tab_data/',
-                method: 'POST',
-                data:$.param(formData),
-                dataType:"json",
-                //xsrfHeaderName :"X-CSRFToken",
-                //xsrfCookieName :"csrftoken",
-                //withCredentials: false,
-                headers: {'X-CSRFToken': formData.csrfmiddlewaretoken},
-            });
-            /*
-            var data = $.param(formData);
         
-            var config = {
-                dataType:"json",
-                'Content-Type': 'application/json',
-                headers : { 'X-CSRFToken': formData.csrfmiddlewaretoken}
-            }
-            return $http.post(adminurl+'get_tab_data/', data,config).success(function(data,status,headers,config){
-                
-            });*/
-
-        },
-        getSysMsg:function(formData,callback){
-            //console.log(formData);
-            return    $http({
-                //url:adminurl+'out/'+formData.user_id+"/",
-                url: adminUrl3 + 'Chatbotautolist/getSysMsg',
-                method: 'POST',
-                data:(formData),
-                //withCredentials: false,
-                //headers: {'Content-Type': 'application/json','X-CSRFToken': "Vfpx6pWJYBx7dbX35vwXm7P9xj3xNPyUJbSx9IlwgcRHReN974ZC5rEbvgpRQdY2"},
-            });
-            
-            
-        },
-        getDthlinkRes:function(formData,callback){
-            //console.log(formData);
-            return    $http({
-                //url:adminurl+'out/'+formData.user_id+"/",
-                url: adminUrl3 + 'Chatbotautolist/getDthlink',
-                method: 'POST',
-                data:(formData),
-                //withCredentials: false
-            });
-            
-            
-        },
-        forgotpassword:function(formData, callback) {
-            
-            return $http({
-                url: adminUrl3 + 'Chatbotuser/forgotpassword',
-                method: 'POST',
-                data: formData
-            });
-        },
-        isvalidpasswordresetreq:function(formData, callback) {
-            
-            return $http({
-                url: adminUrl3 + 'Chatbotuser/isvalidpasswordresetreq',
-                method: 'POST',
-                data: formData
-            });
-        },
-        changepassword2:function(formData, callback) {
-            
-            return $http({
-                url: adminUrl3 + 'Chatbotuser/resetpassword',
-                method: 'POST',
-                data: formData
-            });
-        },
-        getttsSpeech:function(formData,callback){
-            //console.log(formData);
-            return    $http({
-                //url:adminurl+'out/'+formData.user_id+"/",
-                url: adminUrl3 + 'Chatbotautolist/getttsSpeech',
-                method: 'POST',
-                data:(formData),
-                //withCredentials: false
-            });
-            
-            
-        },
-        startRecording:function(formData,callback){
-            //console.log(formData);
-            return    $http({
-                //url:adminurl+'out/'+formData.user_id+"/",
-                url: adminUrl3 + 'Chatbotvoice/startRecording',
-                method: 'POST',
-                data:(formData),
-               
-            });
-            
-            
-        },
-        stopRecording:function(formData,callback){
-            //console.log(formData);
-            return    $http({
-                //url:adminurl+'out/'+formData.user_id+"/",
-                url: adminUrl3 + 'Chatbotvoice/stopRecording',
-                method: 'POST',
-                data:(formData),
-                
-            });
-            
-            
-        },
-        tts:function(formData,callback){
-            //console.log(formData);
-            return    $http({
-                //url:adminurl+'out/'+formData.user_id+"/",
-                url: adminUrl3 + 'Chatbotvoice/startRecoding1',
-                method: 'POST',
-                data:(formData),
-            });
-            
-            
-        },
-        startRecording:function(formData,callback){
-            //console.log(formData);
-            return    $http({
-                //url:adminurl+'out/'+formData.user_id+"/",
-                url: adminUrl3 + 'Chatbotvoice/startRecording',
-                method: 'POST',
-                data:(formData),
-                withCredentials: false
-            });
-            
-            
-        },
-        stopRecording:function(formData,callback){
-            //console.log(formData);
-            return    $http({
-                //url:adminurl+'out/'+formData.user_id+"/",
-                url: adminUrl3 + 'Chatbotvoice/stopRecording',
-                method: 'POST',
-                data:(formData),
-                withCredentials: false
-            });
-            
-            
-        },
-        tts:function(formData,callback){
-            //console.log(formData);
-            return    $http({
-                //url:adminurl+'out/'+formData.user_id+"/",
-                url: adminUrl3 + 'Chatbotvoice/startRecoding1',
-                method: 'POST',
-                data:(formData),
-                withCredentials: false
-            });
-            
-            
-        },
+        
+       
         getQlikChart:function(formData,callback){
             
             return    $http({
-                url:adminurl+'chat/',
+                url:adminurl2+'chat/',
                 method: 'POST',
                 data:$.param(formData),
-                //dataType:"json",
-                //xsrfHeaderName :"X-CSRFToken",
-                //xsrfCookieName :"csrftoken",
-                //withCredentials: false,
                 headers: {'X-CSRFToken': formData.csrfmiddlewaretoken},
             });
         }
@@ -66933,38 +66565,13 @@ myApp.factory('Menuservice', function($rootScope,$http, $q, $timeout,apiService,
         foo: function() {
             alert("I'm foo!");
         },
-        create_tabs : function(nodevalue){
-            //console.log(nodevalue);
-            CsrfTokenService.getCookie("csrftoken").then(function(token) {
-                tabData = {user_id:1196,node_value:nodevalue,csrfmiddlewaretoken:token};
-                $rootScope.tabvalue = [];
-                $rootScope.selectTabIndex = 0;
-                apiService.gettabdata(tabData).then(function (data){
-                    $rootScope.selectTabIndex = 0;
-                    $rootScope.tabvalue = data.data.node_data;
-                   
-                    $timeout(function() {
-                        $('#tab_data ul li').first().addClass('active');
-                        $('#tab_data .tab-content .tab-pane').first().addClass('active');
-                    });
-                    return data.data;
-                });
-            });
-            // $timeout(function() {
-            //     for(i=0; i<data.data.node_data.elements.length;i++){
-                    
-            //             $('#tab_data').append('<li role="presentation"><a href="#tab'+i+'" aria-controls="tab'+i+'" role="tab" data-toggle="tab">'+data.data.node_data.elements[i]+'</a></li>');
-            //             $('#tab-content').append('<div role="tabpanel" class="tab-pane" id="tab'+i+'"><p class="tab-con">'+data.data.node_data.element_values[i]+'</p></div>');
-                    
-            //     }
-            // },200);
-        }
+        
     };
 });
 var globalLocale = moment.locale('hi');
 var localLocale = moment();
 
-myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, NavigationService,CsrfTokenService,Menuservice, $timeout,$http,apiService,$state) {
+myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, NavigationService,Menuservice, $timeout,$http,apiService,$state) {
         $scope.template = TemplateService.getHTML("content/home.html");
         TemplateService.title = "Home"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -66997,14 +66604,7 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
         };
     })
 
-    .filter('highlight', function($sce) {
-        return function(text, phrase) {
-            if (phrase) text = text.replace(new RegExp('('+phrase+')', 'gi'),
-            '<span class="highlighted">$1</span>')
-
-            return $sce.trustAsHtml(text)
-        }
-    })
+    
     .controller('SpeechRecognitionController', function ($scope, $rootScope) {
 
     var vm = this;
@@ -67045,7 +66645,7 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
     
 
 })
-    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService,CsrfTokenService, $timeout,$http,apiService,$state,$uibModal,Menuservice,tts,$sce) {
+    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService, $timeout,$http,apiService,$state,$uibModal,Menuservice,$sce) {
         
         $rootScope.autocompletelist = [];
         $rootScope.chatOpen = false;
@@ -67131,7 +66731,7 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
         };
         $rootScope.chatText = "";
         $rootScope.getAutocomplete = function(chatText) {
-            $rootScope.showTimeoutmsg = false;
+            /*$rootScope.showTimeoutmsg = false;
             if($rootScope.showTimeoutmsg == false && chatText=="") 
             {
                 $timeout(function () {
@@ -67149,7 +66749,7 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
                 //        // console.log(response.data);
                 //     $rootScope.autocompletelist = response.data.data;
                 // });
-            }
+            }*/
         };
         $rootScope.pushSystemMsg = function(id,value) {
             $rootScope.chatmsgid = id;
@@ -67216,74 +66816,14 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
         // else
         //     $rootScope.minimizeChatwindow();
 
-        $rootScope.ratecardSubmit = function(coldata,rowdata) {
-            console.log(coldata,rowdata);
-        };
-        $rootScope.getDthlinkRes = function(colno,lineno,dthlink) {
-            console.log(colno,lineno,dthlink);
-            mysession = $.jStorage.get("sessiondata");
-            console.log(mysession);
-            mysession.DTHlink=dthlink;
-            mysession.DTHline=lineno;
-            mysession.DTHcol=colno;
-            formData = mysession;
-            console.log(formData);
-            apiService.getDthlinkRes(formData).then(function (data){
-                angular.forEach(data.data.data.tiledlist, function(value, key) {
-                    if(value.type=="DTHyperlink")
-                    {
-                        $rootScope.DthResponse(0,data.data.data);
-                        
-                        $("#topic").text(data.data.data.tiledlist[0].topic);
-                        $.jStorage.set("sessiondata",data.data.data.session_obj_data);
-                    }
-                });
-            });
-        };
-        $rootScope.DthResponse = function(id,data) {
-            $rootScope.pushSystemMsg(id,data);
-            $rootScope.showMsgLoader = false; 
-            $rootScope.selectTabIndex = 0;
-            
-            //var node_data = {"node_data": {"elements": ["Guidelines", "Shifting", "Accessibility", "Charges"], "element_values": ["<br>To define general guidelines to be followed by Branches while processing Account Closure. <br><br> Branch should attempt for retention of account before closing the account as opening a new account is expensive. <br><br> Channels through which Account Closure request is received: <br> 1. Customers In Person (CIP) who walk in to the Branch <br>\n2. Representatives/Bearer of customers who walk in to the Branch <br>\n3. Mail / Drop Box <br><br> Check Documentation and Signature Protocol <br><br> Check Mode of Payment for closure Proceeds <br><br> Check for Customer Handling on receipt of request <br><br> Check Process at Branch \u2013Checks during acceptance of closure form <br><br> Check Process at Branch- Post acceptance of Closure form <br><br> ", "<br>Customer is unwilling to give us another chance  <br>\n1) In case of Issues expressed by the customer where he / she is willing to give the Bank another chance. <br><br>\n2) Branch to attempt fix the problem within 48 hours or 7 days on the outside for extreme cases and revert to the customer. This TAT for revert to be communicated to the customer upfront. <br><br>\n3) Customers to be sent a personalised letter thanking them for their time and an acknowledgement, that we value their business and have remedied whatever caused them to want to leave in the first place. A list of all reasons for closure with the action taken, to be stated.  <br><br>\n4) Once the customer has been retained, the customer letter / form duly marked \u201cNOT FOR CLOSURE \u2013 RETAINED\u201d, along with a copy of the resolution letter to be sent to CPC for filing in the customer record.  <br><br>\n5) Siebel to be updated with the same comment and closed.  <br><br>In case the BOM/SM/BM/ RBM / AM or the branch staff are able / Not able  to retain the customer, then protthe SR which has been created needs to be closed with the Closure Description in Siebel as, \u201cCustomer Retained\u201d. This needs to be done diligently and would be subject to audits.\nCustomer will pay the  necessary amount to regularize the account <br>\nCustomer is unwilling to regularize the account after all attempts then branch user to follow the protocol as detailed in chapter \u201cAccount closure requests with debit balance/TBMS lien.\u201d <br><br>\n1) Where the customer is not willing to continue, Branch to ensure that the complete details on Account closure form and all the checks to be made as detailed in the chapter  \u201cGeneral Guidelines to be followed for Account closure\u201d <br><br>\n2) In case of any incomplete request, the customer needs to be apprised of the requirements and Siebel to be updated accordingly. <br><br>\n3) If the a/c closure request is complete in all respects / once the complete request is received from the customer, the same needs to be sent to CPC, post updating the Siebel <br><br>\n4) Branch to journal of the attempts made to retain the customer. <br><br>\nIn case the BOM/SM/BM/ RBM / AM or the branch staff are able / Not able  to retain the customer, then protthe SR which has been created needs to be closed with the Closure Description in Siebel as, \u201cCustomer Retained\u201d. This needs to be done diligently and would be subject to audits.", "<br>If customer is closing his/ her account due to inconvenient accessibility, solutions like Home Banking, Beat Pick up facility, etc. should be re-iterated. <br>\nIn case customer has an account which he/ she is not eligible for an accessibility offering he/ she is interested in, an upgraded account should be offered especially if account balances justify it (ensure that new AMB/AQBs and NMCs are communicated clearly).Customer is unwilling to give us another chance  <br><br>\n1) In case of Issues expressed by the customer where he / she is willing to give the Bank another chance.  <br><br>\n2) Branch to attempt fix the problem within 48 hours or 7 days on the outside for extreme cases and revert to the customer. This TAT for revert to be communicated to the customer upfront. <br><br>\n3) Customers to be sent a personalised letter thanking them for their time and an acknowledgement, that we value their business and have remedied whatever caused them to want to leave in the first place. A list of all reasons for closure with the action taken, to be stated.  <br><br>\n4) Once the customer has been retained, the customer letter / form duly marked \u201cNOT FOR CLOSURE \u2013 RETAINED\u201d, along with a copy of the resolution letter to be sent to CPC for filing in the customer record.  <br><br>\n5) Siebel to be updated with the same comment and closed.  <br><br>\nIn case the BOM/SM/BM/ RBM / AM or the branch staff are able / Not able  to retain the customer, then protthe SR which has been created needs to be closed with the Closure Description in Siebel as, \u201cCustomer Retained\u201d.  <br><br> This needs to be done diligently and would be subject to audits.  <br><br>\nCustomer is unwilling to give another chance: < <br><br>> Customer will pay the  necessary amount to regularize the account  <br><br>\nCustomer is unwilling to regularize the account after all attempts then branch user to follow the protocol as detailed in chapter \u201cAccount closure requests with debit balance/TBMS lien.\u201d  <br><br>\n1) Where the customer is not willing to continue, Branch to ensure that the complete details on Account closure form and all the checks to be made as detailed in the chapter  \u201cGeneral Guidelines to be followed for Account closure\u201d  <br><br>\n2) In case of any incomplete request, the customer needs to be apprised of the requirements and Siebel to be updated accordingly.  <br><br>\n3) If the a/c closure request is complete in all respects / once the complete request is received from the customer, the same needs to be sent to CPC, post updating the Siebel  <br><br> \n4) Branch to journal of the attempts made to retain the customer.  <br><br>\nIn case the BOM/SM/BM/ RBM / AM or the branch staff are able / Not able  to retain the customer, then protthe SR which has been created needs to be closed with the Closure Description in Siebel as, \u201cCustomer Retained\u201d. This needs to be done diligently and would be subject to audits.C2", "<br>1) Customer expresses concerns on high charges, ascertain the nature of charges levied and recommend an upgraded account where required (e.g. if customer finds DD charges high, up-sell to an account with a higher free DD limit or an account offering At Par cheque facility if usage is on our locations). Communicate the AMB/AQB and NMC to customer clearly. <br><br>\n2) The account can be upgraded/downgrade as per customer requirement by retaining the same account Number  <br><br>\n3) Branch can also explain the benefits of Basic/Small Account and offer conversion to the said  account as it will address their inability to maintain the account.  <br><br>\nCustomer is unwilling to give us another chance  <br><br>\n1) In case of Issues expressed by the customer where he / she is willing to give the Bank another chance.  <br><br>\n2) Branch to attempt fix the problem within 48 hours or 7 days on the outside for extreme cases and revert to the customer. This TAT for revert to be communicated to the customer upfront.  <br><br>\n3) Customers to be sent a personalised letter thanking them for their time and an acknowledgement, that we value their business and have remedied whatever caused them to want to leave in the first place. A list of all reasons for closure with the action taken, to be stated.   <br><br>\n4) Once the customer has been retained, the customer letter / form duly marked \u201cNOT FOR CLOSURE \u2013 RETAINED\u201d, along with a copy of the resolution letter to be sent to CPC for filing in the customer record.  <br><br>\n5) Siebel to be updated with the same comment and closed.  <br><br>\nIn case the BOM/SM/BM/ RBM / AM or the branch staff are able / Not able  to retain the customer, then protthe SR which has been created needs to be closed with the Closure Description in Siebel as, \u201cCustomer Retained\u201d. This needs to be done diligently and would be subject to audits.  <br><br>\nCustomer will pay the  necessary amount to regularize the account   <br><br>\nCustomer is unwilling to regularize the account after all attempts then branch user to follow the protocol as detailed in chapter \u201cAccount closure requests with debit balance/TBMS lien.\u201d  <br><br>\n1) Where the customer is not willing to continue, Branch to ensure that the complete details on Account closure form and all the checks to be made as detailed in the chapter  \u201cGeneral Guidelines to be followed for Account closure\u201d  <br><br>\n2) In case of any incomplete request, the customer needs to be apprised of the requirements and Siebel to be updated accordingly.  <br><br>\n3) If the a/c closure request is complete in all respects / once the complete request is received from the customer, the same needs to be sent to CPC, post updating the Siebel  <br><br>\n4) Branch to journal of the attempts made to retain the customer.  <br><br>\nIn case the BOM/SM/BM/ RBM / AM or the branch staff are able / Not able  to retain the customer, then protthe SR which has been created needs to be closed with the Closure Description in Siebel as, \u201cCustomer Retained\u201d. This needs to be done diligently and would be subject to audits.\n"]}};
-            var ele = new Array("Process");
-            ele2 = [  
-                        "Guidelines",
-                        "Shifting",
-                        "Accessibility",
-                        "Charges"
-                    ];
-            ele=ele.concat(ele2);
-            var ele_val = new Array(data.tiledlist[0]);
-            element_values = [  
-                        "<br>To define general guidelines to be followed by Branches while processing Account Closure. <br><br> Branch should attempt for retention of account before closing the account as opening a new account is expensive. <br><br> Channels through which Account Closure request is received: <br> 1. Customers In Person (CIP) who walk in to the Branch <br>\n2. Representatives/Bearer of customers who walk in to the Branch <br>\n3. Mail / Drop Box <br><br> Check Documentation and Signature Protocol <br><br> Check Mode of Payment for closure Proceeds <br><br> Check for Customer Handling on receipt of request <br><br> Check Process at Branch \u2013Checks during acceptance of closure form <br><br> Check Process at Branch- Post acceptance of Closure form <br><br> ",
-                        "<br>Customer is unwilling to give us another chance  <br>\n1) In case of Issues expressed by the customer where he / she is willing to give the Bank another chance. <br><br>\n2) Branch to attempt fix the problem within 48 hours or 7 days on the outside for extreme cases and revert to the customer. This TAT for revert to be communicated to the customer upfront. <br><br>\n3) Customers to be sent a personalised letter thanking them for their time and an acknowledgement, that we value their business and have remedied whatever caused them to want to leave in the first place. A list of all reasons for closure with the action taken, to be stated.  <br><br>\n4) Once the customer has been retained, the customer letter / form duly marked \u201cNOT FOR CLOSURE \u2013 RETAINED\u201d, along with a copy of the resolution letter to be sent to CPC for filing in the customer record.  <br><br>\n5) Siebel to be updated with the same comment and closed.  <br><br>In case the BOM/SM/BM/ RBM / AM or the branch staff are able / Not able  to retain the customer, then protthe SR which has been created needs to be closed with the Closure Description in Siebel as, \u201cCustomer Retained\u201d. This needs to be done diligently and would be subject to audits.\nCustomer will pay the  necessary amount to regularize the account <br>\nCustomer is unwilling to regularize the account after all attempts then branch user to follow the protocol as detailed in chapter \u201cAccount closure requests with debit balance/TBMS lien.\u201d <br><br>\n1) Where the customer is not willing to continue, Branch to ensure that the complete details on Account closure form and all the checks to be made as detailed in the chapter  \u201cGeneral Guidelines to be followed for Account closure\u201d <br><br>\n2) In case of any incomplete request, the customer needs to be apprised of the requirements and Siebel to be updated accordingly. <br><br>\n3) If the a/c closure request is complete in all respects / once the complete request is received from the customer, the same needs to be sent to CPC, post updating the Siebel <br><br>\n4) Branch to journal of the attempts made to retain the customer. <br><br>\nIn case the BOM/SM/BM/ RBM / AM or the branch staff are able / Not able  to retain the customer, then protthe SR which has been created needs to be closed with the Closure Description in Siebel as, \u201cCustomer Retained\u201d. This needs to be done diligently and would be subject to audits.",
-                        "<br>If customer is closing his/ her account due to inconvenient accessibility, solutions like Home Banking, Beat Pick up facility, etc. should be re-iterated. <br>\nIn case customer has an account which he/ she is not eligible for an accessibility offering he/ she is interested in, an upgraded account should be offered especially if account balances justify it (ensure that new AMB/AQBs and NMCs are communicated clearly).Customer is unwilling to give us another chance  <br><br>\n1) In case of Issues expressed by the customer where he / she is willing to give the Bank another chance.  <br><br>\n2) Branch to attempt fix the problem within 48 hours or 7 days on the outside for extreme cases and revert to the customer. This TAT for revert to be communicated to the customer upfront. <br><br>\n3) Customers to be sent a personalised letter thanking them for their time and an acknowledgement, that we value their business and have remedied whatever caused them to want to leave in the first place. A list of all reasons for closure with the action taken, to be stated.  <br><br>\n4) Once the customer has been retained, the customer letter / form duly marked \u201cNOT FOR CLOSURE \u2013 RETAINED\u201d, along with a copy of the resolution letter to be sent to CPC for filing in the customer record.  <br><br>\n5) Siebel to be updated with the same comment and closed.  <br><br>\nIn case the BOM/SM/BM/ RBM / AM or the branch staff are able / Not able  to retain the customer, then protthe SR which has been created needs to be closed with the Closure Description in Siebel as, \u201cCustomer Retained\u201d.  <br><br> This needs to be done diligently and would be subject to audits.  <br><br>\nCustomer is unwilling to give another chance: < <br><br>> Customer will pay the  necessary amount to regularize the account  <br><br>\nCustomer is unwilling to regularize the account after all attempts then branch user to follow the protocol as detailed in chapter \u201cAccount closure requests with debit balance/TBMS lien.\u201d  <br><br>\n1) Where the customer is not willing to continue, Branch to ensure that the complete details on Account closure form and all the checks to be made as detailed in the chapter  \u201cGeneral Guidelines to be followed for Account closure\u201d  <br><br>\n2) In case of any incomplete request, the customer needs to be apprised of the requirements and Siebel to be updated accordingly.  <br><br>\n3) If the a/c closure request is complete in all respects / once the complete request is received from the customer, the same needs to be sent to CPC, post updating the Siebel  <br><br> \n4) Branch to journal of the attempts made to retain the customer.  <br><br>\nIn case the BOM/SM/BM/ RBM / AM or the branch staff are able / Not able  to retain the customer, then protthe SR which has been created needs to be closed with the Closure Description in Siebel as, \u201cCustomer Retained\u201d. This needs to be done diligently and would be subject to audits.C2",
-                        "<br>1) Customer expresses concerns on high charges, ascertain the nature of charges levied and recommend an upgraded account where required (e.g. if customer finds DD charges high, up-sell to an account with a higher free DD limit or an account offering At Par cheque facility if usage is on our locations). Communicate the AMB/AQB and NMC to customer clearly. <br><br>\n2) The account can be upgraded/downgrade as per customer requirement by retaining the same account Number  <br><br>\n3) Branch can also explain the benefits of Basic/Small Account and offer conversion to the said  account as it will address their inability to maintain the account.  <br><br>\nCustomer is unwilling to give us another chance  <br><br>\n1) In case of Issues expressed by the customer where he / she is willing to give the Bank another chance.  <br><br>\n2) Branch to attempt fix the problem within 48 hours or 7 days on the outside for extreme cases and revert to the customer. This TAT for revert to be communicated to the customer upfront.  <br><br>\n3) Customers to be sent a personalised letter thanking them for their time and an acknowledgement, that we value their business and have remedied whatever caused them to want to leave in the first place. A list of all reasons for closure with the action taken, to be stated.   <br><br>\n4) Once the customer has been retained, the customer letter / form duly marked \u201cNOT FOR CLOSURE \u2013 RETAINED\u201d, along with a copy of the resolution letter to be sent to CPC for filing in the customer record.  <br><br>\n5) Siebel to be updated with the same comment and closed.  <br><br>\nIn case the BOM/SM/BM/ RBM / AM or the branch staff are able / Not able  to retain the customer, then protthe SR which has been created needs to be closed with the Closure Description in Siebel as, \u201cCustomer Retained\u201d. This needs to be done diligently and would be subject to audits.  <br><br>\nCustomer will pay the  necessary amount to regularize the account   <br><br>\nCustomer is unwilling to regularize the account after all attempts then branch user to follow the protocol as detailed in chapter \u201cAccount closure requests with debit balance/TBMS lien.\u201d  <br><br>\n1) Where the customer is not willing to continue, Branch to ensure that the complete details on Account closure form and all the checks to be made as detailed in the chapter  \u201cGeneral Guidelines to be followed for Account closure\u201d  <br><br>\n2) In case of any incomplete request, the customer needs to be apprised of the requirements and Siebel to be updated accordingly.  <br><br>\n3) If the a/c closure request is complete in all respects / once the complete request is received from the customer, the same needs to be sent to CPC, post updating the Siebel  <br><br>\n4) Branch to journal of the attempts made to retain the customer.  <br><br>\nIn case the BOM/SM/BM/ RBM / AM or the branch staff are able / Not able  to retain the customer, then protthe SR which has been created needs to be closed with the Closure Description in Siebel as, \u201cCustomer Retained\u201d. This needs to be done diligently and would be subject to audits.\n"
-                    ]
-            ele_val = ele_val.concat(element_values);
-            //_.insert(ele, "Process", [0]);
-            $rootScope.tabvalue.elements = ele;
-            $rootScope.tabvalue.element_values=ele_val;
-            //$rootScope.$emit("setTabData", $scope.node_data);
-           
-            
-        };
-        $rootScope.InstructionResponse = function(id,data) {
-            $rootScope.pushSystemMsg(id,data);
-            $('#myCarousel').carousel({
-                interval: false,
-                wrap: false
-            });
-            $('#myCarousel').find('.item').first().addClass('active');
-            $rootScope.showMsgLoader = false; 
-        };
+        
         $rootScope.trustSrc = function(src) {
             return $sce.trustAsResourceUrl(src);
         };
         $rootScope.getSystemMsg = function(id,value){
             formData = {input:value,csrfmiddlewaretoken:"DapgmpQ2uiWHYVhBZspLD0o9rjce2H3NJHJbc1FOhYYYZ6TuaGyNwVFxO4Sie0my"};
-            //console.log(formData);
+            console.log(formData);
+			framedata = {};
             apiService.getQlikChart(formData).then(function (data){
                 console.log(data);
                 framedata = data.data;
@@ -67434,7 +66974,8 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
 
         $rootScope.onKeyUp = function(e){
             //if(e.key == "ArrowDown" || e.key == "ArrowUp")
-            if(e.which == 40 )
+            /*
+			if(e.which == 40 )
             {
                 if($("ul#ui-id-1 li.active").length!=0) {
                     var storeTarget	= $('ul#ui-id-1').find("li.active").next();
@@ -67473,69 +67014,19 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
 		    	}
 
                 return;
-            }
+            }*/
             if(e.which == 13)
             {
                 if($rootScope.autolistid=="" || $rootScope.autolistid == null || $rootScope.autolistid == 0)
                 {
-                    $(".chatinput").val("");
-                    $rootScope.pushMsg("",$rootScope.chatText);
+                    $rootScope.pushMsg("",$(".chatinput").val());
+					$(".chatinput").val("");
+                    
                 }
                 else {
                     $rootScope.pushMsg($rootScope.autolistid,$rootScope.chatText);
                 }
             }
-        };
-        $rootScope.crnSubmit = function(crnno) {
-            //console.log(crnno,"crnno");
-            $rootScope.userid=$.jStorage.get("id");
-            var datatype = 'CRN';
-            CsrfTokenService.getCookie("csrftoken").then(function(token) {
-                apiService.crnsubmit($rootScope.formData).then(function (callback){
-                    console.log(callback,"crn");
-                });
-                    
-            // $.ajax({
-            
-            //     url : "",
-            //     data: {user_input: crnno, user_id:$scope.userid, number_type:datatype,'csrfmiddlewaretoken': token,
-            //     headers: {'X-CSRFToken': token},
-            //     type: "POST",
-            //     dataType: "json",
-            //     success: function(data){
-            //         var output = data.Output.Result;
-            //         $scope.result_crn(output);
-            //     }
-            // });
-            });
-        };
-        $rootScope.srnSubmit = function(srno,crnno) { 
-            //console.log(crnno+"crnno,sr"+srno);
-            $rootScope.userid=$.jStorage.get("id");
-            var datatype = 'SR';
-            CsrfTokenService.getCookie("csrftoken").then(function(token) {
-            // $.ajax({
-            //     // url: "/srandcrn/",
-            //     data: {user_input: srno, user_id:$scope.userid, number_type:datatype,'csrfmiddlewaretoken': token},
-            //     headers: {'X-CSRFToken': token},
-            //     type: "POST",
-            //     dataType: "json",
-            //     success: function(data){
-            //         var output = data.Output.Result;
-            //         $scope.result_sr(output);
-            //     }
-            // });
-            });
-        };
-        $rootScope.result_sr = function(output) {
-            $timeout(function () {
-                $('#sr_details').html(output);
-            },200);
-        };
-        $rootScope.result_crn = function(output) {
-            $timeout(function () {
-                $('#crn_details').html(output);
-            },200);
         };
         $rootScope.likeChatClick = function(){
             $timeout(function(){

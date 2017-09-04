@@ -25,7 +25,7 @@ module.exports = [
   "bower_components/angular-toastr/dist/angular-toastr.tpls.js",
   "bower_components/angular-promise-buttons/dist/angular-promise-buttons.js",
   "bower_components/jStorage/jstorage.js",
-  "bower_components/ng-idle/angular-idle.js",
+  //"bower_components/ng-idle/angular-idle.js",
   "bower_components/angular-ui-carousel/dist/ui-carousel.min.js",
   "bower_components/angular-bowser/src/angular-bowser.js",
   "frontend/js/services/qlik-isolated.min.js",
@@ -46,11 +46,11 @@ module.exports = [
 
   // Services
   'frontend/js/services/template.js',
-  'frontend/js/services/chatwindow.js',
+  //'frontend/js/services/chatwindow.js',
   'frontend/js/services/csrftoken.js',
-  'frontend/js/services/sha256.js',
-  'frontend/js/services/angular-cookies.min.js',
-  'frontend/js/services/angular-resource.js',
+  //'frontend/js/services/sha256.js',
+  //'frontend/js/services/angular-cookies.min.js',
+  //'frontend/js/services/angular-resource.js',
   'frontend/js/services/jquery-ui.min-v1.12.1.js',
 
   //Factories

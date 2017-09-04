@@ -1,7 +1,7 @@
 var globalLocale = moment.locale('hi');
 var localLocale = moment();
 
-myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, NavigationService,CsrfTokenService,Menuservice, $timeout,$http,apiService,$state) {
+myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, NavigationService,Menuservice, $timeout,$http,apiService,$state) {
         $scope.template = TemplateService.getHTML("content/home.html");
         TemplateService.title = "Home"; //This is the Title of the Website
         $scope.navigation = NavigationService.getNavigation();
@@ -34,14 +34,7 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
         };
     })
 
-    .filter('highlight', function($sce) {
-        return function(text, phrase) {
-            if (phrase) text = text.replace(new RegExp('('+phrase+')', 'gi'),
-            '<span class="highlighted">$1</span>')
-
-            return $sce.trustAsHtml(text)
-        }
-    })
+    
     .controller('SpeechRecognitionController', function ($scope, $rootScope) {
 
     var vm = this;
@@ -82,7 +75,7 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
     
 
 })
-    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService,CsrfTokenService, $timeout,$http,apiService,$state,$uibModal,Menuservice,tts,$sce) {
+    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService, $timeout,$http,apiService,$state,$uibModal,Menuservice,$sce) {
         
         $rootScope.autocompletelist = [];
         $rootScope.chatOpen = false;
@@ -259,7 +252,8 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
         };
         $rootScope.getSystemMsg = function(id,value){
             formData = {input:value,csrfmiddlewaretoken:"DapgmpQ2uiWHYVhBZspLD0o9rjce2H3NJHJbc1FOhYYYZ6TuaGyNwVFxO4Sie0my"};
-            //console.log(formData);
+            console.log(formData);
+			framedata = {};
             apiService.getQlikChart(formData).then(function (data){
                 console.log(data);
                 framedata = data.data;
@@ -455,8 +449,9 @@ myApp.controller('HomeCtrl', function ($scope,$rootScope, TemplateService, Navig
             {
                 if($rootScope.autolistid=="" || $rootScope.autolistid == null || $rootScope.autolistid == 0)
                 {
-                    $(".chatinput").val("");
-                    $rootScope.pushMsg("",$rootScope.chatText);
+                    $rootScope.pushMsg("",$(".chatinput").val());
+					$(".chatinput").val("");
+                    
                 }
                 else {
                     $rootScope.pushMsg($rootScope.autolistid,$rootScope.chatText);

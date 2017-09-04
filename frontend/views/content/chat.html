@@ -80,7 +80,7 @@
                                     <div class="loading">Typing</div>
                                 </div>
                                 <div class="input-group chatinputgroup" ng-controller="SpeechRecognitionController as speech">
-                                    <input type="text" class="form-control chatinput" ng-change="getAutocomplete(chatText);" ng-model="chatText" id="userMsg" placeholder="Type your message here..." autofocus  typeahead="list for list in autocompletelist" ng-keyup="onKeyUp($event)" x-webkit-speech />
+                                    <input type="text" class="form-control chatinput" ng-change="" ng-model="chatText" id="userMsg" placeholder="Type your message here..." autofocus  typeahead="list for list in autocompletelist" ng-keyup="onKeyUp($event)" x-webkit-speech />
                                     <div class="input-group-addon" ng-speech-recognition-start="" ng-speech-recognition-end="speech.displayTranscript()">
                                         <span class="speechtotext"  >
                                             <i class="fa fa-microphone fa-3"></i>
@@ -91,19 +91,19 @@
                                         
                                     </audio>
                                 </div>
-                                <input type="hidden"  name="user_id" id="user_id"  value="{{sessionId}}" />
+                                <!--<input type="hidden"  name="user_id" id="user_id"  value="{{sessionId}}" />-->
                                 <div id="autocomplete_field"></div>
                                 <div id="field_val"></div>
                                 <div id="field_id"></div>
                             </div>
                             <a id="mybtn_trigger" class="hidden" ng-click="Speaktext(text);">Speakme</a>
-                            <div id= "suggestionList">
+                            <!--<div id= "suggestionList">
                                 <ul ng-if="autocompletelist.length > 0" class="{{autocompletelist.length}}  ui-menu ui-widget ui-widget-content ui-autocomplete ui-front" id="ui-id-1">
                                     <div class="ui-menu-item-wrapper">
                                         <li class="ui-menu-item autolist" data-id="{{list.id}}" data-value="{{list.value}}"  ng-repeat="list in autocompletelist | filter:chatText  " ng-click="pushMsg(list.id,list.value);"  ng-bind-html="list.value | highlight:chatText" >{{list.value}}</li>
                                     </div>
                                 </ul>
-                            </div>
+                            </div>-->
                         </div>
                     <!-- </div> -->  
                 <!-- </div> -->

@@ -1,4 +1,4 @@
-myApp.service('CsrfTokenService', function ($timeout,$cookies,$filter) {
+myApp.service('CsrfTokenService', function ($timeout,$filter) {
     csrfservice = {};
     this.getCookie = function(c_name)
     {
@@ -40,7 +40,7 @@ myApp.service('CsrfTokenService', function ($timeout,$cookies,$filter) {
             }
             else
             {
-                $cookies.put("csrftoken",sha256_digest($filter('date')(new Date(), 'hh:mm:ss a')));
+                //$cookies.put("csrftoken",sha256_digest($filter('date')(new Date(), 'hh:mm:ss a')));
             }
             //console.log(document.cookie,"cookie");
             
