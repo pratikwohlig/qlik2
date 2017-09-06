@@ -209,7 +209,7 @@ width:90%;
 }
 
 .panel-body{
-background-color: #fff;
+    background-color: #FAFAFA;
 }
 .chat
 {
@@ -279,8 +279,10 @@ background-color: #fff;
     width: 0;
     height: 0;
     border: 5px solid #d9edf7;
+    border: 5px solid #fff;
     border-left-color: transparent;
     border-bottom-color: transparent;
+    
 }
 .right .chat-body:before{
     content: "";
@@ -296,8 +298,9 @@ background-color: #fff;
 .left .chat-body{
     border-top-left-radius: 0em;
     background: #d9edf7;
+    background: #fff;
     color:#2d2d2d;
-    box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.4);
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.4);
     display: table;
     left: 0;
 }
