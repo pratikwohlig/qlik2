@@ -21,7 +21,7 @@ myApp.factory('apiService', function ($http, $q, $timeout) {
             return    $http({
                 url:adminurl2+'chat/',
                 method: 'POST',
-                data:(formData),
+                data:$.param(formData),
                 headers: {'X-CSRFToken': formData.csrfmiddlewaretoken,'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'},
             });
         }
