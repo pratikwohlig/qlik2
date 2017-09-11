@@ -256,6 +256,12 @@
                 console.log(data);
                 framedata = data.data;
                 framedata.type = "iframe";
+                // if(!framedata.flag)
+                //     framedata.flag = 1;
+                // if(!framedata.flag)
+                //     framedata.flag = 3;
+                if(!framedata.flag)
+                    framedata.flag = 2;
                 $rootScope.currentProjectUrl = framedata.url;
                 console.log(framedata,"Response");
                 $rootScope.pushSystemMsg(0,framedata);

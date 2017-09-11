@@ -21,7 +21,7 @@
                     <!-- <div class="tab-pane active row" id="chattab" ng-if="chat_tab === 1"> -->
                         <div class="panel-body row"> 
                             <ul class="chat">
-                                <li class="{{list.position}} lastchat clearfix" ng-repeat="list in chatlist track by $index">
+                                <li class="{{list.position}} lastchat clearfix" ng-repeat="list in chatlist track by $index" >
                                     <span class="chat-img pull-{{list.position}}">
                                         <img ng-src="img/{{list.position == 'left' && 'cingulariti.png' || 'logo7.png'}}" alt="BOT" class="img-circle " />
                                     </span>
@@ -40,7 +40,7 @@
                                                         {{list.msg.text}}
                                                     </p>
                                                     <!-- <iframe id="framechart" class="framechart" ng-src="{{trustSrc(list.msg.url);}}"> content </iframe> -->
-                                                    <object data="{{trustSrc(list.msg.url);}}" class="framechart" >
+                                                    <object data="{{trustSrc(list.msg.url);}}" class="framechart" ng-style="list.msg.flag === 1 && {'height':'1px'}  || list.msg.flag === 3 && {'height':'20px'}" >
                                                         <embed ng-src="{{trustSrc(list.msg.url);}}"  > </embed>
                                                     </object>
                                                     <div class="qlikdiv qvobject" id="qlikdiv">
