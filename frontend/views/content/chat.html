@@ -15,98 +15,155 @@
                     </a>
                 </div>
             </div>
-            <div class="container-fluid chatbody">
-                <!-- <div class="tab-content chattab-content"> -->
-                    
-                    <!-- <div class="tab-pane active row" id="chattab" ng-if="chat_tab === 1"> -->
-                        <div class="panel-body row"> 
-                            <ul class="chat">
-                                <li class="{{list.position}} lastchat clearfix" ng-repeat="list in chatlist track by $index" >
-                                    <span class="chat-img pull-{{list.position}}">
-                                        <img ng-src="img/{{list.position == 'left' && 'cingulariti.png' || 'logo7.png'}}" alt="BOT" class="img-circle " />
-                                    </span>
-                                    <div class="chat-body">
-                                        <div class="clearfix" ng-if="list.position==='right'">
-                                            <p class="lastmsg" >
-                                                <ng-bind-html ng-bind-html = "list.msg">
-                                                    {{list.msg}}
-                                                </ng-bind-html>
+            <div class="row" ng-if="!isLoggedin">
+                <div class="col-sm-6 col-sm-offset-3 col-xs-12">
+                    <div class="login">
+                        <div class="login-container">
+                            <h1 class="text-center">Login to Chat</h1><br>
+                            <form id="login_form" name="login_form">
+                                <div class="form-group">
+                                    <input class="form-control username" id="username" type="email" name="username" placeholder="Username" ng-model="user.name" required>
+                                    <div class="pull-right" ng-repeat="(field,value) in login_form.username.$error" ng-show="login_form.username.$touched">
+                                        <span class="label label-danger" ng-if="field=='email' && value">Please Enter Valid Email</span>
+                                    </div>
+                                    <input class="form-control userpassword" type="password" name="userpassword" id="userpassword" placeholder="Password" ng-model="user.password" required>
+                                    <div class="pull-right" ng-repeat="(field,value) in login_form.userpassword.$error" ng-show="login_form.userpassword.$touched">
+                                        <span class="label label-danger" ng-if="field=='required' && value">Please Enter Password</span>
+                                    </div>
+                                    <!-- <select id="language_list" name="language_list"  ng-options="cat as cat.name for cat in languagelist" ng-model="selectedLanguage" class="form-control"  required>
+                                
+                                    </select>
+                                    <div class="pull-right" ng-repeat="(field,value) in login_form.language_list.$error" ng-show="login_form.language_list.$touched">
+                                            <span class="label label-danger" ng-if="field=='required' && value">Please Select  Language</span>
+                                    </div> -->
+                                    <div class="pull-right"  ng-if="loginerror==-1">
+                                        <span class="label label-danger">Please Enter Valid username/Password</span>
+                                    </div>
+                                    <div class="pull-right"  ng-if="!isLoggedin">
+                                        <span class="label label-danger">Please Login To Continue</span>
+                                    </div>
+                                    <input class="form-control" id='login' type="submit" name="login" ng-disabled="login_form.$invalid"  class="btn btn-primary btn-lg btn-block" value="Login" ng-click="login(user.name,user.password);">
+                                </div>
+                            </form>
+                        <!-- <div class="login-help">
+                            <a href="#" class="text-center" ng-click="openForgotpassword();">Forgot Password</a>
+                        </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid chatbody" ng-if="isLoggedin">
+                <div class="row toolbar">
+                    <div class="col-md-12">
+                        <div class="btn-group clickbtns">
+                            <a class="" ng-click="opensaveBookmark();">
+                                <span class="glyphicon glyphicon-star"></span> &nbsp;Save Bookmark
+                            </a>
+                            <a class="" ng-click="openviewBookmark();">
+                                <span class="glyphicon glyphicon-star"></span> &nbsp;Load Bookmark
+                            </a>
+                            <a class="" ng-click="sendMail(selectCheck);">
+                                <span class="glyphicon glyphicon-envelope"></span> &nbsp; Mail
+                            </a>
+                            <a ng-if="isLoggedin" class=" logoutbtn" ng-click="logout();">
+                                <span class="glyphicon glyphicon-off"></span> &nbsp;    Logout 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body row"> 
+                    <ul class="chat">
+                        <li class="{{list.position}} lastchat clearfix" ng-repeat="list in chatlist track by $index" >
+                            <span class="chat-img pull-{{list.position}}">
+                                <img ng-src="img/{{list.position == 'left' && 'qlik.png' || 'cingulariti.png'}}" alt="BOT" class="img-circle " />
+                            </span>
+                            <div class="chat-body">
+                                <div class="clearfix" ng-if="list.position==='right'">
+                                    <p class="lastmsg" >
+                                        <ng-bind-html ng-bind-html = "list.msg">
+                                            {{list.msg}}
+                                        </ng-bind-html>
+                                    </p>
+                                </div>
+                                <div class=" clearfix" ng-if="list.position==='left' ">
+                                    <div class="sysChatRes"  >
+                                        <div class="chatType" ng-if="list.msg.type==='iframe'">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" class="selectcheck" value="{{$index}}" ng-true-value="{{$index}}" ng-model="selectCheck" name="formailing[]">
+                                                </label>
+                                            </div>
+                                            <p ng-if="list.msg.text !==''" class="systext">
+                                                {{list.msg.text}}
                                             </p>
-                                        </div>
-                                        <div class=" clearfix" ng-if="list.position==='left' ">
-                                            <div class="sysChatRes"  >
-                                                <div class="chatType" ng-if="list.msg.type==='iframe'">
-                                                    <p ng-if="list.msg.text !==''" class="systext">
-                                                        {{list.msg.text}}
-                                                    </p>
-                                                    <!-- <iframe id="framechart" class="framechart" ng-src="{{trustSrc(list.msg.url);}}"> content </iframe> -->
-                                                    <object data="{{trustSrc(list.msg.url);}}" class="framechart" ng-style="list.msg.flag === 1 && {'height':'1px'}  || list.msg.flag === 3 && {'height':'20px'}" >
-                                                        <embed ng-src="{{trustSrc(list.msg.url);}}"  > </embed>
-                                                    </object>
-                                                    <div class="qlikdiv qvobject" id="qlikdiv">
-                                                    
-                                                    </div>
-                                                </div>
+                                            <!-- <iframe id="framechart" class="framechart" ng-src="{{trustSrc(list.msg.url);}}"> content </iframe> -->
+                                            <object data="{{trustSrc(list.msg.url);}}" class="framechart" ng-style="list.msg.flag === 1 && {'height':'1px'}  || list.msg.flag === 3 && {'height':'20px'}" >
+                                                <embed ng-src="{{trustSrc(list.msg.url);}}"  > </embed>
+                                            </object>
+                                            <div class="qlikdiv qvobject" id="qlikdiv">
+                                            
                                             </div>
                                         </div>
-                                        <div class=" clearfix" ng-if="(list.position==='left' &&  (list.msg.type==='SYS_INACTIVE' || list.msg.type==='SYS_FIRST'))">
-                                            <p class="lastmsg" >
-                                                <ng-bind-html ng-bind-html = "list.msg.Text">
-                                                    {{list.msg.Text}}
-                                                </ng-bind-html>
-                                            </p>
-                                        </div>
-                                        <p class="lastmsg">
-                                            <small class="chatTime">
-                                                <span class="glyphicon glyphicon-time">
-                                                </span>
-                                                {{list.curTime | date: 'HH:mm:ss a'}}
-                                            </small>
-                                        </p>
                                     </div>
-                                </li>    
+                                </div>
+                                <div class=" clearfix" ng-if="(list.position==='left' &&  (list.msg.type==='SYS_INACTIVE' || list.msg.type==='SYS_FIRST'))">
+                                    <p class="lastmsg" >
+                                        <ng-bind-html ng-bind-html = "list.msg.Text">
+                                            {{list.msg.Text}}
+                                        </ng-bind-html>
+                                    </p>
+                                </div>
+                                <p class="lastmsg">
+                                    <small class="chatTime">
+                                        <span class="glyphicon glyphicon-time">
+                                        </span>
+                                        {{list.curTime | date: 'HH:mm:ss a'}}
+                                    </small>
+                                </p>
+                            </div>
+                        </li>    
+                    </ul>
+                </div>
+                <div class=" row">
+                    <div class="col-md-12 panel-footer">
+                        <div class="form-group">
+                            <span  class="thumbsIcon">
+                                <span class="chatbottomtext">Was this information useful ? 
+                                    <span class="thumbsup glyphicon glyphicon-thumbs-up" ng-click="likeChatClick();"></span>&nbsp; 
+                                    <span class="thumbsdown glyphicon glyphicon-thumbs-down" ng-click="dislikeChatClick();"></span>
+                                </span>
+                            </span>
+                        
+                            <div class="loader_msg" ng-show="showMsgLoader">
+                                <div class="loading">Typing</div>
+                            </div>
+                            <div class="input-group chatinputgroup" ng-controller="SpeechRecognitionController as speech">
+                                <input type="text" class="form-control chatinput" ng-change="" ng-model="chatText" id="userMsg" placeholder="Type your message here..." autofocus  typeahead="list for list in autocompletelist" ng-keyup="onKeyUp($event)" x-webkit-speech />
+                                <div class="input-group-addon" ng-speech-recognition-start="" ng-speech-recognition-end="speech.displayTranscript()">
+                                    <span class="speechtotext"  >
+                                        <i class="fa fa-microphone fa-3"></i>
+                                        
+                                    </span>
+                                </div>
+                                <audio controls class="hidden ttsaudio" id="ttsaudio" src="">
+                                    
+                                </audio>
+                            </div>
+                            <!--<input type="hidden"  name="user_id" id="user_id"  value="{{sessionId}}" />-->
+                            <div id="autocomplete_field"></div>
+                            <div id="field_val"></div>
+                            <div id="field_id"></div>
+                        </div>
+                        <a id="mybtn_trigger" class="hidden" ng-click="Speaktext(text);">Speakme</a>
+                        <div id= "suggestionList">
+                            <ul ng-if="autocompletelist.length > 0" class="{{autocompletelist.length}}  ui-menu ui-widget ui-widget-content ui-autocomplete ui-front" id="ui-id-1">
+                                <div class="ui-menu-item-wrapper">
+                                    <li class="ui-menu-item autolist" data-id="{{list.id}}" data-value="{{list.value}}"  ng-repeat="list in autocompletelist | filter:chatText  " ng-click="pushMsg(list.id,list.value);"  ng-bind-html="list.value | highlight:chatText" >{{list.value}}</li>
+                                </div>
                             </ul>
                         </div>
-                        <div class="panel-footer row">
-                            <div class="form-group">
-                                <span  class="thumbsIcon">
-                                    <span class="chatbottomtext">Was this information useful ? 
-                                        <span class="thumbsup glyphicon glyphicon-thumbs-up" ng-click="likeChatClick();"></span>&nbsp; 
-                                        <span class="thumbsdown glyphicon glyphicon-thumbs-down" ng-click="dislikeChatClick();"></span>
-                                    </span>
-                                </span>
-                            
-                                <div class="loader_msg" ng-show="showMsgLoader">
-                                    <div class="loading">Typing</div>
-                                </div>
-                                <div class="input-group chatinputgroup" ng-controller="SpeechRecognitionController as speech">
-                                    <input type="text" class="form-control chatinput" ng-change="" ng-model="chatText" id="userMsg" placeholder="Type your message here..." autofocus  typeahead="list for list in autocompletelist" ng-keyup="onKeyUp($event)" x-webkit-speech />
-                                    <div class="input-group-addon" ng-speech-recognition-start="" ng-speech-recognition-end="speech.displayTranscript()">
-                                        <span class="speechtotext"  >
-                                            <i class="fa fa-microphone fa-3"></i>
-                                            
-                                        </span>
-                                    </div>
-                                    <audio controls class="hidden ttsaudio" id="ttsaudio" src="">
-                                        
-                                    </audio>
-                                </div>
-                                <!--<input type="hidden"  name="user_id" id="user_id"  value="{{sessionId}}" />-->
-                                <div id="autocomplete_field"></div>
-                                <div id="field_val"></div>
-                                <div id="field_id"></div>
-                            </div>
-                            <a id="mybtn_trigger" class="hidden" ng-click="Speaktext(text);">Speakme</a>
-                            <div id= "suggestionList">
-                                <ul ng-if="autocompletelist.length > 0" class="{{autocompletelist.length}}  ui-menu ui-widget ui-widget-content ui-autocomplete ui-front" id="ui-id-1">
-                                    <div class="ui-menu-item-wrapper">
-                                        <li class="ui-menu-item autolist" data-id="{{list.id}}" data-value="{{list.value}}"  ng-repeat="list in autocompletelist | filter:chatText  " ng-click="pushMsg(list.id,list.value);"  ng-bind-html="list.value | highlight:chatText" >{{list.value}}</li>
-                                    </div>
-                                </ul>
-                            </div>
-                        </div>
-                    <!-- </div> -->  
-                <!-- </div> -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>

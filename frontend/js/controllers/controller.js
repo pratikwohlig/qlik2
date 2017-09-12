@@ -83,49 +83,56 @@
         $rootScope.chatmsgid = "";
         
         $rootScope.msgSelected = false;
-        //var mylist = $.jStorage.get("chatlist");
-        var mylist = [];
+        var mylist = $.jStorage.get("chatlist");
+        //var mylist = [];
         if(!mylist || mylist == null)
             $rootScope.chatlist = [];
         else
         {
-            //$rootScope.chatlist = $.jStorage.get("chatlist");
-            $rootScope.chatlist = mylist;
+            $rootScope.chatlist = $.jStorage.get("chatlist");
+            //$rootScope.chatlist = mylist;
         }
         $rootScope.autolistid="";
         $rootScope.autolistvalue="";
         $rootScope.showMsgLoader=false;
         $rootScope.rate_count= 0;
+        $scope.formSubmitted = false;
+        $scope.loginerror=0;
+        $rootScope.isLoggedin = false;
+        if($.jStorage.get("isLoggedin"))
+            $rootScope.isLoggedin = true;
+        $scope.login = function(username,password)
+        {
+            
+            $scope.formData = {username:username,password:sha256_digest(password)};
+            
+            apiService.login($scope.formData).then(function (callback){
+                $.jStorage.flush();
+                //if(username == "admin@exponentiadata.com" && password == "admin")
+                if(callback.data.value)
+                {
+                    $.jStorage.set("id", callback.data.data._id);
+                    $.jStorage.set("fname", callback.data.data.fname);
+                    $.jStorage.set("lname", callback.data.data.lname);
+                    $.jStorage.set("email", callback.data.data.email);
+                    $.jStorage.set("branch", callback.data.data.branch);
+                    $.jStorage.set("access_role", callback.data.data.accessrole);
+                    $.jStorage.set("sessionid", callback.data.data._id);
+                    $.jStorage.set("isLoggedin", true);
+                    
+                    $rootScope.isLoggedin = true;
+                    $rootScope.firstMsg = true;  
+                    msg = {Text:"Hi, How may I help you ?",type:"SYS_FIRST"};
+                    $rootScope.pushSystemMsg(0,msg);  
+                }
+                else if(callback.data.error.message == -1)
+                {
+                    $scope.loginerror = -1;
+                }
+            });
+            
+        };
         
-        // var vm = this;
-        
-        // vm.displayTranscript = displayTranscript;
-        // vm.transcript = '';
-        //  //$rootScope.transcript = "";
-        // // $rootScope.displayTranscript = function() {
-        // //     //vm.transcript = $rootScope.transcript;
-        // //     $(".chatinput").val($rootScope.transcript);
-        // //     console.log("Speech",$rootScope.transcript);
-        // //     //This is just to refresh the content in the view.
-        // //     if (!$scope.$$phase) {
-        // //         $scope.$digest();
-        // //     }
-        // // };
-        // $rootScope.speechEnd = function() {
-        //     console.log("Speech Ended");
-        // };
-        
-        // //vm.displayTranscript = $rootScope.displayTranscript();
-        
-        // $rootScope.speechStarted = function() {
-        //     console.log("speech Started");
-        // };
-        // /**
-        //  * Handle the received transcript here.
-        //  * The result from the Web Speech Recognition will
-        //  * be set inside a $rootScope variable. You can use it
-        //  * as you want.
-        //  */
         function displayTranscript() {
             vm.transcript = $rootScope.transcript;
             console.log("transcript",$rootScope.transcript);
@@ -145,6 +152,48 @@
         //         $scope.$digest();
         //     }
         // }
+        $rootScope.saveBookmark = function(name) {
+            $scope.formData = {name:name,chatlist:$.jStorage.get("chatlist"),userid:$.jStorage.get("sessionid")};
+            
+            apiService.savebookmark($scope.formData).then(function (callback){
+                if(callback.data.value)
+                {
+                    $(".savebookmarktext").val("");
+                    $rootScope.bookmarkCancel();
+                    alert("Saved Successfully");
+                }
+            });
+        };
+        
+        $rootScope.getBookmark = function(selected) {
+             $scope.formData = {userid:$.jStorage.get("sessionid"),selected:selected._id};
+            apiService.getbookmark($scope.formData).then(function (callback){
+                //console.log(callback.data.data.chatlist);
+                if(callback.data.data)
+                {
+                    _.forEach(callback.data.data.chatlist,function(value,key){
+                        
+                        if(value.position == "right")
+                        {
+                            $rootScope.appendMsg(value.msg.id,value.msg);
+                        }
+                        if(value.position == "left" && value.msg.type != "SYS_FIRST")
+                            $rootScope.appendSysMsg(value.msg.id,value.msg);
+                    });
+                    $rootScope.selectbookmarkCancel();
+                }
+            });
+        };
+        $rootScope.sendMail = function(selectCheck) {
+            console.log(selectCheck);
+            var values = new Array();
+            $.each($("input[name='formailing[]']:checked"), function() {
+                values.push($(this).val());
+                console.log($(this).val());
+            // or you can do something to the actual checked checkboxes by working directly with  'this'
+            // something like $(this).hide() (only something useful, probably) :P
+            });
+        };
         $rootScope.scrollChatWindow = function() {
             $timeout(function(){
                 var chatHeight = $("ul.chat").height();
@@ -183,23 +232,38 @@
             $rootScope.chatmsgid = id;
             $rootScope.chatmsg = value;
             $rootScope.chatlist.push({id:"id",msg:value,position:"left",curTime: $rootScope.getDatetime()});
-            //$.jStorage.set("chatlist",$rootScope.chatlist);
+            $.jStorage.set("chatlist",$rootScope.chatlist);
             $timeout(function(){
                 $rootScope.scrollChatWindow();
             });
             
         };
+        $scope.logout = function()
+        {
+            $scope.formData = {sessionid:$.jStorage.get("sessionid"),user:$.jStorage.get("id")};
+            apiService.logout($scope.formData).then(function (callback){
+                $.jStorage.flush();
+                $rootScope.isLoggedin = false;
+                $rootScope.chatlist = [];
+                $.jStorage.set("showchat",false);
+                $rootScope.chatOpen = true;
+                  
+            });
+            
+            
+        };
         $rootScope.showChatwindow = function () {
-            // newlist = $.jStorage.get("chatlist");
-            // if(!newlist || newlist == null)
-            // {
-            //     $rootScope.firstMsg = false;
-            // }
-            // else
-            // { 
-            //     $rootScope.firstMsg = true;
-            // }
-            // $.jStorage.set("showchat",true);
+            newlist = $.jStorage.get("chatlist");
+            //console.log(newlist);
+            if(!newlist || newlist == null)
+            {
+                $rootScope.firstMsg = false;
+            }
+            else
+            { 
+                $rootScope.firstMsg = true;
+            }
+            $.jStorage.set("showchat",true);
             if(!$rootScope.firstMsg)
             {
                 $rootScope.firstMsg = true;
@@ -216,7 +280,7 @@
             $rootScope.scrollChatWindow();
         };
         $rootScope.minimizeChatwindow = function() {
-            //$.jStorage.set("showchat",false);
+            $.jStorage.set("showchat",false);
             $rootScope.showTimeoutmsg = false;
             $rootScope.autocompletelist = [];
             $('#chat_panel').slideUp();
@@ -226,6 +290,29 @@
             $('.panel-heading span.icon_minim').addClass('glyphicon-plus').removeClass('glyphicon-minus');
             $(".clickImage").show( "fadeIn");
         };
+        $rootScope.appendSysMsg = function(id,value) {
+            //console.log(value);
+            if(!value.flag)
+                value.flag = 2;
+            $rootScope.currentProjectUrl = value.url;
+            $rootScope.chatmsgid = id;
+            $rootScope.chatmsg = value;
+            $rootScope.chatlist.push({id:"id",msg:value,position:"left",curTime: $rootScope.getDatetime()});
+            $.jStorage.set("chatlist",$rootScope.chatlist);
+            $timeout(function(){
+                $rootScope.scrollChatWindow();
+            });
+        };
+        $rootScope.appendMsg = function(id,value) {
+            $rootScope.chatmsgid = id;
+            $rootScope.chatmsg = value;
+            $rootScope.autocompletelist = [];
+            $rootScope.chatlist.push({id:"id",msg:value,position:"right",curTime: $rootScope.getDatetime()});
+            //console.log("msgid="+id+"chatmsg="+$rootScope.msgSelected);
+            $.jStorage.set("chatlist",$rootScope.chatlist);
+            $rootScope.msgSelected = false;
+            $rootScope.scrollChatWindow();
+        };
         $rootScope.pushMsg = function(id,value) {
             $rootScope.msgSelected = true;
             $rootScope.chatmsgid = id;
@@ -234,7 +321,7 @@
             $rootScope.chatlist.push({id:"id",msg:value,position:"right",curTime: $rootScope.getDatetime()});
             //console.log("msgid="+id+"chatmsg="+$rootScope.msgSelected);
             $rootScope.getSystemMsg(id,value);
-            //$.jStorage.set("chatlist",$rootScope.chatlist);
+            $.jStorage.set("chatlist",$rootScope.chatlist);
             $rootScope.msgSelected = false;
             $rootScope.showMsgLoader=true;
             $rootScope.scrollChatWindow();
@@ -468,6 +555,52 @@
                 $('.thumbsdown').css("color", "#444");
             },200);
         };
+        
+        $rootScope.$viewmodalInstance = {};
+        $rootScope.selectbookmarkerror = 0;
+        $rootScope.openviewBookmark = function() {
+            $scope.formData = {userid:$.jStorage.get("sessionid")};
+            
+            
+            apiService.viewbookmark($scope.formData).then(function (callback){
+                $("#selectbookmark_list").html("");
+                
+                
+                $rootScope.$viewmodalInstance = $uibModal.open({
+                    scope: $rootScope,
+                    animation: true,
+                    size: 'sm',
+                    templateUrl: 'views/modal/selectbookmark.html',
+                    resolve: {
+                        items: function () {
+                        return callback.data.data;
+                        }
+                    },
+                    controller: 'ViewCtrl'
+                });
+                
+            });
+        };
+        $rootScope.selectbookmarkCancel = function() {
+            //console.log("dismissing");
+            $rootScope.$viewmodalInstance.dismiss('cancel');
+        };
+        
+        $rootScope.savebookmarkerror = 0;
+        $rootScope.$savemodalInstance = {};
+        $scope.opensaveBookmark = function() {
+            $rootScope.$savemodalInstance = $uibModal.open({
+                scope: $rootScope,
+                animation: true,
+                size: 'sm',
+                templateUrl: 'views/modal/savebookmark.html',
+                //controller: 'CommonCtrl'
+            });
+        };
+        $rootScope.bookmarkCancel = function() {
+            //console.log("dismissing");
+            $rootScope.$savemodalInstance.dismiss('cancel');
+        };
         $rootScope.$dislikemodalInstance = {};
         $rootScope.dislikesuggestionerror = 0;
         $rootScope.dislikeChatClick = function(){
@@ -499,6 +632,22 @@
        $timeout(function(){
             //$('#chatTabs a:last').tab('show');
        },200);
+    })
+
+    .controller('ViewCtrl', function ($scope, $uibModalInstance, items) {
+
+        $scope.items = items;
+        // $scope.selected = {
+        //     item: $scope.items[0]
+        // };
+        var dt = "";
+        _.each($scope.items,function(v,k){
+            console.log(v);
+            dt += "<option value='"+v._id+"'>"+v.name+"</option>";
+            
+        });
+        console.log(dt);
+        //$("select#selectbookmark_list").html(dt);
     })
     // Example API Controller
     .controller('DemoAPICtrl', function ($scope, TemplateService, apiService, NavigationService, $timeout) {
