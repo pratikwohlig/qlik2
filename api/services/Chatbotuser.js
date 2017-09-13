@@ -219,47 +219,54 @@ var model = {
         });
     },
     sendmail:function (data, callback) {
-        var attachments1 = new Array();
-        var img = new Array();
-        //var m_html = "<html><body>";
-        var m_html = "";
-        img = data.images;
-        m_html +=data.text+"<br>";
-        console.log(img.length);
-        _.each(img,function(v,k){
-            //m_html += "<img src='"+v+"'>";
-            obj = {"path":v};
-            attachments1.push(obj);
-        });
-        //m_html += "</body></html>";
-        m_html += "";
-        //Config.sendEmail("pratik.shah@wohlig.com",data.email , "Test", "", data.bodytag);
-        const sendmail = require('sendmail')({
-            logger: {
-                debug: console.log,
-                info: console.info,
-                warn: console.warn,
-                error: console.error
-            },
-            silent: false,
-            // dkim: { // Default: False 
-            //     privateKey: fs.readFileSync('./dkim-private.pem', 'utf8'),
-            //     keySelector: 'mydomainkey'
-            // },
-            // devPort: 1025 // Default: False 
-            // devHost: 'localhost' // Default: localhost 
-        })
-        sendmail({
-            from: 'rohit.mathur@exponentiadata.com',
-            to: data.email,
-            subject: 'Detailed Analysis',
-            html: m_html,
-            attachments:attachments1,
-        }, function(err, reply) {
-            console.log(err && err.stack);
-            console.dir(reply);
-            if(!err)
-                callback(null,{message:1});
+        // var attachments1 = new Array();
+        // var img = new Array();
+        // //var m_html = "<html><body>";
+        // var m_html = "";
+        // img = data.images;
+        // m_html +=data.text+"<br>";
+        // console.log(img.length);
+        // _.each(img,function(v,k){
+        //     //m_html += "<img src='"+v+"'>";
+        //     obj = {"path":v};
+        //     attachments1.push(obj);
+        // });
+        // //m_html += "</body></html>";
+        // m_html += "";
+        // //Config.sendEmail("pratik.shah@wohlig.com",data.email , "Test", "", data.bodytag);
+        // const sendmail = require('sendmail')({
+        //     logger: {
+        //         debug: console.log,
+        //         info: console.info,
+        //         warn: console.warn,
+        //         error: console.error
+        //     },
+        //     silent: false,
+        //     // dkim: { // Default: False 
+        //     //     privateKey: fs.readFileSync('./dkim-private.pem', 'utf8'),
+        //     //     keySelector: 'mydomainkey'
+        //     // },
+        //     // devPort: 1025 // Default: False 
+        //     // devHost: 'localhost' // Default: localhost 
+        // })
+        // sendmail({
+        //     from: 'rohit.mathur@exponentiadata.com',
+        //     to: data.email,
+        //     subject: 'Detailed Analysis',
+        //     html: m_html,
+        //     attachments:attachments1,
+        // }, function(err, reply) {
+        //     console.log(err && err.stack);
+        //     console.dir(reply);
+        //     if(!err)
+        //         callback(null,{message:1});
+        // });
+        var page = require('webpage').create();
+        var url = 'http://phantomjs.org/';
+        page.open(url, function (status) {
+        //Page is loaded!
+         page.render('github.png');
+        phantom.exit();
         });
         // var childProcess = require('child_process');
 
