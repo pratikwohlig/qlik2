@@ -68,6 +68,6 @@ module.exports = [
   'frontend/js/controllers/controller.js',
   'frontend/js/controllers/header-controller.js',
   'frontend/js/controllers/language-controller.js',
-  'bower_components/html2canvas/build/html2canvas.js',
+  'frontend/js/directives/html2canvas.js',
   'frontend/js/directives/jquery.plugin.html2canvas.js',
 ];
