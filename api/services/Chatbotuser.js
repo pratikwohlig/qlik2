@@ -261,12 +261,27 @@ var model = {
         //     if(!err)
         //         callback(null,{message:1});
         // });
-        var page = require('webpage').create();
-        var url = 'http://phantomjs.org/';
-        page.open(url, function (status) {
-        //Page is loaded!
-         page.render('github.png');
-        phantom.exit();
+        var attachments1 = new Array();
+        var img = new Array();
+        var capture = require('phantomjs-capture');
+        _.each(img,function(v,k){
+            
+            capture({
+                dir: '.',
+                output: 'xx'+k+'.png',
+                url: v,
+                //size: '1920x800',
+                //domHook: 'ju-footer',
+                screenTimer: 6000
+            }, function(err, result) {
+                obj = {"path":v};
+                attachments1.push(obj);
+                console.log(result.fullPNGPath);        // PNG PATH
+                console.log(result.filePNGName);        // PNG File Name
+                console.log(result.fileHTMLPath);       // HTML PATH
+                console.log(result.fileHTMLName);       // HTML File Name
+            });
+            
         });
         // var childProcess = require('child_process');
 

@@ -61,6 +61,7 @@
     "passport-google-auth": "^1.0.1",
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
+    "phantomjs-capture": "^0.1.6",
     "postcss-cli": "^3.0.0-beta",
     "python-shell": "^0.4.0",
     "qlik-isolated": "^1.0.6",

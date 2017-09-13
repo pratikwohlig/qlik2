@@ -195,67 +195,75 @@
             var isdone=false;
             $.each($("input[name='formailing[]']:checked"), function(k,v) {
                 //values.push($(this).val());
-                var imgname = 'scr'+$(this).val()+'.png';
-                var node = document.getElementById('scr'+$(this).val());
-                var div="#scr"+$(this).val();
+                // var imgname = 'scr'+$(this).val()+'.png';
+                // var node = document.getElementById('scr'+$(this).val());
+                // var div="#scr"+$(this).val();
                 //var div="#chat_window_1";
-                console.log(div);
-                $timeout(function(){
-                    var chatHeight = $("ul.chat").height();
-                    $(div).animate({scrollTop: chatHeight});
-                });
-                
+                //console.log(div);
+                imgarr.push(v);
+                if($("input[name='formailing[]']:checked").length == (k+1))
+                {
+                    isdone = true;
+                    //m_html += "</body></html>";
+            
+                    var formData = {email:emails,text:texts,bodytag:m_html,images:imgarr};
+                    console.log(formData);
+                    apiService.sendmail(formData).then(function (callback){
+                        
+                    });
+                    $rootScope.mailmodalCancel();
+                }
                 // $(div).html2canvas({
                 //     onrendered: function (canvas) {
-                angular.element(document).ready(function () {
-                    divid='#scr'+$(this).val();
-                    //var body = $(div+" object").contents().find('body');
-                    // $timeout(function(){
-                    //     var chatHeight = $("ul.chat").height();
-                    //     $('.panel-body').animate({scrollTop: $(divid).offset().top});
-                    // });
-                    domtoimage.toPng(node)
-                    .then(function (dataUrl) {
-                        imgarr.push(dataUrl);
-                        m_html += "<img src='"+(dataUrl)+"'>";
-                        //console.log(m_html);
-                        if($("input[name='formailing[]']:checked").length == (k+1))
-                        {
-                            isdone = true;
-                            //m_html += "</body></html>";
+                // angular.element(document).ready(function () {
+                //     divid='#scr'+$(this).val();
+                //     //var body = $(div+" object").contents().find('body');
+                //     // $timeout(function(){
+                //     //     var chatHeight = $("ul.chat").height();
+                //     //     $('.panel-body').animate({scrollTop: $(divid).offset().top});
+                //     // });
+                //     domtoimage.toPng(node)
+                //     .then(function (dataUrl) {
+                //         imgarr.push(dataUrl);
+                //         m_html += "<img src='"+(dataUrl)+"'>";
+                //         //console.log(m_html);
+                //         if($("input[name='formailing[]']:checked").length == (k+1))
+                //         {
+                //             isdone = true;
+                //             //m_html += "</body></html>";
                     
-                            var formData = {email:emails,text:texts,bodytag:m_html,images:imgarr};
-                            console.log(formData);
-                            apiService.sendmail(formData).then(function (callback){
+                //             var formData = {email:emails,text:texts,bodytag:m_html,images:imgarr};
+                //             console.log(formData);
+                //             apiService.sendmail(formData).then(function (callback){
                                 
-                            });
-                            $rootScope.mailmodalCancel();
-                        }
-                    })
-                    .catch(function (error) {
-                        console.error('oops, something went wrong!', error);
-                    });
-                    // $(body).html2canvas(   {
-                    //     onrendered: function( canvas ) {
+                //             });
+                //             $rootScope.mailmodalCancel();
+                //         }
+                //     })
+                //     .catch(function (error) {
+                //         console.error('oops, something went wrong!', error);
+                //     });
+                //     // $(body).html2canvas(   {
+                //     //     onrendered: function( canvas ) {
                             
-                    //         imgarr.push(canvas.toDataURL("image/png"));
-                    //         m_html += "<img src='"+(canvas.toDataURL("image/png"))+"'>";
-                    //         //console.log(m_html);
-                    //         if($("input[name='formailing[]']:checked").length == (k+1))
-                    //         {
-                    //             isdone = true;
-                    //             //m_html += "</body></html>";
+                //     //         imgarr.push(canvas.toDataURL("image/png"));
+                //     //         m_html += "<img src='"+(canvas.toDataURL("image/png"))+"'>";
+                //     //         //console.log(m_html);
+                //     //         if($("input[name='formailing[]']:checked").length == (k+1))
+                //     //         {
+                //     //             isdone = true;
+                //     //             //m_html += "</body></html>";
                         
-                    //             var formData = {email:emails,text:texts,bodytag:m_html,images:imgarr};
-                    //             console.log(formData);
-                    //             apiService.sendmail(formData).then(function (callback){
+                //     //             var formData = {email:emails,text:texts,bodytag:m_html,images:imgarr};
+                //     //             console.log(formData);
+                //     //             apiService.sendmail(formData).then(function (callback){
                                     
-                    //             });
-                    //             $rootScope.mailmodalCancel();
-                    //         }
-                    //     }
-                    // });
-                });
+                //     //             });
+                //     //             $rootScope.mailmodalCancel();
+                //     //         }
+                //     //     }
+                //     // });
+                // });
             });
             
         };
