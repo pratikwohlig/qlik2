@@ -216,8 +216,8 @@
                     // });
                     domtoimage.toPng(node)
                     .then(function (dataUrl) {
-                        imgarr.push(canvas.toDataURL("image/png"));
-                        m_html += "<img src='"+(canvas.toDataURL("image/png"))+"'>";
+                        imgarr.push(dataUrl);
+                        m_html += "<img src='"+(dataUrl)+"'>";
                         //console.log(m_html);
                         if($("input[name='formailing[]']:checked").length == (k+1))
                         {
