@@ -253,6 +253,8 @@ var model = {
         }, function(err, reply) {
             console.log(err && err.stack);
             console.dir(reply);
+            if(!err)
+                callback(null,"1");
         });
     },
 };
