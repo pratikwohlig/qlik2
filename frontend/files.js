@@ -28,7 +28,7 @@ module.exports = [
   //"bower_components/ng-idle/angular-idle.js",
   "bower_components/angular-ui-carousel/dist/ui-carousel.min.js",
   "bower_components/angular-bowser/src/angular-bowser.js",
-  'bower_components/html2canvas/build/html2canvas.js',
+  
   
   //"bower_components/dom-to-image/dist/dom-to-image.min.js",
   //"frontend/js/services/qlik-isolated.min.js",
@@ -68,5 +68,6 @@ module.exports = [
   'frontend/js/controllers/controller.js',
   'frontend/js/controllers/header-controller.js',
   'frontend/js/controllers/language-controller.js',
+  'bower_components/html2canvas/build/html2canvas.js',
   'frontend/js/directives/jquery.plugin.html2canvas.js',
 ];
