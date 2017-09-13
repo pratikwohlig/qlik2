@@ -224,6 +224,7 @@ var model = {
         var m_html = "<html><body>";
         img = data.images;
         m_html +=data.text+"<br>";
+        console.log(img.length);
         _.each(img,function(v,k){
             m_html +="<img src='"+v+"'>";
         });
