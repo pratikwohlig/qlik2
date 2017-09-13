@@ -254,7 +254,7 @@ var model = {
             console.log(err && err.stack);
             console.dir(reply);
             if(!err)
-                callback(null,"1");
+                callback(null,{message:1});
         });
     },
 };
