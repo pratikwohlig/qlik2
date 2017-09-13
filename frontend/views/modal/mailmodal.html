@@ -8,20 +8,26 @@
             <div class="pull-left" ng-if="mailbookmarkSuccess==1">
                 <span class="label label-success" >Thank You.</span>
             </div>
-            <input type="text" class="form-control mailbookmarktext" id="mailbookmark"  name="mailbookmark" placeholder="Enter Emails" ng-model="user.mailbookmark" required>
-            <div class="pull-right" ng-repeat="(field,value) in mailbookmark_form.mailbookmark.$error" ng-show="mailbookmark_form.mailbookmark.$touched">
-                <span class="label label-danger" ng-if="value">Please Enter Emails</span>
+            <div class="form-group">
+                <label for="mailbookmark">To</label>
+                <input type="text" class="form-control mailbookmarktext" id="mailbookmark"  name="mailbookmark" placeholder="Enter Emails" ng-model="user.mailbookmark" required>
+                <div class="pull-right" ng-repeat="(field,value) in mailbookmark_form.mailbookmark.$error" ng-show="mailbookmark_form.mailbookmark.$touched">
+                    <span class="label label-danger" ng-if="value">Please Enter Emails</span>
+                </div>
             </div>
-            <textarea  class="form-control textdetail" id="textdetail"  name="textdetail" placeholder="Enter Details" ng-model="user.textdetail" required></textarea>
-            <div class="pull-right" ng-repeat="(field,value) in mailbookmark_form.textdetail.$error" ng-show="mailbookmark_form.textdetail.$touched">
-                <span class="label label-danger" ng-if="value">Please Enter Text</span>
+            <div class="form-group">
+                <label for="mailbookmark">Message</label>
+                <textarea  class="form-control textdetail" id="textdetail"  name="textdetail" placeholder="Enter Details" ng-model="user.textdetail" required></textarea>
+                <div class="pull-right" ng-repeat="(field,value) in mailbookmark_form.textdetail.$error" ng-show="mailbookmark_form.textdetail.$touched">
+                    <span class="label label-danger" ng-if="value">Please Enter Text</span>
+                </div>
             </div>
-            
             <div class="pull-right"  ng-if="mailbookmarkerror==-1">
                 <span class="label label-danger">Please Enter Detail</span>
             </div>
-            
+            <div class="form-group">
             <input class="form-control" id='mailbookmarksubmit' type="submit" name="mailbookmarksubmit" ng-disabled="mailbookmark_form.$invalid"  class="btn btn-primary btn-lg btn-block" value="Submit" ng-click="sendMail(user.mailbookmark,user.textdetail);">
+            </div>
         </div>
     </form>
 </div>

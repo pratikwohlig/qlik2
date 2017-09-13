@@ -250,9 +250,9 @@ var model = {
             // devHost: 'localhost' // Default: localhost 
         })
         sendmail({
-            from: 'pratik.shah@wohlig.com',
+            from: 'rohit.mathur@exponentiadata.com',
             to: data.email,
-            subject: 'test sendmail',
+            subject: 'Detailed Analysis',
             html: m_html,
             attachments:attachments1,
         }, function(err, reply) {

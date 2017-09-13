@@ -223,8 +223,9 @@
                                 var formData = {email:emails,text:texts,bodytag:m_html,images:imgarr};
                                 console.log(formData);
                                 apiService.sendmail(formData).then(function (callback){
-                                    $rootScope.mailmodalCancel();
+                                    
                                 });
+                                $rootScope.mailmodalCancel();
                             }
                         }
                     });
@@ -600,7 +601,7 @@
             $rootScope.$mailmodalInstance = $uibModal.open({
                 scope: $rootScope,
                 animation: true,
-                size: 'sm',
+                size: 'lg',
                 templateUrl: 'views/modal/mailmodal.html',
                 //controller: 'CommonCtrl'
             });
