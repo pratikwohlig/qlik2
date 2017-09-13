@@ -205,25 +205,25 @@
                     $(div).animate({scrollTop: chatHeight});
                 });
                 
-                // $(div).html2canvas({
-                //     onrendered: function (canvas) {
-                //         //Set hidden field's value to image data (base-64 string)
-                //         //$('#img_val').val(canvas.toDataURL("image/png"));
-                //         m_html += "<img src='"+(canvas.toDataURL("image/png"))+"'>";
-                //         console.log(m_html);
-                //         if($("input[name='formailing[]']:checked").length == k+1)
-                //         {
-                //             isdone = true;
-                //             m_html += "</body></html>";
+                $(div).html2canvas({
+                    onrendered: function (canvas) {
+                        //Set hidden field's value to image data (base-64 string)
+                        //$('#img_val').val(canvas.toDataURL("image/png"));
+                        m_html += "<img src='"+(canvas.toDataURL("image/png"))+"'>";
+                        console.log(m_html);
+                        if($("input[name='formailing[]']:checked").length == k+1)
+                        {
+                            isdone = true;
+                            m_html += "</body></html>";
                     
-                //             var formData = {email:emailist,bodytag:m_html};
-                //             console.log(formData);
-                //             apiService.sendmail(formData).then(function (callback){
+                            var formData = {email:emailist,bodytag:m_html};
+                            console.log(formData);
+                            apiService.sendmail(formData).then(function (callback){
 
-                //             });
-                //         }
-                //     }
-                // });
+                            });
+                        }
+                    }
+                });
                 
             });
             
