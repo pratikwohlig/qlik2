@@ -188,7 +188,7 @@
             });
         };
         $rootScope.sendMail = function(selectCheck) {
-            var values = new Array();
+            //var values = new Array();
             var emailist = "pratik.shah429@gmail.com";
             var imgarr = new Array();
             var m_html = "<html><body>";
@@ -205,13 +205,10 @@
                     $(div).animate({scrollTop: chatHeight});
                 });
                 
-                //var node = document.getElementById("chat_window_1");
                 $(div).html2canvas({
                     onrendered: function (canvas) {
                         //Set hidden field's value to image data (base-64 string)
                         //$('#img_val').val(canvas.toDataURL("image/png"));
-                        //console.log(canvas.toDataURL("image/png"));
-                        //imgarr.push($base64.decode(canvas.toDataURL("image/png")));
                         m_html += "<img src='"+(canvas.toDataURL("image/png"))+"'>";
                         console.log(m_html);
                         if($("input[name='formailing[]']:checked").length == k+1)
@@ -225,47 +222,11 @@
 
                             });
                         }
-                        //Submit the form manually
-                        //document.getElementById("myForm").submit();
-                        //window.saveAs($base64.decode(canvas.toDataURL("image/png")),imgname );
                     }
                 });
-                // domtoimage.toPng(node).then(function (dataUrl) {
-                //     var img = new Image();
-                //     img.src = dataUrl;
-                //     console.log(dataUrl);
-                    
-                // }).catch(function (error) {
-                //     console.error('oops, something went wrong!', error);
-                // });
-                // domtoimage.toBlob(node)
-                // .then(function (blob) {
-                //     window.saveAs(blob,imgname );
-                //     console.log(blob);
-                // })
-                // .catch(function (error) {
-                //     console.error('oops, something went wrong!', error);
-                // });
-                // function filter (node) {
-                //     return (node.tagName !== 'i');
-                // }
-                console.log(k,"key");
-            // or you can do something to the actual checked checkboxes by working directly with  'this'
                 
-                    
-            // something like $(this).hide() (only something useful, probably) :P
             });
-            console.log(m_html);
-            // if(isdone)
-            // {
-            //     m_html += "</body></html>";
             
-            //     var formData = {email:emailist,images:imgarr,bodytag:m_html};
-            //     console.log(formData);
-            //     apiService.sendmail(formData).then(function (callback){
-
-            //     });
-            // }
         };
         $rootScope.scrollChatWindow = function() {
             $timeout(function(){
