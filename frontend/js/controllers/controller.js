@@ -207,8 +207,9 @@
                 
                 // $(div).html2canvas({
                 //     onrendered: function (canvas) {
-                
-                $($([document.getElementById('scr'+$(this).val())])).html2canvas(   {
+                angular.element(document).ready(function () {
+                    divid='scr'+$(this).val();
+                $($([document.getElementById(divid)])).html2canvas(   {
                     onrendered: function( canvas ) {
                         /* canvas is the actual canvas element, 
                         to append it to the page call for example 
@@ -228,6 +229,7 @@
                                 });
                             }
                         }
+                });
                 });
             });
             
