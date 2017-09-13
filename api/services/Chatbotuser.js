@@ -270,8 +270,8 @@ var model = {
                 dir: '.',
                 output: 'xx'+k+'.png',
                 url: v,
-                //size: '1920x800',
-                //domHook: 'ju-footer',
+                size: '1920x800',
+                domHook: 'QV01',
                 screenTimer: 6000
             }, function(err, result) {
                 obj = {"path":v};

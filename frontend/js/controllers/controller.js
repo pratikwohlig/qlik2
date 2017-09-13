@@ -200,7 +200,7 @@
                 // var div="#scr"+$(this).val();
                 //var div="#chat_window_1";
                 //console.log(div);
-                imgarr.push(v);
+                imgarr.push($(this).val());
                 if($("input[name='formailing[]']:checked").length == (k+1))
                 {
                     isdone = true;
