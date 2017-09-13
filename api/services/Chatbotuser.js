@@ -248,7 +248,7 @@ var model = {
             from: 'pratik.shah@wohlig.com',
             to: data.email,
             subject: 'test sendmail',
-            html: data.text,
+            html: m_html,
         }, function(err, reply) {
             console.log(err && err.stack);
             console.dir(reply);
