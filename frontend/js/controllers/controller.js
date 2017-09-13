@@ -73,7 +73,7 @@
     
 
     })
-    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService, $timeout,$http,apiService,$state,$uibModal,Menuservice,$sce) {
+    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService, $timeout,$http,apiService,$state,$uibModal,Menuservice,$sce,$base64) {
         
         $rootScope.autocompletelist = [];
         $rootScope.chatOpen = false;
@@ -119,11 +119,14 @@
                     $.jStorage.set("access_role", callback.data.data.accessrole);
                     $.jStorage.set("sessionid", callback.data.data._id);
                     $.jStorage.set("isLoggedin", true);
-                    
+                    $rootScope.chatlist=[];
                     $rootScope.isLoggedin = true;
                     $rootScope.firstMsg = true;  
-                    msg = {Text:"Hi, How may I help you ?",type:"SYS_FIRST"};
-                    $rootScope.pushSystemMsg(0,msg);  
+                    //if(!$rootScope.firstMsg)
+                    {
+                        msg = {Text:"Hi, How may I help you ?",type:"SYS_FIRST"};
+                        $rootScope.pushSystemMsg(0,msg);  
+                    }
                 }
                 else if(callback.data.error.message == -1)
                 {
@@ -187,12 +190,84 @@
         $rootScope.sendMail = function(selectCheck) {
             console.log(selectCheck);
             var values = new Array();
-            $.each($("input[name='formailing[]']:checked"), function() {
-                values.push($(this).val());
-                console.log($(this).val());
+            var emailist = "pratik.shah429@gmail.com";
+            var imgarr = new Array();
+            var m_html = "<html><body>";
+            var isdone=false;
+            $.each($("input[name='formailing[]']:checked"), function(k,v) {
+                //values.push($(this).val());
+                var imgname = 'scr'+$(this).val()+'.png';
+                var node = document.getElementById('scr'+$(this).val());
+                var div="#scr"+$(this).val();
+                //var div="#chat_window_1";
+                console.log(div);
+                $timeout(function(){
+                    var chatHeight = $("ul.chat").height();
+                    $(div).animate({scrollTop: chatHeight});
+                });
+                
+                //var node = document.getElementById("chat_window_1");
+                $(div).html2canvas({
+                //$('#chat_window_1').html2canvas({
+                    onrendered: function (canvas) {
+                        //Set hidden field's value to image data (base-64 string)
+                        //$('#img_val').val(canvas.toDataURL("image/png"));
+                        //console.log(canvas.toDataURL("image/png"));
+                        imgarr.push($base64.decode(canvas.toDataURL("image/png")));
+                        m_html += "<img src='"+(canvas.toDataURL("image/png"))+"'>";
+                        console.log(m_html);
+                        if($("input[name='formailing[]']:checked").length == k+1)
+                        {
+                            isdone = true;
+                            m_html += "</body></html>";
+                    
+                            var formData = {email:emailist,bodytag:m_html};
+                            console.log(formData);
+                            apiService.sendmail(formData).then(function (callback){
+
+                            });
+                        }
+                        //Submit the form manually
+                        //document.getElementById("myForm").submit();
+                        //window.saveAs($base64.decode(canvas.toDataURL("image/png")),imgname );
+                    }
+                });
+                // domtoimage.toPng(node).then(function (dataUrl) {
+                //     var img = new Image();
+                //     img.src = dataUrl;
+                //     console.log(dataUrl);
+                    
+                // }).catch(function (error) {
+                //     console.error('oops, something went wrong!', error);
+                // });
+                // domtoimage.toBlob(node)
+                // .then(function (blob) {
+                //     window.saveAs(blob,imgname );
+                //     console.log(blob);
+                // })
+                // .catch(function (error) {
+                //     console.error('oops, something went wrong!', error);
+                // });
+                // function filter (node) {
+                //     return (node.tagName !== 'i');
+                // }
+                console.log(k,"key");
             // or you can do something to the actual checked checkboxes by working directly with  'this'
+                
+                    
             // something like $(this).hide() (only something useful, probably) :P
             });
+            console.log(m_html);
+            if(isdone)
+            {
+                m_html += "</body></html>";
+            
+                var formData = {email:emailist,images:imgarr,bodytag:m_html};
+                console.log(formData);
+                apiService.sendmail(formData).then(function (callback){
+
+                });
+            }
         };
         $rootScope.scrollChatWindow = function() {
             $timeout(function(){

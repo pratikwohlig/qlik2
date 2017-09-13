@@ -19,7 +19,7 @@
                 <div class="col-sm-6 col-sm-offset-3 col-xs-12">
                     <div class="login">
                         <div class="login-container">
-                            <h1 class="text-center">Login to Chat</h1><br>
+                            <h1 class="text-center">Login</h1><br>
                             <form id="login_form" name="login_form">
                                 <div class="form-group">
                                     <input class="form-control username" id="username" type="email" name="username" placeholder="Username" ng-model="user.name" required>
@@ -93,13 +93,15 @@
                                                     <input type="checkbox" class="selectcheck" value="{{$index}}" ng-true-value="{{$index}}" ng-model="selectCheck" name="formailing[]">
                                                 </label>
                                             </div>
-                                            <p ng-if="list.msg.text !==''" class="systext">
-                                                {{list.msg.text}}
-                                            </p>
-                                            <!-- <iframe id="framechart" class="framechart" ng-src="{{trustSrc(list.msg.url);}}"> content </iframe> -->
-                                            <object data="{{trustSrc(list.msg.url);}}" class="framechart" ng-style="list.msg.flag === 1 && {'height':'1px'}  || list.msg.flag === 3 && {'height':'20px'}" >
-                                                <embed ng-src="{{trustSrc(list.msg.url);}}"  > </embed>
-                                            </object>
+                                            
+                                            <div class="scr{{$index}}" id="scr{{$index}}">
+                                                <p ng-if="list.msg.text !==''" class="systext">
+                                                    {{list.msg.text}}
+                                                </p>
+                                                <object data="{{trustSrc(list.msg.url);}}" class="framechart" ng-style="list.msg.flag === 1 && {'height':'1px'}  || list.msg.flag === 3 && {'height':'20px'}" >
+                                                    <embed ng-src="{{trustSrc(list.msg.url);}}"  > </embed>
+                                                </object>
+                                            </div>
                                             <div class="qlikdiv qvobject" id="qlikdiv">
                                             
                                             </div>

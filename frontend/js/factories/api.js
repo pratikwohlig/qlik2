@@ -2,7 +2,7 @@ myApp.factory('apiService', function ($http, $q, $timeout) {
     
     //adminurl2 = "http://localhost:8000/";
     adminurl2 = "http://104.46.103.162:8000/";
-    adminUrl3 = "http://localhost/api/";
+    //adminUrl3 = "http://localhost/api/";
     adminUrl3 = "http://104.46.103.162:8095/api/";
     return {
 
@@ -71,6 +71,24 @@ myApp.factory('apiService', function ($http, $q, $timeout) {
                 url:adminUrl3+ "Chatbotbookmark/getbookmark",
                 method: 'POST',
                 data: formData,
+            });
+            
+        },
+        sendmail:function(formData, callback) {
+            
+           
+            return $http({
+                url:adminUrl3+ "Chatbotuser/sendmail",
+                method: 'POST',
+                data: formData,
+                // headers : {
+                //     'Content-Type' : 'application/json'
+                // },
+                // transformRequest :  [function (data, headers) {
+                //     //just send data without modifying
+                //     return data;
+                // }],
+                contentType: "application/x-www-form-urlencoded",
             });
             
         },

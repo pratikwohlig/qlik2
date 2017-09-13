@@ -218,6 +218,39 @@ var model = {
 
         });
     },
-    
+    sendmail:function (data, callback) {
+        
+        //var img = new Array();
+        //var m_html = "<html><body>";
+        console.log(data);
+        
+        //m_html += "</body></html>";
+        //console.log(m_html);
+        //Config.sendEmail("pratik.shah@wohlig.com",data.email , "Test", "", data.bodytag);
+        const sendmail = require('sendmail')({
+            logger: {
+                debug: console.log,
+                info: console.info,
+                warn: console.warn,
+                error: console.error
+            },
+            silent: false,
+            // dkim: { // Default: False 
+            //     privateKey: fs.readFileSync('./dkim-private.pem', 'utf8'),
+            //     keySelector: 'mydomainkey'
+            // },
+            // devPort: 1025 // Default: False 
+            // devHost: 'localhost' // Default: localhost 
+        })
+        sendmail({
+            from: 'pratik.shah@wohlig.com',
+            to: data.email,
+            subject: 'test sendmail',
+            html: m_html,
+        }, function(err, reply) {
+            console.log(err && err.stack);
+            console.dir(reply);
+        });
+    },
 };
 module.exports = _.assign(module.exports, exports, model);
