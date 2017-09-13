@@ -219,16 +219,20 @@ var model = {
         });
     },
     sendmail:function (data, callback) {
-        
+        var attachments1 = new Array();
         var img = new Array();
-        var m_html = "<html><body>";
+        //var m_html = "<html><body>";
+        var m_html = "";
         img = data.images;
         m_html +=data.text+"<br>";
         console.log(img.length);
         _.each(img,function(v,k){
-            m_html += "<img src='"+v+"'>";
+            //m_html += "<img src='"+v+"'>";
+            obj = {"path":v};
+            attachments1.push(obj);
         });
-        m_html += "</body></html>";
+        //m_html += "</body></html>";
+        m_html += "";
         //Config.sendEmail("pratik.shah@wohlig.com",data.email , "Test", "", data.bodytag);
         const sendmail = require('sendmail')({
             logger: {
@@ -250,12 +254,24 @@ var model = {
             to: data.email,
             subject: 'test sendmail',
             html: m_html,
+            attachments:attachments1,
         }, function(err, reply) {
             console.log(err && err.stack);
             console.dir(reply);
             if(!err)
                 callback(null,{message:1});
         });
+        // var childProcess = require('child_process');
+
+        // function newEmail(){
+        //     childProcess.spawn(
+        //         "powershell.exe",
+        //         ['$mail = (New-Object -comObject Outlook.Application).CreateItem(0);' +
+        //         '$mail.Attachments.Add("C:\Users\admin\desktop\myproject\temp\testing.pdf");' +
+        //         '$mail.Subject = "Some text";' +
+        //         '$mail.Display();']
+        //     );
+        // }
     },
 };
 module.exports = _.assign(module.exports, exports, model);

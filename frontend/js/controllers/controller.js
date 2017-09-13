@@ -604,6 +604,7 @@
                 templateUrl: 'views/modal/mailmodal.html',
                 //controller: 'CommonCtrl'
             });
+            //window.open('mailto:test@example.com?subject=subject&body=body');
         };
         $rootScope.mailmodalCancel = function() {
             //console.log("dismissing");
