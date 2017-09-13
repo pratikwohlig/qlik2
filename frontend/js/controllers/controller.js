@@ -208,8 +208,7 @@
                 // $(div).html2canvas({
                 //     onrendered: function (canvas) {
                 
-                //$($("#scr"+$(this).val())).html2canvas(   {
-                html2canvas(div, {
+                $($("#scr"+$(this).val())).html2canvas(   {
                     onrendered: function( canvas ) {
                         /* canvas is the actual canvas element, 
                         to append it to the page call for example 
