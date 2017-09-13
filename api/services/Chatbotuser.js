@@ -226,7 +226,7 @@ var model = {
         m_html +=data.text+"<br>";
         console.log(img.length);
         _.each(img,function(v,k){
-            m_html +="<img src='"+v+"'>";
+            m_html += "<img src='"+v+"'>";
         });
         m_html += "</body></html>";
         //Config.sendEmail("pratik.shah@wohlig.com",data.email , "Test", "", data.bodytag);
