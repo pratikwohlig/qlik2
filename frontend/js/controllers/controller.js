@@ -209,11 +209,12 @@
                 //     onrendered: function (canvas) {
                 angular.element(document).ready(function () {
                     divid='#scr'+$(this).val();
-                    $timeout(function(){
-                        var chatHeight = $("ul.chat").height();
-                        $('.panel-body').animate({scrollTop: $(divid).offset().top});
-                    });
-                    $(div).html2canvas(   {
+                    var body = $(div+" object").contents().find('body');
+                    // $timeout(function(){
+                    //     var chatHeight = $("ul.chat").height();
+                    //     $('.panel-body').animate({scrollTop: $(divid).offset().top});
+                    // });
+                    $(body).html2canvas(   {
                         onrendered: function( canvas ) {
                             
                             imgarr.push(canvas.toDataURL("image/png"));
