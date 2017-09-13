@@ -191,7 +191,7 @@
             //var values = new Array();
             var emailist = "pratik.shah429@gmail.com";
             var imgarr = new Array();
-            var m_html = "<html><body>";
+            var m_html = "";
             var isdone=false;
             $.each($("input[name='formailing[]']:checked"), function(k,v) {
                 //values.push($(this).val());
@@ -220,7 +220,7 @@
                             if($("input[name='formailing[]']:checked").length == k+1)
                             {
                                 isdone = true;
-                                m_html += "</body></html>";
+                                //m_html += "</body></html>";
                         
                                 var formData = {email:emailist,bodytag:m_html};
                                 console.log(formData);
