@@ -41,8 +41,8 @@ module.exports = [
   'frontend/js/directives/directive.js',
   'frontend/js/directives/SpeechRecognitionDirective.js',
   //'frontend/js/directives/angularjs.voicerss-tts.min.js',
-  'frontend/js/directives/html2canvas.js',
-  'frontend/js/directives/jquery.plugin.html2canvas.js',
+  //'frontend/js/directives/html2canvas.js',
+  //'frontend/js/directives/jquery.plugin.html2canvas.js',
 
   // Filters
   'frontend/js/filters/filter.js',
