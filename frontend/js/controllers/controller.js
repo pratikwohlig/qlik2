@@ -209,7 +209,7 @@
                 //     onrendered: function (canvas) {
                 angular.element(document).ready(function () {
                     divid='#scr'+$(this).val();
-                    var body = $(div+" object").contents().find('body');
+                    //var body = $(div+" object").contents().find('body');
                     // $timeout(function(){
                     //     var chatHeight = $("ul.chat").height();
                     //     $('.panel-body').animate({scrollTop: $(divid).offset().top});
