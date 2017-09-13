@@ -29,8 +29,6 @@ module.exports = [
   "bower_components/angular-ui-carousel/dist/ui-carousel.min.js",
   "bower_components/angular-bowser/src/angular-bowser.js",
   "bower_components/dom-to-image/dist/dom-to-image.min.js",
-  "bower_components/file-saver/FileSaver.min.js",
-  "bower_components/angular-base64/angular-base64.js",
   //"frontend/js/services/qlik-isolated.min.js",
   //App.js
   'frontend/js/app.js',

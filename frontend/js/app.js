@@ -17,7 +17,6 @@ var myApp = angular.module('myApp', [
     'app.directives',
     //'voiceRss',
     'jlareau.bowser',
-    'base64',
 ]);
 //angular.module('manage', ['ngResource']);
 // Define all the routes below

@@ -73,7 +73,7 @@
     
 
     })
-    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService, $timeout,$http,apiService,$state,$uibModal,Menuservice,$sce,$base64) {
+    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService, $timeout,$http,apiService,$state,$uibModal,Menuservice,$sce) {
         
         $rootScope.autocompletelist = [];
         $rootScope.chatOpen = false;
@@ -188,7 +188,6 @@
             });
         };
         $rootScope.sendMail = function(selectCheck) {
-            console.log(selectCheck);
             var values = new Array();
             var emailist = "pratik.shah429@gmail.com";
             var imgarr = new Array();
@@ -208,12 +207,11 @@
                 
                 //var node = document.getElementById("chat_window_1");
                 $(div).html2canvas({
-                //$('#chat_window_1').html2canvas({
                     onrendered: function (canvas) {
                         //Set hidden field's value to image data (base-64 string)
                         //$('#img_val').val(canvas.toDataURL("image/png"));
                         //console.log(canvas.toDataURL("image/png"));
-                        imgarr.push($base64.decode(canvas.toDataURL("image/png")));
+                        //imgarr.push($base64.decode(canvas.toDataURL("image/png")));
                         m_html += "<img src='"+(canvas.toDataURL("image/png"))+"'>";
                         console.log(m_html);
                         if($("input[name='formailing[]']:checked").length == k+1)
@@ -258,16 +256,16 @@
             // something like $(this).hide() (only something useful, probably) :P
             });
             console.log(m_html);
-            if(isdone)
-            {
-                m_html += "</body></html>";
+            // if(isdone)
+            // {
+            //     m_html += "</body></html>";
             
-                var formData = {email:emailist,images:imgarr,bodytag:m_html};
-                console.log(formData);
-                apiService.sendmail(formData).then(function (callback){
+            //     var formData = {email:emailist,images:imgarr,bodytag:m_html};
+            //     console.log(formData);
+            //     apiService.sendmail(formData).then(function (callback){
 
-                });
-            }
+            //     });
+            // }
         };
         $rootScope.scrollChatWindow = function() {
             $timeout(function(){
