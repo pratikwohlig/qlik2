@@ -187,7 +187,7 @@
                 }
             });
         };
-        $rootScope.sendMail = function(selectCheck) {
+        $rootScope.sendMail = function(emails,texts) {
             //var values = new Array();
             var emailist = "pratik.shah429@gmail.com";
             var imgarr = new Array();
@@ -209,27 +209,25 @@
                 //     onrendered: function (canvas) {
                 angular.element(document).ready(function () {
                     divid='scr'+$(this).val();
-                $(div).html2canvas(   {
-                    onrendered: function( canvas ) {
-                        /* canvas is the actual canvas element, 
-                        to append it to the page call for example 
-                        document.body.appendChild( canvas );
-                        */
+                    $(div).html2canvas(   {
+                        onrendered: function( canvas ) {
+                            
+                            imgarr.push(canvas.toDataURL("image/png"));
                             m_html += "<img src='"+(canvas.toDataURL("image/png"))+"'>";
-                            console.log(m_html);
-                            if($("input[name='formailing[]']:checked").length == k+1)
+                            //console.log(m_html);
+                            if($("input[name='formailing[]']:checked").length == (k+1))
                             {
                                 isdone = true;
                                 //m_html += "</body></html>";
                         
-                                var formData = {email:emailist,bodytag:m_html};
+                                var formData = {email:emails,text:texts,bodytag:m_html,images:imgarr};
                                 console.log(formData);
                                 apiService.sendmail(formData).then(function (callback){
-
+                                    $rootScope.mailmodalCancel();
                                 });
                             }
                         }
-                });
+                    });
                 });
             });
             
@@ -596,6 +594,22 @@
             },200);
         };
         
+        $rootScope.mailmodalInstance = {};
+        $rootScope.mailbookmarkerror = 0;
+        $scope.openMailmodal = function() {
+            $rootScope.$mailmodalInstance = $uibModal.open({
+                scope: $rootScope,
+                animation: true,
+                size: 'sm',
+                templateUrl: 'views/modal/mailmodal.html',
+                //controller: 'CommonCtrl'
+            });
+        };
+        $rootScope.mailmodalCancel = function() {
+            //console.log("dismissing");
+            $rootScope.$mailmodalInstance.dismiss('cancel');
+        };
+
         $rootScope.$viewmodalInstance = {};
         $rootScope.selectbookmarkerror = 0;
         $rootScope.openviewBookmark = function() {
@@ -626,8 +640,8 @@
             $rootScope.$viewmodalInstance.dismiss('cancel');
         };
         
-        $rootScope.savebookmarkerror = 0;
         $rootScope.$savemodalInstance = {};
+        $rootScope.savebookmarkerror = 0;
         $scope.opensaveBookmark = function() {
             $rootScope.$savemodalInstance = $uibModal.open({
                 scope: $rootScope,

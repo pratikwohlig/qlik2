@@ -220,12 +220,14 @@ var model = {
     },
     sendmail:function (data, callback) {
         
-        //var img = new Array();
-        //var m_html = "<html><body>";
-        console.log(data);
-        
-        //m_html += "</body></html>";
-        //console.log(m_html);
+        var img = new Array();
+        var m_html = "<html><body>";
+        img = data.images;
+        m_html +=data.text+"<br>";
+        _.each(img,function(v,k){
+            m_html +="<img src='"+v+"'>";
+        });
+        m_html += "</body></html>";
         //Config.sendEmail("pratik.shah@wohlig.com",data.email , "Test", "", data.bodytag);
         const sendmail = require('sendmail')({
             logger: {
@@ -246,7 +248,7 @@ var model = {
             from: 'pratik.shah@wohlig.com',
             to: data.email,
             subject: 'test sendmail',
-            html: "test",
+            html: data.text,
         }, function(err, reply) {
             console.log(err && err.stack);
             console.dir(reply);

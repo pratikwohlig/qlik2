@@ -1,0 +1,31 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Mail Detail</h3>
+    <button type="button" class="close"  aria-hidden="true" ng-click="mailmodalCancel();">&times;</button>
+</div>
+<div class="modal-body" id="modal-body">
+    <form id="mailbookmark_form" name="mailbookmark_form">
+        <div class="form-group">
+            <div class="pull-left" ng-if="mailbookmarkSuccess==1">
+                <span class="label label-success" >Thank You.</span>
+            </div>
+            <input type="text" class="form-control mailbookmarktext" id="mailbookmark"  name="mailbookmark" placeholder="Enter Emails" ng-model="user.mailbookmark" required>
+            <div class="pull-right" ng-repeat="(field,value) in mailbookmark_form.mailbookmark.$error" ng-show="mailbookmark_form.mailbookmark.$touched">
+                <span class="label label-danger" ng-if="value">Please Enter Emails</span>
+            </div>
+            <textarea  class="form-control textdetail" id="textdetail"  name="textdetail" placeholder="Enter Details" ng-model="user.textdetail" required></textarea>
+            <div class="pull-right" ng-repeat="(field,value) in mailbookmark_form.textdetail.$error" ng-show="mailbookmark_form.textdetail.$touched">
+                <span class="label label-danger" ng-if="value">Please Enter Text</span>
+            </div>
+            
+            <div class="pull-right"  ng-if="mailbookmarkerror==-1">
+                <span class="label label-danger">Please Enter Detail</span>
+            </div>
+            
+            <input class="form-control" id='mailbookmarksubmit' type="submit" name="mailbookmarksubmit" ng-disabled="mailbookmark_form.$invalid"  class="btn btn-primary btn-lg btn-block" value="Submit" ng-click="sendMail(user.mailbookmark,user.textdetail);">
+        </div>
+    </form>
+</div>
+<div class="modal-footer hidden">
+    <button class="btn btn-primary" type="button" ng-click="">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="">Cancel</button>
+</div>
