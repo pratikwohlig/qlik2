@@ -222,9 +222,9 @@ var model = {
         // var attachments1 = new Array();
         // var img = new Array();
         // //var m_html = "<html><body>";
-        // var m_html = "";
+        var m_html = "";
         // img = data.images;
-        // m_html +=data.text+"<br>";
+        m_html +=data.text+"<br>";
         // console.log(img.length);
         // _.each(img,function(v,k){
         //     //m_html += "<img src='"+v+"'>";
@@ -232,7 +232,7 @@ var model = {
         //     attachments1.push(obj);
         // });
         // //m_html += "</body></html>";
-        // m_html += "";
+        m_html += "";
         // //Config.sendEmail("pratik.shah@wohlig.com",data.email , "Test", "", data.bodytag);
         // const sendmail = require('sendmail')({
         //     logger: {
