@@ -261,29 +261,59 @@ var model = {
         //     if(!err)
         //         callback(null,{message:1});
         // });
+        //var capture = require('phantomjs-capture');
+        var async = require('async');
         var attachments1 = new Array();
         var img = new Array();
-        var capture = require('phantomjs-capture');
+        
+        var Screenshot = require('url-to-screenshot');
         img = data.images;
-        _.each(img,function(v,k){
-            console.log(v);    
-            capture({
-                dir: '.',
-                output: 'xx'+k+'.png',
-                url: v,
-                size: '500x500',
-                domHook: 'QV01',
-                screenTimer: 6000
-            }, function(err, result) {
-                obj = {"path":v};
-                attachments1.push(obj);
-                console.log(result.fullPNGPath);        // PNG PATH
-                // console.log(result.filePNGName);        // PNG File Name
-                // console.log(result.fileHTMLPath);       // HTML PATH
-                // console.log(result.fileHTMLName);       // HTML File Name
-            });
+        var key = 0;    
+        async.each(data.images,
+            // 2nd param is the function that each item is passed to
+            function(item, eachCallback){
+                var fs = require('fs');
+                take(item, function(imgData){
+                if(!imgData){
+                    console.log('Could not take screenshot for this url');
+                    return false;
+                }
+                    var file = __dirname+'/test'+key+'.png';
+                    fs.writeFileSync(file, imgData);
+                    attachments1.push(file);
+                    key++;
+                    eachCallback();
+                });
             
-        });
+            },
+            // 3rd param is the function to call when everything's done
+            function(err){
+                // All tasks are done now
+                if(err) {}
+                else
+                    callback(null,{message:1});
+            }
+        );
+
+        // _.each(img,function(v,k){
+        //     console.log(item);    
+        //     capture({
+        //         dir: '.',
+        //         output: 'xx'+key+'.png',
+        //         url: item,
+        //         size: '500x500',
+        //         domHook: 'QV01',
+        //         screenTimer: 6000
+        //     }, function(err, result) {
+        //         obj = {"path":v};
+        //         attachments1.push(obj);
+        //         console.log(result.fullPNGPath);        // PNG PATH
+        //         // console.log(result.filePNGName);        // PNG File Name
+        //         // console.log(result.fileHTMLPath);       // HTML PATH
+        //         // console.log(result.fileHTMLName);       // HTML File Name
+        //     });
+            
+        // });
         // var childProcess = require('child_process');
 
         // function newEmail(){

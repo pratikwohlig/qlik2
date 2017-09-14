@@ -73,7 +73,8 @@
     "sails-wohlig-controller": "latest",
     "sails-wohlig-service": "latest",
     "sendgrid": "^5.0.0",
-    "sendmail": "^1.2.0"
+    "sendmail": "^1.2.0",
+    "url-to-screenshot": "^1.0.1"
   },
   "scripts": {
     "debug": "node debug app.js",
