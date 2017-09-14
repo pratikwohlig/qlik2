@@ -264,22 +264,23 @@ var model = {
         var attachments1 = new Array();
         var img = new Array();
         var capture = require('phantomjs-capture');
+        img = data.images;
         _.each(img,function(v,k){
-            
+            console.log(v);    
             capture({
                 dir: '.',
                 output: 'xx'+k+'.png',
                 url: v,
-                size: '1920x800',
+                size: '500x500',
                 domHook: 'QV01',
                 screenTimer: 6000
             }, function(err, result) {
                 obj = {"path":v};
                 attachments1.push(obj);
                 console.log(result.fullPNGPath);        // PNG PATH
-                console.log(result.filePNGName);        // PNG File Name
-                console.log(result.fileHTMLPath);       // HTML PATH
-                console.log(result.fileHTMLName);       // HTML File Name
+                // console.log(result.filePNGName);        // PNG File Name
+                // console.log(result.fileHTMLPath);       // HTML PATH
+                // console.log(result.fileHTMLName);       // HTML File Name
             });
             
         });
