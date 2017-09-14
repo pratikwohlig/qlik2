@@ -267,17 +267,23 @@ var model = {
         var img = new Array();
         
         var Screenshot = require('url-to-screenshot');
+        var fs = require('fs');
         img = data.images;
         var key = 0;    
         async.each(data.images,
             // 2nd param is the function that each item is passed to
             function(item, eachCallback){
-                var fs = require('fs');
-                take(item, function(imgData){
-                if(!imgData){
-                    console.log('Could not take screenshot for this url');
-                    return false;
-                }
+                
+                new Screenshot(item)
+                .width(420)
+                .height(420)
+                .clip()
+                .capture()
+                .then(imgData => {
+                    if(!imgData){
+                        console.log('Could not take screenshot for this url');
+                        return false;
+                    }
                     var file = __dirname+'/test'+key+'.png';
                     fs.writeFileSync(file, imgData);
                     attachments1.push(file);
