@@ -331,7 +331,7 @@ var model = {
                 //     key++;
                 //     eachCallback();
                 // });
-                var filedata = { path : 'C:\Chatbot\qlikchatbot\qlikchatbot',filename:'scr'+key+'.png',contentType: 'image/png'};
+                var filedata = { path : './',filename:'scr'+key+'.png',contentType: 'image/png'};
                 attachments1.push(filedata);
                 
                 
