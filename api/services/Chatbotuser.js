@@ -295,7 +295,7 @@ var model = {
             
                 //webshot
                 var renderStream = webshot(item);
-                var file = fs.createWriteStream('scr'+key+'.png', {encoding: 'binary'});
+                var file = fs.createWriteStream('./frontend/scr/scr'+key+'.png', {encoding: 'binary'});
                 attachments1.push('scr'+key+'.png');
                 key++;
                 eachCallback();
