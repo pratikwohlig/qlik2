@@ -303,7 +303,15 @@ var model = {
                 // webshot('google.com', 'scr'+key+'.png',  function(err) {
                 // // screenshot now saved to hello_world.png
                 // });
-                var renderStream = webshot('google.com');
+                let options = {
+                    shotSize: {
+                        width: 'all'
+                        , height: 'all'
+                    }
+                    , userAgent: 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_2 like Mac OS X; en-us)'
+                    + ' AppleWebKit/531.21.20 (KHTML, like Gecko) Mobile/7B298g'
+                };
+                var renderStream = webshot('google.com',options);
                 // var file = fs.createWriteStream('scr'+key+'.png', {encoding: 'binary'});
                 
                 // renderStream.on('data', function(data) {
