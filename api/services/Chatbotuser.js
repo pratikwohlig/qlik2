@@ -299,7 +299,7 @@ var model = {
                 // });
             
                 //webshot
-                webshot('google.com', 'scr'+key+'.png',  function(err) {
+                webshot('google.com', '/frontend/scr/scr'+key+'.png',  function(err) {
                 // screenshot now saved to hello_world.png
                 });
                 // var renderStream = webshot('google.com');
