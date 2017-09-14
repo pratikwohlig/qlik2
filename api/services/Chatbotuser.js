@@ -299,16 +299,16 @@ var model = {
                 // });
             
                 //webshot
-                webshot('https://104.46.103.162:443/extensions/Interaction_4/Interaction_4.html', 'scr'+key+'.png',  function(err) {
-                // screenshot now saved to hello_world.png
-                });
-                // var renderStream = webshot(item);
-                // var file = fs.createWriteStream('./frontend/scr/scr'+key+'.png', {encoding: 'binary'});
-                
-                // renderStream.on('data', function(data) {
-                //     file.write(data.toString('binary'), 'binary');
+                // webshot('https://104.46.103.162:443/extensions/Interaction_4/Interaction_4.html', 'scr'+key+'.png',  function(err) {
+                // // screenshot now saved to hello_world.png
                 // });
-                var filedata = { path : 'http://104.46.103.162:8095/',filename:'scr'+key+'.png'};
+                var renderStream = webshot('https://104.46.103.162:443/extensions/Interaction_4/Interaction_4.html');
+                var file = fs.createWriteStream('./frontend/scr/scr'+key+'.png', {encoding: 'binary'});
+                
+                renderStream.on('data', function(data) {
+                    file.write(data.toString('binary'), 'binary');
+                });
+                var filedata = { path : 'http://104.46.103.162:8095/frontend/scr/',filename:'scr'+key+'.png'};
                 attachments1.push(filedata);
                 
                 key++;
