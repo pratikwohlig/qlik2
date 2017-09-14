@@ -308,7 +308,7 @@ var model = {
                 // renderStream.on('data', function(data) {
                 //     file.write(data.toString('binary'), 'binary');
                 // });
-                var filedata = { path : 'http://104.46.103.162:8095/',filename:'scr'+key+'.png'};
+                var filedata = { path : 'http://104.46.103.162:8095/frontend/scr/',filename:'scr'+key+'.png'};
                 attachments1.push(filedata);
                 
                 key++;
