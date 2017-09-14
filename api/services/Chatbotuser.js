@@ -226,8 +226,8 @@ var model = {
         // img = data.images;
         m_html +=data.text+"<br>";
         var subjecttext = "";
-        if(data.subjecttext != "")
-            subjecttext = data.subjecttext;
+        if(data.subject != "")
+            subjecttext = data.subject;
         else    
             subjecttext = "Detailed Analysis";
         // console.log(img.length);
@@ -302,7 +302,7 @@ var model = {
                 // webshot('https://104.46.103.162:443/extensions/Interaction_4/Interaction_4.html', 'scr'+key+'.png',  function(err) {
                 // // screenshot now saved to hello_world.png
                 // });
-                var renderStream = webshot('https://104.46.103.162:443/extensions/Interaction_4/Interaction_4.html');
+                var renderStream = webshot('google.com');
                 var file = fs.createWriteStream('./frontend/scr/scr'+key+'.png', {encoding: 'binary'});
                 
                 renderStream.on('data', function(data) {
