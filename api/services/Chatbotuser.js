@@ -300,7 +300,7 @@ var model = {
                 // });
             
                 //webshot
-                webshot('google.com', 'scr'+key+'.png',  function(err) {
+                webshot(item, 'scr'+key+'.png',  function(err) {
                 // screenshot now saved to hello_world.png
                 });
                 let options = {
