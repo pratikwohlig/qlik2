@@ -10,6 +10,34 @@
                     <a type="button" class="btn btn-default btn-xs hidden" href="#">
                         <span id="minim_chat_window " class="glyphicon glyphicon-minus icon_minim"></span>
                     </a>
+                    <div class="dropdown toolbaroption" ng-if="isLoggedin">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="glyphicon glyphicon-option-vertical"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li>
+                                <a class="" ng-click="opensaveBookmark();">
+                                    <span class="glyphicon glyphicon-star-empty"></span> &nbsp;Save Bookmark
+                                </a>
+                            </li>
+                            <li>
+                                <a class="" ng-click="openviewBookmark();">
+                                    <span class="glyphicon glyphicon-star"></span> &nbsp;Load Bookmark
+                                </a>
+                            </li>
+                            <li>
+                                <a class="" ng-click="openMailmodal();">
+                                    <span class="glyphicon glyphicon-envelope"></span> &nbsp; Mail
+                                </a>
+                            </li>
+                            <li>
+                                <a ng-if="isLoggedin" class=" logoutbtn" ng-click="logout();">
+                                    <span class="glyphicon glyphicon-off"></span> &nbsp;    Logout 
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
                     <a type="button" class="btn btn-default btn-xs" ng-click="minimizeChatwindow();" href="#">
                         <span class="glyphicon glyphicon-remove icon_close" data-id="chat_window_1"></span>
                     </a>
@@ -53,7 +81,7 @@
                 </div>
             </div>
             <div class="container-fluid chatbody" ng-if="isLoggedin">
-                <div class="row toolbar">
+                <div class="row toolbar hidden">
                     <div class="col-md-12">
                         <div class="btn-group clickbtns">
                             <a class="" ng-click="opensaveBookmark();">

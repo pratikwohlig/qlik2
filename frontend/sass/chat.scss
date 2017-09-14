@@ -241,6 +241,9 @@ width:90%;
     margin-right: 10px;
 }
 .clickbtns a:hover { text-decoration: none; } 
+.toolbaroption { float:left; }
+.toolbaroption button { padding-top:0px;padding-bottom:0px; }
+.toolbaroption .dropdown-menu { right:0% !important;left:inherit !important; }
 .redtext { color:red; }
 .chat-body .dthyperlink {
     cursor: pointer;
@@ -347,7 +350,7 @@ height:30px!important;
 {
     overflow-y: auto;
     // height: 320px;
-    height: 410px;
+    height: 460px;
 }
 
 ::-webkit-scrollbar-track

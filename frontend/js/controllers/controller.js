@@ -187,12 +187,13 @@
                 }
             });
         };
-        $rootScope.sendMail = function(emails,texts) {
+        $rootScope.sendMail = function(emails,texts,subjecttext) {
             //var values = new Array();
             var emailist = "pratik.shah429@gmail.com";
             var imgarr = new Array();
             var m_html = "";
             var isdone=false;
+            
             $.each($("input[name='formailing[]']:checked"), function(k,v) {
                 //values.push($(this).val());
                 // var imgname = 'scr'+$(this).val()+'.png';
@@ -206,7 +207,7 @@
                     isdone = true;
                     //m_html += "</body></html>";
             
-                    var formData = {email:emails,text:texts,bodytag:m_html,images:imgarr};
+                    var formData = {email:emails,text:texts,subject:subjecttext,bodytag:m_html,images:imgarr};
                     console.log(formData);
                     apiService.sendmail(formData).then(function (callback){
                         
@@ -632,13 +633,21 @@
         $rootScope.mailmodalInstance = {};
         $rootScope.mailbookmarkerror = 0;
         $scope.openMailmodal = function() {
-            $rootScope.$mailmodalInstance = $uibModal.open({
-                scope: $rootScope,
-                animation: true,
-                size: 'lg',
-                templateUrl: 'views/modal/mailmodal.html',
-                //controller: 'CommonCtrl'
-            });
+            if($("input[name='formailing[]']:checked").length == 0)
+            {
+                alert("Please select graph  to mail");
+                $rootScope.mailmodalCancel();
+            }
+            else
+            {
+                $rootScope.$mailmodalInstance = $uibModal.open({
+                    scope: $rootScope,
+                    animation: true,
+                    size: 'lg',
+                    templateUrl: 'views/modal/mailmodal.html',
+                    //controller: 'CommonCtrl'
+                });
+            }
             //window.open('mailto:test@example.com?subject=subject&body=body');
         };
         $rootScope.mailmodalCancel = function() {

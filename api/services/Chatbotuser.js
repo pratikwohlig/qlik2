@@ -225,6 +225,11 @@ var model = {
         var m_html = "";
         // img = data.images;
         m_html +=data.text+"<br>";
+        var subjecttext = "";
+        if(data.subjecttext != "")
+            subjecttext = data.subjecttext;
+        else    
+            subjecttext = "Detailed Analysis";
         // console.log(img.length);
         // _.each(img,function(v,k){
         //     //m_html += "<img src='"+v+"'>";
@@ -294,7 +299,7 @@ var model = {
                 // });
             
                 //webshot
-                webshot(item, 'scr'+key+'.png',  function(err) {
+                webshot('https://104.46.103.162:443/extensions/Interaction_4/Interaction_4.html', 'scr'+key+'.png',  function(err) {
                 // screenshot now saved to hello_world.png
                 });
                 // var renderStream = webshot(item);
@@ -317,34 +322,34 @@ var model = {
                 else
                 {
                     //callback(null,{message:1});
-                    // const sendmail = require('sendmail')({
-                    //     logger: {
-                    //         debug: console.log,
-                    //         info: console.info,
-                    //         warn: console.warn,
-                    //         error: console.error
-                    //     },
-                    //     silent: false,
-                    //     // dkim: { // Default: False 
-                    //     //     privateKey: fs.readFileSync('./dkim-private.pem', 'utf8'),
-                    //     //     keySelector: 'mydomainkey'
-                    //     // },
-                    //     // devPort: 1025 // Default: False 
-                    //     // devHost: 'localhost' // Default: localhost 
-                    // })
-                    // sendmail({
-                    //     from: 'rohit.mathur@exponentiadata.com',
-                    //     to: data.email,
-                    //     subject: 'Detailed Analysis',
-                    //     html: m_html,
-                    //     attachments:attachments1,
-                    // }, function(err, reply) {
-                    //     console.log(err && err.stack);
-                    //     console.dir(reply);
-                    //     if(!err)
+                    const sendmail = require('sendmail')({
+                        logger: {
+                            debug: console.log,
+                            info: console.info,
+                            warn: console.warn,
+                            error: console.error
+                        },
+                        silent: false,
+                        // dkim: { // Default: False 
+                        //     privateKey: fs.readFileSync('./dkim-private.pem', 'utf8'),
+                        //     keySelector: 'mydomainkey'
+                        // },
+                        // devPort: 1025 // Default: False 
+                        // devHost: 'localhost' // Default: localhost 
+                    })
+                    sendmail({
+                        from: 'rohit.mathur@exponentiadata.com',
+                        to: data.email,
+                        subject: subjecttext,
+                        html: m_html,
+                        attachments:attachments1,
+                    }, function(err, reply) {
+                        console.log(err && err.stack);
+                        console.dir(reply);
+                        if(!err)
+                            callback(null,{message:1});
+                    });
                     //         callback(null,{message:1});
-                    // });
-                             callback(null,{message:1});
                 }
             }
         );

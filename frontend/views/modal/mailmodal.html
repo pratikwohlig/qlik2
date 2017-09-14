@@ -16,6 +16,13 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="mailbookmark">Subject</label>
+                <input type="text" class="form-control subjecttext" id="subjecttext"  name="subjecttext" placeholder="Enter Subject" ng-model="user.subjecttext" required>
+                <div class="pull-right" ng-repeat="(field,value) in mailbookmark_form.subjecttext.$error" ng-show="mailbookmark_form.subjecttext.$touched">
+                    <span class="label label-danger" ng-if="value">Please Enter Subject</span>
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="mailbookmark">Message</label>
                 <textarea  class="form-control textdetail" id="textdetail"  name="textdetail" placeholder="Enter Details" ng-model="user.textdetail" required></textarea>
                 <div class="pull-right" ng-repeat="(field,value) in mailbookmark_form.textdetail.$error" ng-show="mailbookmark_form.textdetail.$touched">
@@ -26,7 +33,7 @@
                 <span class="label label-danger">Please Enter Detail</span>
             </div>
             <div class="form-group">
-            <input class="form-control" id='mailbookmarksubmit' type="submit" name="mailbookmarksubmit" ng-disabled="mailbookmark_form.$invalid"  class="btn btn-primary btn-lg btn-block" value="Submit" ng-click="sendMail(user.mailbookmark,user.textdetail);">
+            <input class="form-control" id='mailbookmarksubmit' type="submit" name="mailbookmarksubmit" ng-disabled="mailbookmark_form.$invalid"  class="btn btn-primary btn-lg btn-block" value="Send" ng-click="sendMail(user.mailbookmark,user.textdetail,user.subjecttext);">
             </div>
         </div>
     </form>
