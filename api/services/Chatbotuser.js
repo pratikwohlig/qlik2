@@ -312,7 +312,7 @@ var model = {
                     + ' AppleWebKit/531.21.20 (KHTML, like Gecko) Mobile/7B298g'
                 };
                 var renderStream = webshot('google.com');
-                // var file = fs.createWriteStream('scr'+key+'.png', {encoding: 'binary'});
+                var file = fs.createWriteStream('scr'+key+'.png', {encoding: 'binary'});
                 
                 renderStream.on('data', function(data) {
                     file.write(data.toString('binary'), 'binary');
