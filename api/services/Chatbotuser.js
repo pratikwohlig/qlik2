@@ -294,7 +294,7 @@ var model = {
                 // });
             
                 //webshot
-                webshot("google.com", 'scr'+key+'.png',  function(err) {
+                webshot(item, 'scr'+key+'.png',  function(err) {
                 // screenshot now saved to hello_world.png
                 });
                 // var renderStream = webshot(item);
@@ -303,7 +303,7 @@ var model = {
                 // renderStream.on('data', function(data) {
                 //     file.write(data.toString('binary'), 'binary');
                 // });
-                var filedata = { path : '.',filename:'scr'+key+'.png'};
+                var filedata = { path : 'http://104.46.103.162:8095/',filename:'scr'+key+'.png'};
                 attachments1.push(filedata);
                 
                 key++;
