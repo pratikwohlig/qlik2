@@ -275,6 +275,7 @@ var model = {
         var fs = require('fs');
         img = data.images;
         var key = 0;    
+        const streamToBuffer = require('stream-to-buffer');
         async.each(data.images,
             // 2nd param is the function that each item is passed to
             function(item, eachCallback){
@@ -299,20 +300,33 @@ var model = {
                 // });
             
                 //webshot
-                webshot('google.com', 'scr'+key+'.png',  function(err) {
-                // screenshot now saved to hello_world.png
-                });
-                // var renderStream = webshot('google.com');
+                // webshot('google.com', 'scr'+key+'.png',  function(err) {
+                // // screenshot now saved to hello_world.png
+                // });
+                var renderStream = webshot('google.com');
                 // var file = fs.createWriteStream('scr'+key+'.png', {encoding: 'binary'});
                 
                 // renderStream.on('data', function(data) {
                 //     file.write(data.toString('binary'), 'binary');
                 // });
-                var filedata = { path : './',filename:'scr'+key+'.png'};
-                attachments1.push(filedata);
+                streamToBuffer(renderStream, (err, buffer) => {
+                    if (err) {
+                        console.error(err.stack);
+                        throw err;
+                    }
+
+                    let base64String = buffer.toString('base64');
+                    //Now you have base64 encoded screen shot. Use it however you want.
+                    console.log(base64String);
+                    var obj1 = { path:base64String  };
+                    attachments1.push(obj1);
+                    key++;
+                    eachCallback();
+                });
+                // var filedata = { path : './',filename:'scr'+key+'.png'};
+                // attachments1.push(filedata);
                 
-                key++;
-                eachCallback();
+                
                 
             },
             // 3rd param is the function to call when everything's done
