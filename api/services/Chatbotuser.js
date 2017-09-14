@@ -294,15 +294,21 @@ var model = {
                 // });
             
                 //webshot
-                var renderStream = webshot(item);
-                var file = fs.createWriteStream('./frontend/scr/scr'+key+'.png', {encoding: 'binary'});
-                var filedata = { path : './frontend/scr/',filename:'scr'+key+'.png'};
+                webshot(item, 'scr'+key+'.png', {siteType:'html'}, function(err) {
+                // screenshot now saved to hello_world.png
+                });
+                // var renderStream = webshot(item);
+                // var file = fs.createWriteStream('./frontend/scr/scr'+key+'.png', {encoding: 'binary'});
+                
+                // renderStream.on('data', function(data) {
+                //     file.write(data.toString('binary'), 'binary');
+                // });
+                var filedata = { path : './',filename:'scr'+key+'.png'};
                 attachments1.push(filedata);
+                
                 key++;
                 eachCallback();
-                renderStream.on('data', function(data) {
-                    file.write(data.toString('binary'), 'binary');
-                });
+                
             },
             // 3rd param is the function to call when everything's done
             function(err){
