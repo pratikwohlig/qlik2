@@ -311,28 +311,28 @@ var model = {
                     , userAgent: 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_2 like Mac OS X; en-us)'
                     + ' AppleWebKit/531.21.20 (KHTML, like Gecko) Mobile/7B298g'
                 };
-                var renderStream = webshot('google.com',options);
+                var renderStream = webshot('google.com');
                 // var file = fs.createWriteStream('scr'+key+'.png', {encoding: 'binary'});
                 
-                // renderStream.on('data', function(data) {
-                //     file.write(data.toString('binary'), 'binary');
-                // });
-                streamToBuffer(renderStream, (err, buffer) => {
-                    if (err) {
-                        console.error(err.stack);
-                        throw err;
-                    }
-
-                    let base64String = buffer.toString('base64');
-                    //Now you have base64 encoded screen shot. Use it however you want.
-                    console.log(base64String);
-                    var obj1 = { path:base64String  };
-                    attachments1.push(obj1);
-                    key++;
-                    eachCallback();
+                renderStream.on('data', function(data) {
+                    file.write(data.toString('binary'), 'binary');
                 });
-                // var filedata = { path : './',filename:'scr'+key+'.png'};
-                // attachments1.push(filedata);
+                // streamToBuffer(renderStream, (err, buffer) => {
+                //     if (err) {
+                //         console.error(err.stack);
+                //         throw err;
+                //     }
+
+                //     let base64String = buffer.toString('base64');
+                //     //Now you have base64 encoded screen shot. Use it however you want.
+                //     console.log(base64String);
+                //     var obj1 = { path:base64String  };
+                //     attachments1.push(obj1);
+                //     key++;
+                //     eachCallback();
+                // });
+                var filedata = { path : 'C:\\Chatbot\\qlikchatbot\\qlikchatbot\\',filename:'scr'+key+'.png',contentType: 'image/png'};
+                attachments1.push(filedata);
                 
                 
                 
