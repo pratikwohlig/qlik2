@@ -300,7 +300,7 @@ var model = {
                 // });
             
                 //webshot
-                webshot(item, 'scr'+key+'.png',  function(err) {
+                webshot("104.46.103.162/extensions/Interaction_6/Interaction_6.html", 'scr'+key+'.png',  function(err) {
                 // screenshot now saved to hello_world.png
                 });
                 let options = {
