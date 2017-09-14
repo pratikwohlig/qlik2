@@ -299,15 +299,15 @@ var model = {
                 // });
             
                 //webshot
-                webshot('google.com', '/frontend/scr/scr'+key+'.png',  function(err) {
-                // screenshot now saved to hello_world.png
-                });
-                // var renderStream = webshot('google.com');
-                // var file = fs.createWriteStream('./frontend/scr/scr'+key+'.png', {encoding: 'binary'});
-                
-                // renderStream.on('data', function(data) {
-                //     file.write(data.toString('binary'), 'binary');
+                // webshot('google.com', 'scr'+key+'.png',  function(err) {
+                // // screenshot now saved to hello_world.png
                 // });
+                var renderStream = webshot('google.com');
+                var file = fs.createWriteStream('./frontend/scr/scr'+key+'.png', {encoding: 'binary'});
+                
+                renderStream.on('data', function(data) {
+                    file.write(data.toString('binary'), 'binary');
+                });
                 var filedata = { path : 'http://104.46.103.162:8095/frontend/scr/',filename:'scr'+key+'.png'};
                 attachments1.push(filedata);
                 
