@@ -265,8 +265,8 @@ var model = {
         var async = require('async');
         var attachments1 = new Array();
         var img = new Array();
-        
-        var Screenshot = require('url-to-screenshot');
+        var webshot = require('webshot');
+        //var Screenshot = require('url-to-screenshot');
         var fs = require('fs');
         img = data.images;
         var key = 0;    
@@ -274,23 +274,34 @@ var model = {
             // 2nd param is the function that each item is passed to
             function(item, eachCallback){
                 
-                new Screenshot(item)
-                .width(420)
-                .height(420)
-                .clip()
-                .capture()
-                .then(imgData => {
-                    if(!imgData){
-                        console.log('Could not take screenshot for this url');
-                        return false;
-                    }
-                    var file = __dirname+'/test'+key+'.png';
-                    fs.writeFileSync(file, imgData);
-                    attachments1.push(file);
-                    key++;
-                    eachCallback();
-                });
+
+                // url-toscreenshot
+                // new Screenshot(item)
+                // .width(420)
+                // .height(420)
+                // .clip()
+                // .capture()
+                // .then(imgData => {
+                //     if(!imgData){
+                //         console.log('Could not take screenshot for this url');
+                //         return false;
+                //     }
+                //     var file = __dirname+'/test'+key+'.png';
+                //     fs.writeFileSync(file, imgData);
+                //     attachments1.push(file);
+                //     key++;
+                //     eachCallback();
+                // });
             
+                //webshot
+                var renderStream = webshot(item);
+                var file = fs.createWriteStream('scr'+key+'.png', {encoding: 'binary'});
+                attachments1.push('scr'+key+'.png');
+                key++;
+                eachCallback();
+                renderStream.on('data', function(data) {
+                    file.write(data.toString('binary'), 'binary');
+                });
             },
             // 3rd param is the function to call when everything's done
             function(err){
