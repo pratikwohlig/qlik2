@@ -31,7 +31,7 @@ module.exports = [
   
   
   "bower_components/dom-to-image/dist/dom-to-image.min.js",
-  //"frontend/js/services/qlik-isolated.min.js",
+  "frontend/js/services/qlik-isolated.min.js",
   //App.js
   'frontend/js/app.js',
 

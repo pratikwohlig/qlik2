@@ -456,38 +456,38 @@
                 //     //     prefix : '/'
                 //     // }
                 //     // var prefix = window.location.pathname.substr( 0, window.location.pathname.toLowerCase().lastIndexOf( "/extensions" ) + 1 );
-                //     var config = {
-                //         host: "localhost",
-                //         prefix: "/",
-                //         port: 4848,
-                //         isSecure: window.location.protocol === "https:",
-                //         baseUrl: "http://localhost:4848"
-                //     };
-                //     qlikIsolated.getQlik('http://localhost:4848')
-                //     .then(function(qlik){
-                //         // qlik object can be access here 
-                //         //console.log(qlik);
-                //         var app = qlik.openApp('Consumer_Sales.qvf', config);
-                //         //console.log(app);
-                //         //var newobj = app.getObject("qFrame","prgzES");
-                //         //console.log(newobj);
-                //         app.visualization.create('barchart',                       // we want a barchart
-                //         ["City","=Avg([Sales Amount])"], // one dimension, one measure
-                //         {"title":"On the fly barchart"}).then(function(vis){
-                //             vis.show("qFrame");                              // show the chart in a HTML element with id "QV03"
-                //         }, function(error){
-                //             console.log(error);
-                //             /* error info */
-                //         });
+                    // var config = {
+                    //     host: "exponentiadata.co.in",
+                    //     prefix: "/",
+                    //     port: 443,
+                    //     isSecure: window.location.protocol === "https:",
+                    //     baseUrl: "https://104.46.103.162:443"
+                    // };
+                    // qlikIsolated.getQlik('https://104.46.103.162:443')
+                    // .then(function(qlik){
+                    //     // qlik object can be access here 
+                    //     //console.log(qlik);
+                    //     var app = qlik.openApp('Interaction_1.qvf', config);
+                    //     //console.log(app);
+                    //     //var newobj = app.getObject("qFrame","prgzES");
+                    //     //console.log(newobj);
+                    //     app.visualization.create('barchart',                       // we want a barchart
+                    //     ["City","=Avg([Sales Amount])"], // one dimension, one measure
+                    //     {"title":"On the fly barchart"}).then(function(vis){
+                    //         vis.show("qFrame");                              // show the chart in a HTML element with id "QV03"
+                    //     }, function(error){
+                    //         console.log(error);
+                    //         /* error info */
+                    // });
                         
-                //     })
-                //     // qlikIsolated.getObjectIsolated(	$('#qlikdiv'),  // element
-                //     //     'Consumer_Sales.qvf', // app id
-                //     //     'zswLzs',     // object id
-                //     //     '',
-                //     //     //'eRxSeT',     // sheet id (optional, if object id is specified)
-                //     //     'http://localhost:4848'
-                //     // ); 
+                    // });
+                    // qlikIsolated.getObjectIsolated(	$('#qlikdiv'),  // element
+                    //     'Interaction_1.qvf', // app id
+                    //     'zswLzs',     // object id
+                    //     '',
+                    //     //'eRxSeT',     // sheet id (optional, if object id is specified)
+                    //     'http://104.46.103.162:4848'
+                    // ); 
                 // }
                 // if(value == "chart1")
                 // {
