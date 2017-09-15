@@ -122,7 +122,7 @@ var model = {
                             },
                                 key: fs.readFileSync("./cert/client_key.pem"),
                                 cert: fs.readFileSync("./cert/client.pem"),
-                                //ca: fs.readFileSync("./cert/root.crt")
+                                ca: fs.readFileSync("./cert/root.pem")
                                 //strictSSL: false
                             };
                             https.get(options, function(res) { 
