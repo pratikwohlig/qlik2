@@ -106,6 +106,22 @@ var model = {
                             
                             // found2 = found;
                             // found2.sessionid = result._id;
+                            var https = require('https');
+                            var fs = require('fs');
+                            // var options = { rejectUnauthorized: false, hostname: 'exponentiadata.co.in', port: 443, path: '/qrs/app?xrfkey=abcdefghijklmnop', method: 'GET', headers: { 'x-qlik-xrfkey' : 'abcdefghijklmnop', 'X-Qlik-User' : 'UserDirectory= Internal; UserId= BONTONCHAT\pratik.shah' } }; 
+                            // https.get(options, function(res) { 
+                            //     console.log("Got response: " + res.statusCode);
+                            //     //console.log("res",res);
+                            //     res.on("data", function(chunk)
+                            //     {
+                            //          console.log("BODY: " + chunk);
+                            //     }); 
+                            // }).on('error', function(e) 
+                            // { 
+                            //     console.log("Got error: " + e.message); 
+                            // });
+
+
                             found = found.toObject();
                             var r = result.toObject();
                             found.sessionid = r._id;
@@ -303,7 +319,7 @@ var model = {
                 webshot("https://104.46.103.162/extensions/Interaction_6/Interaction_6.html", 'scr'+key+'.png',  function(err) {
                 // screenshot now saved to hello_world.png
                 });
-                let options = {
+                var options = {
                     shotSize: {
                         width: 'all'
                         , height: 'all'
