@@ -127,7 +127,7 @@ var model = {
                             };
                             https.get(options, function(res) { 
                                 console.log("Got response: " + res.statusCode);
-                                console.log("res",res);
+                                //console.log("res",res);
                                 res.on("data", function(chunk)
                                 {
                                      console.log("BODY: " + chunk);
