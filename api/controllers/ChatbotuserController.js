@@ -1,7 +1,7 @@
 module.exports = _.cloneDeep(require("sails-wohlig-controller"));
 var controller = {
     loginuser: function (req, res) {
-        console.log(req.connection.remoteAddress);
+        //console.log(req.connection.remoteAddress);
         if (req.body) {
             Chatbotuser.loginuser(req.body, res.callback);
         }

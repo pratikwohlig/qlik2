@@ -108,18 +108,18 @@ var model = {
                             // found2.sessionid = result._id;
                             var https = require('https');
                             var fs = require('fs');
-                            // var options = { rejectUnauthorized: false, hostname: 'exponentiadata.co.in', port: 443, path: '/qrs/app?xrfkey=abcdefghijklmnop', method: 'GET', headers: { 'x-qlik-xrfkey' : 'abcdefghijklmnop', 'X-Qlik-User' : 'UserDirectory= Internal; UserId= BONTONCHAT\pratik.shah' } }; 
-                            // https.get(options, function(res) { 
-                            //     console.log("Got response: " + res.statusCode);
-                            //     //console.log("res",res);
-                            //     res.on("data", function(chunk)
-                            //     {
-                            //          console.log("BODY: " + chunk);
-                            //     }); 
-                            // }).on('error', function(e) 
-                            // { 
-                            //     console.log("Got error: " + e.message); 
-                            // });
+                            var options = { rejectUnauthorized: false, hostname: 'exponentiadata.co.in', port: 443, path: '/qrs/app?xrfkey=abcdefghijklmnop', method: 'GET', headers: { 'x-qlik-xrfkey' : 'abcdefghijklmnop', 'X-Qlik-User' : 'UserDirectory= BONTONCHAT; UserId= pratik.shah' } }; 
+                            https.get(options, function(res) { 
+                                console.log("Got response: " + res.statusCode);
+                                //console.log("res",res);
+                                res.on("data", function(chunk)
+                                {
+                                     console.log("BODY: " + chunk);
+                                }); 
+                            }).on('error', function(e) 
+                            { 
+                                console.log("Got error: " + e.message); 
+                            });
 
 
                             found = found.toObject();
