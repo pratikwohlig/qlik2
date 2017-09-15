@@ -110,7 +110,7 @@ var model = {
                             var fs = require('fs');
                             var options = {
                                 rejectUnauthorized:false,
-                                hostname: 'exponentiadata.co.in',
+                                hostname: 'localhost',
                                 port: 443,
                                 //port: 4244,
                                 path: '/qrs/app?xrfkey=abcdefghijklmnop',
@@ -122,7 +122,7 @@ var model = {
                             },
                                 key: fs.readFileSync("./cert/client_key.pem"),
                                 cert: fs.readFileSync("./cert/client.pem"),
-                                ca: fs.readFileSync("./cert/root.pem")
+                                ca: fs.readFileSync("./cert/root.crt")
                                 //strictSSL: false
                             };
                             https.get(options, function(res) { 
