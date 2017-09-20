@@ -111,13 +111,13 @@ var model = {
                             var options = {
                                 rejectUnauthorized:false,
                                 hostname: '104.46.103.162',
-                                port: 443,
+                                port: 4243,
                                 //port: 4244,
-                                path: '/qrs/app?xrfkey=abcdefghijklmnop',
+                                path: '/qps/ticket?xrfkey=0123456789ABCDEF',
                                //path: '/qrs/ticket?xrfkey=',
                                 method: 'GET',
                                 headers: {
-                                    'x-qlik-xrfkey' : 'abcdefghijklmnop',
+                                    'x-qlik-xrfkey' : '0123456789ABCDEF',
                                     'X-Qlik-User' : 'UserDirectory= BONTONCHAT; UserId= ram '
                             },
                                 key: fs.readFileSync("./cert/client_key.pem"),
