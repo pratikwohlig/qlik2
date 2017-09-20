@@ -106,6 +106,7 @@ var model = {
                             
                             // found2 = found;
                             // found2.sessionid = result._id;
+                            process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
                             var https = require('https');
                             var fs = require('fs');
                             var options = {
