@@ -110,7 +110,7 @@ var model = {
                             var fs = require('fs');
                             var options = {
                                 rejectUnauthorized:false,
-                                hostname: 'exponentiadata.co.in',
+                                hostname: '104.46.103.162',
                                 port: 443,
                                 //port: 4244,
                                 path: '/qrs/app?xrfkey=abcdefghijklmnop',
