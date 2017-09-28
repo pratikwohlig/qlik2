@@ -687,6 +687,10 @@
 
         $rootScope.$viewmodalInstance = {};
         $rootScope.selectbookmarkerror = 0;
+        $rootScope.clearChat = function() {
+            $rootScope.chatlist = [];
+            $.jStorage.set("chatlist",$rootScope.chatlist);
+        };
         $rootScope.openviewBookmark = function() {
             $scope.formData = {userid:$.jStorage.get("sessionid")};
             
