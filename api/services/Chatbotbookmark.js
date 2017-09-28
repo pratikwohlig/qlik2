@@ -88,6 +88,24 @@ var model = {
 
         });
     },
-    
+    deletebookmark: function (data, callback) {
+        Chatbotbookmark.remove({
+            _id: mongoose.Types.ObjectId(data.selected),
+        }).exec(function (err, found) {
+            if (err) {
+                callback(err, null);
+            } 
+            else {
+                if (found) {
+                    callback(null, found);
+                } else {
+                    callback({
+                        message: "-1"
+                    }, null);
+                }
+            }
+
+        });
+    },
 };
 module.exports = _.assign(module.exports, exports, model);

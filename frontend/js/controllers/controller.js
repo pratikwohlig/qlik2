@@ -167,7 +167,25 @@
                 }
             });
         };
-        
+        $rootScope.deleteBookmark = function(selected) {
+             $scope.formData = {userid:$.jStorage.get("sessionid"),selected:selected._id};
+            apiService.deletebookmark($scope.formData).then(function (callback){
+                //console.log(callback.data.data.chatlist);
+                if(callback.data.data)
+                {
+                    // _.forEach(callback.data.data.chatlist,function(value,key){
+                        
+                    //     if(value.position == "right")
+                    //     {
+                    //         $rootScope.appendMsg(value.msg.id,value.msg);
+                    //     }
+                    //     if(value.position == "left" && value.msg.type != "SYS_FIRST")
+                    //         $rootScope.appendSysMsg(value.msg.id,value.msg);
+                    // });
+                    $rootScope.deletebookmarkCancel();
+                }
+            });
+        };
         $rootScope.getBookmark = function(selected) {
              $scope.formData = {userid:$.jStorage.get("sessionid"),selected:selected._id};
             apiService.getbookmark($scope.formData).then(function (callback){
@@ -718,6 +736,37 @@
             //console.log("dismissing");
             $rootScope.$viewmodalInstance.dismiss('cancel');
         };
+
+        $rootScope.$deletemodalInstance = {};
+        $rootScope.deletebookmarkerror = 0;
+        
+        $rootScope.opendeleteBookmark = function() {
+            $scope.formData = {userid:$.jStorage.get("sessionid")};
+            
+            
+            apiService.viewbookmark($scope.formData).then(function (callback){
+                $("#selectbookmark_list").html("");
+                
+                
+                $rootScope.$deletemodalInstance = $uibModal.open({
+                    scope: $rootScope,
+                    animation: true,
+                    size: 'sm',
+                    templateUrl: 'views/modal/deletebookmark.html',
+                    resolve: {
+                        items: function () {
+                        return callback.data.data;
+                        }
+                    },
+                    controller: 'DeleteBookmarkCtrl'
+                });
+                
+            });
+        };
+        $rootScope.deletebookmarkCancel = function() {
+            //console.log("dismissing");
+            $rootScope.$deletemodalInstance.dismiss('cancel');
+        };
         
         $rootScope.$savemodalInstance = {};
         $rootScope.savebookmarkerror = 0;
@@ -766,7 +815,19 @@
             //$('#chatTabs a:last').tab('show');
        },200);
     })
+    
+    .controller('DeleteBookmarkCtrl', function ($scope, $uibModalInstance, items) {
 
+        $scope.items = items;
+        // $scope.selected = {
+        //     item: $scope.items[0]
+        // };
+        var dt = "";
+        _.each($scope.items,function(v,k){
+            dt += "<option value='"+v._id+"'>"+v.name+"</option>";
+            
+        });
+    })
     .controller('ViewCtrl', function ($scope, $uibModalInstance, items) {
 
         $scope.items = items;
