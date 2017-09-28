@@ -214,6 +214,7 @@
                     });
                     $rootScope.mailmodalCancel();
                 }
+                
                 // $(div).html2canvas({
                 //     onrendered: function (canvas) {
                 // angular.element(document).ready(function () {
@@ -327,6 +328,35 @@
             
         };
         $rootScope.showChatwindow = function () {
+            $( ".chat_window_1" ).resizable({
+                //alsoResize: '.panel-body',
+                minHeight:590,
+                maxHeight:window.innerHeight,
+                maxWidth:window.innerWidth,
+                handles: 'n, w',
+                resize: function( event, ui ) {
+                    if(ui.position.top <= ui.originalPosition.top)
+                    {
+                        
+                        var height = $(".chat_window_1").height();
+                        console.log(height+"chat");
+                        var new_height = height - 43 -90;
+                        console.log(new_height+"panel");
+                        //$(".panel-body").height(new_height);
+                        $(".panel-body").css("height", new_height);
+                        $("#chat_panel").css("height", height);
+                    }
+                    else {
+                        
+                        console.log("down");
+                        // $(".panel-body").css({
+                        //     minHeight: 460
+                        // });
+                        // $(".chat_window_1").css({top:0});
+                    }
+                 }
+            
+            });
             newlist = $.jStorage.get("chatlist");
             //console.log(newlist);
             if(!newlist || newlist == null)

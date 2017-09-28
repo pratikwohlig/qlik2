@@ -69,7 +69,6 @@ myApp.run(['$http','$document','$rootScope','bowser', function run(  $http,$docu
     
     //$http.defaults.xsrfCookieName = 'csrftoken';
     //$http.defaults.xsrfHeaderName = 'X-CSRFToken';
-    
     //$http.defaults.headers.post['X-CSRFToken'] = $cookies.get('csrftoken');
     //** django urls loves trailling slashes which angularjs removes by default.
     //$resourceProvider.defaults.stripTrailingSlashes = false;

@@ -6,6 +6,16 @@
     height: 590px;
     position: relative;
 }
+.splitter {
+    position: absolute;
+   width: 16px;
+   height: 16px;
+   padding: 4px;
+   bottom: 0;
+   right: 0;
+   cursor: nwse-resize;
+   background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/wingrip.png) no-repeat;
+}
 div#suggestionList {
     position: relative;
 }
