@@ -353,7 +353,7 @@ var model = {
                 // });
             
                 //webshot
-                webshot("https://104.46.103.162/extensions/Interaction_6/Interaction_6.html", 'scr'+key+'.png',  function(err) {
+                webshot(item+"?qlikTicket="+$.jStorage.get("Ticket"), 'scr'+key+'.png',  function(err) {
                 // screenshot now saved to hello_world.png
                 });
                 var options = {
