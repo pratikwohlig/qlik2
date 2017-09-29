@@ -221,10 +221,11 @@
             $.each($("input[name='formailing[]']:checked"), function(k,v) {
                 //values.push($(this).val());
                 // var imgname = 'scr'+$(this).val()+'.png';
-                // var node = document.getElementById('scr'+$(this).val());
+                var node = document.getElementById('scr'+$(this).val());
                 // var div="#scr"+$(this).val();
                 //var div="#chat_window_1";
                 //console.log(div);
+                
                 imgarr.push($(this).val());
                 if($("input[name='formailing[]']:checked").length == (k+1))
                 {
@@ -238,7 +239,30 @@
                     });
                     $rootScope.mailmodalCancel();
                 }
-                
+                // angular.element(document).ready(function(){
+                    
+                //     domtoimage.toPng(node)
+                //     .then(function (dataUrl) {
+                //         imgarr.push(dataUrl);
+                //         m_html += "<img src='"+(dataUrl)+"'>";
+                //         console.log(m_html);
+                //         if($("input[name='formailing[]']:checked").length == (k+1))
+                //         {
+                //             isdone = true;
+                //             //m_html += "</body></html>";
+                    
+                //             var formData = {email:emails,text:texts,bodytag:m_html,images:imgarr};
+                //             console.log(formData);
+                //             apiService.sendmail(formData).then(function (callback){
+                                
+                //             });
+                //             $rootScope.mailmodalCancel();
+                //         }
+                //     })
+                //     .catch(function (error) {
+                //         console.error('oops, something went wrong!', error);
+                //     });
+                // });
                 // $(div).html2canvas({
                 //     onrendered: function (canvas) {
                 // angular.element(document).ready(function () {
@@ -363,9 +387,9 @@
                     {
                         
                         var height = $(".chat_window_1").height();
-                        console.log(height+"chat");
+                        //console.log(height+"chat");
                         var new_height = height - 43 -90;
-                        console.log(new_height+"panel");
+                        //console.log(new_height+"panel");
                         //$(".panel-body").height(new_height);
                         $(".panel-body").css("height", new_height);
                         $("#chat_panel").css("height", height);
@@ -475,14 +499,33 @@
                 //     framedata.flag = 1;
                 // if(!framedata.flag)
                 //     framedata.flag = 3;
-                if(!framedata.flag)
-                    framedata.flag = 2;
                 $rootScope.currentProjectUrl = framedata.url;
                 $rootScope.currentProjectUrl += "?qlikTicket="+$rootScope.qticket;
                 framedata.url += "?qlikTicket="+$rootScope.qticket;
+                if(!framedata.flag)
+                    framedata.flag = 2;
+                // if(framedata.flag == 2)
+                // {
+                //     framedata.newurl = [];
+                //     framedata.newurl.push(framedata.url);
+                //     framedata.newurl.push(framedata.url);
+                //     //framedata.url=framedata.newurl;
+                //     framedata.flag = 5;
+                // }
+                
                 console.log(framedata,"Response");
                 $rootScope.pushSystemMsg(0,framedata);
                 $rootScope.showMsgLoader = false;
+                if(framedata.flag == 5)
+                {
+                    $timeout(function(){
+                        $('.carousel').carousel({
+                            interval: false,
+                            wrap: false
+                        });
+                        $('.carousel'+($rootScope.chatlist.length-1)).find('.item').first().addClass('active');
+                    },2000);
+                }
                 $timeout(function(){
                     $(".chatinput").val("");
                 });
