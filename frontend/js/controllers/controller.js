@@ -98,7 +98,10 @@
         $rootScope.rate_count= 0;
         $scope.formSubmitted = false;
         $scope.loginerror=0;
+        $rootScope.qticket="";
         $rootScope.isLoggedin = false;
+        if($.jStorage.get("Ticket"))
+            $rootScope.qticket = $.jStorage.get("Ticket");
         if($.jStorage.get("isLoggedin"))
             $rootScope.isLoggedin = true;
         $scope.login = function(username,password)
@@ -119,6 +122,9 @@
                     $.jStorage.set("access_role", callback.data.data.accessrole);
                     $.jStorage.set("sessionid", callback.data.data._id);
                     $.jStorage.set("isLoggedin", true);
+                    $.jStorage.set("chunk",callback.data.data.chunk);
+                    $.jStorage.set("Ticket",callback.data.data.chunk.Ticket);
+                    $rootScope.qticket = callback.data.data.chunk.Ticket;
                     $rootScope.chatlist=[];
                     $rootScope.isLoggedin = true;
                     $rootScope.firstMsg = true;  
@@ -472,6 +478,8 @@
                 if(!framedata.flag)
                     framedata.flag = 2;
                 $rootScope.currentProjectUrl = framedata.url;
+                $rootScope.currentProjectUrl += "?qlikTicket="+$rootScope.qticket;
+                framedata.url += "?qlikTicket="+$rootScope.qticket;
                 console.log(framedata,"Response");
                 $rootScope.pushSystemMsg(0,framedata);
                 $rootScope.showMsgLoader = false;

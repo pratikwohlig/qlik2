@@ -109,30 +109,51 @@ var model = {
                             // found2 = found;
                             // found2.sessionid = result._id;
                             
-                            var https = require('https');
-                            var fs = require('fs');
+                            // var https = require('https');
+                            // var fs = require('fs');
+                            // var options = {
+                            //     rejectUnauthorized:false,
+                            //     hostname: 'exponentiadata.co.in',
+                            //     port: 4244,
+                            //     //port: 4244,
+                            //     path: '/qps/ticket?xrfkey=0123456789ABCDEF',
+                            //    //path: '/qrs/ticket?xrfkey=',
+                            //     method: 'GET',
+                            //     headers: {
+                            //         'x-qlik-xrfkey' : '0123456789ABCDEF',
+                            //         'X-Qlik-User' : 'UserDirectory= BONTONCHAT; UserId= ram '
+                            // },
+                            //     key: fs.readFileSync("./cert/client_key.pem"),
+                            //     cert: fs.readFileSync("./cert/client.pem"),
+                            //     //ca: fs.readFileSync("./cert/root.pem")
+                            //     //strictSSL: false
+                            // };
+                            // https.get(options, function(res) { 
+                            //     console.log("Got response: " + res.statusCode);
+                            //     //console.log("res",res);
+                            //     res.on("data", function(chunk)
+                            //     {
+                            //          console.log("BODY: " + chunk);
+                            //     }); 
+                            // }).on('error', function(e) 
+                            // { 
+                            //     console.log("Got error: " + e.message); 
+                            // });
+                            var http = require('http');
                             var options = {
-                                rejectUnauthorized:false,
-                                hostname: '104.46.103.162',
-                                port: 4243,
-                                //port: 4244,
-                                path: '/qps/ticket?xrfkey=0123456789ABCDEF',
-                               //path: '/qrs/ticket?xrfkey=',
-                                method: 'GET',
-                                headers: {
-                                    'x-qlik-xrfkey' : '0123456789ABCDEF',
-                                    'X-Qlik-User' : 'UserDirectory= BONTONCHAT; UserId= ram '
-                            },
-                                key: fs.readFileSync("./cert/client_key.pem"),
-                                cert: fs.readFileSync("./cert/client.pem"),
-                                //ca: fs.readFileSync("./cert/root.pem")
-                                //strictSSL: false
+                                hostname: 'exponentiadata.co.in',
+                                path:'/qlikauth/qlikauth.php',
                             };
-                            https.get(options, function(res) { 
+                            http.get(options, function(res) { 
                                 console.log("Got response: " + res.statusCode);
-                                console.log("res",res);
+                                //console.log("res",res);
                                 res.on("data", function(chunk)
                                 {
+                                    found = found.toObject();
+                                    var r = result.toObject();
+                                    found.sessionid = r._id;
+                                    found.chunk=JSON.parse(chunk);
+                                    callback(null, found);
                                      console.log("BODY: " + chunk);
                                 }); 
                             }).on('error', function(e) 
@@ -140,12 +161,8 @@ var model = {
                                 console.log("Got error: " + e.message); 
                             });
 
-
                             
-                            found = found.toObject();
-                            var r = result.toObject();
-                            found.sessionid = r._id;
-                            callback(null, found);
+                            
                             
                         }
                     });
