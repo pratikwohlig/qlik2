@@ -231,7 +231,7 @@
                     isdone = true;
                     //m_html += "</body></html>";
             
-                    var formData = {email:emails,text:texts,subject:subjecttext,bodytag:m_html,images:imgarr};
+                    var formData = {Ticket:$.jStorage.get("Ticket"),email:emails,text:texts,subject:subjecttext,bodytag:m_html,images:imgarr};
                     console.log(formData);
                     apiService.sendmail(formData).then(function (callback){
                         

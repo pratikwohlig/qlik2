@@ -137,7 +137,7 @@
                                                 <p ng-if="list.msg.text !==''" class="systext">
                                                     {{list.msg.text}}
                                                 </p>
-                                                <object data="{{trustSrc(list.msg.url);}}" class="framechart" ng-style="list.msg.flag === 1 && {'height':'1px'}  || list.msg.flag === 3 && {'height':'20px'}" >
+                                                <object data="{{trustSrc(list.msg.url);}}" class="framechart" ng-style="list.msg.flag === 1 && {'height':'0px'}  || list.msg.flag === 3 && {'height':'20px'}" >
                                                     <embed ng-src="{{trustSrc(list.msg.url);}}"  > </embed>
                                                 </object>
                                             </div>

@@ -327,6 +327,7 @@ var model = {
         //var Screenshot = require('url-to-screenshot');
         var fs = require('fs');
         img = data.images;
+        var Ticket = data.Ticket;
         var key = 0;    
         const streamToBuffer = require('stream-to-buffer');
         async.each(data.images,
@@ -353,7 +354,7 @@ var model = {
                 // });
             
                 //webshot
-                webshot(item+"?qlikTicket="+$.jStorage.get("Ticket"), 'scr'+key+'.png',  function(err) {
+                webshot(item+"?qlikTicket="+Ticket, 'scr'+key+'.png',  function(err) {
                 // screenshot now saved to hello_world.png
                 });
                 var options = {
