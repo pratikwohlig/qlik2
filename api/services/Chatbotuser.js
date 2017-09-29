@@ -352,9 +352,9 @@ var model = {
                 //     key++;
                 //     eachCallback();
                 // });
-            
+                    console.log(item+"?qlikTicket="+Ticket);
                 //webshot
-                webshot(item+"?qlikTicket="+Ticket, 'scr'+key+'.png',  function(err) {
+                webshot(item, 'scr'+key+'.png',  function(err) {
                 // screenshot now saved to hello_world.png
                 });
                 var options = {
