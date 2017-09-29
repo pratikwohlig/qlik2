@@ -93,6 +93,8 @@ var model = {
             } 
             else {
                 if (found) {
+                    process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+                    process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
                     var ip = require('ip');
                     var ip_address = ip.address("public","ipv4");
                     var userLogs = require("./Chatbotuserlogs");
@@ -106,7 +108,7 @@ var model = {
                             
                             // found2 = found;
                             // found2.sessionid = result._id;
-                            process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+                            
                             var https = require('https');
                             var fs = require('fs');
                             var options = {

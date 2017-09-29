@@ -350,7 +350,7 @@
                 //alsoResize: '.panel-body',
                 minHeight:590,
                 maxHeight:window.innerHeight,
-                maxWidth:window.innerWidth,
+                maxWidth:$(window).width()-20,
                 handles: 'n, w',
                 resize: function( event, ui ) {
                     if(ui.position.top <= ui.originalPosition.top)
