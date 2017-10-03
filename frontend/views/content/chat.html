@@ -136,11 +136,11 @@
                                                 <p ng-if="list.msg.text !==''" class="systext">
                                                     {{list.msg.text}}
                                                 </p>
-                                                <object data="{{trustSrc(list.msg.url);}}" class="framechart" ng-if="list.msg.flag !== 4 && list.msg.flag !== 5 " ng-style="list.msg.flag === 1 && {'height':'0px'}  || list.msg.flag === 3 && {'height':'20px'}" >
+                                                <object data="{{trustSrc(list.msg.url);}}?qlikTicket={{qticket}}" class="framechart" ng-if="list.msg.flag !== 4 && list.msg.flag !== 5 " ng-style="list.msg.flag === 1 && {'height':'0px'}  || list.msg.flag === 3 && {'height':'20px'}" >
                                                     <embed ng-src="{{trustSrc(list.msg.url);}}"  > </embed>
                                                 </object>
                                                 <div ng-if="list.msg.flag === 5">
-                                                    <div class='carousel slide' id='myCarousel{{$index}}'>
+                                                    <!-- <div class='carousel slide' id='myCarousel{{$index}}'>
                                                         <div class='carousel-inner'>
                                                             <div class='item carousel_item' ng-class="{active:!$index}" ng-repeat="imagelist in list.msg.url track by $index" ng-if="$index % 3 === 0">
                                                                 <div class="col-xs-4" >
@@ -161,6 +161,21 @@
                                                                     <div class="img-box">
                                                                         <object data="{{trustSrc(list.msg.url[$index+2]);}}" class="framechart" >
                                                                             <embed ng-src="{{trustSrc(list.msg.url[$index+2]);}}"  > </embed>
+                                                                        </object>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <a class='left carousel-control' href='#myCarousel{{$index}}' data-slide='prev'><i class='glyphicon glyphicon-chevron-left'></i></a>
+                                                        <a class='right carousel-control' href='#myCarousel{{$index}}' data-slide='next'><i class='glyphicon glyphicon-chevron-right'></i></a>
+                                                    </div> -->
+                                                    <div class='carousel slide' id='myCarousel{{$index}}'>
+                                                        <div class='carousel-inner'>
+                                                            <div class='item carousel_item' ng-class="{active:!$index}" ng-repeat="imagelist in list.msg.newurl track by $index" >
+                                                                <div class="col-xs-12" >
+                                                                    <div class="">
+                                                                        <object data="{{trustSrc(list.msg.newurl[$index]);}}" class="framechart" >
+                                                                            <embed ng-src="{{trustSrc(list.msg.newurl[$index]);}}"  > </embed>
                                                                         </object>
                                                                     </div>
                                                                 </div>

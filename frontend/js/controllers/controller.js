@@ -447,6 +447,7 @@
             if(!value.flag)
                 value.flag = 2;
             $rootScope.currentProjectUrl = value.url;
+            
             $rootScope.chatmsgid = id;
             $rootScope.chatmsg = value;
             $rootScope.chatlist.push({id:"id",msg:value,position:"left",curTime: $rootScope.getDatetime()});
@@ -492,7 +493,7 @@
             console.log(formData);
 			framedata = {};
             apiService.getQlikChart(formData).then(function (data){
-                console.log(data);
+                //console.log(data);
                 framedata = data.data;
                 framedata.type = "iframe";
                 // if(!framedata.flag)
@@ -500,8 +501,8 @@
                 // if(!framedata.flag)
                 //     framedata.flag = 3;
                 $rootScope.currentProjectUrl = framedata.url;
-                $rootScope.currentProjectUrl += "?qlikTicket="+$rootScope.qticket;
-                framedata.url += "?qlikTicket="+$rootScope.qticket;
+                //$rootScope.currentProjectUrl += "?qlikTicket="+$rootScope.qticket;
+                //framedata.url += "?qlikTicket="+$rootScope.qticket;
                 if(!framedata.flag)
                     framedata.flag = 2;
                 // if(framedata.flag == 2)
@@ -513,7 +514,7 @@
                 //     framedata.flag = 5;
                 // }
                 
-                console.log(framedata,"Response");
+                //console.log(framedata,"Response");
                 $rootScope.pushSystemMsg(0,framedata);
                 $rootScope.showMsgLoader = false;
                 if(framedata.flag == 5)
