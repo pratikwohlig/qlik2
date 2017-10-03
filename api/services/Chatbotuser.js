@@ -345,13 +345,19 @@ var model = {
                         //     eachCallback();
                         // });
                             //console.log(item+"?qlikTicket="+Ticket);
+                        //console.log("res",res);
+                        //console.log(chunk);
                         url = item.slice( 0, item.indexOf('?') );
-                        chunk=JSON.parse(chunk.Ticket);
-                        url = url+"?qlikTicket="+chunk.Ticket;
+                        //var stringify = JSON.stringify(chunk);
+                        newchunk=JSON.parse(chunk);
+                        url = url+"?qlikTicket="+newchunk.Ticket;
                         //webshot
                         console.log(url,"new url");
                         webshot(url, 'scr'+key+'.png',  function(err) {
                         // screenshot now saved to hello_world.png
+                            eachCallback();
+                            var filedata = { path : './',filename:'scr'+key+'.png',contentType: 'image/png'};
+                            attachments1.push(filedata);
                         });
                         var options = {
                             shotSize: {
@@ -381,8 +387,7 @@ var model = {
                         //     key++;
                         //     eachCallback();
                         // });
-                        var filedata = { path : './',filename:'scr'+key+'.png',contentType: 'image/png'};
-                        attachments1.push(filedata);
+                        
                         
                         
                         
@@ -408,7 +413,7 @@ var model = {
                                 // },
                                 // devPort: 1025 // Default: False 
                                 // devHost: 'localhost' // Default: localhost 
-                            })
+                            });
                             sendmail({
                                 from: 'rohit.mathur@exponentiadata.com',
                                 to: data.email,
