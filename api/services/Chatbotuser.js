@@ -353,12 +353,12 @@ var model = {
                         url = url+"?qlikTicket="+newchunk.Ticket;
                         //webshot
                         console.log(url,"new url");
-                        webshot(url, 'scr'+key+'.png',  function(err) {
-                        // screenshot now saved to hello_world.png
-                            eachCallback();
-                            var filedata = { path : './',filename:'scr'+key+'.png',contentType: 'image/png'};
-                            attachments1.push(filedata);
-                        });
+                        // webshot(url, 'scr'+key+'.png',  function(err) {
+                        // // screenshot now saved to hello_world.png
+                        //     eachCallback();
+                        //     var filedata = { path : './',filename:'scr'+key+'.png',contentType: 'image/png'};
+                        //     attachments1.push(filedata);
+                        // });
                         var options = {
                             shotSize: {
                                 width: 'all'
@@ -367,12 +367,16 @@ var model = {
                             , userAgent: 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_2 like Mac OS X; en-us)'
                             + ' AppleWebKit/531.21.20 (KHTML, like Gecko) Mobile/7B298g'
                         };
-                        //var renderStream = webshot('google.com');
-                        // var file = fs.createWriteStream('scr'+key+'.png', {encoding: 'binary'});
+                        var renderStream = webshot(url);
+                        var file = fs.createWriteStream('scr'+key+'.png', {encoding: 'binary'});
                         
-                        // renderStream.on('data', function(data) {
-                        //     file.write(data.toString('binary'), 'binary');
-                        // });
+                        renderStream.on('data', function(data) {
+                            file.write(data.toString('binary'), 'binary');
+                            var filedata = { path : './',filename:'scr'+key+'.png',contentType: 'image/png'};
+                            attachments1.push(filedata);
+                            key++;
+                            eachCallback();
+                        });
                         // streamToBuffer(renderStream, (err, buffer) => {
                         //     if (err) {
                         //         console.error(err.stack);
@@ -398,6 +402,7 @@ var model = {
                         if(err) {}
                         else
                         {
+                            console.log(attachments1);
                             //callback(null,{message:1});
                             const sendmail = require('sendmail')({
                                 logger: {
