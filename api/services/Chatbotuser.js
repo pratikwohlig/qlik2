@@ -346,7 +346,7 @@ var model = {
                         // });
                             //console.log(item+"?qlikTicket="+Ticket);
                         url = item.slice( 0, item.indexOf('?') );
-                        url = url+"?qlikTicket="+chunk.Ticket;
+                        url = url+"?qlikTicket="+JSON.parse(chunk.Ticket);
                         //webshot
                         console.log(url,"new url");
                         webshot(url, 'scr'+key+'.png',  function(err) {
