@@ -291,22 +291,6 @@ var model = {
         // });
         // //m_html += "</body></html>";
         m_html += "";
-        // //Config.sendEmail("pratik.shah@wohlig.com",data.email , "Test", "", data.bodytag);
-        // const sendmail = require('sendmail')({
-        //     logger: {
-        //         debug: console.log,
-        //         info: console.info,
-        //         warn: console.warn,
-        //         error: console.error
-        //     },
-        //     silent: false,
-        //     // dkim: { // Default: False 
-        //     //     privateKey: fs.readFileSync('./dkim-private.pem', 'utf8'),
-        //     //     keySelector: 'mydomainkey'
-        //     // },
-        //     // devPort: 1025 // Default: False 
-        //     // devHost: 'localhost' // Default: localhost 
-        // })
         // sendmail({
         //     from: 'rohit.mathur@exponentiadata.com',
         //     to: data.email,
@@ -330,105 +314,121 @@ var model = {
         var Ticket = data.Ticket;
         var key = 0;    
         const streamToBuffer = require('stream-to-buffer');
-        async.each(data.images,
-            // 2nd param is the function that each item is passed to
-            function(item, eachCallback){
-                
+        var http = require('http');
+        var options = {
+            hostname: 'exponentiadata.co.in',
+            path:'/qlikauth/qlikauth.php',
+        };
+        http.get(options, function(res) { 
+            res.on("data", function(chunk)
+            {
+                async.each(data.images,
+                    // 2nd param is the function that each item is passed to
+                    function(item, eachCallback){
+                        
 
-                // url-toscreenshot
-                // new Screenshot(item)
-                // .width(420)
-                // .height(420)
-                // .clip()
-                // .capture()
-                // .then(imgData => {
-                //     if(!imgData){
-                //         console.log('Could not take screenshot for this url');
-                //         return false;
-                //     }
-                //     var file = __dirname+'/test'+key+'.png';
-                //     fs.writeFileSync(file, imgData);
-                //     attachments1.push(file);
-                //     key++;
-                //     eachCallback();
-                // });
-                    console.log(item+"?qlikTicket="+Ticket);
-                //webshot
-                webshot(item, 'scr'+key+'.png',  function(err) {
-                // screenshot now saved to hello_world.png
-                });
-                var options = {
-                    shotSize: {
-                        width: 'all'
-                        , height: 'all'
+                        // url-toscreenshot
+                        // new Screenshot(item)
+                        // .width(420)
+                        // .height(420)
+                        // .clip()
+                        // .capture()
+                        // .then(imgData => {
+                        //     if(!imgData){
+                        //         console.log('Could not take screenshot for this url');
+                        //         return false;
+                        //     }
+                        //     var file = __dirname+'/test'+key+'.png';
+                        //     fs.writeFileSync(file, imgData);
+                        //     attachments1.push(file);
+                        //     key++;
+                        //     eachCallback();
+                        // });
+                            //console.log(item+"?qlikTicket="+Ticket);
+                        url = item.slice( 0, item.indexOf('?') );
+                        url = url+"?qlikTicket="+chunk.Ticket;
+                        //webshot
+                        webshot(url, 'scr'+key+'.png',  function(err) {
+                        // screenshot now saved to hello_world.png
+                        });
+                        var options = {
+                            shotSize: {
+                                width: 'all'
+                                , height: 'all'
+                            }
+                            , userAgent: 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_2 like Mac OS X; en-us)'
+                            + ' AppleWebKit/531.21.20 (KHTML, like Gecko) Mobile/7B298g'
+                        };
+                        //var renderStream = webshot('google.com');
+                        // var file = fs.createWriteStream('scr'+key+'.png', {encoding: 'binary'});
+                        
+                        // renderStream.on('data', function(data) {
+                        //     file.write(data.toString('binary'), 'binary');
+                        // });
+                        // streamToBuffer(renderStream, (err, buffer) => {
+                        //     if (err) {
+                        //         console.error(err.stack);
+                        //         throw err;
+                        //     }
+
+                        //     let base64String = buffer.toString('base64');
+                        //     //Now you have base64 encoded screen shot. Use it however you want.
+                        //     console.log(base64String);
+                        //     var obj1 = { path:base64String  };
+                        //     attachments1.push(obj1);
+                        //     key++;
+                        //     eachCallback();
+                        // });
+                        var filedata = { path : './',filename:'scr'+key+'.png',contentType: 'image/png'};
+                        attachments1.push(filedata);
+                        
+                        
+                        
+                    },
+                    // 3rd param is the function to call when everything's done
+                    function(err){
+                        // All tasks are done now
+                        if(err) {}
+                        else
+                        {
+                            //callback(null,{message:1});
+                            const sendmail = require('sendmail')({
+                                logger: {
+                                    debug: console.log,
+                                    info: console.info,
+                                    warn: console.warn,
+                                    error: console.error
+                                },
+                                silent: false,
+                                // dkim: { // Default: False 
+                                //     privateKey: fs.readFileSync('./dkim-private.pem', 'utf8'),
+                                //     keySelector: 'mydomainkey'
+                                // },
+                                // devPort: 1025 // Default: False 
+                                // devHost: 'localhost' // Default: localhost 
+                            })
+                            sendmail({
+                                from: 'rohit.mathur@exponentiadata.com',
+                                to: data.email,
+                                subject: subjecttext,
+                                html: m_html,
+                                attachments:attachments1,
+                            }, function(err, reply) {
+                                console.log(err && err.stack);
+                                console.dir(reply);
+                                if(!err)
+                                    callback(null,{message:1});
+                            });
+                            //         callback(null,{message:1});
+                        }
                     }
-                    , userAgent: 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_2 like Mac OS X; en-us)'
-                    + ' AppleWebKit/531.21.20 (KHTML, like Gecko) Mobile/7B298g'
-                };
-                //var renderStream = webshot('google.com');
-                // var file = fs.createWriteStream('scr'+key+'.png', {encoding: 'binary'});
-                
-                // renderStream.on('data', function(data) {
-                //     file.write(data.toString('binary'), 'binary');
-                // });
-                // streamToBuffer(renderStream, (err, buffer) => {
-                //     if (err) {
-                //         console.error(err.stack);
-                //         throw err;
-                //     }
-
-                //     let base64String = buffer.toString('base64');
-                //     //Now you have base64 encoded screen shot. Use it however you want.
-                //     console.log(base64String);
-                //     var obj1 = { path:base64String  };
-                //     attachments1.push(obj1);
-                //     key++;
-                //     eachCallback();
-                // });
-                var filedata = { path : './',filename:'scr'+key+'.png',contentType: 'image/png'};
-                attachments1.push(filedata);
-                
-                
-                
-            },
-            // 3rd param is the function to call when everything's done
-            function(err){
-                // All tasks are done now
-                if(err) {}
-                else
-                {
-                    //callback(null,{message:1});
-                    const sendmail = require('sendmail')({
-                        logger: {
-                            debug: console.log,
-                            info: console.info,
-                            warn: console.warn,
-                            error: console.error
-                        },
-                        silent: false,
-                        // dkim: { // Default: False 
-                        //     privateKey: fs.readFileSync('./dkim-private.pem', 'utf8'),
-                        //     keySelector: 'mydomainkey'
-                        // },
-                        // devPort: 1025 // Default: False 
-                        // devHost: 'localhost' // Default: localhost 
-                    })
-                    sendmail({
-                        from: 'rohit.mathur@exponentiadata.com',
-                        to: data.email,
-                        subject: subjecttext,
-                        html: m_html,
-                        attachments:attachments1,
-                    }, function(err, reply) {
-                        console.log(err && err.stack);
-                        console.dir(reply);
-                        if(!err)
-                            callback(null,{message:1});
-                    });
-                    //         callback(null,{message:1});
-                }
-            }
-        );
+                );
+            }); 
+        }).on('error', function(e) 
+        { 
+            console.log("Got error: " + e.message); 
+        });
+        
 
         // _.each(img,function(v,k){
         //     console.log(item);    
