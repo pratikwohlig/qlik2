@@ -1,9 +1,9 @@
 myApp.factory('apiService', function ($http, $q, $timeout) {
     
     //adminurl2 = "http://localhost:8000/";
-    adminurl2 = "http://104.46.103.162:8000/";
+    adminurl2 = "http://104.46.103.162:8099/";
     adminUrl3 = "http://localhost/api/";
-    adminUrl3 = "http://104.46.103.162:8095/api/";
+    adminUrl3 = "http://104.46.103.162:8098/api/";
     return {
 
         // This is a demo Service for POST Method.

@@ -73,7 +73,7 @@
     
 
     })
-    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService, $timeout,$http,apiService,$state,$uibModal,Menuservice,$sce) {
+    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService, $timeout,$http,apiService,$state,$uibModal,Menuservice,$sce,$interval) {
         
         $rootScope.autocompletelist = [];
         $rootScope.chatOpen = false;
@@ -128,6 +128,7 @@
                     $rootScope.chatlist=[];
                     $rootScope.isLoggedin = true;
                     $rootScope.firstMsg = true;  
+					location.reload();
                     //if(!$rootScope.firstMsg)
                     {
                         msg = {Text:"Hi, How may I help you ?",type:"SYS_FIRST"};
@@ -141,7 +142,29 @@
             });
             
         };
-        
+        if($rootScope.isLoggedin) {
+			/*
+            $interval(function(){
+
+                apiService.getnewticket($scope.formData).then(function (callback){
+
+                    if(callback.data.value)
+
+                    {
+
+                        $.jStorage.set("chunk",callback.data.data.chunk);
+
+                        $.jStorage.set("Ticket",callback.data.data.chunk.Ticket);
+
+                        $rootScope.qticket = callback.data.data.chunk.Ticket;
+
+                    }
+
+                });
+
+            },1200000);
+			*/
+        }
         function displayTranscript() {
             vm.transcript = $rootScope.transcript;
             console.log("transcript",$rootScope.transcript);

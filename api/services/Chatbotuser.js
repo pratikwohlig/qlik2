@@ -347,7 +347,8 @@ var model = {
                             //console.log(item+"?qlikTicket="+Ticket);
                         //console.log("res",res);
                         //console.log(chunk);
-                        url = item.slice( 0, item.indexOf('?') );
+                        //url = item.slice( 0, item.indexOf('?') );
+                        url = item;
                         //var stringify = JSON.stringify(chunk);
                         newchunk=JSON.parse(chunk);
                         url = url+"?qlikTicket="+newchunk.Ticket;
@@ -356,7 +357,7 @@ var model = {
                         webshot(url, 'scr'+key+'.png',  function(err) {
                         // screenshot now saved to hello_world.png
                             
-                            var filedata = { path : './',filename:'scr'+key+'.png',contentType: 'image/png'};
+                            var filedata = {filename:'scr'+key+'.png',contentType: 'image/png'};
                             attachments1.push(filedata);
                             key++;
                             eachCallback();
@@ -369,15 +370,15 @@ var model = {
                             , userAgent: 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_2 like Mac OS X; en-us)'
                             + ' AppleWebKit/531.21.20 (KHTML, like Gecko) Mobile/7B298g'
                         };
-                        // var renderStream = webshot(url);
-                        // var file = fs.createWriteStream('scr'+key+'.png', {encoding: 'binary'});
+                        var renderStream = webshot(url);
+                        var file = fs.createWriteStream('scr'+key+'.png', {encoding: 'binary'});
                         
                         // renderStream.on('data', function(data) {
                         //     file.write(data.toString('binary'), 'binary');
-                        //     var filedata = { path : './',filename:'scr'+key+'.png',contentType: 'image/png'};
-                        //     attachments1.push(filedata);
-                        //     key++;
-                        //     eachCallback();
+                        //     var filedata = { filename:'scr'+key+'.png',contentType: 'image/png'};
+                        //     // attachments1.push(filedata);
+                        //     // key++;
+                        //     // eachCallback();
                         // });
                         // streamToBuffer(renderStream, (err, buffer) => {
                         //     if (err) {
@@ -385,7 +386,7 @@ var model = {
                         //         throw err;
                         //     }
 
-                        //     let base64String = buffer.toString('base64');
+                        //     var base64String = buffer.toString('base64');
                         //     //Now you have base64 encoded screen shot. Use it however you want.
                         //     console.log(base64String);
                         //     var obj1 = { path:base64String  };

@@ -65192,6 +65192,11 @@ angular.module('angularPromiseButtons')
 
 });
 
+/*! dom-to-image 10-06-2017 */
+!function(a){"use strict";function b(a,b){function c(a){return b.bgcolor&&(a.style.backgroundColor=b.bgcolor),b.width&&(a.style.width=b.width+"px"),b.height&&(a.style.height=b.height+"px"),b.style&&Object.keys(b.style).forEach(function(c){a.style[c]=b.style[c]}),a}return b=b||{},g(b),Promise.resolve(a).then(function(a){return i(a,b.filter,!0)}).then(j).then(k).then(c).then(function(c){return l(c,b.width||q.width(a),b.height||q.height(a))})}function c(a,b){return h(a,b||{}).then(function(b){return b.getContext("2d").getImageData(0,0,q.width(a),q.height(a)).data})}function d(a,b){return h(a,b||{}).then(function(a){return a.toDataURL()})}function e(a,b){return b=b||{},h(a,b).then(function(a){return a.toDataURL("image/jpeg",b.quality||1)})}function f(a,b){return h(a,b||{}).then(q.canvasToBlob)}function g(a){"undefined"==typeof a.imagePlaceholder?v.impl.options.imagePlaceholder=u.imagePlaceholder:v.impl.options.imagePlaceholder=a.imagePlaceholder,"undefined"==typeof a.cacheBust?v.impl.options.cacheBust=u.cacheBust:v.impl.options.cacheBust=a.cacheBust}function h(a,c){function d(a){var b=document.createElement("canvas");if(b.width=c.width||q.width(a),b.height=c.height||q.height(a),c.bgcolor){var d=b.getContext("2d");d.fillStyle=c.bgcolor,d.fillRect(0,0,b.width,b.height)}return b}return b(a,c).then(q.makeImage).then(q.delay(100)).then(function(b){var c=d(a);return c.getContext("2d").drawImage(b,0,0),c})}function i(a,b,c){function d(a){return a instanceof HTMLCanvasElement?q.makeImage(a.toDataURL()):a.cloneNode(!1)}function e(a,b,c){function d(a,b,c){var d=Promise.resolve();return b.forEach(function(b){d=d.then(function(){return i(b,c)}).then(function(b){b&&a.appendChild(b)})}),d}var e=a.childNodes;return 0===e.length?Promise.resolve(b):d(b,q.asArray(e),c).then(function(){return b})}function f(a,b){function c(){function c(a,b){function c(a,b){q.asArray(a).forEach(function(c){b.setProperty(c,a.getPropertyValue(c),a.getPropertyPriority(c))})}a.cssText?b.cssText=a.cssText:c(a,b)}c(window.getComputedStyle(a),b.style)}function d(){function c(c){function d(a,b,c){function d(a){var b=a.getPropertyValue("content");return a.cssText+" content: "+b+";"}function e(a){function b(b){return b+": "+a.getPropertyValue(b)+(a.getPropertyPriority(b)?" !important":"")}return q.asArray(a).map(b).join("; ")+";"}var f="."+a+":"+b,g=c.cssText?d(c):e(c);return document.createTextNode(f+"{"+g+"}")}var e=window.getComputedStyle(a,c),f=e.getPropertyValue("content");if(""!==f&&"none"!==f){var g=q.uid();b.className=b.className+" "+g;var h=document.createElement("style");h.appendChild(d(g,c,e)),b.appendChild(h)}}[":before",":after"].forEach(function(a){c(a)})}function e(){a instanceof HTMLTextAreaElement&&(b.innerHTML=a.value),a instanceof HTMLInputElement&&b.setAttribute("value",a.value)}function f(){b instanceof SVGElement&&(b.setAttribute("xmlns","http://www.w3.org/2000/svg"),b instanceof SVGRectElement&&["width","height"].forEach(function(a){var c=b.getAttribute(a);c&&b.style.setProperty(a,c)}))}return b instanceof Element?Promise.resolve().then(c).then(d).then(e).then(f).then(function(){return b}):b}return c||!b||b(a)?Promise.resolve(a).then(d).then(function(c){return e(a,c,b)}).then(function(b){return f(a,b)}):Promise.resolve()}function j(a){return s.resolveAll().then(function(b){var c=document.createElement("style");return a.appendChild(c),c.appendChild(document.createTextNode(b)),a})}function k(a){return t.inlineAll(a).then(function(){return a})}function l(a,b,c){return Promise.resolve(a).then(function(a){return a.setAttribute("xmlns","http://www.w3.org/1999/xhtml"),(new XMLSerializer).serializeToString(a)}).then(q.escapeXhtml).then(function(a){return'<foreignObject x="0" y="0" width="100%" height="100%">'+a+"</foreignObject>"}).then(function(a){return'<svg xmlns="http://www.w3.org/2000/svg" width="'+b+'" height="'+c+'">'+a+"</svg>"}).then(function(a){return"data:image/svg+xml;charset=utf-8,"+a})}function m(){function a(){var a="application/font-woff",b="image/jpeg";return{woff:a,woff2:a,ttf:"application/font-truetype",eot:"application/vnd.ms-fontobject",png:"image/png",jpg:b,jpeg:b,gif:"image/gif",tiff:"image/tiff",svg:"image/svg+xml"}}function b(a){var b=/\.([^\.\/]*?)$/g.exec(a);return b?b[1]:""}function c(c){var d=b(c).toLowerCase();return a()[d]||""}function d(a){return a.search(/^(data:)/)!==-1}function e(a){return new Promise(function(b){for(var c=window.atob(a.toDataURL().split(",")[1]),d=c.length,e=new Uint8Array(d),f=0;f<d;f++)e[f]=c.charCodeAt(f);b(new Blob([e],{type:"image/png"}))})}function f(a){return a.toBlob?new Promise(function(b){a.toBlob(b)}):e(a)}function g(a,b){var c=document.implementation.createHTMLDocument(),d=c.createElement("base");c.head.appendChild(d);var e=c.createElement("a");return c.body.appendChild(e),d.href=b,e.href=a,e.href}function h(){var a=0;return function(){function b(){return("0000"+(Math.random()*Math.pow(36,4)<<0).toString(36)).slice(-4)}return"u"+b()+a++}}function i(a){return new Promise(function(b,c){var d=new Image;d.onload=function(){b(d)},d.onerror=c,d.src=a})}function j(a){var b=3e4;return v.impl.options.cacheBust&&(a+=(/\?/.test(a)?"&":"?")+(new Date).getTime()),new Promise(function(c){function d(){if(4===g.readyState){if(200!==g.status)return void(h?c(h):f("cannot fetch resource: "+a+", status: "+g.status));var b=new FileReader;b.onloadend=function(){var a=b.result.split(/,/)[1];c(a)},b.readAsDataURL(g.response)}}function e(){h?c(h):f("timeout of "+b+"ms occured while fetching resource: "+a)}function f(a){console.error(a),c("")}var g=new XMLHttpRequest;g.onreadystatechange=d,g.ontimeout=e,g.responseType="blob",g.timeout=b,g.open("GET",a,!0),g.send();var h;if(v.impl.options.imagePlaceholder){var i=v.impl.options.imagePlaceholder.split(/,/);i&&i[1]&&(h=i[1])}})}function k(a,b){return"data:"+b+";base64,"+a}function l(a){return a.replace(/([.*+?^${}()|\[\]\/\\])/g,"\\$1")}function m(a){return function(b){return new Promise(function(c){setTimeout(function(){c(b)},a)})}}function n(a){for(var b=[],c=a.length,d=0;d<c;d++)b.push(a[d]);return b}function o(a){return a.replace(/#/g,"%23").replace(/\n/g,"%0A")}function p(a){var b=r(a,"border-left-width"),c=r(a,"border-right-width");return a.scrollWidth+b+c}function q(a){var b=r(a,"border-top-width"),c=r(a,"border-bottom-width");return a.scrollHeight+b+c}function r(a,b){var c=window.getComputedStyle(a).getPropertyValue(b);return parseFloat(c.replace("px",""))}return{escape:l,parseExtension:b,mimeType:c,dataAsUrl:k,isDataUrl:d,canvasToBlob:f,resolveUrl:g,getAndEncode:j,uid:h(),delay:m,asArray:n,escapeXhtml:o,makeImage:i,width:p,height:q}}function n(){function a(a){return a.search(e)!==-1}function b(a){for(var b,c=[];null!==(b=e.exec(a));)c.push(b[1]);return c.filter(function(a){return!q.isDataUrl(a)})}function c(a,b,c,d){function e(a){return new RegExp("(url\\(['\"]?)("+q.escape(a)+")(['\"]?\\))","g")}return Promise.resolve(b).then(function(a){return c?q.resolveUrl(a,c):a}).then(d||q.getAndEncode).then(function(a){return q.dataAsUrl(a,q.mimeType(b))}).then(function(c){return a.replace(e(b),"$1"+c+"$3")})}function d(d,e,f){function g(){return!a(d)}return g()?Promise.resolve(d):Promise.resolve(d).then(b).then(function(a){var b=Promise.resolve(d);return a.forEach(function(a){b=b.then(function(b){return c(b,a,e,f)})}),b})}var e=/url\(['"]?([^'"]+?)['"]?\)/g;return{inlineAll:d,shouldProcess:a,impl:{readUrls:b,inline:c}}}function o(){function a(){return b(document).then(function(a){return Promise.all(a.map(function(a){return a.resolve()}))}).then(function(a){return a.join("\n")})}function b(){function a(a){return a.filter(function(a){return a.type===CSSRule.FONT_FACE_RULE}).filter(function(a){return r.shouldProcess(a.style.getPropertyValue("src"))})}function b(a){var b=[];return a.forEach(function(a){try{q.asArray(a.cssRules||[]).forEach(b.push.bind(b))}catch(c){console.log("Error while reading CSS rules from "+a.href,c.toString())}}),b}function c(a){return{resolve:function(){var b=(a.parentStyleSheet||{}).href;return r.inlineAll(a.cssText,b)},src:function(){return a.style.getPropertyValue("src")}}}return Promise.resolve(q.asArray(document.styleSheets)).then(b).then(a).then(function(a){return a.map(c)})}return{resolveAll:a,impl:{readAll:b}}}function p(){function a(a){function b(b){return q.isDataUrl(a.src)?Promise.resolve():Promise.resolve(a.src).then(b||q.getAndEncode).then(function(b){return q.dataAsUrl(b,q.mimeType(a.src))}).then(function(b){return new Promise(function(c,d){a.onload=c,a.onerror=d,a.src=b})})}return{inline:b}}function b(c){function d(a){var b=a.style.getPropertyValue("background");return b?r.inlineAll(b).then(function(b){a.style.setProperty("background",b,a.style.getPropertyPriority("background"))}).then(function(){return a}):Promise.resolve(a)}return c instanceof Element?d(c).then(function(){return c instanceof HTMLImageElement?a(c).inline():Promise.all(q.asArray(c.childNodes).map(function(a){return b(a)}))}):Promise.resolve(c)}return{inlineAll:b,impl:{newImage:a}}}var q=m(),r=n(),s=o(),t=p(),u={imagePlaceholder:void 0,cacheBust:!1},v={toSvg:b,toPng:d,toJpeg:e,toBlob:f,toPixelData:c,impl:{fontFaces:s,images:t,util:q,inliner:r,options:{}}};"undefined"!=typeof module?module.exports=v:a.domtoimage=v}(this);
+/*! qlik-isolated - v1.0.5 | 2017-08-03
+ * Hari Vikas Janarthanan (hrivks@gmail.com) | MIT License | https://github.com/hrivks/qlik-isolated#readme */
+var qlikIsolated=function(){function e(){var e=i+n+"resources";return'<html><head><script src="'+e+'/assets/external/requirejs/require.js"><\/script></head><body><p>Isolated iframe to load Qlik.js </p><script>try {require.config({ baseUrl: "'+e+'" });require(["js/qlik"], function(q) { parent.qlikIsolated._qFrameLoadSuccess(q); });} catch(e) { parent.qlikIsolated._qFrameLoadFailure(e); }<\/script></body></html>'}function o(e,o,t,l,a,n,g,I,b,y){if("string"!=typeof e)throw"qlik-Isolated: appid must be a vaild string";if("string"!=typeof o&&"string"!=typeof t)throw"qlik-Isolated: obj or sheet must be a vaild string";var h=l||i;if(!h)throw"qlik-Isolated: baseUrl is required";var L="";L+=a?u:"",L+=g?f:"",L+=b?k:"",L=(L+=I?q:"").substring(0,L.lastIndexOf(",")),o=o||"",t=t||"",h+=m.replace(r,e).replace(s,o).replace(d,L).replace(c,t),n&&(h+=p),y&&y instanceof Array&&(h+="&select="+y.join("&select="));var C=document.createElement("iframe");return C.style.border="none",C.style.width="100%",C.style.height="100%",C.className="qlik-isolated",C.src=h,C}var t,i,l,a,n="/",r="#APPID#",s="#OBJ#",d="#OPT#",c="#SHEET#",u="currsel,",f="nointeraction,",q="noselections,",k="noanimate,",p="&select=clearall",m="/single/?appid="+r+"&obj="+s+"&sheet="+c+"&opt="+d;return{getQlik:function(o,r){if(!o&&!i)throw"qlik-Isolated: Qlik Server URL is required";var s=new Promise(function(e,o){l=e,a=o});if(t)return l(t),s;i=o||i,n=r||n;var d=document.createElement("iframe");return d.style.display="none",d.id="qFrame",document.body.appendChild(d),d.contentWindow.document.open(),d.contentWindow.document.write(e()),d.contentWindow.document.close(),s},getObjectIsolated:function(e,t,i,l,a,n,r,s,d,c,u){if(!e)throw"qlik-Isolated: element must be a HTML element or a jQuery selection";var f=o(t,i,l,a,n,r,s,d,c,u);e.append(f)},getSelectionBarIsolated:function(e,t,i,l,a,n,r,s){if(!e)throw"qlik-Isolated: element must be a HTML element or a jQuery selection";var d=o(t,"CurrentSelections","",i,!1,l,a,n,r,s);d.className="qlik-isolated qlik-isolated-selection-bar",d.style.marginTop="-50px",e.append(d)},_qFrameLoadSuccess:function(e){l(t=e)},_qFrameLoadFailure:function(e){a(e)},version:"1.0.5"}}();"undefined"!=typeof qlikIsolatedLoadConfig&&"string"==typeof qlikIsolatedLoadConfig.url&&qlikIsolated.getQlik(qlikIsolatedLoadConfig.url,qlikIsolatedLoadConfig.prefix).then(function(e){console.log("qlik-isolated: qlik.js auto loaded"),qlikIsolatedLoadConfig.makeGlobal&&(window.qlik=e),"function"==typeof qlikIsolatedLoadConfig.successCallback&&qlikIsolatedLoadConfig.successCallback(e)},function(e){console.log("qlik-isolated: error auto loading qlik"),console.log(e),"function"==typeof qlikIsolatedLoadConfig.failureCallback&&qlikIsolatedLoadConfig.failureCallback(e)});
 // Link all the JS Docs here
 var myApp = angular.module('myApp', [
     'ui.router',
@@ -65210,7 +65215,7 @@ var myApp = angular.module('myApp', [
     //'ngIdle',
     'app.directives',
     //'voiceRss',
-    'jlareau.bowser'
+    'jlareau.bowser',
 ]);
 //angular.module('manage', ['ngResource']);
 // Define all the routes below
@@ -65263,7 +65268,6 @@ myApp.run(['$http','$document','$rootScope','bowser', function run(  $http,$docu
     
     //$http.defaults.xsrfCookieName = 'csrftoken';
     //$http.defaults.xsrfHeaderName = 'X-CSRFToken';
-    
     //$http.defaults.headers.post['X-CSRFToken'] = $cookies.get('csrftoken');
     //** django urls loves trailling slashes which angularjs removes by default.
     //$resourceProvider.defaults.stripTrailingSlashes = false;
@@ -65898,4381 +65902,257 @@ t(n.alsoResize).each(function(){var e=t(this),s=t(this).data("ui-resizable-alsor
 break;case U[1]-1:T+=" ui-datepicker-group-last",I=" ui-corner-"+(Y?"left":"right");break;default:T+=" ui-datepicker-group-middle",I=""}T+="'>"}for(T+="<div class='ui-datepicker-header ui-widget-header ui-helper-clearfix"+I+"'>"+(/all|left/.test(I)&&0===k?Y?o:s:"")+(/all|right/.test(I)&&0===k?Y?s:o:"")+this._generateMonthYearHeader(t,Z,te,Q,J,k>0||C>0,f,g)+"</div><table class='ui-datepicker-calendar'><thead>"+"<tr>",P=u?"<th class='ui-datepicker-week-col'>"+this._get(t,"weekHeader")+"</th>":"",w=0;7>w;w++)M=(w+c)%7,P+="<th scope='col'"+((w+c+6)%7>=5?" class='ui-datepicker-week-end'":"")+">"+"<span title='"+d[M]+"'>"+p[M]+"</span></th>";for(T+=P+"</tr></thead><tbody>",S=this._getDaysInMonth(te,Z),te===t.selectedYear&&Z===t.selectedMonth&&(t.selectedDay=Math.min(t.selectedDay,S)),H=(this._getFirstDayOfMonth(te,Z)-c+7)%7,z=Math.ceil((H+S)/7),O=X?this.maxRows>z?this.maxRows:z:z,this.maxRows=O,A=this._daylightSavingAdjust(new Date(te,Z,1-H)),N=0;O>N;N++){for(T+="<tr>",W=u?"<td class='ui-datepicker-week-col'>"+this._get(t,"calculateWeek")(A)+"</td>":"",w=0;7>w;w++)E=m?m.apply(t.input?t.input[0]:null,[A]):[!0,""],F=A.getMonth()!==Z,L=F&&!v||!E[0]||Q&&Q>A||J&&A>J,W+="<td class='"+((w+c+6)%7>=5?" ui-datepicker-week-end":"")+(F?" ui-datepicker-other-month":"")+(A.getTime()===D.getTime()&&Z===t.selectedMonth&&t._keyEvent||b.getTime()===A.getTime()&&b.getTime()===D.getTime()?" "+this._dayOverClass:"")+(L?" "+this._unselectableClass+" ui-state-disabled":"")+(F&&!_?"":" "+E[1]+(A.getTime()===G.getTime()?" "+this._currentClass:"")+(A.getTime()===B.getTime()?" ui-datepicker-today":""))+"'"+(F&&!_||!E[2]?"":" title='"+E[2].replace(/'/g,"&#39;")+"'")+(L?"":" data-handler='selectDay' data-event='click' data-month='"+A.getMonth()+"' data-year='"+A.getFullYear()+"'")+">"+(F&&!_?"&#xa0;":L?"<span class='ui-state-default'>"+A.getDate()+"</span>":"<a class='ui-state-default"+(A.getTime()===B.getTime()?" ui-state-highlight":"")+(A.getTime()===G.getTime()?" ui-state-active":"")+(F?" ui-priority-secondary":"")+"' href='#'>"+A.getDate()+"</a>")+"</td>",A.setDate(A.getDate()+1),A=this._daylightSavingAdjust(A);T+=W+"</tr>"}Z++,Z>11&&(Z=0,te++),T+="</tbody></table>"+(X?"</div>"+(U[0]>0&&C===U[1]-1?"<div class='ui-datepicker-row-break'></div>":""):""),x+=T}y+=x}return y+=l,t._keyEvent=!1,y},_generateMonthYearHeader:function(t,e,i,s,n,o,a,r){var h,l,c,u,d,p,f,g,m=this._get(t,"changeMonth"),_=this._get(t,"changeYear"),v=this._get(t,"showMonthAfterYear"),b="<div class='ui-datepicker-title'>",y="";if(o||!m)y+="<span class='ui-datepicker-month'>"+a[e]+"</span>";else{for(h=s&&s.getFullYear()===i,l=n&&n.getFullYear()===i,y+="<select class='ui-datepicker-month' data-handler='selectMonth' data-event='change'>",c=0;12>c;c++)(!h||c>=s.getMonth())&&(!l||n.getMonth()>=c)&&(y+="<option value='"+c+"'"+(c===e?" selected='selected'":"")+">"+r[c]+"</option>");y+="</select>"}if(v||(b+=y+(!o&&m&&_?"":"&#xa0;")),!t.yearshtml)if(t.yearshtml="",o||!_)b+="<span class='ui-datepicker-year'>"+i+"</span>";else{for(u=this._get(t,"yearRange").split(":"),d=(new Date).getFullYear(),p=function(t){var e=t.match(/c[+\-].*/)?i+parseInt(t.substring(1),10):t.match(/[+\-].*/)?d+parseInt(t,10):parseInt(t,10);return isNaN(e)?d:e},f=p(u[0]),g=Math.max(f,p(u[1]||"")),f=s?Math.max(f,s.getFullYear()):f,g=n?Math.min(g,n.getFullYear()):g,t.yearshtml+="<select class='ui-datepicker-year' data-handler='selectYear' data-event='change'>";g>=f;f++)t.yearshtml+="<option value='"+f+"'"+(f===i?" selected='selected'":"")+">"+f+"</option>";t.yearshtml+="</select>",b+=t.yearshtml,t.yearshtml=null}return b+=this._get(t,"yearSuffix"),v&&(b+=(!o&&m&&_?"":"&#xa0;")+y),b+="</div>"},_adjustInstDate:function(t,e,i){var s=t.selectedYear+("Y"===i?e:0),n=t.selectedMonth+("M"===i?e:0),o=Math.min(t.selectedDay,this._getDaysInMonth(s,n))+("D"===i?e:0),a=this._restrictMinMax(t,this._daylightSavingAdjust(new Date(s,n,o)));t.selectedDay=a.getDate(),t.drawMonth=t.selectedMonth=a.getMonth(),t.drawYear=t.selectedYear=a.getFullYear(),("M"===i||"Y"===i)&&this._notifyChange(t)},_restrictMinMax:function(t,e){var i=this._getMinMaxDate(t,"min"),s=this._getMinMaxDate(t,"max"),n=i&&i>e?i:e;return s&&n>s?s:n},_notifyChange:function(t){var e=this._get(t,"onChangeMonthYear");e&&e.apply(t.input?t.input[0]:null,[t.selectedYear,t.selectedMonth+1,t])},_getNumberOfMonths:function(t){var e=this._get(t,"numberOfMonths");return null==e?[1,1]:"number"==typeof e?[1,e]:e},_getMinMaxDate:function(t,e){return this._determineDate(t,this._get(t,e+"Date"),null)},_getDaysInMonth:function(t,e){return 32-this._daylightSavingAdjust(new Date(t,e,32)).getDate()},_getFirstDayOfMonth:function(t,e){return new Date(t,e,1).getDay()},_canAdjustMonth:function(t,e,i,s){var n=this._getNumberOfMonths(t),o=this._daylightSavingAdjust(new Date(i,s+(0>e?e:n[0]*n[1]),1));return 0>e&&o.setDate(this._getDaysInMonth(o.getFullYear(),o.getMonth())),this._isInRange(t,o)},_isInRange:function(t,e){var i,s,n=this._getMinMaxDate(t,"min"),o=this._getMinMaxDate(t,"max"),a=null,r=null,h=this._get(t,"yearRange");return h&&(i=h.split(":"),s=(new Date).getFullYear(),a=parseInt(i[0],10),r=parseInt(i[1],10),i[0].match(/[+\-].*/)&&(a+=s),i[1].match(/[+\-].*/)&&(r+=s)),(!n||e.getTime()>=n.getTime())&&(!o||e.getTime()<=o.getTime())&&(!a||e.getFullYear()>=a)&&(!r||r>=e.getFullYear())},_getFormatConfig:function(t){var e=this._get(t,"shortYearCutoff");return e="string"!=typeof e?e:(new Date).getFullYear()%100+parseInt(e,10),{shortYearCutoff:e,dayNamesShort:this._get(t,"dayNamesShort"),dayNames:this._get(t,"dayNames"),monthNamesShort:this._get(t,"monthNamesShort"),monthNames:this._get(t,"monthNames")}},_formatDate:function(t,e,i,s){e||(t.currentDay=t.selectedDay,t.currentMonth=t.selectedMonth,t.currentYear=t.selectedYear);var n=e?"object"==typeof e?e:this._daylightSavingAdjust(new Date(s,i,e)):this._daylightSavingAdjust(new Date(t.currentYear,t.currentMonth,t.currentDay));return this.formatDate(this._get(t,"dateFormat"),n,this._getFormatConfig(t))}}),t.fn.datepicker=function(e){if(!this.length)return this;t.datepicker.initialized||(t(document).on("mousedown",t.datepicker._checkExternalClick),t.datepicker.initialized=!0),0===t("#"+t.datepicker._mainDivId).length&&t("body").append(t.datepicker.dpDiv);var i=Array.prototype.slice.call(arguments,1);return"string"!=typeof e||"isDisabled"!==e&&"getDate"!==e&&"widget"!==e?"option"===e&&2===arguments.length&&"string"==typeof arguments[1]?t.datepicker["_"+e+"Datepicker"].apply(t.datepicker,[this[0]].concat(i)):this.each(function(){"string"==typeof e?t.datepicker["_"+e+"Datepicker"].apply(t.datepicker,[this].concat(i)):t.datepicker._attachDatepicker(this,e)}):t.datepicker["_"+e+"Datepicker"].apply(t.datepicker,[this[0]].concat(i))},t.datepicker=new s,t.datepicker.initialized=!1,t.datepicker.uuid=(new Date).getTime(),t.datepicker.version="1.12.1",t.datepicker,t.widget("ui.dialog",{version:"1.12.1",options:{appendTo:"body",autoOpen:!0,buttons:[],classes:{"ui-dialog":"ui-corner-all","ui-dialog-titlebar":"ui-corner-all"},closeOnEscape:!0,closeText:"Close",draggable:!0,hide:null,height:"auto",maxHeight:null,maxWidth:null,minHeight:150,minWidth:150,modal:!1,position:{my:"center",at:"center",of:window,collision:"fit",using:function(e){var i=t(this).css(e).offset().top;0>i&&t(this).css("top",e.top-i)}},resizable:!0,show:null,title:null,width:300,beforeClose:null,close:null,drag:null,dragStart:null,dragStop:null,focus:null,open:null,resize:null,resizeStart:null,resizeStop:null},sizeRelatedOptions:{buttons:!0,height:!0,maxHeight:!0,maxWidth:!0,minHeight:!0,minWidth:!0,width:!0},resizableRelatedOptions:{maxHeight:!0,maxWidth:!0,minHeight:!0,minWidth:!0},_create:function(){this.originalCss={display:this.element[0].style.display,width:this.element[0].style.width,minHeight:this.element[0].style.minHeight,maxHeight:this.element[0].style.maxHeight,height:this.element[0].style.height},this.originalPosition={parent:this.element.parent(),index:this.element.parent().children().index(this.element)},this.originalTitle=this.element.attr("title"),null==this.options.title&&null!=this.originalTitle&&(this.options.title=this.originalTitle),this.options.disabled&&(this.options.disabled=!1),this._createWrapper(),this.element.show().removeAttr("title").appendTo(this.uiDialog),this._addClass("ui-dialog-content","ui-widget-content"),this._createTitlebar(),this._createButtonPane(),this.options.draggable&&t.fn.draggable&&this._makeDraggable(),this.options.resizable&&t.fn.resizable&&this._makeResizable(),this._isOpen=!1,this._trackFocus()},_init:function(){this.options.autoOpen&&this.open()},_appendTo:function(){var e=this.options.appendTo;return e&&(e.jquery||e.nodeType)?t(e):this.document.find(e||"body").eq(0)},_destroy:function(){var t,e=this.originalPosition;this._untrackInstance(),this._destroyOverlay(),this.element.removeUniqueId().css(this.originalCss).detach(),this.uiDialog.remove(),this.originalTitle&&this.element.attr("title",this.originalTitle),t=e.parent.children().eq(e.index),t.length&&t[0]!==this.element[0]?t.before(this.element):e.parent.append(this.element)},widget:function(){return this.uiDialog},disable:t.noop,enable:t.noop,close:function(e){var i=this;this._isOpen&&this._trigger("beforeClose",e)!==!1&&(this._isOpen=!1,this._focusedElement=null,this._destroyOverlay(),this._untrackInstance(),this.opener.filter(":focusable").trigger("focus").length||t.ui.safeBlur(t.ui.safeActiveElement(this.document[0])),this._hide(this.uiDialog,this.options.hide,function(){i._trigger("close",e)}))},isOpen:function(){return this._isOpen},moveToTop:function(){this._moveToTop()},_moveToTop:function(e,i){var s=!1,n=this.uiDialog.siblings(".ui-front:visible").map(function(){return+t(this).css("z-index")}).get(),o=Math.max.apply(null,n);return o>=+this.uiDialog.css("z-index")&&(this.uiDialog.css("z-index",o+1),s=!0),s&&!i&&this._trigger("focus",e),s},open:function(){var e=this;return this._isOpen?(this._moveToTop()&&this._focusTabbable(),void 0):(this._isOpen=!0,this.opener=t(t.ui.safeActiveElement(this.document[0])),this._size(),this._position(),this._createOverlay(),this._moveToTop(null,!0),this.overlay&&this.overlay.css("z-index",this.uiDialog.css("z-index")-1),this._show(this.uiDialog,this.options.show,function(){e._focusTabbable(),e._trigger("focus")}),this._makeFocusTarget(),this._trigger("open"),void 0)},_focusTabbable:function(){var t=this._focusedElement;t||(t=this.element.find("[autofocus]")),t.length||(t=this.element.find(":tabbable")),t.length||(t=this.uiDialogButtonPane.find(":tabbable")),t.length||(t=this.uiDialogTitlebarClose.filter(":tabbable")),t.length||(t=this.uiDialog),t.eq(0).trigger("focus")},_keepFocus:function(e){function i(){var e=t.ui.safeActiveElement(this.document[0]),i=this.uiDialog[0]===e||t.contains(this.uiDialog[0],e);i||this._focusTabbable()}e.preventDefault(),i.call(this),this._delay(i)},_createWrapper:function(){this.uiDialog=t("<div>").hide().attr({tabIndex:-1,role:"dialog"}).appendTo(this._appendTo()),this._addClass(this.uiDialog,"ui-dialog","ui-widget ui-widget-content ui-front"),this._on(this.uiDialog,{keydown:function(e){if(this.options.closeOnEscape&&!e.isDefaultPrevented()&&e.keyCode&&e.keyCode===t.ui.keyCode.ESCAPE)return e.preventDefault(),this.close(e),void 0;if(e.keyCode===t.ui.keyCode.TAB&&!e.isDefaultPrevented()){var i=this.uiDialog.find(":tabbable"),s=i.filter(":first"),n=i.filter(":last");e.target!==n[0]&&e.target!==this.uiDialog[0]||e.shiftKey?e.target!==s[0]&&e.target!==this.uiDialog[0]||!e.shiftKey||(this._delay(function(){n.trigger("focus")}),e.preventDefault()):(this._delay(function(){s.trigger("focus")}),e.preventDefault())}},mousedown:function(t){this._moveToTop(t)&&this._focusTabbable()}}),this.element.find("[aria-describedby]").length||this.uiDialog.attr({"aria-describedby":this.element.uniqueId().attr("id")})},_createTitlebar:function(){var e;this.uiDialogTitlebar=t("<div>"),this._addClass(this.uiDialogTitlebar,"ui-dialog-titlebar","ui-widget-header ui-helper-clearfix"),this._on(this.uiDialogTitlebar,{mousedown:function(e){t(e.target).closest(".ui-dialog-titlebar-close")||this.uiDialog.trigger("focus")}}),this.uiDialogTitlebarClose=t("<button type='button'></button>").button({label:t("<a>").text(this.options.closeText).html(),icon:"ui-icon-closethick",showLabel:!1}).appendTo(this.uiDialogTitlebar),this._addClass(this.uiDialogTitlebarClose,"ui-dialog-titlebar-close"),this._on(this.uiDialogTitlebarClose,{click:function(t){t.preventDefault(),this.close(t)}}),e=t("<span>").uniqueId().prependTo(this.uiDialogTitlebar),this._addClass(e,"ui-dialog-title"),this._title(e),this.uiDialogTitlebar.prependTo(this.uiDialog),this.uiDialog.attr({"aria-labelledby":e.attr("id")})},_title:function(t){this.options.title?t.text(this.options.title):t.html("&#160;")},_createButtonPane:function(){this.uiDialogButtonPane=t("<div>"),this._addClass(this.uiDialogButtonPane,"ui-dialog-buttonpane","ui-widget-content ui-helper-clearfix"),this.uiButtonSet=t("<div>").appendTo(this.uiDialogButtonPane),this._addClass(this.uiButtonSet,"ui-dialog-buttonset"),this._createButtons()},_createButtons:function(){var e=this,i=this.options.buttons;return this.uiDialogButtonPane.remove(),this.uiButtonSet.empty(),t.isEmptyObject(i)||t.isArray(i)&&!i.length?(this._removeClass(this.uiDialog,"ui-dialog-buttons"),void 0):(t.each(i,function(i,s){var n,o;s=t.isFunction(s)?{click:s,text:i}:s,s=t.extend({type:"button"},s),n=s.click,o={icon:s.icon,iconPosition:s.iconPosition,showLabel:s.showLabel,icons:s.icons,text:s.text},delete s.click,delete s.icon,delete s.iconPosition,delete s.showLabel,delete s.icons,"boolean"==typeof s.text&&delete s.text,t("<button></button>",s).button(o).appendTo(e.uiButtonSet).on("click",function(){n.apply(e.element[0],arguments)})}),this._addClass(this.uiDialog,"ui-dialog-buttons"),this.uiDialogButtonPane.appendTo(this.uiDialog),void 0)},_makeDraggable:function(){function e(t){return{position:t.position,offset:t.offset}}var i=this,s=this.options;this.uiDialog.draggable({cancel:".ui-dialog-content, .ui-dialog-titlebar-close",handle:".ui-dialog-titlebar",containment:"document",start:function(s,n){i._addClass(t(this),"ui-dialog-dragging"),i._blockFrames(),i._trigger("dragStart",s,e(n))},drag:function(t,s){i._trigger("drag",t,e(s))},stop:function(n,o){var a=o.offset.left-i.document.scrollLeft(),r=o.offset.top-i.document.scrollTop();s.position={my:"left top",at:"left"+(a>=0?"+":"")+a+" "+"top"+(r>=0?"+":"")+r,of:i.window},i._removeClass(t(this),"ui-dialog-dragging"),i._unblockFrames(),i._trigger("dragStop",n,e(o))}})},_makeResizable:function(){function e(t){return{originalPosition:t.originalPosition,originalSize:t.originalSize,position:t.position,size:t.size}}var i=this,s=this.options,n=s.resizable,o=this.uiDialog.css("position"),a="string"==typeof n?n:"n,e,s,w,se,sw,ne,nw";this.uiDialog.resizable({cancel:".ui-dialog-content",containment:"document",alsoResize:this.element,maxWidth:s.maxWidth,maxHeight:s.maxHeight,minWidth:s.minWidth,minHeight:this._minHeight(),handles:a,start:function(s,n){i._addClass(t(this),"ui-dialog-resizing"),i._blockFrames(),i._trigger("resizeStart",s,e(n))},resize:function(t,s){i._trigger("resize",t,e(s))},stop:function(n,o){var a=i.uiDialog.offset(),r=a.left-i.document.scrollLeft(),h=a.top-i.document.scrollTop();s.height=i.uiDialog.height(),s.width=i.uiDialog.width(),s.position={my:"left top",at:"left"+(r>=0?"+":"")+r+" "+"top"+(h>=0?"+":"")+h,of:i.window},i._removeClass(t(this),"ui-dialog-resizing"),i._unblockFrames(),i._trigger("resizeStop",n,e(o))}}).css("position",o)},_trackFocus:function(){this._on(this.widget(),{focusin:function(e){this._makeFocusTarget(),this._focusedElement=t(e.target)}})},_makeFocusTarget:function(){this._untrackInstance(),this._trackingInstances().unshift(this)},_untrackInstance:function(){var e=this._trackingInstances(),i=t.inArray(this,e);-1!==i&&e.splice(i,1)},_trackingInstances:function(){var t=this.document.data("ui-dialog-instances");return t||(t=[],this.document.data("ui-dialog-instances",t)),t},_minHeight:function(){var t=this.options;return"auto"===t.height?t.minHeight:Math.min(t.minHeight,t.height)},_position:function(){var t=this.uiDialog.is(":visible");t||this.uiDialog.show(),this.uiDialog.position(this.options.position),t||this.uiDialog.hide()},_setOptions:function(e){var i=this,s=!1,n={};t.each(e,function(t,e){i._setOption(t,e),t in i.sizeRelatedOptions&&(s=!0),t in i.resizableRelatedOptions&&(n[t]=e)}),s&&(this._size(),this._position()),this.uiDialog.is(":data(ui-resizable)")&&this.uiDialog.resizable("option",n)},_setOption:function(e,i){var s,n,o=this.uiDialog;"disabled"!==e&&(this._super(e,i),"appendTo"===e&&this.uiDialog.appendTo(this._appendTo()),"buttons"===e&&this._createButtons(),"closeText"===e&&this.uiDialogTitlebarClose.button({label:t("<a>").text(""+this.options.closeText).html()}),"draggable"===e&&(s=o.is(":data(ui-draggable)"),s&&!i&&o.draggable("destroy"),!s&&i&&this._makeDraggable()),"position"===e&&this._position(),"resizable"===e&&(n=o.is(":data(ui-resizable)"),n&&!i&&o.resizable("destroy"),n&&"string"==typeof i&&o.resizable("option","handles",i),n||i===!1||this._makeResizable()),"title"===e&&this._title(this.uiDialogTitlebar.find(".ui-dialog-title")))},_size:function(){var t,e,i,s=this.options;this.element.show().css({width:"auto",minHeight:0,maxHeight:"none",height:0}),s.minWidth>s.width&&(s.width=s.minWidth),t=this.uiDialog.css({height:"auto",width:s.width}).outerHeight(),e=Math.max(0,s.minHeight-t),i="number"==typeof s.maxHeight?Math.max(0,s.maxHeight-t):"none","auto"===s.height?this.element.css({minHeight:e,maxHeight:i,height:"auto"}):this.element.height(Math.max(0,s.height-t)),this.uiDialog.is(":data(ui-resizable)")&&this.uiDialog.resizable("option","minHeight",this._minHeight())},_blockFrames:function(){this.iframeBlocks=this.document.find("iframe").map(function(){var e=t(this);return t("<div>").css({position:"absolute",width:e.outerWidth(),height:e.outerHeight()}).appendTo(e.parent()).offset(e.offset())[0]})},_unblockFrames:function(){this.iframeBlocks&&(this.iframeBlocks.remove(),delete this.iframeBlocks)},_allowInteraction:function(e){return t(e.target).closest(".ui-dialog").length?!0:!!t(e.target).closest(".ui-datepicker").length},_createOverlay:function(){if(this.options.modal){var e=!0;this._delay(function(){e=!1}),this.document.data("ui-dialog-overlays")||this._on(this.document,{focusin:function(t){e||this._allowInteraction(t)||(t.preventDefault(),this._trackingInstances()[0]._focusTabbable())}}),this.overlay=t("<div>").appendTo(this._appendTo()),this._addClass(this.overlay,null,"ui-widget-overlay ui-front"),this._on(this.overlay,{mousedown:"_keepFocus"}),this.document.data("ui-dialog-overlays",(this.document.data("ui-dialog-overlays")||0)+1)}},_destroyOverlay:function(){if(this.options.modal&&this.overlay){var t=this.document.data("ui-dialog-overlays")-1;t?this.document.data("ui-dialog-overlays",t):(this._off(this.document,"focusin"),this.document.removeData("ui-dialog-overlays")),this.overlay.remove(),this.overlay=null}}}),t.uiBackCompat!==!1&&t.widget("ui.dialog",t.ui.dialog,{options:{dialogClass:""},_createWrapper:function(){this._super(),this.uiDialog.addClass(this.options.dialogClass)},_setOption:function(t,e){"dialogClass"===t&&this.uiDialog.removeClass(this.options.dialogClass).addClass(e),this._superApply(arguments)}}),t.ui.dialog,t.widget("ui.progressbar",{version:"1.12.1",options:{classes:{"ui-progressbar":"ui-corner-all","ui-progressbar-value":"ui-corner-left","ui-progressbar-complete":"ui-corner-right"},max:100,value:0,change:null,complete:null},min:0,_create:function(){this.oldValue=this.options.value=this._constrainedValue(),this.element.attr({role:"progressbar","aria-valuemin":this.min}),this._addClass("ui-progressbar","ui-widget ui-widget-content"),this.valueDiv=t("<div>").appendTo(this.element),this._addClass(this.valueDiv,"ui-progressbar-value","ui-widget-header"),this._refreshValue()},_destroy:function(){this.element.removeAttr("role aria-valuemin aria-valuemax aria-valuenow"),this.valueDiv.remove()},value:function(t){return void 0===t?this.options.value:(this.options.value=this._constrainedValue(t),this._refreshValue(),void 0)},_constrainedValue:function(t){return void 0===t&&(t=this.options.value),this.indeterminate=t===!1,"number"!=typeof t&&(t=0),this.indeterminate?!1:Math.min(this.options.max,Math.max(this.min,t))},_setOptions:function(t){var e=t.value;delete t.value,this._super(t),this.options.value=this._constrainedValue(e),this._refreshValue()},_setOption:function(t,e){"max"===t&&(e=Math.max(this.min,e)),this._super(t,e)},_setOptionDisabled:function(t){this._super(t),this.element.attr("aria-disabled",t),this._toggleClass(null,"ui-state-disabled",!!t)},_percentage:function(){return this.indeterminate?100:100*(this.options.value-this.min)/(this.options.max-this.min)},_refreshValue:function(){var e=this.options.value,i=this._percentage();this.valueDiv.toggle(this.indeterminate||e>this.min).width(i.toFixed(0)+"%"),this._toggleClass(this.valueDiv,"ui-progressbar-complete",null,e===this.options.max)._toggleClass("ui-progressbar-indeterminate",null,this.indeterminate),this.indeterminate?(this.element.removeAttr("aria-valuenow"),this.overlayDiv||(this.overlayDiv=t("<div>").appendTo(this.valueDiv),this._addClass(this.overlayDiv,"ui-progressbar-overlay"))):(this.element.attr({"aria-valuemax":this.options.max,"aria-valuenow":e}),this.overlayDiv&&(this.overlayDiv.remove(),this.overlayDiv=null)),this.oldValue!==e&&(this.oldValue=e,this._trigger("change")),e===this.options.max&&this._trigger("complete")}}),t.widget("ui.selectmenu",[t.ui.formResetMixin,{version:"1.12.1",defaultElement:"<select>",options:{appendTo:null,classes:{"ui-selectmenu-button-open":"ui-corner-top","ui-selectmenu-button-closed":"ui-corner-all"},disabled:null,icons:{button:"ui-icon-triangle-1-s"},position:{my:"left top",at:"left bottom",collision:"none"},width:!1,change:null,close:null,focus:null,open:null,select:null},_create:function(){var e=this.element.uniqueId().attr("id");this.ids={element:e,button:e+"-button",menu:e+"-menu"},this._drawButton(),this._drawMenu(),this._bindFormResetHandler(),this._rendered=!1,this.menuItems=t()},_drawButton:function(){var e,i=this,s=this._parseOption(this.element.find("option:selected"),this.element[0].selectedIndex);this.labels=this.element.labels().attr("for",this.ids.button),this._on(this.labels,{click:function(t){this.button.focus(),t.preventDefault()}}),this.element.hide(),this.button=t("<span>",{tabindex:this.options.disabled?-1:0,id:this.ids.button,role:"combobox","aria-expanded":"false","aria-autocomplete":"list","aria-owns":this.ids.menu,"aria-haspopup":"true",title:this.element.attr("title")}).insertAfter(this.element),this._addClass(this.button,"ui-selectmenu-button ui-selectmenu-button-closed","ui-button ui-widget"),e=t("<span>").appendTo(this.button),this._addClass(e,"ui-selectmenu-icon","ui-icon "+this.options.icons.button),this.buttonItem=this._renderButtonItem(s).appendTo(this.button),this.options.width!==!1&&this._resizeButton(),this._on(this.button,this._buttonEvents),this.button.one("focusin",function(){i._rendered||i._refreshMenu()})},_drawMenu:function(){var e=this;this.menu=t("<ul>",{"aria-hidden":"true","aria-labelledby":this.ids.button,id:this.ids.menu}),this.menuWrap=t("<div>").append(this.menu),this._addClass(this.menuWrap,"ui-selectmenu-menu","ui-front"),this.menuWrap.appendTo(this._appendTo()),this.menuInstance=this.menu.menu({classes:{"ui-menu":"ui-corner-bottom"},role:"listbox",select:function(t,i){t.preventDefault(),e._setSelection(),e._select(i.item.data("ui-selectmenu-item"),t)},focus:function(t,i){var s=i.item.data("ui-selectmenu-item");null!=e.focusIndex&&s.index!==e.focusIndex&&(e._trigger("focus",t,{item:s}),e.isOpen||e._select(s,t)),e.focusIndex=s.index,e.button.attr("aria-activedescendant",e.menuItems.eq(s.index).attr("id"))}}).menu("instance"),this.menuInstance._off(this.menu,"mouseleave"),this.menuInstance._closeOnDocumentClick=function(){return!1},this.menuInstance._isDivider=function(){return!1}},refresh:function(){this._refreshMenu(),this.buttonItem.replaceWith(this.buttonItem=this._renderButtonItem(this._getSelectedItem().data("ui-selectmenu-item")||{})),null===this.options.width&&this._resizeButton()},_refreshMenu:function(){var t,e=this.element.find("option");this.menu.empty(),this._parseOptions(e),this._renderMenu(this.menu,this.items),this.menuInstance.refresh(),this.menuItems=this.menu.find("li").not(".ui-selectmenu-optgroup").find(".ui-menu-item-wrapper"),this._rendered=!0,e.length&&(t=this._getSelectedItem(),this.menuInstance.focus(null,t),this._setAria(t.data("ui-selectmenu-item")),this._setOption("disabled",this.element.prop("disabled")))},open:function(t){this.options.disabled||(this._rendered?(this._removeClass(this.menu.find(".ui-state-active"),null,"ui-state-active"),this.menuInstance.focus(null,this._getSelectedItem())):this._refreshMenu(),this.menuItems.length&&(this.isOpen=!0,this._toggleAttr(),this._resizeMenu(),this._position(),this._on(this.document,this._documentClick),this._trigger("open",t)))},_position:function(){this.menuWrap.position(t.extend({of:this.button},this.options.position))},close:function(t){this.isOpen&&(this.isOpen=!1,this._toggleAttr(),this.range=null,this._off(this.document),this._trigger("close",t))},widget:function(){return this.button},menuWidget:function(){return this.menu},_renderButtonItem:function(e){var i=t("<span>");return this._setText(i,e.label),this._addClass(i,"ui-selectmenu-text"),i},_renderMenu:function(e,i){var s=this,n="";t.each(i,function(i,o){var a;o.optgroup!==n&&(a=t("<li>",{text:o.optgroup}),s._addClass(a,"ui-selectmenu-optgroup","ui-menu-divider"+(o.element.parent("optgroup").prop("disabled")?" ui-state-disabled":"")),a.appendTo(e),n=o.optgroup),s._renderItemData(e,o)})},_renderItemData:function(t,e){return this._renderItem(t,e).data("ui-selectmenu-item",e)},_renderItem:function(e,i){var s=t("<li>"),n=t("<div>",{title:i.element.attr("title")});return i.disabled&&this._addClass(s,null,"ui-state-disabled"),this._setText(n,i.label),s.append(n).appendTo(e)},_setText:function(t,e){e?t.text(e):t.html("&#160;")},_move:function(t,e){var i,s,n=".ui-menu-item";this.isOpen?i=this.menuItems.eq(this.focusIndex).parent("li"):(i=this.menuItems.eq(this.element[0].selectedIndex).parent("li"),n+=":not(.ui-state-disabled)"),s="first"===t||"last"===t?i["first"===t?"prevAll":"nextAll"](n).eq(-1):i[t+"All"](n).eq(0),s.length&&this.menuInstance.focus(e,s)},_getSelectedItem:function(){return this.menuItems.eq(this.element[0].selectedIndex).parent("li")},_toggle:function(t){this[this.isOpen?"close":"open"](t)},_setSelection:function(){var t;this.range&&(window.getSelection?(t=window.getSelection(),t.removeAllRanges(),t.addRange(this.range)):this.range.select(),this.button.focus())},_documentClick:{mousedown:function(e){this.isOpen&&(t(e.target).closest(".ui-selectmenu-menu, #"+t.ui.escapeSelector(this.ids.button)).length||this.close(e))}},_buttonEvents:{mousedown:function(){var t;window.getSelection?(t=window.getSelection(),t.rangeCount&&(this.range=t.getRangeAt(0))):this.range=document.selection.createRange()},click:function(t){this._setSelection(),this._toggle(t)},keydown:function(e){var i=!0;switch(e.keyCode){case t.ui.keyCode.TAB:case t.ui.keyCode.ESCAPE:this.close(e),i=!1;break;case t.ui.keyCode.ENTER:this.isOpen&&this._selectFocusedItem(e);break;case t.ui.keyCode.UP:e.altKey?this._toggle(e):this._move("prev",e);break;case t.ui.keyCode.DOWN:e.altKey?this._toggle(e):this._move("next",e);break;case t.ui.keyCode.SPACE:this.isOpen?this._selectFocusedItem(e):this._toggle(e);break;case t.ui.keyCode.LEFT:this._move("prev",e);break;case t.ui.keyCode.RIGHT:this._move("next",e);break;case t.ui.keyCode.HOME:case t.ui.keyCode.PAGE_UP:this._move("first",e);break;case t.ui.keyCode.END:case t.ui.keyCode.PAGE_DOWN:this._move("last",e);break;default:this.menu.trigger(e),i=!1}i&&e.preventDefault()}},_selectFocusedItem:function(t){var e=this.menuItems.eq(this.focusIndex).parent("li");e.hasClass("ui-state-disabled")||this._select(e.data("ui-selectmenu-item"),t)},_select:function(t,e){var i=this.element[0].selectedIndex;this.element[0].selectedIndex=t.index,this.buttonItem.replaceWith(this.buttonItem=this._renderButtonItem(t)),this._setAria(t),this._trigger("select",e,{item:t}),t.index!==i&&this._trigger("change",e,{item:t}),this.close(e)},_setAria:function(t){var e=this.menuItems.eq(t.index).attr("id");this.button.attr({"aria-labelledby":e,"aria-activedescendant":e}),this.menu.attr("aria-activedescendant",e)},_setOption:function(t,e){if("icons"===t){var i=this.button.find("span.ui-icon");this._removeClass(i,null,this.options.icons.button)._addClass(i,null,e.button)}this._super(t,e),"appendTo"===t&&this.menuWrap.appendTo(this._appendTo()),"width"===t&&this._resizeButton()},_setOptionDisabled:function(t){this._super(t),this.menuInstance.option("disabled",t),this.button.attr("aria-disabled",t),this._toggleClass(this.button,null,"ui-state-disabled",t),this.element.prop("disabled",t),t?(this.button.attr("tabindex",-1),this.close()):this.button.attr("tabindex",0)},_appendTo:function(){var e=this.options.appendTo;return e&&(e=e.jquery||e.nodeType?t(e):this.document.find(e).eq(0)),e&&e[0]||(e=this.element.closest(".ui-front, dialog")),e.length||(e=this.document[0].body),e},_toggleAttr:function(){this.button.attr("aria-expanded",this.isOpen),this._removeClass(this.button,"ui-selectmenu-button-"+(this.isOpen?"closed":"open"))._addClass(this.button,"ui-selectmenu-button-"+(this.isOpen?"open":"closed"))._toggleClass(this.menuWrap,"ui-selectmenu-open",null,this.isOpen),this.menu.attr("aria-hidden",!this.isOpen)},_resizeButton:function(){var t=this.options.width;return t===!1?(this.button.css("width",""),void 0):(null===t&&(t=this.element.show().outerWidth(),this.element.hide()),this.button.outerWidth(t),void 0)},_resizeMenu:function(){this.menu.outerWidth(Math.max(this.button.outerWidth(),this.menu.width("").outerWidth()+1))},_getCreateOptions:function(){var t=this._super();return t.disabled=this.element.prop("disabled"),t},_parseOptions:function(e){var i=this,s=[];e.each(function(e,n){s.push(i._parseOption(t(n),e))}),this.items=s},_parseOption:function(t,e){var i=t.parent("optgroup");return{element:t,index:e,value:t.val(),label:t.text(),optgroup:i.attr("label")||"",disabled:i.prop("disabled")||t.prop("disabled")}},_destroy:function(){this._unbindFormResetHandler(),this.menuWrap.remove(),this.button.remove(),this.element.show(),this.element.removeUniqueId(),this.labels.attr("for",this.ids.element)}}]),t.widget("ui.slider",t.ui.mouse,{version:"1.12.1",widgetEventPrefix:"slide",options:{animate:!1,classes:{"ui-slider":"ui-corner-all","ui-slider-handle":"ui-corner-all","ui-slider-range":"ui-corner-all ui-widget-header"},distance:0,max:100,min:0,orientation:"horizontal",range:!1,step:1,value:0,values:null,change:null,slide:null,start:null,stop:null},numPages:5,_create:function(){this._keySliding=!1,this._mouseSliding=!1,this._animateOff=!0,this._handleIndex=null,this._detectOrientation(),this._mouseInit(),this._calculateNewMax(),this._addClass("ui-slider ui-slider-"+this.orientation,"ui-widget ui-widget-content"),this._refresh(),this._animateOff=!1},_refresh:function(){this._createRange(),this._createHandles(),this._setupEvents(),this._refreshValue()},_createHandles:function(){var e,i,s=this.options,n=this.element.find(".ui-slider-handle"),o="<span tabindex='0'></span>",a=[];for(i=s.values&&s.values.length||1,n.length>i&&(n.slice(i).remove(),n=n.slice(0,i)),e=n.length;i>e;e++)a.push(o);this.handles=n.add(t(a.join("")).appendTo(this.element)),this._addClass(this.handles,"ui-slider-handle","ui-state-default"),this.handle=this.handles.eq(0),this.handles.each(function(e){t(this).data("ui-slider-handle-index",e).attr("tabIndex",0)})},_createRange:function(){var e=this.options;e.range?(e.range===!0&&(e.values?e.values.length&&2!==e.values.length?e.values=[e.values[0],e.values[0]]:t.isArray(e.values)&&(e.values=e.values.slice(0)):e.values=[this._valueMin(),this._valueMin()]),this.range&&this.range.length?(this._removeClass(this.range,"ui-slider-range-min ui-slider-range-max"),this.range.css({left:"",bottom:""})):(this.range=t("<div>").appendTo(this.element),this._addClass(this.range,"ui-slider-range")),("min"===e.range||"max"===e.range)&&this._addClass(this.range,"ui-slider-range-"+e.range)):(this.range&&this.range.remove(),this.range=null)
 },_setupEvents:function(){this._off(this.handles),this._on(this.handles,this._handleEvents),this._hoverable(this.handles),this._focusable(this.handles)},_destroy:function(){this.handles.remove(),this.range&&this.range.remove(),this._mouseDestroy()},_mouseCapture:function(e){var i,s,n,o,a,r,h,l,c=this,u=this.options;return u.disabled?!1:(this.elementSize={width:this.element.outerWidth(),height:this.element.outerHeight()},this.elementOffset=this.element.offset(),i={x:e.pageX,y:e.pageY},s=this._normValueFromMouse(i),n=this._valueMax()-this._valueMin()+1,this.handles.each(function(e){var i=Math.abs(s-c.values(e));(n>i||n===i&&(e===c._lastChangedValue||c.values(e)===u.min))&&(n=i,o=t(this),a=e)}),r=this._start(e,a),r===!1?!1:(this._mouseSliding=!0,this._handleIndex=a,this._addClass(o,null,"ui-state-active"),o.trigger("focus"),h=o.offset(),l=!t(e.target).parents().addBack().is(".ui-slider-handle"),this._clickOffset=l?{left:0,top:0}:{left:e.pageX-h.left-o.width()/2,top:e.pageY-h.top-o.height()/2-(parseInt(o.css("borderTopWidth"),10)||0)-(parseInt(o.css("borderBottomWidth"),10)||0)+(parseInt(o.css("marginTop"),10)||0)},this.handles.hasClass("ui-state-hover")||this._slide(e,a,s),this._animateOff=!0,!0))},_mouseStart:function(){return!0},_mouseDrag:function(t){var e={x:t.pageX,y:t.pageY},i=this._normValueFromMouse(e);return this._slide(t,this._handleIndex,i),!1},_mouseStop:function(t){return this._removeClass(this.handles,null,"ui-state-active"),this._mouseSliding=!1,this._stop(t,this._handleIndex),this._change(t,this._handleIndex),this._handleIndex=null,this._clickOffset=null,this._animateOff=!1,!1},_detectOrientation:function(){this.orientation="vertical"===this.options.orientation?"vertical":"horizontal"},_normValueFromMouse:function(t){var e,i,s,n,o;return"horizontal"===this.orientation?(e=this.elementSize.width,i=t.x-this.elementOffset.left-(this._clickOffset?this._clickOffset.left:0)):(e=this.elementSize.height,i=t.y-this.elementOffset.top-(this._clickOffset?this._clickOffset.top:0)),s=i/e,s>1&&(s=1),0>s&&(s=0),"vertical"===this.orientation&&(s=1-s),n=this._valueMax()-this._valueMin(),o=this._valueMin()+s*n,this._trimAlignValue(o)},_uiHash:function(t,e,i){var s={handle:this.handles[t],handleIndex:t,value:void 0!==e?e:this.value()};return this._hasMultipleValues()&&(s.value=void 0!==e?e:this.values(t),s.values=i||this.values()),s},_hasMultipleValues:function(){return this.options.values&&this.options.values.length},_start:function(t,e){return this._trigger("start",t,this._uiHash(e))},_slide:function(t,e,i){var s,n,o=this.value(),a=this.values();this._hasMultipleValues()&&(n=this.values(e?0:1),o=this.values(e),2===this.options.values.length&&this.options.range===!0&&(i=0===e?Math.min(n,i):Math.max(n,i)),a[e]=i),i!==o&&(s=this._trigger("slide",t,this._uiHash(e,i,a)),s!==!1&&(this._hasMultipleValues()?this.values(e,i):this.value(i)))},_stop:function(t,e){this._trigger("stop",t,this._uiHash(e))},_change:function(t,e){this._keySliding||this._mouseSliding||(this._lastChangedValue=e,this._trigger("change",t,this._uiHash(e)))},value:function(t){return arguments.length?(this.options.value=this._trimAlignValue(t),this._refreshValue(),this._change(null,0),void 0):this._value()},values:function(e,i){var s,n,o;if(arguments.length>1)return this.options.values[e]=this._trimAlignValue(i),this._refreshValue(),this._change(null,e),void 0;if(!arguments.length)return this._values();if(!t.isArray(arguments[0]))return this._hasMultipleValues()?this._values(e):this.value();for(s=this.options.values,n=arguments[0],o=0;s.length>o;o+=1)s[o]=this._trimAlignValue(n[o]),this._change(null,o);this._refreshValue()},_setOption:function(e,i){var s,n=0;switch("range"===e&&this.options.range===!0&&("min"===i?(this.options.value=this._values(0),this.options.values=null):"max"===i&&(this.options.value=this._values(this.options.values.length-1),this.options.values=null)),t.isArray(this.options.values)&&(n=this.options.values.length),this._super(e,i),e){case"orientation":this._detectOrientation(),this._removeClass("ui-slider-horizontal ui-slider-vertical")._addClass("ui-slider-"+this.orientation),this._refreshValue(),this.options.range&&this._refreshRange(i),this.handles.css("horizontal"===i?"bottom":"left","");break;case"value":this._animateOff=!0,this._refreshValue(),this._change(null,0),this._animateOff=!1;break;case"values":for(this._animateOff=!0,this._refreshValue(),s=n-1;s>=0;s--)this._change(null,s);this._animateOff=!1;break;case"step":case"min":case"max":this._animateOff=!0,this._calculateNewMax(),this._refreshValue(),this._animateOff=!1;break;case"range":this._animateOff=!0,this._refresh(),this._animateOff=!1}},_setOptionDisabled:function(t){this._super(t),this._toggleClass(null,"ui-state-disabled",!!t)},_value:function(){var t=this.options.value;return t=this._trimAlignValue(t)},_values:function(t){var e,i,s;if(arguments.length)return e=this.options.values[t],e=this._trimAlignValue(e);if(this._hasMultipleValues()){for(i=this.options.values.slice(),s=0;i.length>s;s+=1)i[s]=this._trimAlignValue(i[s]);return i}return[]},_trimAlignValue:function(t){if(this._valueMin()>=t)return this._valueMin();if(t>=this._valueMax())return this._valueMax();var e=this.options.step>0?this.options.step:1,i=(t-this._valueMin())%e,s=t-i;return 2*Math.abs(i)>=e&&(s+=i>0?e:-e),parseFloat(s.toFixed(5))},_calculateNewMax:function(){var t=this.options.max,e=this._valueMin(),i=this.options.step,s=Math.round((t-e)/i)*i;t=s+e,t>this.options.max&&(t-=i),this.max=parseFloat(t.toFixed(this._precision()))},_precision:function(){var t=this._precisionOf(this.options.step);return null!==this.options.min&&(t=Math.max(t,this._precisionOf(this.options.min))),t},_precisionOf:function(t){var e=""+t,i=e.indexOf(".");return-1===i?0:e.length-i-1},_valueMin:function(){return this.options.min},_valueMax:function(){return this.max},_refreshRange:function(t){"vertical"===t&&this.range.css({width:"",left:""}),"horizontal"===t&&this.range.css({height:"",bottom:""})},_refreshValue:function(){var e,i,s,n,o,a=this.options.range,r=this.options,h=this,l=this._animateOff?!1:r.animate,c={};this._hasMultipleValues()?this.handles.each(function(s){i=100*((h.values(s)-h._valueMin())/(h._valueMax()-h._valueMin())),c["horizontal"===h.orientation?"left":"bottom"]=i+"%",t(this).stop(1,1)[l?"animate":"css"](c,r.animate),h.options.range===!0&&("horizontal"===h.orientation?(0===s&&h.range.stop(1,1)[l?"animate":"css"]({left:i+"%"},r.animate),1===s&&h.range[l?"animate":"css"]({width:i-e+"%"},{queue:!1,duration:r.animate})):(0===s&&h.range.stop(1,1)[l?"animate":"css"]({bottom:i+"%"},r.animate),1===s&&h.range[l?"animate":"css"]({height:i-e+"%"},{queue:!1,duration:r.animate}))),e=i}):(s=this.value(),n=this._valueMin(),o=this._valueMax(),i=o!==n?100*((s-n)/(o-n)):0,c["horizontal"===this.orientation?"left":"bottom"]=i+"%",this.handle.stop(1,1)[l?"animate":"css"](c,r.animate),"min"===a&&"horizontal"===this.orientation&&this.range.stop(1,1)[l?"animate":"css"]({width:i+"%"},r.animate),"max"===a&&"horizontal"===this.orientation&&this.range.stop(1,1)[l?"animate":"css"]({width:100-i+"%"},r.animate),"min"===a&&"vertical"===this.orientation&&this.range.stop(1,1)[l?"animate":"css"]({height:i+"%"},r.animate),"max"===a&&"vertical"===this.orientation&&this.range.stop(1,1)[l?"animate":"css"]({height:100-i+"%"},r.animate))},_handleEvents:{keydown:function(e){var i,s,n,o,a=t(e.target).data("ui-slider-handle-index");switch(e.keyCode){case t.ui.keyCode.HOME:case t.ui.keyCode.END:case t.ui.keyCode.PAGE_UP:case t.ui.keyCode.PAGE_DOWN:case t.ui.keyCode.UP:case t.ui.keyCode.RIGHT:case t.ui.keyCode.DOWN:case t.ui.keyCode.LEFT:if(e.preventDefault(),!this._keySliding&&(this._keySliding=!0,this._addClass(t(e.target),null,"ui-state-active"),i=this._start(e,a),i===!1))return}switch(o=this.options.step,s=n=this._hasMultipleValues()?this.values(a):this.value(),e.keyCode){case t.ui.keyCode.HOME:n=this._valueMin();break;case t.ui.keyCode.END:n=this._valueMax();break;case t.ui.keyCode.PAGE_UP:n=this._trimAlignValue(s+(this._valueMax()-this._valueMin())/this.numPages);break;case t.ui.keyCode.PAGE_DOWN:n=this._trimAlignValue(s-(this._valueMax()-this._valueMin())/this.numPages);break;case t.ui.keyCode.UP:case t.ui.keyCode.RIGHT:if(s===this._valueMax())return;n=this._trimAlignValue(s+o);break;case t.ui.keyCode.DOWN:case t.ui.keyCode.LEFT:if(s===this._valueMin())return;n=this._trimAlignValue(s-o)}this._slide(e,a,n)},keyup:function(e){var i=t(e.target).data("ui-slider-handle-index");this._keySliding&&(this._keySliding=!1,this._stop(e,i),this._change(e,i),this._removeClass(t(e.target),null,"ui-state-active"))}}}),t.widget("ui.spinner",{version:"1.12.1",defaultElement:"<input>",widgetEventPrefix:"spin",options:{classes:{"ui-spinner":"ui-corner-all","ui-spinner-down":"ui-corner-br","ui-spinner-up":"ui-corner-tr"},culture:null,icons:{down:"ui-icon-triangle-1-s",up:"ui-icon-triangle-1-n"},incremental:!0,max:null,min:null,numberFormat:null,page:10,step:1,change:null,spin:null,start:null,stop:null},_create:function(){this._setOption("max",this.options.max),this._setOption("min",this.options.min),this._setOption("step",this.options.step),""!==this.value()&&this._value(this.element.val(),!0),this._draw(),this._on(this._events),this._refresh(),this._on(this.window,{beforeunload:function(){this.element.removeAttr("autocomplete")}})},_getCreateOptions:function(){var e=this._super(),i=this.element;return t.each(["min","max","step"],function(t,s){var n=i.attr(s);null!=n&&n.length&&(e[s]=n)}),e},_events:{keydown:function(t){this._start(t)&&this._keydown(t)&&t.preventDefault()},keyup:"_stop",focus:function(){this.previous=this.element.val()},blur:function(t){return this.cancelBlur?(delete this.cancelBlur,void 0):(this._stop(),this._refresh(),this.previous!==this.element.val()&&this._trigger("change",t),void 0)},mousewheel:function(t,e){if(e){if(!this.spinning&&!this._start(t))return!1;this._spin((e>0?1:-1)*this.options.step,t),clearTimeout(this.mousewheelTimer),this.mousewheelTimer=this._delay(function(){this.spinning&&this._stop(t)},100),t.preventDefault()}},"mousedown .ui-spinner-button":function(e){function i(){var e=this.element[0]===t.ui.safeActiveElement(this.document[0]);e||(this.element.trigger("focus"),this.previous=s,this._delay(function(){this.previous=s}))}var s;s=this.element[0]===t.ui.safeActiveElement(this.document[0])?this.previous:this.element.val(),e.preventDefault(),i.call(this),this.cancelBlur=!0,this._delay(function(){delete this.cancelBlur,i.call(this)}),this._start(e)!==!1&&this._repeat(null,t(e.currentTarget).hasClass("ui-spinner-up")?1:-1,e)},"mouseup .ui-spinner-button":"_stop","mouseenter .ui-spinner-button":function(e){return t(e.currentTarget).hasClass("ui-state-active")?this._start(e)===!1?!1:(this._repeat(null,t(e.currentTarget).hasClass("ui-spinner-up")?1:-1,e),void 0):void 0},"mouseleave .ui-spinner-button":"_stop"},_enhance:function(){this.uiSpinner=this.element.attr("autocomplete","off").wrap("<span>").parent().append("<a></a><a></a>")},_draw:function(){this._enhance(),this._addClass(this.uiSpinner,"ui-spinner","ui-widget ui-widget-content"),this._addClass("ui-spinner-input"),this.element.attr("role","spinbutton"),this.buttons=this.uiSpinner.children("a").attr("tabIndex",-1).attr("aria-hidden",!0).button({classes:{"ui-button":""}}),this._removeClass(this.buttons,"ui-corner-all"),this._addClass(this.buttons.first(),"ui-spinner-button ui-spinner-up"),this._addClass(this.buttons.last(),"ui-spinner-button ui-spinner-down"),this.buttons.first().button({icon:this.options.icons.up,showLabel:!1}),this.buttons.last().button({icon:this.options.icons.down,showLabel:!1}),this.buttons.height()>Math.ceil(.5*this.uiSpinner.height())&&this.uiSpinner.height()>0&&this.uiSpinner.height(this.uiSpinner.height())},_keydown:function(e){var i=this.options,s=t.ui.keyCode;switch(e.keyCode){case s.UP:return this._repeat(null,1,e),!0;case s.DOWN:return this._repeat(null,-1,e),!0;case s.PAGE_UP:return this._repeat(null,i.page,e),!0;case s.PAGE_DOWN:return this._repeat(null,-i.page,e),!0}return!1},_start:function(t){return this.spinning||this._trigger("start",t)!==!1?(this.counter||(this.counter=1),this.spinning=!0,!0):!1},_repeat:function(t,e,i){t=t||500,clearTimeout(this.timer),this.timer=this._delay(function(){this._repeat(40,e,i)},t),this._spin(e*this.options.step,i)},_spin:function(t,e){var i=this.value()||0;this.counter||(this.counter=1),i=this._adjustValue(i+t*this._increment(this.counter)),this.spinning&&this._trigger("spin",e,{value:i})===!1||(this._value(i),this.counter++)},_increment:function(e){var i=this.options.incremental;return i?t.isFunction(i)?i(e):Math.floor(e*e*e/5e4-e*e/500+17*e/200+1):1},_precision:function(){var t=this._precisionOf(this.options.step);return null!==this.options.min&&(t=Math.max(t,this._precisionOf(this.options.min))),t},_precisionOf:function(t){var e=""+t,i=e.indexOf(".");return-1===i?0:e.length-i-1},_adjustValue:function(t){var e,i,s=this.options;return e=null!==s.min?s.min:0,i=t-e,i=Math.round(i/s.step)*s.step,t=e+i,t=parseFloat(t.toFixed(this._precision())),null!==s.max&&t>s.max?s.max:null!==s.min&&s.min>t?s.min:t},_stop:function(t){this.spinning&&(clearTimeout(this.timer),clearTimeout(this.mousewheelTimer),this.counter=0,this.spinning=!1,this._trigger("stop",t))},_setOption:function(t,e){var i,s,n;return"culture"===t||"numberFormat"===t?(i=this._parse(this.element.val()),this.options[t]=e,this.element.val(this._format(i)),void 0):(("max"===t||"min"===t||"step"===t)&&"string"==typeof e&&(e=this._parse(e)),"icons"===t&&(s=this.buttons.first().find(".ui-icon"),this._removeClass(s,null,this.options.icons.up),this._addClass(s,null,e.up),n=this.buttons.last().find(".ui-icon"),this._removeClass(n,null,this.options.icons.down),this._addClass(n,null,e.down)),this._super(t,e),void 0)},_setOptionDisabled:function(t){this._super(t),this._toggleClass(this.uiSpinner,null,"ui-state-disabled",!!t),this.element.prop("disabled",!!t),this.buttons.button(t?"disable":"enable")},_setOptions:r(function(t){this._super(t)}),_parse:function(t){return"string"==typeof t&&""!==t&&(t=window.Globalize&&this.options.numberFormat?Globalize.parseFloat(t,10,this.options.culture):+t),""===t||isNaN(t)?null:t},_format:function(t){return""===t?"":window.Globalize&&this.options.numberFormat?Globalize.format(t,this.options.numberFormat,this.options.culture):t},_refresh:function(){this.element.attr({"aria-valuemin":this.options.min,"aria-valuemax":this.options.max,"aria-valuenow":this._parse(this.element.val())})},isValid:function(){var t=this.value();return null===t?!1:t===this._adjustValue(t)},_value:function(t,e){var i;""!==t&&(i=this._parse(t),null!==i&&(e||(i=this._adjustValue(i)),t=this._format(i))),this.element.val(t),this._refresh()},_destroy:function(){this.element.prop("disabled",!1).removeAttr("autocomplete role aria-valuemin aria-valuemax aria-valuenow"),this.uiSpinner.replaceWith(this.element)},stepUp:r(function(t){this._stepUp(t)}),_stepUp:function(t){this._start()&&(this._spin((t||1)*this.options.step),this._stop())},stepDown:r(function(t){this._stepDown(t)}),_stepDown:function(t){this._start()&&(this._spin((t||1)*-this.options.step),this._stop())},pageUp:r(function(t){this._stepUp((t||1)*this.options.page)}),pageDown:r(function(t){this._stepDown((t||1)*this.options.page)}),value:function(t){return arguments.length?(r(this._value).call(this,t),void 0):this._parse(this.element.val())},widget:function(){return this.uiSpinner}}),t.uiBackCompat!==!1&&t.widget("ui.spinner",t.ui.spinner,{_enhance:function(){this.uiSpinner=this.element.attr("autocomplete","off").wrap(this._uiSpinnerHtml()).parent().append(this._buttonHtml())},_uiSpinnerHtml:function(){return"<span>"},_buttonHtml:function(){return"<a></a><a></a>"}}),t.ui.spinner,t.widget("ui.tabs",{version:"1.12.1",delay:300,options:{active:null,classes:{"ui-tabs":"ui-corner-all","ui-tabs-nav":"ui-corner-all","ui-tabs-panel":"ui-corner-bottom","ui-tabs-tab":"ui-corner-top"},collapsible:!1,event:"click",heightStyle:"content",hide:null,show:null,activate:null,beforeActivate:null,beforeLoad:null,load:null},_isLocal:function(){var t=/#.*$/;return function(e){var i,s;i=e.href.replace(t,""),s=location.href.replace(t,"");try{i=decodeURIComponent(i)}catch(n){}try{s=decodeURIComponent(s)}catch(n){}return e.hash.length>1&&i===s}}(),_create:function(){var e=this,i=this.options;this.running=!1,this._addClass("ui-tabs","ui-widget ui-widget-content"),this._toggleClass("ui-tabs-collapsible",null,i.collapsible),this._processTabs(),i.active=this._initialActive(),t.isArray(i.disabled)&&(i.disabled=t.unique(i.disabled.concat(t.map(this.tabs.filter(".ui-state-disabled"),function(t){return e.tabs.index(t)}))).sort()),this.active=this.options.active!==!1&&this.anchors.length?this._findActive(i.active):t(),this._refresh(),this.active.length&&this.load(i.active)},_initialActive:function(){var e=this.options.active,i=this.options.collapsible,s=location.hash.substring(1);return null===e&&(s&&this.tabs.each(function(i,n){return t(n).attr("aria-controls")===s?(e=i,!1):void 0}),null===e&&(e=this.tabs.index(this.tabs.filter(".ui-tabs-active"))),(null===e||-1===e)&&(e=this.tabs.length?0:!1)),e!==!1&&(e=this.tabs.index(this.tabs.eq(e)),-1===e&&(e=i?!1:0)),!i&&e===!1&&this.anchors.length&&(e=0),e},_getCreateEventData:function(){return{tab:this.active,panel:this.active.length?this._getPanelForTab(this.active):t()}},_tabKeydown:function(e){var i=t(t.ui.safeActiveElement(this.document[0])).closest("li"),s=this.tabs.index(i),n=!0;if(!this._handlePageNav(e)){switch(e.keyCode){case t.ui.keyCode.RIGHT:case t.ui.keyCode.DOWN:s++;break;case t.ui.keyCode.UP:case t.ui.keyCode.LEFT:n=!1,s--;break;case t.ui.keyCode.END:s=this.anchors.length-1;break;case t.ui.keyCode.HOME:s=0;break;case t.ui.keyCode.SPACE:return e.preventDefault(),clearTimeout(this.activating),this._activate(s),void 0;case t.ui.keyCode.ENTER:return e.preventDefault(),clearTimeout(this.activating),this._activate(s===this.options.active?!1:s),void 0;default:return}e.preventDefault(),clearTimeout(this.activating),s=this._focusNextTab(s,n),e.ctrlKey||e.metaKey||(i.attr("aria-selected","false"),this.tabs.eq(s).attr("aria-selected","true"),this.activating=this._delay(function(){this.option("active",s)},this.delay))}},_panelKeydown:function(e){this._handlePageNav(e)||e.ctrlKey&&e.keyCode===t.ui.keyCode.UP&&(e.preventDefault(),this.active.trigger("focus"))},_handlePageNav:function(e){return e.altKey&&e.keyCode===t.ui.keyCode.PAGE_UP?(this._activate(this._focusNextTab(this.options.active-1,!1)),!0):e.altKey&&e.keyCode===t.ui.keyCode.PAGE_DOWN?(this._activate(this._focusNextTab(this.options.active+1,!0)),!0):void 0},_findNextTab:function(e,i){function s(){return e>n&&(e=0),0>e&&(e=n),e}for(var n=this.tabs.length-1;-1!==t.inArray(s(),this.options.disabled);)e=i?e+1:e-1;return e},_focusNextTab:function(t,e){return t=this._findNextTab(t,e),this.tabs.eq(t).trigger("focus"),t},_setOption:function(t,e){return"active"===t?(this._activate(e),void 0):(this._super(t,e),"collapsible"===t&&(this._toggleClass("ui-tabs-collapsible",null,e),e||this.options.active!==!1||this._activate(0)),"event"===t&&this._setupEvents(e),"heightStyle"===t&&this._setupHeightStyle(e),void 0)},_sanitizeSelector:function(t){return t?t.replace(/[!"$%&'()*+,.\/:;<=>?@\[\]\^`{|}~]/g,"\\$&"):""},refresh:function(){var e=this.options,i=this.tablist.children(":has(a[href])");e.disabled=t.map(i.filter(".ui-state-disabled"),function(t){return i.index(t)}),this._processTabs(),e.active!==!1&&this.anchors.length?this.active.length&&!t.contains(this.tablist[0],this.active[0])?this.tabs.length===e.disabled.length?(e.active=!1,this.active=t()):this._activate(this._findNextTab(Math.max(0,e.active-1),!1)):e.active=this.tabs.index(this.active):(e.active=!1,this.active=t()),this._refresh()},_refresh:function(){this._setOptionDisabled(this.options.disabled),this._setupEvents(this.options.event),this._setupHeightStyle(this.options.heightStyle),this.tabs.not(this.active).attr({"aria-selected":"false","aria-expanded":"false",tabIndex:-1}),this.panels.not(this._getPanelForTab(this.active)).hide().attr({"aria-hidden":"true"}),this.active.length?(this.active.attr({"aria-selected":"true","aria-expanded":"true",tabIndex:0}),this._addClass(this.active,"ui-tabs-active","ui-state-active"),this._getPanelForTab(this.active).show().attr({"aria-hidden":"false"})):this.tabs.eq(0).attr("tabIndex",0)},_processTabs:function(){var e=this,i=this.tabs,s=this.anchors,n=this.panels;this.tablist=this._getList().attr("role","tablist"),this._addClass(this.tablist,"ui-tabs-nav","ui-helper-reset ui-helper-clearfix ui-widget-header"),this.tablist.on("mousedown"+this.eventNamespace,"> li",function(e){t(this).is(".ui-state-disabled")&&e.preventDefault()}).on("focus"+this.eventNamespace,".ui-tabs-anchor",function(){t(this).closest("li").is(".ui-state-disabled")&&this.blur()}),this.tabs=this.tablist.find("> li:has(a[href])").attr({role:"tab",tabIndex:-1}),this._addClass(this.tabs,"ui-tabs-tab","ui-state-default"),this.anchors=this.tabs.map(function(){return t("a",this)[0]}).attr({role:"presentation",tabIndex:-1}),this._addClass(this.anchors,"ui-tabs-anchor"),this.panels=t(),this.anchors.each(function(i,s){var n,o,a,r=t(s).uniqueId().attr("id"),h=t(s).closest("li"),l=h.attr("aria-controls");e._isLocal(s)?(n=s.hash,a=n.substring(1),o=e.element.find(e._sanitizeSelector(n))):(a=h.attr("aria-controls")||t({}).uniqueId()[0].id,n="#"+a,o=e.element.find(n),o.length||(o=e._createPanel(a),o.insertAfter(e.panels[i-1]||e.tablist)),o.attr("aria-live","polite")),o.length&&(e.panels=e.panels.add(o)),l&&h.data("ui-tabs-aria-controls",l),h.attr({"aria-controls":a,"aria-labelledby":r}),o.attr("aria-labelledby",r)}),this.panels.attr("role","tabpanel"),this._addClass(this.panels,"ui-tabs-panel","ui-widget-content"),i&&(this._off(i.not(this.tabs)),this._off(s.not(this.anchors)),this._off(n.not(this.panels)))},_getList:function(){return this.tablist||this.element.find("ol, ul").eq(0)},_createPanel:function(e){return t("<div>").attr("id",e).data("ui-tabs-destroy",!0)},_setOptionDisabled:function(e){var i,s,n;for(t.isArray(e)&&(e.length?e.length===this.anchors.length&&(e=!0):e=!1),n=0;s=this.tabs[n];n++)i=t(s),e===!0||-1!==t.inArray(n,e)?(i.attr("aria-disabled","true"),this._addClass(i,null,"ui-state-disabled")):(i.removeAttr("aria-disabled"),this._removeClass(i,null,"ui-state-disabled"));this.options.disabled=e,this._toggleClass(this.widget(),this.widgetFullName+"-disabled",null,e===!0)},_setupEvents:function(e){var i={};e&&t.each(e.split(" "),function(t,e){i[e]="_eventHandler"}),this._off(this.anchors.add(this.tabs).add(this.panels)),this._on(!0,this.anchors,{click:function(t){t.preventDefault()}}),this._on(this.anchors,i),this._on(this.tabs,{keydown:"_tabKeydown"}),this._on(this.panels,{keydown:"_panelKeydown"}),this._focusable(this.tabs),this._hoverable(this.tabs)},_setupHeightStyle:function(e){var i,s=this.element.parent();"fill"===e?(i=s.height(),i-=this.element.outerHeight()-this.element.height(),this.element.siblings(":visible").each(function(){var e=t(this),s=e.css("position");"absolute"!==s&&"fixed"!==s&&(i-=e.outerHeight(!0))}),this.element.children().not(this.panels).each(function(){i-=t(this).outerHeight(!0)}),this.panels.each(function(){t(this).height(Math.max(0,i-t(this).innerHeight()+t(this).height()))}).css("overflow","auto")):"auto"===e&&(i=0,this.panels.each(function(){i=Math.max(i,t(this).height("").height())}).height(i))},_eventHandler:function(e){var i=this.options,s=this.active,n=t(e.currentTarget),o=n.closest("li"),a=o[0]===s[0],r=a&&i.collapsible,h=r?t():this._getPanelForTab(o),l=s.length?this._getPanelForTab(s):t(),c={oldTab:s,oldPanel:l,newTab:r?t():o,newPanel:h};e.preventDefault(),o.hasClass("ui-state-disabled")||o.hasClass("ui-tabs-loading")||this.running||a&&!i.collapsible||this._trigger("beforeActivate",e,c)===!1||(i.active=r?!1:this.tabs.index(o),this.active=a?t():o,this.xhr&&this.xhr.abort(),l.length||h.length||t.error("jQuery UI Tabs: Mismatching fragment identifier."),h.length&&this.load(this.tabs.index(o),e),this._toggle(e,c))},_toggle:function(e,i){function s(){o.running=!1,o._trigger("activate",e,i)}function n(){o._addClass(i.newTab.closest("li"),"ui-tabs-active","ui-state-active"),a.length&&o.options.show?o._show(a,o.options.show,s):(a.show(),s())}var o=this,a=i.newPanel,r=i.oldPanel;this.running=!0,r.length&&this.options.hide?this._hide(r,this.options.hide,function(){o._removeClass(i.oldTab.closest("li"),"ui-tabs-active","ui-state-active"),n()}):(this._removeClass(i.oldTab.closest("li"),"ui-tabs-active","ui-state-active"),r.hide(),n()),r.attr("aria-hidden","true"),i.oldTab.attr({"aria-selected":"false","aria-expanded":"false"}),a.length&&r.length?i.oldTab.attr("tabIndex",-1):a.length&&this.tabs.filter(function(){return 0===t(this).attr("tabIndex")}).attr("tabIndex",-1),a.attr("aria-hidden","false"),i.newTab.attr({"aria-selected":"true","aria-expanded":"true",tabIndex:0})},_activate:function(e){var i,s=this._findActive(e);s[0]!==this.active[0]&&(s.length||(s=this.active),i=s.find(".ui-tabs-anchor")[0],this._eventHandler({target:i,currentTarget:i,preventDefault:t.noop}))},_findActive:function(e){return e===!1?t():this.tabs.eq(e)},_getIndex:function(e){return"string"==typeof e&&(e=this.anchors.index(this.anchors.filter("[href$='"+t.ui.escapeSelector(e)+"']"))),e},_destroy:function(){this.xhr&&this.xhr.abort(),this.tablist.removeAttr("role").off(this.eventNamespace),this.anchors.removeAttr("role tabIndex").removeUniqueId(),this.tabs.add(this.panels).each(function(){t.data(this,"ui-tabs-destroy")?t(this).remove():t(this).removeAttr("role tabIndex aria-live aria-busy aria-selected aria-labelledby aria-hidden aria-expanded")}),this.tabs.each(function(){var e=t(this),i=e.data("ui-tabs-aria-controls");i?e.attr("aria-controls",i).removeData("ui-tabs-aria-controls"):e.removeAttr("aria-controls")}),this.panels.show(),"content"!==this.options.heightStyle&&this.panels.css("height","")},enable:function(e){var i=this.options.disabled;i!==!1&&(void 0===e?i=!1:(e=this._getIndex(e),i=t.isArray(i)?t.map(i,function(t){return t!==e?t:null}):t.map(this.tabs,function(t,i){return i!==e?i:null})),this._setOptionDisabled(i))},disable:function(e){var i=this.options.disabled;if(i!==!0){if(void 0===e)i=!0;else{if(e=this._getIndex(e),-1!==t.inArray(e,i))return;i=t.isArray(i)?t.merge([e],i).sort():[e]}this._setOptionDisabled(i)}},load:function(e,i){e=this._getIndex(e);var s=this,n=this.tabs.eq(e),o=n.find(".ui-tabs-anchor"),a=this._getPanelForTab(n),r={tab:n,panel:a},h=function(t,e){"abort"===e&&s.panels.stop(!1,!0),s._removeClass(n,"ui-tabs-loading"),a.removeAttr("aria-busy"),t===s.xhr&&delete s.xhr};this._isLocal(o[0])||(this.xhr=t.ajax(this._ajaxSettings(o,i,r)),this.xhr&&"canceled"!==this.xhr.statusText&&(this._addClass(n,"ui-tabs-loading"),a.attr("aria-busy","true"),this.xhr.done(function(t,e,n){setTimeout(function(){a.html(t),s._trigger("load",i,r),h(n,e)},1)}).fail(function(t,e){setTimeout(function(){h(t,e)},1)})))},_ajaxSettings:function(e,i,s){var n=this;return{url:e.attr("href").replace(/#.*$/,""),beforeSend:function(e,o){return n._trigger("beforeLoad",i,t.extend({jqXHR:e,ajaxSettings:o},s))}}},_getPanelForTab:function(e){var i=t(e).attr("aria-controls");return this.element.find(this._sanitizeSelector("#"+i))}}),t.uiBackCompat!==!1&&t.widget("ui.tabs",t.ui.tabs,{_processTabs:function(){this._superApply(arguments),this._addClass(this.tabs,"ui-tab")}}),t.ui.tabs,t.widget("ui.tooltip",{version:"1.12.1",options:{classes:{"ui-tooltip":"ui-corner-all ui-widget-shadow"},content:function(){var e=t(this).attr("title")||"";return t("<a>").text(e).html()},hide:!0,items:"[title]:not([disabled])",position:{my:"left top+15",at:"left bottom",collision:"flipfit flip"},show:!0,track:!1,close:null,open:null},_addDescribedBy:function(e,i){var s=(e.attr("aria-describedby")||"").split(/\s+/);s.push(i),e.data("ui-tooltip-id",i).attr("aria-describedby",t.trim(s.join(" ")))},_removeDescribedBy:function(e){var i=e.data("ui-tooltip-id"),s=(e.attr("aria-describedby")||"").split(/\s+/),n=t.inArray(i,s);-1!==n&&s.splice(n,1),e.removeData("ui-tooltip-id"),s=t.trim(s.join(" ")),s?e.attr("aria-describedby",s):e.removeAttr("aria-describedby")},_create:function(){this._on({mouseover:"open",focusin:"open"}),this.tooltips={},this.parents={},this.liveRegion=t("<div>").attr({role:"log","aria-live":"assertive","aria-relevant":"additions"}).appendTo(this.document[0].body),this._addClass(this.liveRegion,null,"ui-helper-hidden-accessible"),this.disabledTitles=t([])},_setOption:function(e,i){var s=this;this._super(e,i),"content"===e&&t.each(this.tooltips,function(t,e){s._updateContent(e.element)})},_setOptionDisabled:function(t){this[t?"_disable":"_enable"]()},_disable:function(){var e=this;t.each(this.tooltips,function(i,s){var n=t.Event("blur");n.target=n.currentTarget=s.element[0],e.close(n,!0)}),this.disabledTitles=this.disabledTitles.add(this.element.find(this.options.items).addBack().filter(function(){var e=t(this);return e.is("[title]")?e.data("ui-tooltip-title",e.attr("title")).removeAttr("title"):void 0}))},_enable:function(){this.disabledTitles.each(function(){var e=t(this);e.data("ui-tooltip-title")&&e.attr("title",e.data("ui-tooltip-title"))}),this.disabledTitles=t([])},open:function(e){var i=this,s=t(e?e.target:this.element).closest(this.options.items);s.length&&!s.data("ui-tooltip-id")&&(s.attr("title")&&s.data("ui-tooltip-title",s.attr("title")),s.data("ui-tooltip-open",!0),e&&"mouseover"===e.type&&s.parents().each(function(){var e,s=t(this);s.data("ui-tooltip-open")&&(e=t.Event("blur"),e.target=e.currentTarget=this,i.close(e,!0)),s.attr("title")&&(s.uniqueId(),i.parents[this.id]={element:this,title:s.attr("title")},s.attr("title",""))}),this._registerCloseHandlers(e,s),this._updateContent(s,e))},_updateContent:function(t,e){var i,s=this.options.content,n=this,o=e?e.type:null;return"string"==typeof s||s.nodeType||s.jquery?this._open(e,t,s):(i=s.call(t[0],function(i){n._delay(function(){t.data("ui-tooltip-open")&&(e&&(e.type=o),this._open(e,t,i))})}),i&&this._open(e,t,i),void 0)},_open:function(e,i,s){function n(t){l.of=t,a.is(":hidden")||a.position(l)}var o,a,r,h,l=t.extend({},this.options.position);if(s){if(o=this._find(i))return o.tooltip.find(".ui-tooltip-content").html(s),void 0;i.is("[title]")&&(e&&"mouseover"===e.type?i.attr("title",""):i.removeAttr("title")),o=this._tooltip(i),a=o.tooltip,this._addDescribedBy(i,a.attr("id")),a.find(".ui-tooltip-content").html(s),this.liveRegion.children().hide(),h=t("<div>").html(a.find(".ui-tooltip-content").html()),h.removeAttr("name").find("[name]").removeAttr("name"),h.removeAttr("id").find("[id]").removeAttr("id"),h.appendTo(this.liveRegion),this.options.track&&e&&/^mouse/.test(e.type)?(this._on(this.document,{mousemove:n}),n(e)):a.position(t.extend({of:i},this.options.position)),a.hide(),this._show(a,this.options.show),this.options.track&&this.options.show&&this.options.show.delay&&(r=this.delayedShow=setInterval(function(){a.is(":visible")&&(n(l.of),clearInterval(r))},t.fx.interval)),this._trigger("open",e,{tooltip:a})}},_registerCloseHandlers:function(e,i){var s={keyup:function(e){if(e.keyCode===t.ui.keyCode.ESCAPE){var s=t.Event(e);s.currentTarget=i[0],this.close(s,!0)}}};i[0]!==this.element[0]&&(s.remove=function(){this._removeTooltip(this._find(i).tooltip)}),e&&"mouseover"!==e.type||(s.mouseleave="close"),e&&"focusin"!==e.type||(s.focusout="close"),this._on(!0,i,s)},close:function(e){var i,s=this,n=t(e?e.currentTarget:this.element),o=this._find(n);return o?(i=o.tooltip,o.closing||(clearInterval(this.delayedShow),n.data("ui-tooltip-title")&&!n.attr("title")&&n.attr("title",n.data("ui-tooltip-title")),this._removeDescribedBy(n),o.hiding=!0,i.stop(!0),this._hide(i,this.options.hide,function(){s._removeTooltip(t(this))}),n.removeData("ui-tooltip-open"),this._off(n,"mouseleave focusout keyup"),n[0]!==this.element[0]&&this._off(n,"remove"),this._off(this.document,"mousemove"),e&&"mouseleave"===e.type&&t.each(this.parents,function(e,i){t(i.element).attr("title",i.title),delete s.parents[e]
 }),o.closing=!0,this._trigger("close",e,{tooltip:i}),o.hiding||(o.closing=!1)),void 0):(n.removeData("ui-tooltip-open"),void 0)},_tooltip:function(e){var i=t("<div>").attr("role","tooltip"),s=t("<div>").appendTo(i),n=i.uniqueId().attr("id");return this._addClass(s,"ui-tooltip-content"),this._addClass(i,"ui-tooltip","ui-widget ui-widget-content"),i.appendTo(this._appendTo(e)),this.tooltips[n]={element:e,tooltip:i}},_find:function(t){var e=t.data("ui-tooltip-id");return e?this.tooltips[e]:null},_removeTooltip:function(t){t.remove(),delete this.tooltips[t.attr("id")]},_appendTo:function(t){var e=t.closest(".ui-front, dialog");return e.length||(e=this.document[0].body),e},_destroy:function(){var e=this;t.each(this.tooltips,function(i,s){var n=t.Event("blur"),o=s.element;n.target=n.currentTarget=o[0],e.close(n,!0),t("#"+i).remove(),o.data("ui-tooltip-title")&&(o.attr("title")||o.attr("title",o.data("ui-tooltip-title")),o.removeData("ui-tooltip-title"))}),this.liveRegion.remove()}}),t.uiBackCompat!==!1&&t.widget("ui.tooltip",t.ui.tooltip,{options:{tooltipClass:null},_tooltip:function(){var t=this._superApply(arguments);return this.options.tooltipClass&&t.tooltip.addClass(this.options.tooltipClass),t}}),t.ui.tooltip;var f="ui-effects-",g="ui-effects-style",m="ui-effects-animated",_=t;t.effects={effect:{}},function(t,e){function i(t,e,i){var s=u[e.type]||{};return null==t?i||!e.def?null:e.def:(t=s.floor?~~t:parseFloat(t),isNaN(t)?e.def:s.mod?(t+s.mod)%s.mod:0>t?0:t>s.max?s.max:t)}function s(i){var s=l(),n=s._rgba=[];return i=i.toLowerCase(),f(h,function(t,o){var a,r=o.re.exec(i),h=r&&o.parse(r),l=o.space||"rgba";return h?(a=s[l](h),s[c[l].cache]=a[c[l].cache],n=s._rgba=a._rgba,!1):e}),n.length?("0,0,0,0"===n.join()&&t.extend(n,o.transparent),s):o[i]}function n(t,e,i){return i=(i+1)%1,1>6*i?t+6*(e-t)*i:1>2*i?e:2>3*i?t+6*(e-t)*(2/3-i):t}var o,a="backgroundColor borderBottomColor borderLeftColor borderRightColor borderTopColor color columnRuleColor outlineColor textDecorationColor textEmphasisColor",r=/^([\-+])=\s*(\d+\.?\d*)/,h=[{re:/rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*(?:,\s*(\d?(?:\.\d+)?)\s*)?\)/,parse:function(t){return[t[1],t[2],t[3],t[4]]}},{re:/rgba?\(\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*(?:,\s*(\d?(?:\.\d+)?)\s*)?\)/,parse:function(t){return[2.55*t[1],2.55*t[2],2.55*t[3],t[4]]}},{re:/#([a-f0-9]{2})([a-f0-9]{2})([a-f0-9]{2})/,parse:function(t){return[parseInt(t[1],16),parseInt(t[2],16),parseInt(t[3],16)]}},{re:/#([a-f0-9])([a-f0-9])([a-f0-9])/,parse:function(t){return[parseInt(t[1]+t[1],16),parseInt(t[2]+t[2],16),parseInt(t[3]+t[3],16)]}},{re:/hsla?\(\s*(\d+(?:\.\d+)?)\s*,\s*(\d+(?:\.\d+)?)\%\s*,\s*(\d+(?:\.\d+)?)\%\s*(?:,\s*(\d?(?:\.\d+)?)\s*)?\)/,space:"hsla",parse:function(t){return[t[1],t[2]/100,t[3]/100,t[4]]}}],l=t.Color=function(e,i,s,n){return new t.Color.fn.parse(e,i,s,n)},c={rgba:{props:{red:{idx:0,type:"byte"},green:{idx:1,type:"byte"},blue:{idx:2,type:"byte"}}},hsla:{props:{hue:{idx:0,type:"degrees"},saturation:{idx:1,type:"percent"},lightness:{idx:2,type:"percent"}}}},u={"byte":{floor:!0,max:255},percent:{max:1},degrees:{mod:360,floor:!0}},d=l.support={},p=t("<p>")[0],f=t.each;p.style.cssText="background-color:rgba(1,1,1,.5)",d.rgba=p.style.backgroundColor.indexOf("rgba")>-1,f(c,function(t,e){e.cache="_"+t,e.props.alpha={idx:3,type:"percent",def:1}}),l.fn=t.extend(l.prototype,{parse:function(n,a,r,h){if(n===e)return this._rgba=[null,null,null,null],this;(n.jquery||n.nodeType)&&(n=t(n).css(a),a=e);var u=this,d=t.type(n),p=this._rgba=[];return a!==e&&(n=[n,a,r,h],d="array"),"string"===d?this.parse(s(n)||o._default):"array"===d?(f(c.rgba.props,function(t,e){p[e.idx]=i(n[e.idx],e)}),this):"object"===d?(n instanceof l?f(c,function(t,e){n[e.cache]&&(u[e.cache]=n[e.cache].slice())}):f(c,function(e,s){var o=s.cache;f(s.props,function(t,e){if(!u[o]&&s.to){if("alpha"===t||null==n[t])return;u[o]=s.to(u._rgba)}u[o][e.idx]=i(n[t],e,!0)}),u[o]&&0>t.inArray(null,u[o].slice(0,3))&&(u[o][3]=1,s.from&&(u._rgba=s.from(u[o])))}),this):e},is:function(t){var i=l(t),s=!0,n=this;return f(c,function(t,o){var a,r=i[o.cache];return r&&(a=n[o.cache]||o.to&&o.to(n._rgba)||[],f(o.props,function(t,i){return null!=r[i.idx]?s=r[i.idx]===a[i.idx]:e})),s}),s},_space:function(){var t=[],e=this;return f(c,function(i,s){e[s.cache]&&t.push(i)}),t.pop()},transition:function(t,e){var s=l(t),n=s._space(),o=c[n],a=0===this.alpha()?l("transparent"):this,r=a[o.cache]||o.to(a._rgba),h=r.slice();return s=s[o.cache],f(o.props,function(t,n){var o=n.idx,a=r[o],l=s[o],c=u[n.type]||{};null!==l&&(null===a?h[o]=l:(c.mod&&(l-a>c.mod/2?a+=c.mod:a-l>c.mod/2&&(a-=c.mod)),h[o]=i((l-a)*e+a,n)))}),this[n](h)},blend:function(e){if(1===this._rgba[3])return this;var i=this._rgba.slice(),s=i.pop(),n=l(e)._rgba;return l(t.map(i,function(t,e){return(1-s)*n[e]+s*t}))},toRgbaString:function(){var e="rgba(",i=t.map(this._rgba,function(t,e){return null==t?e>2?1:0:t});return 1===i[3]&&(i.pop(),e="rgb("),e+i.join()+")"},toHslaString:function(){var e="hsla(",i=t.map(this.hsla(),function(t,e){return null==t&&(t=e>2?1:0),e&&3>e&&(t=Math.round(100*t)+"%"),t});return 1===i[3]&&(i.pop(),e="hsl("),e+i.join()+")"},toHexString:function(e){var i=this._rgba.slice(),s=i.pop();return e&&i.push(~~(255*s)),"#"+t.map(i,function(t){return t=(t||0).toString(16),1===t.length?"0"+t:t}).join("")},toString:function(){return 0===this._rgba[3]?"transparent":this.toRgbaString()}}),l.fn.parse.prototype=l.fn,c.hsla.to=function(t){if(null==t[0]||null==t[1]||null==t[2])return[null,null,null,t[3]];var e,i,s=t[0]/255,n=t[1]/255,o=t[2]/255,a=t[3],r=Math.max(s,n,o),h=Math.min(s,n,o),l=r-h,c=r+h,u=.5*c;return e=h===r?0:s===r?60*(n-o)/l+360:n===r?60*(o-s)/l+120:60*(s-n)/l+240,i=0===l?0:.5>=u?l/c:l/(2-c),[Math.round(e)%360,i,u,null==a?1:a]},c.hsla.from=function(t){if(null==t[0]||null==t[1]||null==t[2])return[null,null,null,t[3]];var e=t[0]/360,i=t[1],s=t[2],o=t[3],a=.5>=s?s*(1+i):s+i-s*i,r=2*s-a;return[Math.round(255*n(r,a,e+1/3)),Math.round(255*n(r,a,e)),Math.round(255*n(r,a,e-1/3)),o]},f(c,function(s,n){var o=n.props,a=n.cache,h=n.to,c=n.from;l.fn[s]=function(s){if(h&&!this[a]&&(this[a]=h(this._rgba)),s===e)return this[a].slice();var n,r=t.type(s),u="array"===r||"object"===r?s:arguments,d=this[a].slice();return f(o,function(t,e){var s=u["object"===r?t:e.idx];null==s&&(s=d[e.idx]),d[e.idx]=i(s,e)}),c?(n=l(c(d)),n[a]=d,n):l(d)},f(o,function(e,i){l.fn[e]||(l.fn[e]=function(n){var o,a=t.type(n),h="alpha"===e?this._hsla?"hsla":"rgba":s,l=this[h](),c=l[i.idx];return"undefined"===a?c:("function"===a&&(n=n.call(this,c),a=t.type(n)),null==n&&i.empty?this:("string"===a&&(o=r.exec(n),o&&(n=c+parseFloat(o[2])*("+"===o[1]?1:-1))),l[i.idx]=n,this[h](l)))})})}),l.hook=function(e){var i=e.split(" ");f(i,function(e,i){t.cssHooks[i]={set:function(e,n){var o,a,r="";if("transparent"!==n&&("string"!==t.type(n)||(o=s(n)))){if(n=l(o||n),!d.rgba&&1!==n._rgba[3]){for(a="backgroundColor"===i?e.parentNode:e;(""===r||"transparent"===r)&&a&&a.style;)try{r=t.css(a,"backgroundColor"),a=a.parentNode}catch(h){}n=n.blend(r&&"transparent"!==r?r:"_default")}n=n.toRgbaString()}try{e.style[i]=n}catch(h){}}},t.fx.step[i]=function(e){e.colorInit||(e.start=l(e.elem,i),e.end=l(e.end),e.colorInit=!0),t.cssHooks[i].set(e.elem,e.start.transition(e.end,e.pos))}})},l.hook(a),t.cssHooks.borderColor={expand:function(t){var e={};return f(["Top","Right","Bottom","Left"],function(i,s){e["border"+s+"Color"]=t}),e}},o=t.Color.names={aqua:"#00ffff",black:"#000000",blue:"#0000ff",fuchsia:"#ff00ff",gray:"#808080",green:"#008000",lime:"#00ff00",maroon:"#800000",navy:"#000080",olive:"#808000",purple:"#800080",red:"#ff0000",silver:"#c0c0c0",teal:"#008080",white:"#ffffff",yellow:"#ffff00",transparent:[null,null,null,0],_default:"#ffffff"}}(_),function(){function e(e){var i,s,n=e.ownerDocument.defaultView?e.ownerDocument.defaultView.getComputedStyle(e,null):e.currentStyle,o={};if(n&&n.length&&n[0]&&n[n[0]])for(s=n.length;s--;)i=n[s],"string"==typeof n[i]&&(o[t.camelCase(i)]=n[i]);else for(i in n)"string"==typeof n[i]&&(o[i]=n[i]);return o}function i(e,i){var s,o,a={};for(s in i)o=i[s],e[s]!==o&&(n[s]||(t.fx.step[s]||!isNaN(parseFloat(o)))&&(a[s]=o));return a}var s=["add","remove","toggle"],n={border:1,borderBottom:1,borderColor:1,borderLeft:1,borderRight:1,borderTop:1,borderWidth:1,margin:1,padding:1};t.each(["borderLeftStyle","borderRightStyle","borderBottomStyle","borderTopStyle"],function(e,i){t.fx.step[i]=function(t){("none"!==t.end&&!t.setAttr||1===t.pos&&!t.setAttr)&&(_.style(t.elem,i,t.end),t.setAttr=!0)}}),t.fn.addBack||(t.fn.addBack=function(t){return this.add(null==t?this.prevObject:this.prevObject.filter(t))}),t.effects.animateClass=function(n,o,a,r){var h=t.speed(o,a,r);return this.queue(function(){var o,a=t(this),r=a.attr("class")||"",l=h.children?a.find("*").addBack():a;l=l.map(function(){var i=t(this);return{el:i,start:e(this)}}),o=function(){t.each(s,function(t,e){n[e]&&a[e+"Class"](n[e])})},o(),l=l.map(function(){return this.end=e(this.el[0]),this.diff=i(this.start,this.end),this}),a.attr("class",r),l=l.map(function(){var e=this,i=t.Deferred(),s=t.extend({},h,{queue:!1,complete:function(){i.resolve(e)}});return this.el.animate(this.diff,s),i.promise()}),t.when.apply(t,l.get()).done(function(){o(),t.each(arguments,function(){var e=this.el;t.each(this.diff,function(t){e.css(t,"")})}),h.complete.call(a[0])})})},t.fn.extend({addClass:function(e){return function(i,s,n,o){return s?t.effects.animateClass.call(this,{add:i},s,n,o):e.apply(this,arguments)}}(t.fn.addClass),removeClass:function(e){return function(i,s,n,o){return arguments.length>1?t.effects.animateClass.call(this,{remove:i},s,n,o):e.apply(this,arguments)}}(t.fn.removeClass),toggleClass:function(e){return function(i,s,n,o,a){return"boolean"==typeof s||void 0===s?n?t.effects.animateClass.call(this,s?{add:i}:{remove:i},n,o,a):e.apply(this,arguments):t.effects.animateClass.call(this,{toggle:i},s,n,o)}}(t.fn.toggleClass),switchClass:function(e,i,s,n,o){return t.effects.animateClass.call(this,{add:i,remove:e},s,n,o)}})}(),function(){function e(e,i,s,n){return t.isPlainObject(e)&&(i=e,e=e.effect),e={effect:e},null==i&&(i={}),t.isFunction(i)&&(n=i,s=null,i={}),("number"==typeof i||t.fx.speeds[i])&&(n=s,s=i,i={}),t.isFunction(s)&&(n=s,s=null),i&&t.extend(e,i),s=s||i.duration,e.duration=t.fx.off?0:"number"==typeof s?s:s in t.fx.speeds?t.fx.speeds[s]:t.fx.speeds._default,e.complete=n||i.complete,e}function i(e){return!e||"number"==typeof e||t.fx.speeds[e]?!0:"string"!=typeof e||t.effects.effect[e]?t.isFunction(e)?!0:"object"!=typeof e||e.effect?!1:!0:!0}function s(t,e){var i=e.outerWidth(),s=e.outerHeight(),n=/^rect\((-?\d*\.?\d*px|-?\d+%|auto),?\s*(-?\d*\.?\d*px|-?\d+%|auto),?\s*(-?\d*\.?\d*px|-?\d+%|auto),?\s*(-?\d*\.?\d*px|-?\d+%|auto)\)$/,o=n.exec(t)||["",0,i,s,0];return{top:parseFloat(o[1])||0,right:"auto"===o[2]?i:parseFloat(o[2]),bottom:"auto"===o[3]?s:parseFloat(o[3]),left:parseFloat(o[4])||0}}t.expr&&t.expr.filters&&t.expr.filters.animated&&(t.expr.filters.animated=function(e){return function(i){return!!t(i).data(m)||e(i)}}(t.expr.filters.animated)),t.uiBackCompat!==!1&&t.extend(t.effects,{save:function(t,e){for(var i=0,s=e.length;s>i;i++)null!==e[i]&&t.data(f+e[i],t[0].style[e[i]])},restore:function(t,e){for(var i,s=0,n=e.length;n>s;s++)null!==e[s]&&(i=t.data(f+e[s]),t.css(e[s],i))},setMode:function(t,e){return"toggle"===e&&(e=t.is(":hidden")?"show":"hide"),e},createWrapper:function(e){if(e.parent().is(".ui-effects-wrapper"))return e.parent();var i={width:e.outerWidth(!0),height:e.outerHeight(!0),"float":e.css("float")},s=t("<div></div>").addClass("ui-effects-wrapper").css({fontSize:"100%",background:"transparent",border:"none",margin:0,padding:0}),n={width:e.width(),height:e.height()},o=document.activeElement;try{o.id}catch(a){o=document.body}return e.wrap(s),(e[0]===o||t.contains(e[0],o))&&t(o).trigger("focus"),s=e.parent(),"static"===e.css("position")?(s.css({position:"relative"}),e.css({position:"relative"})):(t.extend(i,{position:e.css("position"),zIndex:e.css("z-index")}),t.each(["top","left","bottom","right"],function(t,s){i[s]=e.css(s),isNaN(parseInt(i[s],10))&&(i[s]="auto")}),e.css({position:"relative",top:0,left:0,right:"auto",bottom:"auto"})),e.css(n),s.css(i).show()},removeWrapper:function(e){var i=document.activeElement;return e.parent().is(".ui-effects-wrapper")&&(e.parent().replaceWith(e),(e[0]===i||t.contains(e[0],i))&&t(i).trigger("focus")),e}}),t.extend(t.effects,{version:"1.12.1",define:function(e,i,s){return s||(s=i,i="effect"),t.effects.effect[e]=s,t.effects.effect[e].mode=i,s},scaledDimensions:function(t,e,i){if(0===e)return{height:0,width:0,outerHeight:0,outerWidth:0};var s="horizontal"!==i?(e||100)/100:1,n="vertical"!==i?(e||100)/100:1;return{height:t.height()*n,width:t.width()*s,outerHeight:t.outerHeight()*n,outerWidth:t.outerWidth()*s}},clipToBox:function(t){return{width:t.clip.right-t.clip.left,height:t.clip.bottom-t.clip.top,left:t.clip.left,top:t.clip.top}},unshift:function(t,e,i){var s=t.queue();e>1&&s.splice.apply(s,[1,0].concat(s.splice(e,i))),t.dequeue()},saveStyle:function(t){t.data(g,t[0].style.cssText)},restoreStyle:function(t){t[0].style.cssText=t.data(g)||"",t.removeData(g)},mode:function(t,e){var i=t.is(":hidden");return"toggle"===e&&(e=i?"show":"hide"),(i?"hide"===e:"show"===e)&&(e="none"),e},getBaseline:function(t,e){var i,s;switch(t[0]){case"top":i=0;break;case"middle":i=.5;break;case"bottom":i=1;break;default:i=t[0]/e.height}switch(t[1]){case"left":s=0;break;case"center":s=.5;break;case"right":s=1;break;default:s=t[1]/e.width}return{x:s,y:i}},createPlaceholder:function(e){var i,s=e.css("position"),n=e.position();return e.css({marginTop:e.css("marginTop"),marginBottom:e.css("marginBottom"),marginLeft:e.css("marginLeft"),marginRight:e.css("marginRight")}).outerWidth(e.outerWidth()).outerHeight(e.outerHeight()),/^(static|relative)/.test(s)&&(s="absolute",i=t("<"+e[0].nodeName+">").insertAfter(e).css({display:/^(inline|ruby)/.test(e.css("display"))?"inline-block":"block",visibility:"hidden",marginTop:e.css("marginTop"),marginBottom:e.css("marginBottom"),marginLeft:e.css("marginLeft"),marginRight:e.css("marginRight"),"float":e.css("float")}).outerWidth(e.outerWidth()).outerHeight(e.outerHeight()).addClass("ui-effects-placeholder"),e.data(f+"placeholder",i)),e.css({position:s,left:n.left,top:n.top}),i},removePlaceholder:function(t){var e=f+"placeholder",i=t.data(e);i&&(i.remove(),t.removeData(e))},cleanUp:function(e){t.effects.restoreStyle(e),t.effects.removePlaceholder(e)},setTransition:function(e,i,s,n){return n=n||{},t.each(i,function(t,i){var o=e.cssUnit(i);o[0]>0&&(n[i]=o[0]*s+o[1])}),n}}),t.fn.extend({effect:function(){function i(e){function i(){r.removeData(m),t.effects.cleanUp(r),"hide"===s.mode&&r.hide(),a()}function a(){t.isFunction(h)&&h.call(r[0]),t.isFunction(e)&&e()}var r=t(this);s.mode=c.shift(),t.uiBackCompat===!1||o?"none"===s.mode?(r[l](),a()):n.call(r[0],s,i):(r.is(":hidden")?"hide"===l:"show"===l)?(r[l](),a()):n.call(r[0],s,a)}var s=e.apply(this,arguments),n=t.effects.effect[s.effect],o=n.mode,a=s.queue,r=a||"fx",h=s.complete,l=s.mode,c=[],u=function(e){var i=t(this),s=t.effects.mode(i,l)||o;i.data(m,!0),c.push(s),o&&("show"===s||s===o&&"hide"===s)&&i.show(),o&&"none"===s||t.effects.saveStyle(i),t.isFunction(e)&&e()};return t.fx.off||!n?l?this[l](s.duration,h):this.each(function(){h&&h.call(this)}):a===!1?this.each(u).each(i):this.queue(r,u).queue(r,i)},show:function(t){return function(s){if(i(s))return t.apply(this,arguments);var n=e.apply(this,arguments);return n.mode="show",this.effect.call(this,n)}}(t.fn.show),hide:function(t){return function(s){if(i(s))return t.apply(this,arguments);var n=e.apply(this,arguments);return n.mode="hide",this.effect.call(this,n)}}(t.fn.hide),toggle:function(t){return function(s){if(i(s)||"boolean"==typeof s)return t.apply(this,arguments);var n=e.apply(this,arguments);return n.mode="toggle",this.effect.call(this,n)}}(t.fn.toggle),cssUnit:function(e){var i=this.css(e),s=[];return t.each(["em","px","%","pt"],function(t,e){i.indexOf(e)>0&&(s=[parseFloat(i),e])}),s},cssClip:function(t){return t?this.css("clip","rect("+t.top+"px "+t.right+"px "+t.bottom+"px "+t.left+"px)"):s(this.css("clip"),this)},transfer:function(e,i){var s=t(this),n=t(e.to),o="fixed"===n.css("position"),a=t("body"),r=o?a.scrollTop():0,h=o?a.scrollLeft():0,l=n.offset(),c={top:l.top-r,left:l.left-h,height:n.innerHeight(),width:n.innerWidth()},u=s.offset(),d=t("<div class='ui-effects-transfer'></div>").appendTo("body").addClass(e.className).css({top:u.top-r,left:u.left-h,height:s.innerHeight(),width:s.innerWidth(),position:o?"fixed":"absolute"}).animate(c,e.duration,e.easing,function(){d.remove(),t.isFunction(i)&&i()})}}),t.fx.step.clip=function(e){e.clipInit||(e.start=t(e.elem).cssClip(),"string"==typeof e.end&&(e.end=s(e.end,e.elem)),e.clipInit=!0),t(e.elem).cssClip({top:e.pos*(e.end.top-e.start.top)+e.start.top,right:e.pos*(e.end.right-e.start.right)+e.start.right,bottom:e.pos*(e.end.bottom-e.start.bottom)+e.start.bottom,left:e.pos*(e.end.left-e.start.left)+e.start.left})}}(),function(){var e={};t.each(["Quad","Cubic","Quart","Quint","Expo"],function(t,i){e[i]=function(e){return Math.pow(e,t+2)}}),t.extend(e,{Sine:function(t){return 1-Math.cos(t*Math.PI/2)},Circ:function(t){return 1-Math.sqrt(1-t*t)},Elastic:function(t){return 0===t||1===t?t:-Math.pow(2,8*(t-1))*Math.sin((80*(t-1)-7.5)*Math.PI/15)},Back:function(t){return t*t*(3*t-2)},Bounce:function(t){for(var e,i=4;((e=Math.pow(2,--i))-1)/11>t;);return 1/Math.pow(4,3-i)-7.5625*Math.pow((3*e-2)/22-t,2)}}),t.each(e,function(e,i){t.easing["easeIn"+e]=i,t.easing["easeOut"+e]=function(t){return 1-i(1-t)},t.easing["easeInOut"+e]=function(t){return.5>t?i(2*t)/2:1-i(-2*t+2)/2}})}();var v=t.effects;t.effects.define("blind","hide",function(e,i){var s={up:["bottom","top"],vertical:["bottom","top"],down:["top","bottom"],left:["right","left"],horizontal:["right","left"],right:["left","right"]},n=t(this),o=e.direction||"up",a=n.cssClip(),r={clip:t.extend({},a)},h=t.effects.createPlaceholder(n);r.clip[s[o][0]]=r.clip[s[o][1]],"show"===e.mode&&(n.cssClip(r.clip),h&&h.css(t.effects.clipToBox(r)),r.clip=a),h&&h.animate(t.effects.clipToBox(r),e.duration,e.easing),n.animate(r,{queue:!1,duration:e.duration,easing:e.easing,complete:i})}),t.effects.define("bounce",function(e,i){var s,n,o,a=t(this),r=e.mode,h="hide"===r,l="show"===r,c=e.direction||"up",u=e.distance,d=e.times||5,p=2*d+(l||h?1:0),f=e.duration/p,g=e.easing,m="up"===c||"down"===c?"top":"left",_="up"===c||"left"===c,v=0,b=a.queue().length;for(t.effects.createPlaceholder(a),o=a.css(m),u||(u=a["top"===m?"outerHeight":"outerWidth"]()/3),l&&(n={opacity:1},n[m]=o,a.css("opacity",0).css(m,_?2*-u:2*u).animate(n,f,g)),h&&(u/=Math.pow(2,d-1)),n={},n[m]=o;d>v;v++)s={},s[m]=(_?"-=":"+=")+u,a.animate(s,f,g).animate(n,f,g),u=h?2*u:u/2;h&&(s={opacity:0},s[m]=(_?"-=":"+=")+u,a.animate(s,f,g)),a.queue(i),t.effects.unshift(a,b,p+1)}),t.effects.define("clip","hide",function(e,i){var s,n={},o=t(this),a=e.direction||"vertical",r="both"===a,h=r||"horizontal"===a,l=r||"vertical"===a;s=o.cssClip(),n.clip={top:l?(s.bottom-s.top)/2:s.top,right:h?(s.right-s.left)/2:s.right,bottom:l?(s.bottom-s.top)/2:s.bottom,left:h?(s.right-s.left)/2:s.left},t.effects.createPlaceholder(o),"show"===e.mode&&(o.cssClip(n.clip),n.clip=s),o.animate(n,{queue:!1,duration:e.duration,easing:e.easing,complete:i})}),t.effects.define("drop","hide",function(e,i){var s,n=t(this),o=e.mode,a="show"===o,r=e.direction||"left",h="up"===r||"down"===r?"top":"left",l="up"===r||"left"===r?"-=":"+=",c="+="===l?"-=":"+=",u={opacity:0};t.effects.createPlaceholder(n),s=e.distance||n["top"===h?"outerHeight":"outerWidth"](!0)/2,u[h]=l+s,a&&(n.css(u),u[h]=c+s,u.opacity=1),n.animate(u,{queue:!1,duration:e.duration,easing:e.easing,complete:i})}),t.effects.define("explode","hide",function(e,i){function s(){b.push(this),b.length===u*d&&n()}function n(){p.css({visibility:"visible"}),t(b).remove(),i()}var o,a,r,h,l,c,u=e.pieces?Math.round(Math.sqrt(e.pieces)):3,d=u,p=t(this),f=e.mode,g="show"===f,m=p.show().css("visibility","hidden").offset(),_=Math.ceil(p.outerWidth()/d),v=Math.ceil(p.outerHeight()/u),b=[];for(o=0;u>o;o++)for(h=m.top+o*v,c=o-(u-1)/2,a=0;d>a;a++)r=m.left+a*_,l=a-(d-1)/2,p.clone().appendTo("body").wrap("<div></div>").css({position:"absolute",visibility:"visible",left:-a*_,top:-o*v}).parent().addClass("ui-effects-explode").css({position:"absolute",overflow:"hidden",width:_,height:v,left:r+(g?l*_:0),top:h+(g?c*v:0),opacity:g?0:1}).animate({left:r+(g?0:l*_),top:h+(g?0:c*v),opacity:g?1:0},e.duration||500,e.easing,s)}),t.effects.define("fade","toggle",function(e,i){var s="show"===e.mode;t(this).css("opacity",s?0:1).animate({opacity:s?1:0},{queue:!1,duration:e.duration,easing:e.easing,complete:i})}),t.effects.define("fold","hide",function(e,i){var s=t(this),n=e.mode,o="show"===n,a="hide"===n,r=e.size||15,h=/([0-9]+)%/.exec(r),l=!!e.horizFirst,c=l?["right","bottom"]:["bottom","right"],u=e.duration/2,d=t.effects.createPlaceholder(s),p=s.cssClip(),f={clip:t.extend({},p)},g={clip:t.extend({},p)},m=[p[c[0]],p[c[1]]],_=s.queue().length;h&&(r=parseInt(h[1],10)/100*m[a?0:1]),f.clip[c[0]]=r,g.clip[c[0]]=r,g.clip[c[1]]=0,o&&(s.cssClip(g.clip),d&&d.css(t.effects.clipToBox(g)),g.clip=p),s.queue(function(i){d&&d.animate(t.effects.clipToBox(f),u,e.easing).animate(t.effects.clipToBox(g),u,e.easing),i()}).animate(f,u,e.easing).animate(g,u,e.easing).queue(i),t.effects.unshift(s,_,4)}),t.effects.define("highlight","show",function(e,i){var s=t(this),n={backgroundColor:s.css("backgroundColor")};"hide"===e.mode&&(n.opacity=0),t.effects.saveStyle(s),s.css({backgroundImage:"none",backgroundColor:e.color||"#ffff99"}).animate(n,{queue:!1,duration:e.duration,easing:e.easing,complete:i})}),t.effects.define("size",function(e,i){var s,n,o,a=t(this),r=["fontSize"],h=["borderTopWidth","borderBottomWidth","paddingTop","paddingBottom"],l=["borderLeftWidth","borderRightWidth","paddingLeft","paddingRight"],c=e.mode,u="effect"!==c,d=e.scale||"both",p=e.origin||["middle","center"],f=a.css("position"),g=a.position(),m=t.effects.scaledDimensions(a),_=e.from||m,v=e.to||t.effects.scaledDimensions(a,0);t.effects.createPlaceholder(a),"show"===c&&(o=_,_=v,v=o),n={from:{y:_.height/m.height,x:_.width/m.width},to:{y:v.height/m.height,x:v.width/m.width}},("box"===d||"both"===d)&&(n.from.y!==n.to.y&&(_=t.effects.setTransition(a,h,n.from.y,_),v=t.effects.setTransition(a,h,n.to.y,v)),n.from.x!==n.to.x&&(_=t.effects.setTransition(a,l,n.from.x,_),v=t.effects.setTransition(a,l,n.to.x,v))),("content"===d||"both"===d)&&n.from.y!==n.to.y&&(_=t.effects.setTransition(a,r,n.from.y,_),v=t.effects.setTransition(a,r,n.to.y,v)),p&&(s=t.effects.getBaseline(p,m),_.top=(m.outerHeight-_.outerHeight)*s.y+g.top,_.left=(m.outerWidth-_.outerWidth)*s.x+g.left,v.top=(m.outerHeight-v.outerHeight)*s.y+g.top,v.left=(m.outerWidth-v.outerWidth)*s.x+g.left),a.css(_),("content"===d||"both"===d)&&(h=h.concat(["marginTop","marginBottom"]).concat(r),l=l.concat(["marginLeft","marginRight"]),a.find("*[width]").each(function(){var i=t(this),s=t.effects.scaledDimensions(i),o={height:s.height*n.from.y,width:s.width*n.from.x,outerHeight:s.outerHeight*n.from.y,outerWidth:s.outerWidth*n.from.x},a={height:s.height*n.to.y,width:s.width*n.to.x,outerHeight:s.height*n.to.y,outerWidth:s.width*n.to.x};n.from.y!==n.to.y&&(o=t.effects.setTransition(i,h,n.from.y,o),a=t.effects.setTransition(i,h,n.to.y,a)),n.from.x!==n.to.x&&(o=t.effects.setTransition(i,l,n.from.x,o),a=t.effects.setTransition(i,l,n.to.x,a)),u&&t.effects.saveStyle(i),i.css(o),i.animate(a,e.duration,e.easing,function(){u&&t.effects.restoreStyle(i)})})),a.animate(v,{queue:!1,duration:e.duration,easing:e.easing,complete:function(){var e=a.offset();0===v.opacity&&a.css("opacity",_.opacity),u||(a.css("position","static"===f?"relative":f).offset(e),t.effects.saveStyle(a)),i()}})}),t.effects.define("scale",function(e,i){var s=t(this),n=e.mode,o=parseInt(e.percent,10)||(0===parseInt(e.percent,10)?0:"effect"!==n?0:100),a=t.extend(!0,{from:t.effects.scaledDimensions(s),to:t.effects.scaledDimensions(s,o,e.direction||"both"),origin:e.origin||["middle","center"]},e);e.fade&&(a.from.opacity=1,a.to.opacity=0),t.effects.effect.size.call(this,a,i)}),t.effects.define("puff","hide",function(e,i){var s=t.extend(!0,{},e,{fade:!0,percent:parseInt(e.percent,10)||150});t.effects.effect.scale.call(this,s,i)}),t.effects.define("pulsate","show",function(e,i){var s=t(this),n=e.mode,o="show"===n,a="hide"===n,r=o||a,h=2*(e.times||5)+(r?1:0),l=e.duration/h,c=0,u=1,d=s.queue().length;for((o||!s.is(":visible"))&&(s.css("opacity",0).show(),c=1);h>u;u++)s.animate({opacity:c},l,e.easing),c=1-c;s.animate({opacity:c},l,e.easing),s.queue(i),t.effects.unshift(s,d,h+1)}),t.effects.define("shake",function(e,i){var s=1,n=t(this),o=e.direction||"left",a=e.distance||20,r=e.times||3,h=2*r+1,l=Math.round(e.duration/h),c="up"===o||"down"===o?"top":"left",u="up"===o||"left"===o,d={},p={},f={},g=n.queue().length;for(t.effects.createPlaceholder(n),d[c]=(u?"-=":"+=")+a,p[c]=(u?"+=":"-=")+2*a,f[c]=(u?"-=":"+=")+2*a,n.animate(d,l,e.easing);r>s;s++)n.animate(p,l,e.easing).animate(f,l,e.easing);n.animate(p,l,e.easing).animate(d,l/2,e.easing).queue(i),t.effects.unshift(n,g,h+1)}),t.effects.define("slide","show",function(e,i){var s,n,o=t(this),a={up:["bottom","top"],down:["top","bottom"],left:["right","left"],right:["left","right"]},r=e.mode,h=e.direction||"left",l="up"===h||"down"===h?"top":"left",c="up"===h||"left"===h,u=e.distance||o["top"===l?"outerHeight":"outerWidth"](!0),d={};t.effects.createPlaceholder(o),s=o.cssClip(),n=o.position()[l],d[l]=(c?-1:1)*u+n,d.clip=o.cssClip(),d.clip[a[h][1]]=d.clip[a[h][0]],"show"===r&&(o.cssClip(d.clip),o.css(l,d[l]),d.clip=s,d[l]=n),o.animate(d,{queue:!1,duration:e.duration,easing:e.easing,complete:i})});var v;t.uiBackCompat!==!1&&(v=t.effects.define("transfer",function(e,i){t(this).transfer(e,i)}))});
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.adapter = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /*
- *  Copyright (c) 2017 The WebRTC project authors. All Rights Reserved.
- *
- *  Use of this source code is governed by a BSD-style license
- *  that can be found in the LICENSE file in the root of the source
- *  tree.
- */
- /* eslint-env node */
-'use strict';
+* A JavaScript implementation of the SHA256 hash function.
+*
+* FILE:	sha256.js
+* VERSION:	0.8
+* AUTHOR:	Christoph Bichlmeier <informatik@zombiearena.de>
+*
+* NOTE: This version is not tested thoroughly!
+*
+* Copyright (c) 2003, Christoph Bichlmeier
+* All rights reserved.
+*
+* Redistribution and use in source and binary forms, with or without
+* modification, are permitted provided that the following conditions
+* are met:
+* 1. Redistributions of source code must retain the above copyright
+*    notice, this list of conditions and the following disclaimer.
+* 2. Redistributions in binary form must reproduce the above copyright
+*    notice, this list of conditions and the following disclaimer in the
+*    documentation and/or other materials provided with the distribution.
+* 3. Neither the name of the copyright holder nor the names of contributors
+*    may be used to endorse or promote products derived from this software
+*    without specific prior written permission.
+*
+* ======================================================================
+*
+* THIS SOFTWARE IS PROVIDED BY THE AUTHORS ''AS IS'' AND ANY EXPRESS
+* OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+* ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHORS OR CONTRIBUTORS BE
+* LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+* SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+* BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+* WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+* OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+* EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
 
-var SDPUtils = require('sdp');
-
-function writeMediaSection(transceiver, caps, type, stream) {
-  var sdp = SDPUtils.writeRtpDescription(transceiver.kind, caps);
-
-  // Map ICE parameters (ufrag, pwd) to SDP.
-  sdp += SDPUtils.writeIceParameters(
-      transceiver.iceGatherer.getLocalParameters());
-
-  // Map DTLS parameters to SDP.
-  sdp += SDPUtils.writeDtlsParameters(
-      transceiver.dtlsTransport.getLocalParameters(),
-      type === 'offer' ? 'actpass' : 'active');
-
-  sdp += 'a=mid:' + transceiver.mid + '\r\n';
-
-  if (transceiver.direction) {
-    sdp += 'a=' + transceiver.direction + '\r\n';
-  } else if (transceiver.rtpSender && transceiver.rtpReceiver) {
-    sdp += 'a=sendrecv\r\n';
-  } else if (transceiver.rtpSender) {
-    sdp += 'a=sendonly\r\n';
-  } else if (transceiver.rtpReceiver) {
-    sdp += 'a=recvonly\r\n';
-  } else {
-    sdp += 'a=inactive\r\n';
-  }
-
-  if (transceiver.rtpSender) {
-    // spec.
-    var msid = 'msid:' + stream.id + ' ' +
-        transceiver.rtpSender.track.id + '\r\n';
-    sdp += 'a=' + msid;
-
-    // for Chrome.
-    sdp += 'a=ssrc:' + transceiver.sendEncodingParameters[0].ssrc +
-        ' ' + msid;
-    if (transceiver.sendEncodingParameters[0].rtx) {
-      sdp += 'a=ssrc:' + transceiver.sendEncodingParameters[0].rtx.ssrc +
-          ' ' + msid;
-      sdp += 'a=ssrc-group:FID ' +
-          transceiver.sendEncodingParameters[0].ssrc + ' ' +
-          transceiver.sendEncodingParameters[0].rtx.ssrc +
-          '\r\n';
-    }
-  }
-  // FIXME: this should be written by writeRtpDescription.
-  sdp += 'a=ssrc:' + transceiver.sendEncodingParameters[0].ssrc +
-      ' cname:' + SDPUtils.localCName + '\r\n';
-  if (transceiver.rtpSender && transceiver.sendEncodingParameters[0].rtx) {
-    sdp += 'a=ssrc:' + transceiver.sendEncodingParameters[0].rtx.ssrc +
-        ' cname:' + SDPUtils.localCName + '\r\n';
-  }
-  return sdp;
+/* SHA256 logical functions */
+function rotateRight(n,x) {
+	return ((x >>> n) | (x << (32 - n)));
+}
+function choice(x,y,z) {
+	return ((x & y) ^ (~x & z));
+}
+function majority(x,y,z) {
+	return ((x & y) ^ (x & z) ^ (y & z));
+}
+function sha256_Sigma0(x) {
+	return (rotateRight(2, x) ^ rotateRight(13, x) ^ rotateRight(22, x));
+}
+function sha256_Sigma1(x) {
+	return (rotateRight(6, x) ^ rotateRight(11, x) ^ rotateRight(25, x));
+}
+function sha256_sigma0(x) {
+	return (rotateRight(7, x) ^ rotateRight(18, x) ^ (x >>> 3));
+}
+function sha256_sigma1(x) {
+	return (rotateRight(17, x) ^ rotateRight(19, x) ^ (x >>> 10));
+}
+function sha256_expand(W, j) {
+	return (W[j&0x0f] += sha256_sigma1(W[(j+14)&0x0f]) + W[(j+9)&0x0f] + 
+sha256_sigma0(W[(j+1)&0x0f]));
 }
 
-// Edge does not like
-// 1) stun: filtered after 14393 unless ?transport=udp is present
-// 2) turn: that does not have all of turn:host:port?transport=udp
-// 3) turn: with ipv6 addresses
-// 4) turn: occurring muliple times
-function filterIceServers(iceServers, edgeVersion) {
-  var hasTurn = false;
-  iceServers = JSON.parse(JSON.stringify(iceServers));
-  return iceServers.filter(function(server) {
-    if (server && (server.urls || server.url)) {
-      var urls = server.urls || server.url;
-      if (server.url && !server.urls) {
-        console.warn('RTCIceServer.url is deprecated! Use urls instead.');
-      }
-      var isString = typeof urls === 'string';
-      if (isString) {
-        urls = [urls];
-      }
-      urls = urls.filter(function(url) {
-        var validTurn = url.indexOf('turn:') === 0 &&
-            url.indexOf('transport=udp') !== -1 &&
-            url.indexOf('turn:[') === -1 &&
-            !hasTurn;
+/* Hash constant words K: */
+var K256 = new Array(
+	0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
+	0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+	0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3,
+	0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+	0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc,
+	0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+	0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7,
+	0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+	0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13,
+	0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+	0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3,
+	0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+	0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5,
+	0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+	0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208,
+	0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+);
 
-        if (validTurn) {
-          hasTurn = true;
-          return true;
-        }
-        return url.indexOf('stun:') === 0 && edgeVersion >= 14393 &&
-            url.indexOf('?transport=udp') === -1;
-      });
+/* global arrays */
+var ihash, count, buffer;
+var sha256_hex_digits = "0123456789abcdef";
 
-      delete server.url;
-      server.urls = isString ? urls[0] : urls;
-      return !!urls.length;
-    }
-    return false;
-  });
+/* Add 32-bit integers with 16-bit operations (bug in some JS-interpreters: 
+overflow) */
+function safe_add(x, y)
+{
+	var lsw = (x & 0xffff) + (y & 0xffff);
+	var msw = (x >> 16) + (y >> 16) + (lsw >> 16);
+	return (msw << 16) | (lsw & 0xffff);
 }
 
-// Determines the intersection of local and remote capabilities.
-function getCommonCapabilities(localCapabilities, remoteCapabilities) {
-  var commonCapabilities = {
-    codecs: [],
-    headerExtensions: [],
-    fecMechanisms: []
-  };
-
-  var findCodecByPayloadType = function(pt, codecs) {
-    pt = parseInt(pt, 10);
-    for (var i = 0; i < codecs.length; i++) {
-      if (codecs[i].payloadType === pt ||
-          codecs[i].preferredPayloadType === pt) {
-        return codecs[i];
-      }
-    }
-  };
-
-  var rtxCapabilityMatches = function(lRtx, rRtx, lCodecs, rCodecs) {
-    var lCodec = findCodecByPayloadType(lRtx.parameters.apt, lCodecs);
-    var rCodec = findCodecByPayloadType(rRtx.parameters.apt, rCodecs);
-    return lCodec && rCodec &&
-        lCodec.name.toLowerCase() === rCodec.name.toLowerCase();
-  };
-
-  localCapabilities.codecs.forEach(function(lCodec) {
-    for (var i = 0; i < remoteCapabilities.codecs.length; i++) {
-      var rCodec = remoteCapabilities.codecs[i];
-      if (lCodec.name.toLowerCase() === rCodec.name.toLowerCase() &&
-          lCodec.clockRate === rCodec.clockRate) {
-        if (lCodec.name.toLowerCase() === 'rtx' &&
-            lCodec.parameters && rCodec.parameters.apt) {
-          // for RTX we need to find the local rtx that has a apt
-          // which points to the same local codec as the remote one.
-          if (!rtxCapabilityMatches(lCodec, rCodec,
-              localCapabilities.codecs, remoteCapabilities.codecs)) {
-            continue;
-          }
-        }
-        rCodec = JSON.parse(JSON.stringify(rCodec)); // deepcopy
-        // number of channels is the highest common number of channels
-        rCodec.numChannels = Math.min(lCodec.numChannels,
-            rCodec.numChannels);
-        // push rCodec so we reply with offerer payload type
-        commonCapabilities.codecs.push(rCodec);
-
-        // determine common feedback mechanisms
-        rCodec.rtcpFeedback = rCodec.rtcpFeedback.filter(function(fb) {
-          for (var j = 0; j < lCodec.rtcpFeedback.length; j++) {
-            if (lCodec.rtcpFeedback[j].type === fb.type &&
-                lCodec.rtcpFeedback[j].parameter === fb.parameter) {
-              return true;
-            }
-          }
-          return false;
-        });
-        // FIXME: also need to determine .parameters
-        //  see https://github.com/openpeer/ortc/issues/569
-        break;
-      }
-    }
-  });
-
-  localCapabilities.headerExtensions.forEach(function(lHeaderExtension) {
-    for (var i = 0; i < remoteCapabilities.headerExtensions.length;
-         i++) {
-      var rHeaderExtension = remoteCapabilities.headerExtensions[i];
-      if (lHeaderExtension.uri === rHeaderExtension.uri) {
-        commonCapabilities.headerExtensions.push(rHeaderExtension);
-        break;
-      }
-    }
-  });
-
-  // FIXME: fecMechanisms
-  return commonCapabilities;
+/* Initialise the SHA256 computation */
+function sha256_init() {
+	ihash = new Array(8);
+	count = new Array(2);
+	buffer = new Array(64);
+	count[0] = count[1] = 0;
+	ihash[0] = 0x6a09e667;
+	ihash[1] = 0xbb67ae85;
+	ihash[2] = 0x3c6ef372;
+	ihash[3] = 0xa54ff53a;
+	ihash[4] = 0x510e527f;
+	ihash[5] = 0x9b05688c;
+	ihash[6] = 0x1f83d9ab;
+	ihash[7] = 0x5be0cd19;
 }
 
-// is action=setLocalDescription with type allowed in signalingState
-function isActionAllowedInSignalingState(action, type, signalingState) {
-  return {
-    offer: {
-      setLocalDescription: ['stable', 'have-local-offer'],
-      setRemoteDescription: ['stable', 'have-remote-offer']
-    },
-    answer: {
-      setLocalDescription: ['have-remote-offer', 'have-local-pranswer'],
-      setRemoteDescription: ['have-local-offer', 'have-remote-pranswer']
-    }
-  }[type][action].indexOf(signalingState) !== -1;
+/* Transform a 512-bit message block */
+function sha256_transform() {
+	var a, b, c, d, e, f, g, h, T1, T2;
+	var W = new Array(16);
+
+	/* Initialize registers with the previous intermediate value */
+	a = ihash[0];
+	b = ihash[1];
+	c = ihash[2];
+	d = ihash[3];
+	e = ihash[4];
+	f = ihash[5];
+	g = ihash[6];
+	h = ihash[7];
+
+        /* make 32-bit words */
+	for(var i=0; i<16; i++)
+		W[i] = ((buffer[(i<<2)+3]) | (buffer[(i<<2)+2] << 8) | (buffer[(i<<2)+1] 
+<< 16) | (buffer[i<<2] << 24));
+
+        for(var j=0; j<64; j++) {
+		T1 = h + sha256_Sigma1(e) + choice(e, f, g) + K256[j];
+		if(j < 16) T1 += W[j];
+		else T1 += sha256_expand(W, j);
+		T2 = sha256_Sigma0(a) + majority(a, b, c);
+		h = g;
+		g = f;
+		f = e;
+		e = safe_add(d, T1);
+		d = c;
+		c = b;
+		b = a;
+		a = safe_add(T1, T2);
+        }
+
+	/* Compute the current intermediate hash value */
+	ihash[0] += a;
+	ihash[1] += b;
+	ihash[2] += c;
+	ihash[3] += d;
+	ihash[4] += e;
+	ihash[5] += f;
+	ihash[6] += g;
+	ihash[7] += h;
 }
 
-function maybeAddCandidate(iceTransport, candidate) {
-  // Edge's internal representation adds some fields therefore
-  // not all fieldѕ are taken into account.
-  var alreadyAdded = iceTransport.getRemoteCandidates()
-      .find(function(remoteCandidate) {
-        return candidate.foundation === remoteCandidate.foundation &&
-            candidate.ip === remoteCandidate.ip &&
-            candidate.port === remoteCandidate.port &&
-            candidate.priority === remoteCandidate.priority &&
-            candidate.protocol === remoteCandidate.protocol &&
-            candidate.type === remoteCandidate.type;
-      });
-  if (!alreadyAdded) {
-    iceTransport.addRemoteCandidate(candidate);
-  }
+/* Read the next chunk of data and update the SHA256 computation */
+function sha256_update(data, inputLen) {
+	var i, index, curpos = 0;
+	/* Compute number of bytes mod 64 */
+	index = ((count[0] >> 3) & 0x3f);
+        var remainder = (inputLen & 0x3f);
+
+	/* Update number of bits */
+	if ((count[0] += (inputLen << 3)) < (inputLen << 3)) count[1]++;
+	count[1] += (inputLen >> 29);
+
+	/* Transform as many times as possible */
+	for(i=0; i+63<inputLen; i+=64) {
+                for(var j=index; j<64; j++)
+			buffer[j] = data.charCodeAt(curpos++);
+		sha256_transform();
+		index = 0;
+	}
+
+	/* Buffer remaining input */
+	for(var j=0; j<remainder; j++)
+		buffer[j] = data.charCodeAt(curpos++);
 }
 
-module.exports = function(window, edgeVersion) {
-  var RTCPeerConnection = function(config) {
-    var self = this;
-
-    var _eventTarget = document.createDocumentFragment();
-    ['addEventListener', 'removeEventListener', 'dispatchEvent']
-        .forEach(function(method) {
-          self[method] = _eventTarget[method].bind(_eventTarget);
-        });
-
-    this.onicecandidate = null;
-    this.onaddstream = null;
-    this.ontrack = null;
-    this.onremovestream = null;
-    this.onsignalingstatechange = null;
-    this.oniceconnectionstatechange = null;
-    this.onicegatheringstatechange = null;
-    this.onnegotiationneeded = null;
-    this.ondatachannel = null;
-    this.canTrickleIceCandidates = null;
-
-    this.needNegotiation = false;
-
-    this.localStreams = [];
-    this.remoteStreams = [];
-
-    this.localDescription = null;
-    this.remoteDescription = null;
-
-    this.signalingState = 'stable';
-    this.iceConnectionState = 'new';
-    this.iceGatheringState = 'new';
-
-    config = JSON.parse(JSON.stringify(config || {}));
-
-    this.usingBundle = config.bundlePolicy === 'max-bundle';
-    if (config.rtcpMuxPolicy === 'negotiate') {
-      var e = new Error('rtcpMuxPolicy \'negotiate\' is not supported');
-      e.name = 'NotSupportedError';
-      throw(e);
-    } else if (!config.rtcpMuxPolicy) {
-      config.rtcpMuxPolicy = 'require';
-    }
-
-    switch (config.iceTransportPolicy) {
-      case 'all':
-      case 'relay':
-        break;
-      default:
-        config.iceTransportPolicy = 'all';
-        break;
-    }
-
-    switch (config.bundlePolicy) {
-      case 'balanced':
-      case 'max-compat':
-      case 'max-bundle':
-        break;
-      default:
-        config.bundlePolicy = 'balanced';
-        break;
-    }
-
-    config.iceServers = filterIceServers(config.iceServers || [], edgeVersion);
-
-    this._iceGatherers = [];
-    if (config.iceCandidatePoolSize) {
-      for (var i = config.iceCandidatePoolSize; i > 0; i--) {
-        this._iceGatherers = new window.RTCIceGatherer({
-          iceServers: config.iceServers,
-          gatherPolicy: config.iceTransportPolicy
-        });
-      }
-    } else {
-      config.iceCandidatePoolSize = 0;
-    }
-
-    this._config = config;
-
-    // per-track iceGathers, iceTransports, dtlsTransports, rtpSenders, ...
-    // everything that is needed to describe a SDP m-line.
-    this.transceivers = [];
-
-    this._sdpSessionId = SDPUtils.generateSessionId();
-    this._sdpSessionVersion = 0;
-  };
-
-  RTCPeerConnection.prototype._emitGatheringStateChange = function() {
-    var event = new Event('icegatheringstatechange');
-    this.dispatchEvent(event);
-    if (this.onicegatheringstatechange !== null) {
-      this.onicegatheringstatechange(event);
-    }
-  };
-
-  RTCPeerConnection.prototype.getConfiguration = function() {
-    return this._config;
-  };
-
-  RTCPeerConnection.prototype.getLocalStreams = function() {
-    return this.localStreams;
-  };
-
-  RTCPeerConnection.prototype.getRemoteStreams = function() {
-    return this.remoteStreams;
-  };
-
-  // internal helper to create a transceiver object.
-  // (whih is not yet the same as the WebRTC 1.0 transceiver)
-  RTCPeerConnection.prototype._createTransceiver = function(kind) {
-    var hasBundleTransport = this.transceivers.length > 0;
-    var transceiver = {
-      track: null,
-      iceGatherer: null,
-      iceTransport: null,
-      dtlsTransport: null,
-      localCapabilities: null,
-      remoteCapabilities: null,
-      rtpSender: null,
-      rtpReceiver: null,
-      kind: kind,
-      mid: null,
-      sendEncodingParameters: null,
-      recvEncodingParameters: null,
-      stream: null,
-      wantReceive: true
-    };
-    if (this.usingBundle && hasBundleTransport) {
-      transceiver.iceTransport = this.transceivers[0].iceTransport;
-      transceiver.dtlsTransport = this.transceivers[0].dtlsTransport;
-    } else {
-      var transports = this._createIceAndDtlsTransports();
-      transceiver.iceTransport = transports.iceTransport;
-      transceiver.dtlsTransport = transports.dtlsTransport;
-    }
-    this.transceivers.push(transceiver);
-    return transceiver;
-  };
-
-  RTCPeerConnection.prototype.addTrack = function(track, stream) {
-    var transceiver;
-    for (var i = 0; i < this.transceivers.length; i++) {
-      if (!this.transceivers[i].track &&
-          this.transceivers[i].kind === track.kind) {
-        transceiver = this.transceivers[i];
-      }
-    }
-    if (!transceiver) {
-      transceiver = this._createTransceiver(track.kind);
-    }
-
-    this._maybeFireNegotiationNeeded();
-
-    if (this.localStreams.indexOf(stream) === -1) {
-      this.localStreams.push(stream);
-    }
-
-    transceiver.track = track;
-    transceiver.stream = stream;
-    transceiver.rtpSender = new window.RTCRtpSender(track,
-        transceiver.dtlsTransport);
-    return transceiver.rtpSender;
-  };
-
-  RTCPeerConnection.prototype.addStream = function(stream) {
-    var self = this;
-    if (edgeVersion >= 15025) {
-      stream.getTracks().forEach(function(track) {
-        self.addTrack(track, stream);
-      });
-    } else {
-      // Clone is necessary for local demos mostly, attaching directly
-      // to two different senders does not work (build 10547).
-      // Fixed in 15025 (or earlier)
-      var clonedStream = stream.clone();
-      stream.getTracks().forEach(function(track, idx) {
-        var clonedTrack = clonedStream.getTracks()[idx];
-        track.addEventListener('enabled', function(event) {
-          clonedTrack.enabled = event.enabled;
-        });
-      });
-      clonedStream.getTracks().forEach(function(track) {
-        self.addTrack(track, clonedStream);
-      });
-    }
-  };
-
-  RTCPeerConnection.prototype.removeStream = function(stream) {
-    var idx = this.localStreams.indexOf(stream);
-    if (idx > -1) {
-      this.localStreams.splice(idx, 1);
-      this._maybeFireNegotiationNeeded();
-    }
-  };
-
-  RTCPeerConnection.prototype.getSenders = function() {
-    return this.transceivers.filter(function(transceiver) {
-      return !!transceiver.rtpSender;
-    })
-    .map(function(transceiver) {
-      return transceiver.rtpSender;
-    });
-  };
-
-  RTCPeerConnection.prototype.getReceivers = function() {
-    return this.transceivers.filter(function(transceiver) {
-      return !!transceiver.rtpReceiver;
-    })
-    .map(function(transceiver) {
-      return transceiver.rtpReceiver;
-    });
-  };
-
-
-  RTCPeerConnection.prototype._createIceGatherer = function(sdpMLineIndex,
-      usingBundle) {
-    var self = this;
-    if (usingBundle && sdpMLineIndex > 0) {
-      return this.transceivers[0].iceGatherer;
-    } else if (this._iceGatherers.length) {
-      return this._iceGatherers.shift();
-    }
-    var iceGatherer = new window.RTCIceGatherer({
-      iceServers: this._config.iceServers,
-      gatherPolicy: this._config.iceTransportPolicy
-    });
-    Object.defineProperty(iceGatherer, 'state',
-        {value: 'new', writable: true}
-    );
-
-    this.transceivers[sdpMLineIndex].candidates = [];
-    this.transceivers[sdpMLineIndex].bufferCandidates = function(event) {
-      var end = !event.candidate || Object.keys(event.candidate).length === 0;
-      // polyfill since RTCIceGatherer.state is not implemented in
-      // Edge 10547 yet.
-      iceGatherer.state = end ? 'completed' : 'gathering';
-      if (self.transceivers[sdpMLineIndex].candidates !== null) {
-        self.transceivers[sdpMLineIndex].candidates.push(event.candidate);
-      }
-    };
-    iceGatherer.addEventListener('localcandidate',
-      this.transceivers[sdpMLineIndex].bufferCandidates);
-    return iceGatherer;
-  };
-
-  // start gathering from an RTCIceGatherer.
-  RTCPeerConnection.prototype._gather = function(mid, sdpMLineIndex) {
-    var self = this;
-    var iceGatherer = this.transceivers[sdpMLineIndex].iceGatherer;
-    if (iceGatherer.onlocalcandidate) {
-      return;
-    }
-    var candidates = this.transceivers[sdpMLineIndex].candidates;
-    this.transceivers[sdpMLineIndex].candidates = null;
-    iceGatherer.removeEventListener('localcandidate',
-      this.transceivers[sdpMLineIndex].bufferCandidates);
-    iceGatherer.onlocalcandidate = function(evt) {
-      if (self.usingBundle && sdpMLineIndex > 0) {
-        // if we know that we use bundle we can drop candidates with
-        // ѕdpMLineIndex > 0. If we don't do this then our state gets
-        // confused since we dispose the extra ice gatherer.
-        return;
-      }
-      var event = new Event('icecandidate');
-      event.candidate = {sdpMid: mid, sdpMLineIndex: sdpMLineIndex};
-
-      var cand = evt.candidate;
-      // Edge emits an empty object for RTCIceCandidateComplete‥
-      var end = !cand || Object.keys(cand).length === 0;
-      if (end) {
-        // polyfill since RTCIceGatherer.state is not implemented in
-        // Edge 10547 yet.
-        if (iceGatherer.state === 'new' || iceGatherer.state === 'gathering') {
-          iceGatherer.state = 'completed';
-        }
-      } else {
-        if (iceGatherer.state === 'new') {
-          iceGatherer.state = 'gathering';
-        }
-        // RTCIceCandidate doesn't have a component, needs to be added
-        cand.component = 1;
-        event.candidate.candidate = SDPUtils.writeCandidate(cand);
-      }
-
-      // update local description.
-      var sections = SDPUtils.splitSections(self.localDescription.sdp);
-      if (!end) {
-        sections[event.candidate.sdpMLineIndex + 1] +=
-            'a=' + event.candidate.candidate + '\r\n';
-      } else {
-        sections[event.candidate.sdpMLineIndex + 1] +=
-            'a=end-of-candidates\r\n';
-      }
-      self.localDescription.sdp = sections.join('');
-      var complete = self.transceivers.every(function(transceiver) {
-        return transceiver.iceGatherer &&
-            transceiver.iceGatherer.state === 'completed';
-      });
-
-      if (self.iceGatheringState !== 'gathering') {
-        self.iceGatheringState = 'gathering';
-        self._emitGatheringStateChange();
-      }
-
-      // Emit candidate. Also emit null candidate when all gatherers are
-      // complete.
-      if (!end) {
-        self.dispatchEvent(event);
-        if (self.onicecandidate !== null) {
-          self.onicecandidate(event);
-        }
-      }
-      if (complete) {
-        self.dispatchEvent(new Event('icecandidate'));
-        if (self.onicecandidate !== null) {
-          self.onicecandidate(new Event('icecandidate'));
-        }
-        self.iceGatheringState = 'complete';
-        self._emitGatheringStateChange();
-      }
-    };
-
-    // emit already gathered candidates.
-    window.setTimeout(function() {
-      candidates.forEach(function(candidate) {
-        var e = new Event('RTCIceGatherEvent');
-        e.candidate = candidate;
-        iceGatherer.onlocalcandidate(e);
-      });
-    }, 0);
-  };
-
-  // Create ICE transport and DTLS transport.
-  RTCPeerConnection.prototype._createIceAndDtlsTransports = function() {
-    var self = this;
-    var iceTransport = new window.RTCIceTransport(null);
-    iceTransport.onicestatechange = function() {
-      self._updateConnectionState();
-    };
-
-    var dtlsTransport = new window.RTCDtlsTransport(iceTransport);
-    dtlsTransport.ondtlsstatechange = function() {
-      self._updateConnectionState();
-    };
-    dtlsTransport.onerror = function() {
-      // onerror does not set state to failed by itself.
-      Object.defineProperty(dtlsTransport, 'state',
-          {value: 'failed', writable: true});
-      self._updateConnectionState();
-    };
-
-    return {
-      iceTransport: iceTransport,
-      dtlsTransport: dtlsTransport
-    };
-  };
-
-  // Destroy ICE gatherer, ICE transport and DTLS transport.
-  // Without triggering the callbacks.
-  RTCPeerConnection.prototype._disposeIceAndDtlsTransports = function(
-      sdpMLineIndex) {
-    var iceGatherer = this.transceivers[sdpMLineIndex].iceGatherer;
-    if (iceGatherer) {
-      delete iceGatherer.onlocalcandidate;
-      delete this.transceivers[sdpMLineIndex].iceGatherer;
-    }
-    var iceTransport = this.transceivers[sdpMLineIndex].iceTransport;
-    if (iceTransport) {
-      delete iceTransport.onicestatechange;
-      delete this.transceivers[sdpMLineIndex].iceTransport;
-    }
-    var dtlsTransport = this.transceivers[sdpMLineIndex].dtlsTransport;
-    if (dtlsTransport) {
-      delete dtlsTransport.ondtlsstatechange;
-      delete dtlsTransport.onerror;
-      delete this.transceivers[sdpMLineIndex].dtlsTransport;
-    }
-  };
-
-  // Start the RTP Sender and Receiver for a transceiver.
-  RTCPeerConnection.prototype._transceive = function(transceiver,
-      send, recv) {
-    var params = getCommonCapabilities(transceiver.localCapabilities,
-        transceiver.remoteCapabilities);
-    if (send && transceiver.rtpSender) {
-      params.encodings = transceiver.sendEncodingParameters;
-      params.rtcp = {
-        cname: SDPUtils.localCName,
-        compound: transceiver.rtcpParameters.compound
-      };
-      if (transceiver.recvEncodingParameters.length) {
-        params.rtcp.ssrc = transceiver.recvEncodingParameters[0].ssrc;
-      }
-      transceiver.rtpSender.send(params);
-    }
-    if (recv && transceiver.rtpReceiver) {
-      // remove RTX field in Edge 14942
-      if (transceiver.kind === 'video'
-          && transceiver.recvEncodingParameters
-          && edgeVersion < 15019) {
-        transceiver.recvEncodingParameters.forEach(function(p) {
-          delete p.rtx;
-        });
-      }
-      params.encodings = transceiver.recvEncodingParameters;
-      params.rtcp = {
-        cname: transceiver.rtcpParameters.cname,
-        compound: transceiver.rtcpParameters.compound
-      };
-      if (transceiver.sendEncodingParameters.length) {
-        params.rtcp.ssrc = transceiver.sendEncodingParameters[0].ssrc;
-      }
-      transceiver.rtpReceiver.receive(params);
-    }
-  };
-
-  RTCPeerConnection.prototype.setLocalDescription = function(description) {
-    var self = this;
-    var args = arguments;
-
-    if (!isActionAllowedInSignalingState('setLocalDescription',
-        description.type, this.signalingState)) {
-      return new Promise(function(resolve, reject) {
-        var e = new Error('Can not set remote ' + description.type +
-            ' in state ' + self.signalingState);
-        e.name = 'InvalidStateError';
-        if (args.length > 2 && typeof args[2] === 'function') {
-          args[2].apply(null, [e]);
-        }
-        reject(e);
-      });
-    }
-
-    var sections;
-    var sessionpart;
-    if (description.type === 'offer') {
-      // VERY limited support for SDP munging. Limited to:
-      // * changing the order of codecs
-      sections = SDPUtils.splitSections(description.sdp);
-      sessionpart = sections.shift();
-      sections.forEach(function(mediaSection, sdpMLineIndex) {
-        var caps = SDPUtils.parseRtpParameters(mediaSection);
-        self.transceivers[sdpMLineIndex].localCapabilities = caps;
-      });
-
-      this.transceivers.forEach(function(transceiver, sdpMLineIndex) {
-        self._gather(transceiver.mid, sdpMLineIndex);
-      });
-    } else if (description.type === 'answer') {
-      sections = SDPUtils.splitSections(self.remoteDescription.sdp);
-      sessionpart = sections.shift();
-      var isIceLite = SDPUtils.matchPrefix(sessionpart,
-          'a=ice-lite').length > 0;
-      sections.forEach(function(mediaSection, sdpMLineIndex) {
-        var transceiver = self.transceivers[sdpMLineIndex];
-        var iceGatherer = transceiver.iceGatherer;
-        var iceTransport = transceiver.iceTransport;
-        var dtlsTransport = transceiver.dtlsTransport;
-        var localCapabilities = transceiver.localCapabilities;
-        var remoteCapabilities = transceiver.remoteCapabilities;
-
-        var rejected = SDPUtils.isRejected(mediaSection);
-
-        if (!rejected && !transceiver.isDatachannel) {
-          var remoteIceParameters = SDPUtils.getIceParameters(
-              mediaSection, sessionpart);
-          var remoteDtlsParameters = SDPUtils.getDtlsParameters(
-              mediaSection, sessionpart);
-          if (isIceLite) {
-            remoteDtlsParameters.role = 'server';
-          }
-
-          if (!self.usingBundle || sdpMLineIndex === 0) {
-            self._gather(transceiver.mid, sdpMLineIndex);
-            if (iceTransport.state === 'new') {
-              iceTransport.start(iceGatherer, remoteIceParameters,
-                  isIceLite ? 'controlling' : 'controlled');
-            }
-            if (dtlsTransport.state === 'new') {
-              dtlsTransport.start(remoteDtlsParameters);
-            }
-          }
-
-          // Calculate intersection of capabilities.
-          var params = getCommonCapabilities(localCapabilities,
-              remoteCapabilities);
-
-          // Start the RTCRtpSender. The RTCRtpReceiver for this
-          // transceiver has already been started in setRemoteDescription.
-          self._transceive(transceiver,
-              params.codecs.length > 0,
-              false);
-        }
-      });
-    }
-
-    this.localDescription = {
-      type: description.type,
-      sdp: description.sdp
-    };
-    switch (description.type) {
-      case 'offer':
-        this._updateSignalingState('have-local-offer');
-        break;
-      case 'answer':
-        this._updateSignalingState('stable');
-        break;
-      default:
-        throw new TypeError('unsupported type "' + description.type +
-            '"');
-    }
-
-    // If a success callback was provided, emit ICE candidates after it
-    // has been executed. Otherwise, emit callback after the Promise is
-    // resolved.
-    var cb = arguments.length > 1 && typeof arguments[1] === 'function' &&
-        arguments[1];
-    return new Promise(function(resolve) {
-      if (cb) {
-        cb.apply(null);
-      }
-      resolve();
-    });
-  };
-
-  RTCPeerConnection.prototype.setRemoteDescription = function(description) {
-    var self = this;
-    var args = arguments;
-
-    if (!isActionAllowedInSignalingState('setRemoteDescription',
-        description.type, this.signalingState)) {
-      return new Promise(function(resolve, reject) {
-        var e = new Error('Can not set remote ' + description.type +
-            ' in state ' + self.signalingState);
-        e.name = 'InvalidStateError';
-        if (args.length > 2 && typeof args[2] === 'function') {
-          args[2].apply(null, [e]);
-        }
-        reject(e);
-      });
-    }
-
-    var streams = {};
-    this.remoteStreams.forEach(function(stream) {
-      streams[stream.id] = stream;
-    });
-    var receiverList = [];
-    var sections = SDPUtils.splitSections(description.sdp);
-    var sessionpart = sections.shift();
-    var isIceLite = SDPUtils.matchPrefix(sessionpart,
-        'a=ice-lite').length > 0;
-    var usingBundle = SDPUtils.matchPrefix(sessionpart,
-        'a=group:BUNDLE ').length > 0;
-    this.usingBundle = usingBundle;
-    var iceOptions = SDPUtils.matchPrefix(sessionpart,
-        'a=ice-options:')[0];
-    if (iceOptions) {
-      this.canTrickleIceCandidates = iceOptions.substr(14).split(' ')
-          .indexOf('trickle') >= 0;
-    } else {
-      this.canTrickleIceCandidates = false;
-    }
-
-    sections.forEach(function(mediaSection, sdpMLineIndex) {
-      var lines = SDPUtils.splitLines(mediaSection);
-      var kind = SDPUtils.getKind(mediaSection);
-      var rejected = SDPUtils.isRejected(mediaSection);
-      var protocol = lines[0].substr(2).split(' ')[2];
-
-      var direction = SDPUtils.getDirection(mediaSection, sessionpart);
-      var remoteMsid = SDPUtils.parseMsid(mediaSection);
-
-      var mid = SDPUtils.getMid(mediaSection) || SDPUtils.generateIdentifier();
-
-      // Reject datachannels which are not implemented yet.
-      if (kind === 'application' && protocol === 'DTLS/SCTP') {
-        self.transceivers[sdpMLineIndex] = {
-          mid: mid,
-          isDatachannel: true
-        };
-        return;
-      }
-
-      var transceiver;
-      var iceGatherer;
-      var iceTransport;
-      var dtlsTransport;
-      var rtpReceiver;
-      var sendEncodingParameters;
-      var recvEncodingParameters;
-      var localCapabilities;
-
-      var track;
-      // FIXME: ensure the mediaSection has rtcp-mux set.
-      var remoteCapabilities = SDPUtils.parseRtpParameters(mediaSection);
-      var remoteIceParameters;
-      var remoteDtlsParameters;
-      if (!rejected) {
-        remoteIceParameters = SDPUtils.getIceParameters(mediaSection,
-            sessionpart);
-        remoteDtlsParameters = SDPUtils.getDtlsParameters(mediaSection,
-            sessionpart);
-        remoteDtlsParameters.role = 'client';
-      }
-      recvEncodingParameters =
-          SDPUtils.parseRtpEncodingParameters(mediaSection);
-
-      var rtcpParameters = SDPUtils.parseRtcpParameters(mediaSection);
-
-      var isComplete = SDPUtils.matchPrefix(mediaSection,
-          'a=end-of-candidates', sessionpart).length > 0;
-      var cands = SDPUtils.matchPrefix(mediaSection, 'a=candidate:')
-          .map(function(cand) {
-            return SDPUtils.parseCandidate(cand);
-          })
-          .filter(function(cand) {
-            return cand.component === 1;
-          });
-
-      // Check if we can use BUNDLE and dispose transports.
-      if ((description.type === 'offer' || description.type === 'answer') &&
-          !rejected && usingBundle && sdpMLineIndex > 0 &&
-          self.transceivers[sdpMLineIndex]) {
-        self._disposeIceAndDtlsTransports(sdpMLineIndex);
-        self.transceivers[sdpMLineIndex].iceGatherer =
-            self.transceivers[0].iceGatherer;
-        self.transceivers[sdpMLineIndex].iceTransport =
-            self.transceivers[0].iceTransport;
-        self.transceivers[sdpMLineIndex].dtlsTransport =
-            self.transceivers[0].dtlsTransport;
-        if (self.transceivers[sdpMLineIndex].rtpSender) {
-          self.transceivers[sdpMLineIndex].rtpSender.setTransport(
-              self.transceivers[0].dtlsTransport);
-        }
-        if (self.transceivers[sdpMLineIndex].rtpReceiver) {
-          self.transceivers[sdpMLineIndex].rtpReceiver.setTransport(
-              self.transceivers[0].dtlsTransport);
-        }
-      }
-      if (description.type === 'offer' && !rejected) {
-        transceiver = self.transceivers[sdpMLineIndex] ||
-            self._createTransceiver(kind);
-        transceiver.mid = mid;
-
-        if (!transceiver.iceGatherer) {
-          transceiver.iceGatherer = self._createIceGatherer(sdpMLineIndex,
-              usingBundle);
-        }
-
-        if (cands.length) {
-          if (isComplete && (!usingBundle || sdpMLineIndex === 0)
-              && transceiver.iceTransport.state === 'new') {
-            transceiver.iceTransport.setRemoteCandidates(cands);
-          } else {
-            cands.forEach(function(candidate) {
-              maybeAddCandidate(transceiver.iceTransport, candidate);
-            });
-          }
-        }
-
-        localCapabilities = window.RTCRtpReceiver.getCapabilities(kind);
-
-        // filter RTX until additional stuff needed for RTX is implemented
-        // in adapter.js
-        if (edgeVersion < 15019) {
-          localCapabilities.codecs = localCapabilities.codecs.filter(
-              function(codec) {
-                return codec.name !== 'rtx';
-              });
-        }
-
-        sendEncodingParameters = [{
-          ssrc: (2 * sdpMLineIndex + 2) * 1001
-        }];
-
-        if (direction === 'sendrecv' || direction === 'sendonly') {
-          var isNewTrack = !transceiver.rtpReceiver;
-          rtpReceiver = transceiver.rtpReceiver ||
-              new window.RTCRtpReceiver(transceiver.dtlsTransport, kind);
-
-          if (isNewTrack) {
-            var stream;
-            track = rtpReceiver.track;
-            // FIXME: does not work with Plan B.
-            if (remoteMsid) {
-              if (!streams[remoteMsid.stream]) {
-                streams[remoteMsid.stream] = new window.MediaStream();
-                Object.defineProperty(streams[remoteMsid.stream], 'id', {
-                  get: function() {
-                    return remoteMsid.stream;
-                  }
-                });
-              }
-              Object.defineProperty(track, 'id', {
-                get: function() {
-                  return remoteMsid.track;
-                }
-              });
-              stream = streams[remoteMsid.stream];
-            } else {
-              if (!streams.default) {
-                streams.default = new window.MediaStream();
-              }
-              stream = streams.default;
-            }
-            stream.addTrack(track);
-            receiverList.push([track, rtpReceiver, stream]);
-          }
-        }
-
-        transceiver.localCapabilities = localCapabilities;
-        transceiver.remoteCapabilities = remoteCapabilities;
-        transceiver.rtpReceiver = rtpReceiver;
-        transceiver.rtcpParameters = rtcpParameters;
-        transceiver.sendEncodingParameters = sendEncodingParameters;
-        transceiver.recvEncodingParameters = recvEncodingParameters;
-
-        // Start the RTCRtpReceiver now. The RTPSender is started in
-        // setLocalDescription.
-        self._transceive(self.transceivers[sdpMLineIndex],
-            false,
-            direction === 'sendrecv' || direction === 'sendonly');
-      } else if (description.type === 'answer' && !rejected) {
-        transceiver = self.transceivers[sdpMLineIndex];
-        iceGatherer = transceiver.iceGatherer;
-        iceTransport = transceiver.iceTransport;
-        dtlsTransport = transceiver.dtlsTransport;
-        rtpReceiver = transceiver.rtpReceiver;
-        sendEncodingParameters = transceiver.sendEncodingParameters;
-        localCapabilities = transceiver.localCapabilities;
-
-        self.transceivers[sdpMLineIndex].recvEncodingParameters =
-            recvEncodingParameters;
-        self.transceivers[sdpMLineIndex].remoteCapabilities =
-            remoteCapabilities;
-        self.transceivers[sdpMLineIndex].rtcpParameters = rtcpParameters;
-
-        if (cands.length) {
-          if ((isIceLite || isComplete) &&
-              (!usingBundle || sdpMLineIndex === 0) &&
-              iceTransport.state === 'new') {
-            iceTransport.setRemoteCandidates(cands);
-          } else {
-            cands.forEach(function(candidate) {
-              maybeAddCandidate(transceiver.iceTransport, candidate);
-            });
-          }
-        }
-
-        if (!usingBundle || sdpMLineIndex === 0) {
-          if (iceTransport.state === 'new') {
-            iceTransport.start(iceGatherer, remoteIceParameters,
-                'controlling');
-          }
-          if (dtlsTransport.state === 'new') {
-            dtlsTransport.start(remoteDtlsParameters);
-          }
-        }
-
-        self._transceive(transceiver,
-            direction === 'sendrecv' || direction === 'recvonly',
-            direction === 'sendrecv' || direction === 'sendonly');
-
-        if (rtpReceiver &&
-            (direction === 'sendrecv' || direction === 'sendonly')) {
-          track = rtpReceiver.track;
-          if (remoteMsid) {
-            if (!streams[remoteMsid.stream]) {
-              streams[remoteMsid.stream] = new window.MediaStream();
-            }
-            streams[remoteMsid.stream].addTrack(track);
-            receiverList.push([track, rtpReceiver, streams[remoteMsid.stream]]);
-          } else {
-            if (!streams.default) {
-              streams.default = new window.MediaStream();
-            }
-            streams.default.addTrack(track);
-            receiverList.push([track, rtpReceiver, streams.default]);
-          }
+/* Finish the computation by operations such as padding */
+function sha256_final() {
+	var index = ((count[0] >> 3) & 0x3f);
+        buffer[index++] = 0x80;
+        if(index <= 56) {
+		for(var i=index; i<56; i++)
+			buffer[i] = 0;
         } else {
-          // FIXME: actually the receiver should be created later.
-          delete transceiver.rtpReceiver;
-        }
-      }
-    });
-
-    this.remoteDescription = {
-      type: description.type,
-      sdp: description.sdp
-    };
-    switch (description.type) {
-      case 'offer':
-        this._updateSignalingState('have-remote-offer');
-        break;
-      case 'answer':
-        this._updateSignalingState('stable');
-        break;
-      default:
-        throw new TypeError('unsupported type "' + description.type +
-            '"');
-    }
-    Object.keys(streams).forEach(function(sid) {
-      var stream = streams[sid];
-      if (stream.getTracks().length) {
-        if (self.remoteStreams.indexOf(stream) === -1) {
-          self.remoteStreams.push(stream);
-          var event = new Event('addstream');
-          event.stream = stream;
-          window.setTimeout(function() {
-            self.dispatchEvent(event);
-            if (self.onaddstream !== null) {
-              self.onaddstream(event);
-            }
-          });
-        }
-
-        receiverList.forEach(function(item) {
-          var track = item[0];
-          var receiver = item[1];
-          if (stream.id !== item[2].id) {
-            return;
-          }
-          var trackEvent = new Event('track');
-          trackEvent.track = track;
-          trackEvent.receiver = receiver;
-          trackEvent.transceiver = {receiver: receiver};
-          trackEvent.streams = [stream];
-          window.setTimeout(function() {
-            self.dispatchEvent(trackEvent);
-            if (self.ontrack !== null) {
-              self.ontrack(trackEvent);
-            }
-          });
-        });
-      }
-    });
-
-    // check whether addIceCandidate({}) was called within four seconds after
-    // setRemoteDescription.
-    window.setTimeout(function() {
-      if (!(self && self.transceivers)) {
-        return;
-      }
-      self.transceivers.forEach(function(transceiver) {
-        if (transceiver.iceTransport &&
-            transceiver.iceTransport.state === 'new' &&
-            transceiver.iceTransport.getRemoteCandidates().length > 0) {
-          console.warn('Timeout for addRemoteCandidate. Consider sending ' +
-              'an end-of-candidates notification');
-          transceiver.iceTransport.addRemoteCandidate({});
-        }
-      });
-    }, 4000);
-
-    return new Promise(function(resolve) {
-      if (args.length > 1 && typeof args[1] === 'function') {
-        args[1].apply(null);
-      }
-      resolve();
-    });
-  };
-
-  RTCPeerConnection.prototype.close = function() {
-    this.transceivers.forEach(function(transceiver) {
-      /* not yet
-      if (transceiver.iceGatherer) {
-        transceiver.iceGatherer.close();
-      }
-      */
-      if (transceiver.iceTransport) {
-        transceiver.iceTransport.stop();
-      }
-      if (transceiver.dtlsTransport) {
-        transceiver.dtlsTransport.stop();
-      }
-      if (transceiver.rtpSender) {
-        transceiver.rtpSender.stop();
-      }
-      if (transceiver.rtpReceiver) {
-        transceiver.rtpReceiver.stop();
-      }
-    });
-    // FIXME: clean up tracks, local streams, remote streams, etc
-    this._updateSignalingState('closed');
-  };
-
-  // Update the signaling state.
-  RTCPeerConnection.prototype._updateSignalingState = function(newState) {
-    this.signalingState = newState;
-    var event = new Event('signalingstatechange');
-    this.dispatchEvent(event);
-    if (this.onsignalingstatechange !== null) {
-      this.onsignalingstatechange(event);
-    }
-  };
-
-  // Determine whether to fire the negotiationneeded event.
-  RTCPeerConnection.prototype._maybeFireNegotiationNeeded = function() {
-    var self = this;
-    if (this.signalingState !== 'stable' || this.needNegotiation === true) {
-      return;
-    }
-    this.needNegotiation = true;
-    window.setTimeout(function() {
-      if (self.needNegotiation === false) {
-        return;
-      }
-      self.needNegotiation = false;
-      var event = new Event('negotiationneeded');
-      self.dispatchEvent(event);
-      if (self.onnegotiationneeded !== null) {
-        self.onnegotiationneeded(event);
-      }
-    }, 0);
-  };
-
-  // Update the connection state.
-  RTCPeerConnection.prototype._updateConnectionState = function() {
-    var self = this;
-    var newState;
-    var states = {
-      'new': 0,
-      closed: 0,
-      connecting: 0,
-      checking: 0,
-      connected: 0,
-      completed: 0,
-      disconnected: 0,
-      failed: 0
-    };
-    this.transceivers.forEach(function(transceiver) {
-      states[transceiver.iceTransport.state]++;
-      states[transceiver.dtlsTransport.state]++;
-    });
-    // ICETransport.completed and connected are the same for this purpose.
-    states.connected += states.completed;
-
-    newState = 'new';
-    if (states.failed > 0) {
-      newState = 'failed';
-    } else if (states.connecting > 0 || states.checking > 0) {
-      newState = 'connecting';
-    } else if (states.disconnected > 0) {
-      newState = 'disconnected';
-    } else if (states.new > 0) {
-      newState = 'new';
-    } else if (states.connected > 0 || states.completed > 0) {
-      newState = 'connected';
-    }
-
-    if (newState !== self.iceConnectionState) {
-      self.iceConnectionState = newState;
-      var event = new Event('iceconnectionstatechange');
-      this.dispatchEvent(event);
-      if (this.oniceconnectionstatechange !== null) {
-        this.oniceconnectionstatechange(event);
-      }
-    }
-  };
-
-  RTCPeerConnection.prototype.createOffer = function() {
-    var self = this;
-    var args = arguments;
-
-    var offerOptions;
-    if (arguments.length === 1 && typeof arguments[0] !== 'function') {
-      offerOptions = arguments[0];
-    } else if (arguments.length === 3) {
-      offerOptions = arguments[2];
-    }
-
-    var numAudioTracks = this.transceivers.filter(function(t) {
-      return t.kind === 'audio';
-    }).length;
-    var numVideoTracks = this.transceivers.filter(function(t) {
-      return t.kind === 'video';
-    }).length;
-
-    // Determine number of audio and video tracks we need to send/recv.
-    if (offerOptions) {
-      // Reject Chrome legacy constraints.
-      if (offerOptions.mandatory || offerOptions.optional) {
-        throw new TypeError(
-            'Legacy mandatory/optional constraints not supported.');
-      }
-      if (offerOptions.offerToReceiveAudio !== undefined) {
-        if (offerOptions.offerToReceiveAudio === true) {
-          numAudioTracks = 1;
-        } else if (offerOptions.offerToReceiveAudio === false) {
-          numAudioTracks = 0;
-        } else {
-          numAudioTracks = offerOptions.offerToReceiveAudio;
-        }
-      }
-      if (offerOptions.offerToReceiveVideo !== undefined) {
-        if (offerOptions.offerToReceiveVideo === true) {
-          numVideoTracks = 1;
-        } else if (offerOptions.offerToReceiveVideo === false) {
-          numVideoTracks = 0;
-        } else {
-          numVideoTracks = offerOptions.offerToReceiveVideo;
-        }
-      }
-    }
-
-    this.transceivers.forEach(function(transceiver) {
-      if (transceiver.kind === 'audio') {
-        numAudioTracks--;
-        if (numAudioTracks < 0) {
-          transceiver.wantReceive = false;
-        }
-      } else if (transceiver.kind === 'video') {
-        numVideoTracks--;
-        if (numVideoTracks < 0) {
-          transceiver.wantReceive = false;
-        }
-      }
-    });
-
-    // Create M-lines for recvonly streams.
-    while (numAudioTracks > 0 || numVideoTracks > 0) {
-      if (numAudioTracks > 0) {
-        this._createTransceiver('audio');
-        numAudioTracks--;
-      }
-      if (numVideoTracks > 0) {
-        this._createTransceiver('video');
-        numVideoTracks--;
-      }
-    }
-
-    var sdp = SDPUtils.writeSessionBoilerplate(this._sdpSessionId,
-        this._sdpSessionVersion++);
-    this.transceivers.forEach(function(transceiver, sdpMLineIndex) {
-      // For each track, create an ice gatherer, ice transport,
-      // dtls transport, potentially rtpsender and rtpreceiver.
-      var track = transceiver.track;
-      var kind = transceiver.kind;
-      var mid = SDPUtils.generateIdentifier();
-      transceiver.mid = mid;
-
-      if (!transceiver.iceGatherer) {
-        transceiver.iceGatherer = self._createIceGatherer(sdpMLineIndex,
-            self.usingBundle);
-      }
-
-      var localCapabilities = window.RTCRtpSender.getCapabilities(kind);
-      // filter RTX until additional stuff needed for RTX is implemented
-      // in adapter.js
-      if (edgeVersion < 15019) {
-        localCapabilities.codecs = localCapabilities.codecs.filter(
-            function(codec) {
-              return codec.name !== 'rtx';
-            });
-      }
-      localCapabilities.codecs.forEach(function(codec) {
-        // work around https://bugs.chromium.org/p/webrtc/issues/detail?id=6552
-        // by adding level-asymmetry-allowed=1
-        if (codec.name === 'H264' &&
-            codec.parameters['level-asymmetry-allowed'] === undefined) {
-          codec.parameters['level-asymmetry-allowed'] = '1';
-        }
-      });
-
-      // generate an ssrc now, to be used later in rtpSender.send
-      var sendEncodingParameters = [{
-        ssrc: (2 * sdpMLineIndex + 1) * 1001
-      }];
-      if (track) {
-        // add RTX
-        if (edgeVersion >= 15019 && kind === 'video') {
-          sendEncodingParameters[0].rtx = {
-            ssrc: (2 * sdpMLineIndex + 1) * 1001 + 1
-          };
-        }
-      }
-
-      if (transceiver.wantReceive) {
-        transceiver.rtpReceiver = new window.RTCRtpReceiver(
-            transceiver.dtlsTransport, kind);
-      }
-
-      transceiver.localCapabilities = localCapabilities;
-      transceiver.sendEncodingParameters = sendEncodingParameters;
-    });
-
-    // always offer BUNDLE and dispose on return if not supported.
-    if (this._config.bundlePolicy !== 'max-compat') {
-      sdp += 'a=group:BUNDLE ' + this.transceivers.map(function(t) {
-        return t.mid;
-      }).join(' ') + '\r\n';
-    }
-    sdp += 'a=ice-options:trickle\r\n';
-
-    this.transceivers.forEach(function(transceiver, sdpMLineIndex) {
-      sdp += writeMediaSection(transceiver,
-          transceiver.localCapabilities, 'offer', transceiver.stream);
-      sdp += 'a=rtcp-rsize\r\n';
-
-      if (transceiver.iceGatherer && self.iceGatheringState !== 'new' &&
-          (sdpMLineIndex === 0 || !self.usingBundle)) {
-        transceiver.iceGatherer.getLocalCandidates().forEach(function(cand) {
-          cand.component = 1;
-          sdp += 'a=' + SDPUtils.writeCandidate(cand) + '\r\n';
-        });
-
-        if (transceiver.iceGatherer.state === 'completed') {
-          sdp += 'a=end-of-candidates\r\n';
-        }
-      }
-    });
-
-    var desc = new window.RTCSessionDescription({
-      type: 'offer',
-      sdp: sdp
-    });
-    return new Promise(function(resolve) {
-      if (args.length > 0 && typeof args[0] === 'function') {
-        args[0].apply(null, [desc]);
-        resolve();
-        return;
-      }
-      resolve(desc);
-    });
-  };
-
-  RTCPeerConnection.prototype.createAnswer = function() {
-    var args = arguments;
-
-    var sdp = SDPUtils.writeSessionBoilerplate(this._sdpSessionId,
-        this._sdpSessionVersion++);
-    if (this.usingBundle) {
-      sdp += 'a=group:BUNDLE ' + this.transceivers.map(function(t) {
-        return t.mid;
-      }).join(' ') + '\r\n';
-    }
-    var mediaSectionsInOffer = SDPUtils.splitSections(
-        this.remoteDescription.sdp).length - 1;
-    this.transceivers.forEach(function(transceiver, sdpMLineIndex) {
-      if (sdpMLineIndex + 1 > mediaSectionsInOffer) {
-        return;
-      }
-      if (transceiver.isDatachannel) {
-        sdp += 'm=application 0 DTLS/SCTP 5000\r\n' +
-            'c=IN IP4 0.0.0.0\r\n' +
-            'a=mid:' + transceiver.mid + '\r\n';
-        return;
-      }
-
-      // FIXME: look at direction.
-      if (transceiver.stream) {
-        var localTrack;
-        if (transceiver.kind === 'audio') {
-          localTrack = transceiver.stream.getAudioTracks()[0];
-        } else if (transceiver.kind === 'video') {
-          localTrack = transceiver.stream.getVideoTracks()[0];
-        }
-        if (localTrack) {
-          // add RTX
-          if (edgeVersion >= 15019 && transceiver.kind === 'video') {
-            transceiver.sendEncodingParameters[0].rtx = {
-              ssrc: (2 * sdpMLineIndex + 2) * 1001 + 1
-            };
-          }
-        }
-      }
-
-      // Calculate intersection of capabilities.
-      var commonCapabilities = getCommonCapabilities(
-          transceiver.localCapabilities,
-          transceiver.remoteCapabilities);
-
-      var hasRtx = commonCapabilities.codecs.filter(function(c) {
-        return c.name.toLowerCase() === 'rtx';
-      }).length;
-      if (!hasRtx && transceiver.sendEncodingParameters[0].rtx) {
-        delete transceiver.sendEncodingParameters[0].rtx;
-      }
-
-      sdp += writeMediaSection(transceiver, commonCapabilities,
-          'answer', transceiver.stream);
-      if (transceiver.rtcpParameters &&
-          transceiver.rtcpParameters.reducedSize) {
-        sdp += 'a=rtcp-rsize\r\n';
-      }
-    });
-
-    var desc = new window.RTCSessionDescription({
-      type: 'answer',
-      sdp: sdp
-    });
-    return new Promise(function(resolve) {
-      if (args.length > 0 && typeof args[0] === 'function') {
-        args[0].apply(null, [desc]);
-        resolve();
-        return;
-      }
-      resolve(desc);
-    });
-  };
-
-  RTCPeerConnection.prototype.addIceCandidate = function(candidate) {
-    var err;
-    var sections;
-    if (!candidate || candidate.candidate === '') {
-      for (var j = 0; j < this.transceivers.length; j++) {
-        if (this.transceivers[j].isDatachannel) {
-          continue;
-        }
-        this.transceivers[j].iceTransport.addRemoteCandidate({});
-        sections = SDPUtils.splitSections(this.remoteDescription.sdp);
-        sections[j + 1] += 'a=end-of-candidates\r\n';
-        this.remoteDescription.sdp = sections.join('');
-        if (this.usingBundle) {
-          break;
-        }
-      }
-    } else if (!(candidate.sdpMLineIndex || candidate.sdpMid)) {
-      throw new TypeError('sdpMLineIndex or sdpMid required');
-    } else if (!this.remoteDescription) {
-      err = new Error('Can not add ICE candidate without ' +
-          'a remote description');
-      err.name = 'InvalidStateError';
-    } else {
-      var sdpMLineIndex = candidate.sdpMLineIndex;
-      if (candidate.sdpMid) {
-        for (var i = 0; i < this.transceivers.length; i++) {
-          if (this.transceivers[i].mid === candidate.sdpMid) {
-            sdpMLineIndex = i;
-            break;
-          }
-        }
-      }
-      var transceiver = this.transceivers[sdpMLineIndex];
-      if (transceiver) {
-        if (transceiver.isDatachannel) {
-          return Promise.resolve();
-        }
-        var cand = Object.keys(candidate.candidate).length > 0 ?
-            SDPUtils.parseCandidate(candidate.candidate) : {};
-        // Ignore Chrome's invalid candidates since Edge does not like them.
-        if (cand.protocol === 'tcp' && (cand.port === 0 || cand.port === 9)) {
-          return Promise.resolve();
-        }
-        // Ignore RTCP candidates, we assume RTCP-MUX.
-        if (cand.component && cand.component !== 1) {
-          return Promise.resolve();
-        }
-        // when using bundle, avoid adding candidates to the wrong
-        // ice transport.
-        if (sdpMLineIndex === 0 || (sdpMLineIndex > 0 &&
-            transceiver.iceTransport !== this.transceivers[0].iceTransport)) {
-          transceiver.iceTransport.addRemoteCandidate(cand);
-        }
-
-        // update the remoteDescription.
-        var candidateString = candidate.candidate.trim();
-        if (candidateString.indexOf('a=') === 0) {
-          candidateString = candidateString.substr(2);
-        }
-        sections = SDPUtils.splitSections(this.remoteDescription.sdp);
-        sections[sdpMLineIndex + 1] += 'a=' +
-            (cand.type ? candidateString : 'end-of-candidates')
-            + '\r\n';
-        this.remoteDescription.sdp = sections.join('');
-      } else {
-        err = new Error('Can not add ICE candidate');
-        err.name = 'OperationError';
-      }
-    }
-    var args = arguments;
-    return new Promise(function(resolve, reject) {
-      if (err) {
-        if (args.length > 2 && typeof args[2] === 'function') {
-          args[2].apply(null, [err]);
-        }
-        reject(err);
-      } else {
-        if (args.length > 1 && typeof args[1] === 'function') {
-          args[1].apply(null);
-        }
-        resolve();
-      }
-    });
-  };
-
-  RTCPeerConnection.prototype.getStats = function() {
-    var promises = [];
-    this.transceivers.forEach(function(transceiver) {
-      ['rtpSender', 'rtpReceiver', 'iceGatherer', 'iceTransport',
-          'dtlsTransport'].forEach(function(method) {
-            if (transceiver[method]) {
-              promises.push(transceiver[method].getStats());
-            }
-          });
-    });
-    var cb = arguments.length > 1 && typeof arguments[1] === 'function' &&
-        arguments[1];
-    var fixStatsType = function(stat) {
-      return {
-        inboundrtp: 'inbound-rtp',
-        outboundrtp: 'outbound-rtp',
-        candidatepair: 'candidate-pair',
-        localcandidate: 'local-candidate',
-        remotecandidate: 'remote-candidate'
-      }[stat.type] || stat.type;
-    };
-    return new Promise(function(resolve) {
-      // shim getStats with maplike support
-      var results = new Map();
-      Promise.all(promises).then(function(res) {
-        res.forEach(function(result) {
-          Object.keys(result).forEach(function(id) {
-            result[id].type = fixStatsType(result[id]);
-            results.set(id, result[id]);
-          });
-        });
-        if (cb) {
-          cb.apply(null, results);
-        }
-        resolve(results);
-      });
-    });
-  };
-  return RTCPeerConnection;
-};
-
-},{"sdp":2}],2:[function(require,module,exports){
- /* eslint-env node */
-'use strict';
-
-// SDP helpers.
-var SDPUtils = {};
-
-// Generate an alphanumeric identifier for cname or mids.
-// TODO: use UUIDs instead? https://gist.github.com/jed/982883
-SDPUtils.generateIdentifier = function() {
-  return Math.random().toString(36).substr(2, 10);
-};
-
-// The RTCP CNAME used by all peerconnections from the same JS.
-SDPUtils.localCName = SDPUtils.generateIdentifier();
-
-// Splits SDP into lines, dealing with both CRLF and LF.
-SDPUtils.splitLines = function(blob) {
-  return blob.trim().split('\n').map(function(line) {
-    return line.trim();
-  });
-};
-// Splits SDP into sessionpart and mediasections. Ensures CRLF.
-SDPUtils.splitSections = function(blob) {
-  var parts = blob.split('\nm=');
-  return parts.map(function(part, index) {
-    return (index > 0 ? 'm=' + part : part).trim() + '\r\n';
-  });
-};
-
-// Returns lines that start with a certain prefix.
-SDPUtils.matchPrefix = function(blob, prefix) {
-  return SDPUtils.splitLines(blob).filter(function(line) {
-    return line.indexOf(prefix) === 0;
-  });
-};
-
-// Parses an ICE candidate line. Sample input:
-// candidate:702786350 2 udp 41819902 8.8.8.8 60769 typ relay raddr 8.8.8.8
-// rport 55996"
-SDPUtils.parseCandidate = function(line) {
-  var parts;
-  // Parse both variants.
-  if (line.indexOf('a=candidate:') === 0) {
-    parts = line.substring(12).split(' ');
-  } else {
-    parts = line.substring(10).split(' ');
-  }
-
-  var candidate = {
-    foundation: parts[0],
-    component: parseInt(parts[1], 10),
-    protocol: parts[2].toLowerCase(),
-    priority: parseInt(parts[3], 10),
-    ip: parts[4],
-    port: parseInt(parts[5], 10),
-    // skip parts[6] == 'typ'
-    type: parts[7]
-  };
-
-  for (var i = 8; i < parts.length; i += 2) {
-    switch (parts[i]) {
-      case 'raddr':
-        candidate.relatedAddress = parts[i + 1];
-        break;
-      case 'rport':
-        candidate.relatedPort = parseInt(parts[i + 1], 10);
-        break;
-      case 'tcptype':
-        candidate.tcpType = parts[i + 1];
-        break;
-      case 'ufrag':
-        candidate.ufrag = parts[i + 1]; // for backward compability.
-        candidate.usernameFragment = parts[i + 1];
-        break;
-      default: // extension handling, in particular ufrag
-        candidate[parts[i]] = parts[i + 1];
-        break;
-    }
-  }
-  return candidate;
-};
-
-// Translates a candidate object into SDP candidate attribute.
-SDPUtils.writeCandidate = function(candidate) {
-  var sdp = [];
-  sdp.push(candidate.foundation);
-  sdp.push(candidate.component);
-  sdp.push(candidate.protocol.toUpperCase());
-  sdp.push(candidate.priority);
-  sdp.push(candidate.ip);
-  sdp.push(candidate.port);
-
-  var type = candidate.type;
-  sdp.push('typ');
-  sdp.push(type);
-  if (type !== 'host' && candidate.relatedAddress &&
-      candidate.relatedPort) {
-    sdp.push('raddr');
-    sdp.push(candidate.relatedAddress); // was: relAddr
-    sdp.push('rport');
-    sdp.push(candidate.relatedPort); // was: relPort
-  }
-  if (candidate.tcpType && candidate.protocol.toLowerCase() === 'tcp') {
-    sdp.push('tcptype');
-    sdp.push(candidate.tcpType);
-  }
-  if (candidate.ufrag) {
-    sdp.push('ufrag');
-    sdp.push(candidate.ufrag);
-  }
-  return 'candidate:' + sdp.join(' ');
-};
-
-// Parses an ice-options line, returns an array of option tags.
-// a=ice-options:foo bar
-SDPUtils.parseIceOptions = function(line) {
-  return line.substr(14).split(' ');
+		for(var i=index; i<64; i++)
+			buffer[i] = 0;
+                sha256_transform();
+                for(var i=0; i<56; i++)
+			buffer[i] = 0;
+	}
+        buffer[56] = (count[1] >>> 24) & 0xff;
+        buffer[57] = (count[1] >>> 16) & 0xff;
+        buffer[58] = (count[1] >>> 8) & 0xff;
+        buffer[59] = count[1] & 0xff;
+        buffer[60] = (count[0] >>> 24) & 0xff;
+        buffer[61] = (count[0] >>> 16) & 0xff;
+        buffer[62] = (count[0] >>> 8) & 0xff;
+        buffer[63] = count[0] & 0xff;
+        sha256_transform();
 }
 
-// Parses an rtpmap line, returns RTCRtpCoddecParameters. Sample input:
-// a=rtpmap:111 opus/48000/2
-SDPUtils.parseRtpMap = function(line) {
-  var parts = line.substr(9).split(' ');
-  var parsed = {
-    payloadType: parseInt(parts.shift(), 10) // was: id
-  };
-
-  parts = parts[0].split('/');
-
-  parsed.name = parts[0];
-  parsed.clockRate = parseInt(parts[1], 10); // was: clockrate
-  // was: channels
-  parsed.numChannels = parts.length === 3 ? parseInt(parts[2], 10) : 1;
-  return parsed;
-};
-
-// Generate an a=rtpmap line from RTCRtpCodecCapability or
-// RTCRtpCodecParameters.
-SDPUtils.writeRtpMap = function(codec) {
-  var pt = codec.payloadType;
-  if (codec.preferredPayloadType !== undefined) {
-    pt = codec.preferredPayloadType;
-  }
-  return 'a=rtpmap:' + pt + ' ' + codec.name + '/' + codec.clockRate +
-      (codec.numChannels !== 1 ? '/' + codec.numChannels : '') + '\r\n';
-};
-
-// Parses an a=extmap line (headerextension from RFC 5285). Sample input:
-// a=extmap:2 urn:ietf:params:rtp-hdrext:toffset
-// a=extmap:2/sendonly urn:ietf:params:rtp-hdrext:toffset
-SDPUtils.parseExtmap = function(line) {
-  var parts = line.substr(9).split(' ');
-  return {
-    id: parseInt(parts[0], 10),
-    direction: parts[0].indexOf('/') > 0 ? parts[0].split('/')[1] : 'sendrecv',
-    uri: parts[1]
-  };
-};
-
-// Generates a=extmap line from RTCRtpHeaderExtensionParameters or
-// RTCRtpHeaderExtension.
-SDPUtils.writeExtmap = function(headerExtension) {
-  return 'a=extmap:' + (headerExtension.id || headerExtension.preferredId) +
-      (headerExtension.direction && headerExtension.direction !== 'sendrecv'
-          ? '/' + headerExtension.direction
-          : '') +
-      ' ' + headerExtension.uri + '\r\n';
-};
-
-// Parses an ftmp line, returns dictionary. Sample input:
-// a=fmtp:96 vbr=on;cng=on
-// Also deals with vbr=on; cng=on
-SDPUtils.parseFmtp = function(line) {
-  var parsed = {};
-  var kv;
-  var parts = line.substr(line.indexOf(' ') + 1).split(';');
-  for (var j = 0; j < parts.length; j++) {
-    kv = parts[j].trim().split('=');
-    parsed[kv[0].trim()] = kv[1];
-  }
-  return parsed;
-};
-
-// Generates an a=ftmp line from RTCRtpCodecCapability or RTCRtpCodecParameters.
-SDPUtils.writeFmtp = function(codec) {
-  var line = '';
-  var pt = codec.payloadType;
-  if (codec.preferredPayloadType !== undefined) {
-    pt = codec.preferredPayloadType;
-  }
-  if (codec.parameters && Object.keys(codec.parameters).length) {
-    var params = [];
-    Object.keys(codec.parameters).forEach(function(param) {
-      params.push(param + '=' + codec.parameters[param]);
-    });
-    line += 'a=fmtp:' + pt + ' ' + params.join(';') + '\r\n';
-  }
-  return line;
-};
-
-// Parses an rtcp-fb line, returns RTCPRtcpFeedback object. Sample input:
-// a=rtcp-fb:98 nack rpsi
-SDPUtils.parseRtcpFb = function(line) {
-  var parts = line.substr(line.indexOf(' ') + 1).split(' ');
-  return {
-    type: parts.shift(),
-    parameter: parts.join(' ')
-  };
-};
-// Generate a=rtcp-fb lines from RTCRtpCodecCapability or RTCRtpCodecParameters.
-SDPUtils.writeRtcpFb = function(codec) {
-  var lines = '';
-  var pt = codec.payloadType;
-  if (codec.preferredPayloadType !== undefined) {
-    pt = codec.preferredPayloadType;
-  }
-  if (codec.rtcpFeedback && codec.rtcpFeedback.length) {
-    // FIXME: special handling for trr-int?
-    codec.rtcpFeedback.forEach(function(fb) {
-      lines += 'a=rtcp-fb:' + pt + ' ' + fb.type +
-      (fb.parameter && fb.parameter.length ? ' ' + fb.parameter : '') +
-          '\r\n';
-    });
-  }
-  return lines;
-};
-
-// Parses an RFC 5576 ssrc media attribute. Sample input:
-// a=ssrc:3735928559 cname:something
-SDPUtils.parseSsrcMedia = function(line) {
-  var sp = line.indexOf(' ');
-  var parts = {
-    ssrc: parseInt(line.substr(7, sp - 7), 10)
-  };
-  var colon = line.indexOf(':', sp);
-  if (colon > -1) {
-    parts.attribute = line.substr(sp + 1, colon - sp - 1);
-    parts.value = line.substr(colon + 1);
-  } else {
-    parts.attribute = line.substr(sp + 1);
-  }
-  return parts;
-};
-
-// Extracts the MID (RFC 5888) from a media section.
-// returns the MID or undefined if no mid line was found.
-SDPUtils.getMid = function(mediaSection) {
-  var mid = SDPUtils.matchPrefix(mediaSection, 'a=mid:')[0];
-  if (mid) {
-    return mid.substr(6);
-  }
+/* Split the internal hash values into an array of bytes */
+function sha256_encode_bytes() {
+        var j=0;
+        var output = new Array(32);
+	for(var i=0; i<8; i++) {
+		output[j++] = ((ihash[i] >>> 24) & 0xff);
+		output[j++] = ((ihash[i] >>> 16) & 0xff);
+		output[j++] = ((ihash[i] >>> 8) & 0xff);
+		output[j++] = (ihash[i] & 0xff);
+	}
+	return output;
 }
 
-SDPUtils.parseFingerprint = function(line) {
-  var parts = line.substr(14).split(' ');
-  return {
-    algorithm: parts[0].toLowerCase(), // algorithm is case-sensitive in Edge.
-    value: parts[1]
-  };
-};
-
-// Extracts DTLS parameters from SDP media section or sessionpart.
-// FIXME: for consistency with other functions this should only
-//   get the fingerprint line as input. See also getIceParameters.
-SDPUtils.getDtlsParameters = function(mediaSection, sessionpart) {
-  var lines = SDPUtils.matchPrefix(mediaSection + sessionpart,
-      'a=fingerprint:');
-  // Note: a=setup line is ignored since we use the 'auto' role.
-  // Note2: 'algorithm' is not case sensitive except in Edge.
-  return {
-    role: 'auto',
-    fingerprints: lines.map(SDPUtils.parseFingerprint)
-  };
-};
-
-// Serializes DTLS parameters to SDP.
-SDPUtils.writeDtlsParameters = function(params, setupType) {
-  var sdp = 'a=setup:' + setupType + '\r\n';
-  params.fingerprints.forEach(function(fp) {
-    sdp += 'a=fingerprint:' + fp.algorithm + ' ' + fp.value + '\r\n';
-  });
-  return sdp;
-};
-// Parses ICE information from SDP media section or sessionpart.
-// FIXME: for consistency with other functions this should only
-//   get the ice-ufrag and ice-pwd lines as input.
-SDPUtils.getIceParameters = function(mediaSection, sessionpart) {
-  var lines = SDPUtils.splitLines(mediaSection);
-  // Search in session part, too.
-  lines = lines.concat(SDPUtils.splitLines(sessionpart));
-  var iceParameters = {
-    usernameFragment: lines.filter(function(line) {
-      return line.indexOf('a=ice-ufrag:') === 0;
-    })[0].substr(12),
-    password: lines.filter(function(line) {
-      return line.indexOf('a=ice-pwd:') === 0;
-    })[0].substr(10)
-  };
-  return iceParameters;
-};
-
-// Serializes ICE parameters to SDP.
-SDPUtils.writeIceParameters = function(params) {
-  return 'a=ice-ufrag:' + params.usernameFragment + '\r\n' +
-      'a=ice-pwd:' + params.password + '\r\n';
-};
-
-// Parses the SDP media section and returns RTCRtpParameters.
-SDPUtils.parseRtpParameters = function(mediaSection) {
-  var description = {
-    codecs: [],
-    headerExtensions: [],
-    fecMechanisms: [],
-    rtcp: []
-  };
-  var lines = SDPUtils.splitLines(mediaSection);
-  var mline = lines[0].split(' ');
-  for (var i = 3; i < mline.length; i++) { // find all codecs from mline[3..]
-    var pt = mline[i];
-    var rtpmapline = SDPUtils.matchPrefix(
-        mediaSection, 'a=rtpmap:' + pt + ' ')[0];
-    if (rtpmapline) {
-      var codec = SDPUtils.parseRtpMap(rtpmapline);
-      var fmtps = SDPUtils.matchPrefix(
-          mediaSection, 'a=fmtp:' + pt + ' ');
-      // Only the first a=fmtp:<pt> is considered.
-      codec.parameters = fmtps.length ? SDPUtils.parseFmtp(fmtps[0]) : {};
-      codec.rtcpFeedback = SDPUtils.matchPrefix(
-          mediaSection, 'a=rtcp-fb:' + pt + ' ')
-        .map(SDPUtils.parseRtcpFb);
-      description.codecs.push(codec);
-      // parse FEC mechanisms from rtpmap lines.
-      switch (codec.name.toUpperCase()) {
-        case 'RED':
-        case 'ULPFEC':
-          description.fecMechanisms.push(codec.name.toUpperCase());
-          break;
-        default: // only RED and ULPFEC are recognized as FEC mechanisms.
-          break;
-      }
-    }
-  }
-  SDPUtils.matchPrefix(mediaSection, 'a=extmap:').forEach(function(line) {
-    description.headerExtensions.push(SDPUtils.parseExtmap(line));
-  });
-  // FIXME: parse rtcp.
-  return description;
-};
-
-// Generates parts of the SDP media section describing the capabilities /
-// parameters.
-SDPUtils.writeRtpDescription = function(kind, caps) {
-  var sdp = '';
-
-  // Build the mline.
-  sdp += 'm=' + kind + ' ';
-  sdp += caps.codecs.length > 0 ? '9' : '0'; // reject if no codecs.
-  sdp += ' UDP/TLS/RTP/SAVPF ';
-  sdp += caps.codecs.map(function(codec) {
-    if (codec.preferredPayloadType !== undefined) {
-      return codec.preferredPayloadType;
-    }
-    return codec.payloadType;
-  }).join(' ') + '\r\n';
-
-  sdp += 'c=IN IP4 0.0.0.0\r\n';
-  sdp += 'a=rtcp:9 IN IP4 0.0.0.0\r\n';
-
-  // Add a=rtpmap lines for each codec. Also fmtp and rtcp-fb.
-  caps.codecs.forEach(function(codec) {
-    sdp += SDPUtils.writeRtpMap(codec);
-    sdp += SDPUtils.writeFmtp(codec);
-    sdp += SDPUtils.writeRtcpFb(codec);
-  });
-  var maxptime = 0;
-  caps.codecs.forEach(function(codec) {
-    if (codec.maxptime > maxptime) {
-      maxptime = codec.maxptime;
-    }
-  });
-  if (maxptime > 0) {
-    sdp += 'a=maxptime:' + maxptime + '\r\n';
-  }
-  sdp += 'a=rtcp-mux\r\n';
-
-  caps.headerExtensions.forEach(function(extension) {
-    sdp += SDPUtils.writeExtmap(extension);
-  });
-  // FIXME: write fecMechanisms.
-  return sdp;
-};
-
-// Parses the SDP media section and returns an array of
-// RTCRtpEncodingParameters.
-SDPUtils.parseRtpEncodingParameters = function(mediaSection) {
-  var encodingParameters = [];
-  var description = SDPUtils.parseRtpParameters(mediaSection);
-  var hasRed = description.fecMechanisms.indexOf('RED') !== -1;
-  var hasUlpfec = description.fecMechanisms.indexOf('ULPFEC') !== -1;
-
-  // filter a=ssrc:... cname:, ignore PlanB-msid
-  var ssrcs = SDPUtils.matchPrefix(mediaSection, 'a=ssrc:')
-  .map(function(line) {
-    return SDPUtils.parseSsrcMedia(line);
-  })
-  .filter(function(parts) {
-    return parts.attribute === 'cname';
-  });
-  var primarySsrc = ssrcs.length > 0 && ssrcs[0].ssrc;
-  var secondarySsrc;
-
-  var flows = SDPUtils.matchPrefix(mediaSection, 'a=ssrc-group:FID')
-  .map(function(line) {
-    var parts = line.split(' ');
-    parts.shift();
-    return parts.map(function(part) {
-      return parseInt(part, 10);
-    });
-  });
-  if (flows.length > 0 && flows[0].length > 1 && flows[0][0] === primarySsrc) {
-    secondarySsrc = flows[0][1];
-  }
-
-  description.codecs.forEach(function(codec) {
-    if (codec.name.toUpperCase() === 'RTX' && codec.parameters.apt) {
-      var encParam = {
-        ssrc: primarySsrc,
-        codecPayloadType: parseInt(codec.parameters.apt, 10),
-        rtx: {
-          ssrc: secondarySsrc
-        }
-      };
-      encodingParameters.push(encParam);
-      if (hasRed) {
-        encParam = JSON.parse(JSON.stringify(encParam));
-        encParam.fec = {
-          ssrc: secondarySsrc,
-          mechanism: hasUlpfec ? 'red+ulpfec' : 'red'
-        };
-        encodingParameters.push(encParam);
-      }
-    }
-  });
-  if (encodingParameters.length === 0 && primarySsrc) {
-    encodingParameters.push({
-      ssrc: primarySsrc
-    });
-  }
-
-  // we support both b=AS and b=TIAS but interpret AS as TIAS.
-  var bandwidth = SDPUtils.matchPrefix(mediaSection, 'b=');
-  if (bandwidth.length) {
-    if (bandwidth[0].indexOf('b=TIAS:') === 0) {
-      bandwidth = parseInt(bandwidth[0].substr(7), 10);
-    } else if (bandwidth[0].indexOf('b=AS:') === 0) {
-      // use formula from JSEP to convert b=AS to TIAS value.
-      bandwidth = parseInt(bandwidth[0].substr(5), 10) * 1000 * 0.95
-          - (50 * 40 * 8);
-    } else {
-      bandwidth = undefined;
-    }
-    encodingParameters.forEach(function(params) {
-      params.maxBitrate = bandwidth;
-    });
-  }
-  return encodingParameters;
-};
-
-// parses http://draft.ortc.org/#rtcrtcpparameters*
-SDPUtils.parseRtcpParameters = function(mediaSection) {
-  var rtcpParameters = {};
-
-  var cname;
-  // Gets the first SSRC. Note that with RTX there might be multiple
-  // SSRCs.
-  var remoteSsrc = SDPUtils.matchPrefix(mediaSection, 'a=ssrc:')
-      .map(function(line) {
-        return SDPUtils.parseSsrcMedia(line);
-      })
-      .filter(function(obj) {
-        return obj.attribute === 'cname';
-      })[0];
-  if (remoteSsrc) {
-    rtcpParameters.cname = remoteSsrc.value;
-    rtcpParameters.ssrc = remoteSsrc.ssrc;
-  }
-
-  // Edge uses the compound attribute instead of reducedSize
-  // compound is !reducedSize
-  var rsize = SDPUtils.matchPrefix(mediaSection, 'a=rtcp-rsize');
-  rtcpParameters.reducedSize = rsize.length > 0;
-  rtcpParameters.compound = rsize.length === 0;
-
-  // parses the rtcp-mux attrіbute.
-  // Note that Edge does not support unmuxed RTCP.
-  var mux = SDPUtils.matchPrefix(mediaSection, 'a=rtcp-mux');
-  rtcpParameters.mux = mux.length > 0;
-
-  return rtcpParameters;
-};
-
-// parses either a=msid: or a=ssrc:... msid lines and returns
-// the id of the MediaStream and MediaStreamTrack.
-SDPUtils.parseMsid = function(mediaSection) {
-  var parts;
-  var spec = SDPUtils.matchPrefix(mediaSection, 'a=msid:');
-  if (spec.length === 1) {
-    parts = spec[0].substr(7).split(' ');
-    return {stream: parts[0], track: parts[1]};
-  }
-  var planB = SDPUtils.matchPrefix(mediaSection, 'a=ssrc:')
-  .map(function(line) {
-    return SDPUtils.parseSsrcMedia(line);
-  })
-  .filter(function(parts) {
-    return parts.attribute === 'msid';
-  });
-  if (planB.length > 0) {
-    parts = planB[0].value.split(' ');
-    return {stream: parts[0], track: parts[1]};
-  }
-};
-
-// Generate a session ID for SDP.
-// https://tools.ietf.org/html/draft-ietf-rtcweb-jsep-20#section-5.2.1
-// recommends using a cryptographically random +ve 64-bit value
-// but right now this should be acceptable and within the right range
-SDPUtils.generateSessionId = function() {
-  return Math.random().toString().substr(2, 21);
-};
-
-// Write boilder plate for start of SDP
-// sessId argument is optional - if not supplied it will
-// be generated randomly
-// sessVersion is optional and defaults to 2
-SDPUtils.writeSessionBoilerplate = function(sessId, sessVer) {
-  var sessionId;
-  var version = sessVer !== undefined ? sessVer : 2;
-  if (sessId) {
-    sessionId = sessId;
-  } else {
-    sessionId = SDPUtils.generateSessionId();
-  }
-  // FIXME: sess-id should be an NTP timestamp.
-  return 'v=0\r\n' +
-      'o=thisisadapterortc ' + sessionId + ' ' + version + ' IN IP4 127.0.0.1\r\n' +
-      's=-\r\n' +
-      't=0 0\r\n';
-};
-
-SDPUtils.writeMediaSection = function(transceiver, caps, type, stream) {
-  var sdp = SDPUtils.writeRtpDescription(transceiver.kind, caps);
-
-  // Map ICE parameters (ufrag, pwd) to SDP.
-  sdp += SDPUtils.writeIceParameters(
-      transceiver.iceGatherer.getLocalParameters());
-
-  // Map DTLS parameters to SDP.
-  sdp += SDPUtils.writeDtlsParameters(
-      transceiver.dtlsTransport.getLocalParameters(),
-      type === 'offer' ? 'actpass' : 'active');
-
-  sdp += 'a=mid:' + transceiver.mid + '\r\n';
-
-  if (transceiver.direction) {
-    sdp += 'a=' + transceiver.direction + '\r\n';
-  } else if (transceiver.rtpSender && transceiver.rtpReceiver) {
-    sdp += 'a=sendrecv\r\n';
-  } else if (transceiver.rtpSender) {
-    sdp += 'a=sendonly\r\n';
-  } else if (transceiver.rtpReceiver) {
-    sdp += 'a=recvonly\r\n';
-  } else {
-    sdp += 'a=inactive\r\n';
-  }
-
-  if (transceiver.rtpSender) {
-    // spec.
-    var msid = 'msid:' + stream.id + ' ' +
-        transceiver.rtpSender.track.id + '\r\n';
-    sdp += 'a=' + msid;
-
-    // for Chrome.
-    sdp += 'a=ssrc:' + transceiver.sendEncodingParameters[0].ssrc +
-        ' ' + msid;
-    if (transceiver.sendEncodingParameters[0].rtx) {
-      sdp += 'a=ssrc:' + transceiver.sendEncodingParameters[0].rtx.ssrc +
-          ' ' + msid;
-      sdp += 'a=ssrc-group:FID ' +
-          transceiver.sendEncodingParameters[0].ssrc + ' ' +
-          transceiver.sendEncodingParameters[0].rtx.ssrc +
-          '\r\n';
-    }
-  }
-  // FIXME: this should be written by writeRtpDescription.
-  sdp += 'a=ssrc:' + transceiver.sendEncodingParameters[0].ssrc +
-      ' cname:' + SDPUtils.localCName + '\r\n';
-  if (transceiver.rtpSender && transceiver.sendEncodingParameters[0].rtx) {
-    sdp += 'a=ssrc:' + transceiver.sendEncodingParameters[0].rtx.ssrc +
-        ' cname:' + SDPUtils.localCName + '\r\n';
-  }
-  return sdp;
-};
-
-// Gets the direction from the mediaSection or the sessionpart.
-SDPUtils.getDirection = function(mediaSection, sessionpart) {
-  // Look for sendrecv, sendonly, recvonly, inactive, default to sendrecv.
-  var lines = SDPUtils.splitLines(mediaSection);
-  for (var i = 0; i < lines.length; i++) {
-    switch (lines[i]) {
-      case 'a=sendrecv':
-      case 'a=sendonly':
-      case 'a=recvonly':
-      case 'a=inactive':
-        return lines[i].substr(2);
-      default:
-        // FIXME: What should happen here?
-    }
-  }
-  if (sessionpart) {
-    return SDPUtils.getDirection(sessionpart);
-  }
-  return 'sendrecv';
-};
-
-SDPUtils.getKind = function(mediaSection) {
-  var lines = SDPUtils.splitLines(mediaSection);
-  var mline = lines[0].split(' ');
-  return mline[0].substr(2);
-};
-
-SDPUtils.isRejected = function(mediaSection) {
-  return mediaSection.split(' ', 2)[1] === '0';
-};
-
-// Expose public methods.
-module.exports = SDPUtils;
-
-},{}],3:[function(require,module,exports){
-(function (global){
-/*
- *  Copyright (c) 2016 The WebRTC project authors. All Rights Reserved.
- *
- *  Use of this source code is governed by a BSD-style license
- *  that can be found in the LICENSE file in the root of the source
- *  tree.
- */
- /* eslint-env node */
-
-'use strict';
-
-var adapterFactory = require('./adapter_factory.js');
-module.exports = adapterFactory({window: global.window});
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./adapter_factory.js":4}],4:[function(require,module,exports){
-/*
- *  Copyright (c) 2016 The WebRTC project authors. All Rights Reserved.
- *
- *  Use of this source code is governed by a BSD-style license
- *  that can be found in the LICENSE file in the root of the source
- *  tree.
- */
- /* eslint-env node */
-
-'use strict';
-
-var utils = require('./utils');
-// Shimming starts here.
-module.exports = function(dependencies, opts) {
-  var window = dependencies && dependencies.window;
-
-  var options = {
-    shimChrome: true,
-    shimFirefox: true,
-    shimEdge: true,
-    shimSafari: true,
-  };
-
-  for (var key in opts) {
-    if (hasOwnProperty.call(opts, key)) {
-      options[key] = opts[key];
-    }
-  }
-
-  // Utils.
-  var logging = utils.log;
-  var browserDetails = utils.detectBrowser(window);
-
-  // Export to the adapter global object visible in the browser.
-  var adapter = {
-    browserDetails: browserDetails,
-    extractVersion: utils.extractVersion,
-    disableLog: utils.disableLog,
-    disableWarnings: utils.disableWarnings
-  };
-
-  // Uncomment the line below if you want logging to occur, including logging
-  // for the switch statement below. Can also be turned on in the browser via
-  // adapter.disableLog(false), but then logging from the switch statement below
-  // will not appear.
-  // require('./utils').disableLog(false);
-
-  // Browser shims.
-  var chromeShim = require('./chrome/chrome_shim') || null;
-  var edgeShim = require('./edge/edge_shim') || null;
-  var firefoxShim = require('./firefox/firefox_shim') || null;
-  var safariShim = require('./safari/safari_shim') || null;
-  var commonShim = require('./common_shim') || null;
-
-  // Shim browser if found.
-  switch (browserDetails.browser) {
-    case 'chrome':
-      if (!chromeShim || !chromeShim.shimPeerConnection ||
-          !options.shimChrome) {
-        logging('Chrome shim is not included in this adapter release.');
-        return adapter;
-      }
-      logging('adapter.js shimming chrome.');
-      // Export to the adapter global object visible in the browser.
-      adapter.browserShim = chromeShim;
-      commonShim.shimCreateObjectURL(window);
-
-      chromeShim.shimGetUserMedia(window);
-      chromeShim.shimMediaStream(window);
-      chromeShim.shimSourceObject(window);
-      chromeShim.shimPeerConnection(window);
-      chromeShim.shimOnTrack(window);
-      chromeShim.shimAddTrackRemoveTrack(window);
-      chromeShim.shimGetSendersWithDtmf(window);
-
-      commonShim.shimRTCIceCandidate(window);
-      break;
-    case 'firefox':
-      if (!firefoxShim || !firefoxShim.shimPeerConnection ||
-          !options.shimFirefox) {
-        logging('Firefox shim is not included in this adapter release.');
-        return adapter;
-      }
-      logging('adapter.js shimming firefox.');
-      // Export to the adapter global object visible in the browser.
-      adapter.browserShim = firefoxShim;
-      commonShim.shimCreateObjectURL(window);
-
-      firefoxShim.shimGetUserMedia(window);
-      firefoxShim.shimSourceObject(window);
-      firefoxShim.shimPeerConnection(window);
-      firefoxShim.shimOnTrack(window);
-
-      commonShim.shimRTCIceCandidate(window);
-      break;
-    case 'edge':
-      if (!edgeShim || !edgeShim.shimPeerConnection || !options.shimEdge) {
-        logging('MS edge shim is not included in this adapter release.');
-        return adapter;
-      }
-      logging('adapter.js shimming edge.');
-      // Export to the adapter global object visible in the browser.
-      adapter.browserShim = edgeShim;
-      commonShim.shimCreateObjectURL(window);
-
-      edgeShim.shimGetUserMedia(window);
-      edgeShim.shimPeerConnection(window);
-      edgeShim.shimReplaceTrack(window);
-
-      // the edge shim implements the full RTCIceCandidate object.
-      break;
-    case 'safari':
-      if (!safariShim || !options.shimSafari) {
-        logging('Safari shim is not included in this adapter release.');
-        return adapter;
-      }
-      logging('adapter.js shimming safari.');
-      // Export to the adapter global object visible in the browser.
-      adapter.browserShim = safariShim;
-      commonShim.shimCreateObjectURL(window);
-
-      safariShim.shimRTCIceServerUrls(window);
-      safariShim.shimCallbacksAPI(window);
-      safariShim.shimLocalStreamsAPI(window);
-      safariShim.shimRemoteStreamsAPI(window);
-      safariShim.shimTrackEventTransceiver(window);
-      safariShim.shimGetUserMedia(window);
-
-      commonShim.shimRTCIceCandidate(window);
-      break;
-    default:
-      logging('Unsupported browser!');
-      break;
-  }
-
-  return adapter;
-};
-
-},{"./chrome/chrome_shim":5,"./common_shim":7,"./edge/edge_shim":8,"./firefox/firefox_shim":10,"./safari/safari_shim":12,"./utils":13}],5:[function(require,module,exports){
-
-/*
- *  Copyright (c) 2016 The WebRTC project authors. All Rights Reserved.
- *
- *  Use of this source code is governed by a BSD-style license
- *  that can be found in the LICENSE file in the root of the source
- *  tree.
- */
- /* eslint-env node */
-'use strict';
-var utils = require('../utils.js');
-var logging = utils.log;
-
-var chromeShim = {
-  shimMediaStream: function(window) {
-    window.MediaStream = window.MediaStream || window.webkitMediaStream;
-  },
-
-  shimOnTrack: function(window) {
-    if (typeof window === 'object' && window.RTCPeerConnection && !('ontrack' in
-        window.RTCPeerConnection.prototype)) {
-      Object.defineProperty(window.RTCPeerConnection.prototype, 'ontrack', {
-        get: function() {
-          return this._ontrack;
-        },
-        set: function(f) {
-          if (this._ontrack) {
-            this.removeEventListener('track', this._ontrack);
-          }
-          this.addEventListener('track', this._ontrack = f);
-        }
-      });
-      var origSetRemoteDescription =
-          window.RTCPeerConnection.prototype.setRemoteDescription;
-      window.RTCPeerConnection.prototype.setRemoteDescription = function() {
-        var pc = this;
-        if (!pc._ontrackpoly) {
-          pc._ontrackpoly = function(e) {
-            // onaddstream does not fire when a track is added to an existing
-            // stream. But stream.onaddtrack is implemented so we use that.
-            e.stream.addEventListener('addtrack', function(te) {
-              var receiver;
-              if (window.RTCPeerConnection.prototype.getReceivers) {
-                receiver = pc.getReceivers().find(function(r) {
-                  return r.track && r.track.id === te.track.id;
-                });
-              } else {
-                receiver = {track: te.track};
-              }
-
-              var event = new Event('track');
-              event.track = te.track;
-              event.receiver = receiver;
-              event.transceiver = {receiver: receiver};
-              event.streams = [e.stream];
-              pc.dispatchEvent(event);
-            });
-            e.stream.getTracks().forEach(function(track) {
-              var receiver;
-              if (window.RTCPeerConnection.prototype.getReceivers) {
-                receiver = pc.getReceivers().find(function(r) {
-                  return r.track && r.track.id === track.id;
-                });
-              } else {
-                receiver = {track: track};
-              }
-              var event = new Event('track');
-              event.track = track;
-              event.receiver = receiver;
-              event.transceiver = {receiver: receiver};
-              event.streams = [e.stream];
-              pc.dispatchEvent(event);
-            });
-          };
-          pc.addEventListener('addstream', pc._ontrackpoly);
-        }
-        return origSetRemoteDescription.apply(pc, arguments);
-      };
-    }
-  },
-
-  shimGetSendersWithDtmf: function(window) {
-    // Overrides addTrack/removeTrack, depends on shimAddTrackRemoveTrack.
-    if (typeof window === 'object' && window.RTCPeerConnection &&
-        !('getSenders' in window.RTCPeerConnection.prototype) &&
-        'createDTMFSender' in window.RTCPeerConnection.prototype) {
-      var shimSenderWithDtmf = function(pc, track) {
-        return {
-          track: track,
-          get dtmf() {
-            if (this._dtmf === undefined) {
-              if (track.kind === 'audio') {
-                this._dtmf = pc.createDTMFSender(track);
-              } else {
-                this._dtmf = null;
-              }
-            }
-            return this._dtmf;
-          },
-          _pc: pc
-        };
-      };
-
-      // augment addTrack when getSenders is not available.
-      if (!window.RTCPeerConnection.prototype.getSenders) {
-        window.RTCPeerConnection.prototype.getSenders = function() {
-          this._senders = this._senders || [];
-          return this._senders.slice(); // return a copy of the internal state.
-        };
-        var origAddTrack = window.RTCPeerConnection.prototype.addTrack;
-        window.RTCPeerConnection.prototype.addTrack = function(track, stream) {
-          var pc = this;
-          var sender = origAddTrack.apply(pc, arguments);
-          if (!sender) {
-            sender = shimSenderWithDtmf(pc, track);
-            pc._senders.push(sender);
-          }
-          return sender;
-        };
-
-        var origRemoveTrack = window.RTCPeerConnection.prototype.removeTrack;
-        window.RTCPeerConnection.prototype.removeTrack = function(sender) {
-          var pc = this;
-          origRemoveTrack.apply(pc, arguments);
-          var idx = pc._senders.indexOf(sender);
-          if (idx !== -1) {
-            pc._senders.splice(idx, 1);
-          }
-        };
-      }
-      var origAddStream = window.RTCPeerConnection.prototype.addStream;
-      window.RTCPeerConnection.prototype.addStream = function(stream) {
-        var pc = this;
-        pc._senders = pc._senders || [];
-        origAddStream.apply(pc, [stream]);
-        stream.getTracks().forEach(function(track) {
-          pc._senders.push(shimSenderWithDtmf(pc, track));
-        });
-      };
-
-      var origRemoveStream = window.RTCPeerConnection.prototype.removeStream;
-      window.RTCPeerConnection.prototype.removeStream = function(stream) {
-        var pc = this;
-        pc._senders = pc._senders || [];
-        origRemoveStream.apply(pc, [(pc._streams[stream.id] || stream)]);
-
-        stream.getTracks().forEach(function(track) {
-          var sender = pc._senders.find(function(s) {
-            return s.track === track;
-          });
-          if (sender) {
-            pc._senders.splice(pc._senders.indexOf(sender), 1); // remove sender
-          }
-        });
-      };
-    } else if (typeof window === 'object' && window.RTCPeerConnection &&
-               'getSenders' in window.RTCPeerConnection.prototype &&
-               'createDTMFSender' in window.RTCPeerConnection.prototype &&
-               window.RTCRtpSender &&
-               !('dtmf' in window.RTCRtpSender.prototype)) {
-      var origGetSenders = window.RTCPeerConnection.prototype.getSenders;
-      window.RTCPeerConnection.prototype.getSenders = function() {
-        var pc = this;
-        var senders = origGetSenders.apply(pc, []);
-        senders.forEach(function(sender) {
-          sender._pc = pc;
-        });
-        return senders;
-      };
-
-      Object.defineProperty(window.RTCRtpSender.prototype, 'dtmf', {
-        get: function() {
-          if (this._dtmf === undefined) {
-            if (this.track.kind === 'audio') {
-              this._dtmf = this._pc.createDTMFSender(this.track);
-            } else {
-              this._dtmf = null;
-            }
-          }
-          return this._dtmf;
-        }
-      });
-    }
-  },
-
-  shimSourceObject: function(window) {
-    var URL = window && window.URL;
-
-    if (typeof window === 'object') {
-      if (window.HTMLMediaElement &&
-        !('srcObject' in window.HTMLMediaElement.prototype)) {
-        // Shim the srcObject property, once, when HTMLMediaElement is found.
-        Object.defineProperty(window.HTMLMediaElement.prototype, 'srcObject', {
-          get: function() {
-            return this._srcObject;
-          },
-          set: function(stream) {
-            var self = this;
-            // Use _srcObject as a private property for this shim
-            this._srcObject = stream;
-            if (this.src) {
-              URL.revokeObjectURL(this.src);
-            }
-
-            if (!stream) {
-              this.src = '';
-              return undefined;
-            }
-            this.src = URL.createObjectURL(stream);
-            // We need to recreate the blob url when a track is added or
-            // removed. Doing it manually since we want to avoid a recursion.
-            stream.addEventListener('addtrack', function() {
-              if (self.src) {
-                URL.revokeObjectURL(self.src);
-              }
-              self.src = URL.createObjectURL(stream);
-            });
-            stream.addEventListener('removetrack', function() {
-              if (self.src) {
-                URL.revokeObjectURL(self.src);
-              }
-              self.src = URL.createObjectURL(stream);
-            });
-          }
-        });
-      }
-    }
-  },
-
-  shimAddTrackRemoveTrack: function(window) {
-    // shim addTrack and removeTrack.
-    if (window.RTCPeerConnection.prototype.addTrack) {
-      return;
-    }
-
-    // also shim pc.getLocalStreams when addTrack is shimmed
-    // to return the original streams.
-    var origGetLocalStreams = window.RTCPeerConnection.prototype
-        .getLocalStreams;
-    window.RTCPeerConnection.prototype.getLocalStreams = function() {
-      var self = this;
-      var nativeStreams = origGetLocalStreams.apply(this);
-      self._reverseStreams = self._reverseStreams || {};
-      return nativeStreams.map(function(stream) {
-        return self._reverseStreams[stream.id];
-      });
-    };
-
-    var origAddStream = window.RTCPeerConnection.prototype.addStream;
-    window.RTCPeerConnection.prototype.addStream = function(stream) {
-      var pc = this;
-      pc._streams = pc._streams || {};
-      pc._reverseStreams = pc._reverseStreams || {};
-
-      stream.getTracks().forEach(function(track) {
-        var alreadyExists = pc.getSenders().find(function(s) {
-          return s.track === track;
-        });
-        if (alreadyExists) {
-          throw new DOMException('Track already exists.',
-              'InvalidAccessError');
-        }
-      });
-      // Add identity mapping for consistency with addTrack.
-      // Unless this is being used with a stream from addTrack.
-      if (!pc._reverseStreams[stream.id]) {
-        var newStream = new window.MediaStream(stream.getTracks());
-        pc._streams[stream.id] = newStream;
-        pc._reverseStreams[newStream.id] = stream;
-        stream = newStream;
-      }
-      origAddStream.apply(pc, [stream]);
-    };
-
-    var origRemoveStream = window.RTCPeerConnection.prototype.removeStream;
-    window.RTCPeerConnection.prototype.removeStream = function(stream) {
-      var pc = this;
-      pc._streams = pc._streams || {};
-      pc._reverseStreams = pc._reverseStreams || {};
-
-      origRemoveStream.apply(pc, [(pc._streams[stream.id] || stream)]);
-      delete pc._reverseStreams[(pc._streams[stream.id] ?
-          pc._streams[stream.id].id : stream.id)];
-      delete pc._streams[stream.id];
-    };
-
-    window.RTCPeerConnection.prototype.addTrack = function(track, stream) {
-      var pc = this;
-      if (pc.signalingState === 'closed') {
-        throw new DOMException(
-          'The RTCPeerConnection\'s signalingState is \'closed\'.',
-          'InvalidStateError');
-      }
-      var streams = [].slice.call(arguments, 1);
-      if (streams.length !== 1 ||
-          !streams[0].getTracks().find(function(t) {
-            return t === track;
-          })) {
-        // this is not fully correct but all we can manage without
-        // [[associated MediaStreams]] internal slot.
-        throw new DOMException(
-          'The adapter.js addTrack polyfill only supports a single ' +
-          ' stream which is associated with the specified track.',
-          'NotSupportedError');
-      }
-
-      var alreadyExists = pc.getSenders().find(function(s) {
-        return s.track === track;
-      });
-      if (alreadyExists) {
-        throw new DOMException('Track already exists.',
-            'InvalidAccessError');
-      }
-
-      pc._streams = pc._streams || {};
-      pc._reverseStreams = pc._reverseStreams || {};
-      var oldStream = pc._streams[stream.id];
-      if (oldStream) {
-        // this is using odd Chrome behaviour, use with caution:
-        // https://bugs.chromium.org/p/webrtc/issues/detail?id=7815
-        // Note: we rely on the high-level addTrack/dtmf shim to
-        // create the sender with a dtmf sender.
-        oldStream.addTrack(track);
-
-        // Trigger ONN async.
-        Promise.resolve().then(function() {
-          pc.dispatchEvent(new Event('negotiationneeded'));
-        });
-      } else {
-        var newStream = new window.MediaStream([track]);
-        pc._streams[stream.id] = newStream;
-        pc._reverseStreams[newStream.id] = stream;
-        pc.addStream(newStream);
-      }
-      return pc.getSenders().find(function(s) {
-        return s.track === track;
-      });
-    };
-
-    // replace the internal stream id with the external one and
-    // vice versa.
-    function replaceInternalStreamId(pc, description) {
-      var sdp = description.sdp;
-      Object.keys(pc._reverseStreams || []).forEach(function(internalId) {
-        var externalStream = pc._reverseStreams[internalId];
-        var internalStream = pc._streams[externalStream.id];
-        sdp = sdp.replace(new RegExp(internalStream.id, 'g'),
-            externalStream.id);
-      });
-      return new RTCSessionDescription({
-        type: description.type,
-        sdp: sdp
-      });
-    }
-    function replaceExternalStreamId(pc, description) {
-      var sdp = description.sdp;
-      Object.keys(pc._reverseStreams || []).forEach(function(internalId) {
-        var externalStream = pc._reverseStreams[internalId];
-        var internalStream = pc._streams[externalStream.id];
-        sdp = sdp.replace(new RegExp(externalStream.id, 'g'),
-            internalStream.id);
-      });
-      return new RTCSessionDescription({
-        type: description.type,
-        sdp: sdp
-      });
-    }
-    ['createOffer', 'createAnswer'].forEach(function(method) {
-      var nativeMethod = window.RTCPeerConnection.prototype[method];
-      window.RTCPeerConnection.prototype[method] = function() {
-        var pc = this;
-        var args = arguments;
-        var isLegacyCall = arguments.length &&
-            typeof arguments[0] === 'function';
-        if (isLegacyCall) {
-          return nativeMethod.apply(pc, [
-            function(description) {
-              var desc = replaceInternalStreamId(pc, description);
-              args[0].apply(null, [desc]);
-            },
-            function(err) {
-              if (args[1]) {
-                args[1].apply(null, err);
-              }
-            }, arguments[2]
-          ]);
-        }
-        return nativeMethod.apply(pc, arguments)
-        .then(function(description) {
-          return replaceInternalStreamId(pc, description);
-        });
-      };
-    });
-
-    var origSetLocalDescription =
-        window.RTCPeerConnection.prototype.setLocalDescription;
-    window.RTCPeerConnection.prototype.setLocalDescription = function() {
-      var pc = this;
-      if (!arguments.length || !arguments[0].type) {
-        return origSetLocalDescription.apply(pc, arguments);
-      }
-      arguments[0] = replaceExternalStreamId(pc, arguments[0]);
-      return origSetLocalDescription.apply(pc, arguments);
-    };
-
-    // TODO: mangle getStats: https://w3c.github.io/webrtc-stats/#dom-rtcmediastreamstats-streamidentifier
-
-    var origLocalDescription = Object.getOwnPropertyDescriptor(
-        window.RTCPeerConnection.prototype, 'localDescription');
-    Object.defineProperty(window.RTCPeerConnection.prototype,
-        'localDescription', {
-          get: function() {
-            var pc = this;
-            var description = origLocalDescription.get.apply(this);
-            if (description.type === '') {
-              return description;
-            }
-            return replaceInternalStreamId(pc, description);
-          }
-        });
-
-    window.RTCPeerConnection.prototype.removeTrack = function(sender) {
-      var pc = this;
-      if (pc.signalingState === 'closed') {
-        throw new DOMException(
-          'The RTCPeerConnection\'s signalingState is \'closed\'.',
-          'InvalidStateError');
-      }
-      // We can not yet check for sender instanceof RTCRtpSender
-      // since we shim RTPSender. So we check if sender._pc is set.
-      if (!sender._pc) {
-        throw new DOMException('Argument 1 of RTCPeerConnection.removeTrack ' +
-            'does not implement interface RTCRtpSender.', 'TypeError');
-      }
-      var isLocal = sender._pc === pc;
-      if (!isLocal) {
-        throw new DOMException('Sender was not created by this connection.',
-            'InvalidAccessError');
-      }
-
-      // Search for the native stream the senders track belongs to.
-      pc._streams = pc._streams || {};
-      var stream;
-      Object.keys(pc._streams).forEach(function(streamid) {
-        var hasTrack = pc._streams[streamid].getTracks().find(function(track) {
-          return sender.track === track;
-        });
-        if (hasTrack) {
-          stream = pc._streams[streamid];
-        }
-      });
-
-      if (stream) {
-        if (stream.getTracks().length === 1) {
-          // if this is the last track of the stream, remove the stream. This
-          // takes care of any shimmed _senders.
-          pc.removeStream(stream);
-        } else {
-          // relying on the same odd chrome behaviour as above.
-          stream.removeTrack(sender.track);
-        }
-        pc.dispatchEvent(new Event('negotiationneeded'));
-      }
-    };
-  },
-
-  shimPeerConnection: function(window) {
-    var browserDetails = utils.detectBrowser(window);
-
-    // The RTCPeerConnection object.
-    if (!window.RTCPeerConnection) {
-      window.RTCPeerConnection = function(pcConfig, pcConstraints) {
-        // Translate iceTransportPolicy to iceTransports,
-        // see https://code.google.com/p/webrtc/issues/detail?id=4869
-        // this was fixed in M56 along with unprefixing RTCPeerConnection.
-        logging('PeerConnection');
-        if (pcConfig && pcConfig.iceTransportPolicy) {
-          pcConfig.iceTransports = pcConfig.iceTransportPolicy;
-        }
-
-        return new window.webkitRTCPeerConnection(pcConfig, pcConstraints);
-      };
-      window.RTCPeerConnection.prototype =
-          window.webkitRTCPeerConnection.prototype;
-      // wrap static methods. Currently just generateCertificate.
-      if (window.webkitRTCPeerConnection.generateCertificate) {
-        Object.defineProperty(window.RTCPeerConnection, 'generateCertificate', {
-          get: function() {
-            return window.webkitRTCPeerConnection.generateCertificate;
-          }
-        });
-      }
-    } else {
-      // migrate from non-spec RTCIceServer.url to RTCIceServer.urls
-      var OrigPeerConnection = window.RTCPeerConnection;
-      window.RTCPeerConnection = function(pcConfig, pcConstraints) {
-        if (pcConfig && pcConfig.iceServers) {
-          var newIceServers = [];
-          for (var i = 0; i < pcConfig.iceServers.length; i++) {
-            var server = pcConfig.iceServers[i];
-            if (!server.hasOwnProperty('urls') &&
-                server.hasOwnProperty('url')) {
-              utils.deprecated('RTCIceServer.url', 'RTCIceServer.urls');
-              server = JSON.parse(JSON.stringify(server));
-              server.urls = server.url;
-              newIceServers.push(server);
-            } else {
-              newIceServers.push(pcConfig.iceServers[i]);
-            }
-          }
-          pcConfig.iceServers = newIceServers;
-        }
-        return new OrigPeerConnection(pcConfig, pcConstraints);
-      };
-      window.RTCPeerConnection.prototype = OrigPeerConnection.prototype;
-      // wrap static methods. Currently just generateCertificate.
-      Object.defineProperty(window.RTCPeerConnection, 'generateCertificate', {
-        get: function() {
-          return OrigPeerConnection.generateCertificate;
-        }
-      });
-    }
-
-    var origGetStats = window.RTCPeerConnection.prototype.getStats;
-    window.RTCPeerConnection.prototype.getStats = function(selector,
-        successCallback, errorCallback) {
-      var self = this;
-      var args = arguments;
-
-      // If selector is a function then we are in the old style stats so just
-      // pass back the original getStats format to avoid breaking old users.
-      if (arguments.length > 0 && typeof selector === 'function') {
-        return origGetStats.apply(this, arguments);
-      }
-
-      // When spec-style getStats is supported, return those when called with
-      // either no arguments or the selector argument is null.
-      if (origGetStats.length === 0 && (arguments.length === 0 ||
-          typeof arguments[0] !== 'function')) {
-        return origGetStats.apply(this, []);
-      }
-
-      var fixChromeStats_ = function(response) {
-        var standardReport = {};
-        var reports = response.result();
-        reports.forEach(function(report) {
-          var standardStats = {
-            id: report.id,
-            timestamp: report.timestamp,
-            type: {
-              localcandidate: 'local-candidate',
-              remotecandidate: 'remote-candidate'
-            }[report.type] || report.type
-          };
-          report.names().forEach(function(name) {
-            standardStats[name] = report.stat(name);
-          });
-          standardReport[standardStats.id] = standardStats;
-        });
-
-        return standardReport;
-      };
-
-      // shim getStats with maplike support
-      var makeMapStats = function(stats) {
-        return new Map(Object.keys(stats).map(function(key) {
-          return [key, stats[key]];
-        }));
-      };
-
-      if (arguments.length >= 2) {
-        var successCallbackWrapper_ = function(response) {
-          args[1](makeMapStats(fixChromeStats_(response)));
-        };
-
-        return origGetStats.apply(this, [successCallbackWrapper_,
-          arguments[0]]);
-      }
-
-      // promise-support
-      return new Promise(function(resolve, reject) {
-        origGetStats.apply(self, [
-          function(response) {
-            resolve(makeMapStats(fixChromeStats_(response)));
-          }, reject]);
-      }).then(successCallback, errorCallback);
-    };
-
-    // add promise support -- natively available in Chrome 51
-    if (browserDetails.version < 51) {
-      ['setLocalDescription', 'setRemoteDescription', 'addIceCandidate']
-          .forEach(function(method) {
-            var nativeMethod = window.RTCPeerConnection.prototype[method];
-            window.RTCPeerConnection.prototype[method] = function() {
-              var args = arguments;
-              var self = this;
-              var promise = new Promise(function(resolve, reject) {
-                nativeMethod.apply(self, [args[0], resolve, reject]);
-              });
-              if (args.length < 2) {
-                return promise;
-              }
-              return promise.then(function() {
-                args[1].apply(null, []);
-              },
-              function(err) {
-                if (args.length >= 3) {
-                  args[2].apply(null, [err]);
-                }
-              });
-            };
-          });
-    }
-
-    // promise support for createOffer and createAnswer. Available (without
-    // bugs) since M52: crbug/619289
-    if (browserDetails.version < 52) {
-      ['createOffer', 'createAnswer'].forEach(function(method) {
-        var nativeMethod = window.RTCPeerConnection.prototype[method];
-        window.RTCPeerConnection.prototype[method] = function() {
-          var self = this;
-          if (arguments.length < 1 || (arguments.length === 1 &&
-              typeof arguments[0] === 'object')) {
-            var opts = arguments.length === 1 ? arguments[0] : undefined;
-            return new Promise(function(resolve, reject) {
-              nativeMethod.apply(self, [resolve, reject, opts]);
-            });
-          }
-          return nativeMethod.apply(this, arguments);
-        };
-      });
-    }
-
-    // shim implicit creation of RTCSessionDescription/RTCIceCandidate
-    ['setLocalDescription', 'setRemoteDescription', 'addIceCandidate']
-        .forEach(function(method) {
-          var nativeMethod = window.RTCPeerConnection.prototype[method];
-          window.RTCPeerConnection.prototype[method] = function() {
-            arguments[0] = new ((method === 'addIceCandidate') ?
-                window.RTCIceCandidate :
-                window.RTCSessionDescription)(arguments[0]);
-            return nativeMethod.apply(this, arguments);
-          };
-        });
-
-    // support for addIceCandidate(null or undefined)
-    var nativeAddIceCandidate =
-        window.RTCPeerConnection.prototype.addIceCandidate;
-    window.RTCPeerConnection.prototype.addIceCandidate = function() {
-      if (!arguments[0]) {
-        if (arguments[1]) {
-          arguments[1].apply(null);
-        }
-        return Promise.resolve();
-      }
-      return nativeAddIceCandidate.apply(this, arguments);
-    };
-  }
-};
-
-
-// Expose public methods.
-module.exports = {
-  shimMediaStream: chromeShim.shimMediaStream,
-  shimOnTrack: chromeShim.shimOnTrack,
-  shimAddTrackRemoveTrack: chromeShim.shimAddTrackRemoveTrack,
-  shimGetSendersWithDtmf: chromeShim.shimGetSendersWithDtmf,
-  shimSourceObject: chromeShim.shimSourceObject,
-  shimPeerConnection: chromeShim.shimPeerConnection,
-  shimGetUserMedia: require('./getusermedia')
-};
-
-},{"../utils.js":13,"./getusermedia":6}],6:[function(require,module,exports){
-/*
- *  Copyright (c) 2016 The WebRTC project authors. All Rights Reserved.
- *
- *  Use of this source code is governed by a BSD-style license
- *  that can be found in the LICENSE file in the root of the source
- *  tree.
- */
- /* eslint-env node */
-'use strict';
-var utils = require('../utils.js');
-var logging = utils.log;
-
-// Expose public methods.
-module.exports = function(window) {
-  var browserDetails = utils.detectBrowser(window);
-  var navigator = window && window.navigator;
-
-  var constraintsToChrome_ = function(c) {
-    if (typeof c !== 'object' || c.mandatory || c.optional) {
-      return c;
-    }
-    var cc = {};
-    Object.keys(c).forEach(function(key) {
-      if (key === 'require' || key === 'advanced' || key === 'mediaSource') {
-        return;
-      }
-      var r = (typeof c[key] === 'object') ? c[key] : {ideal: c[key]};
-      if (r.exact !== undefined && typeof r.exact === 'number') {
-        r.min = r.max = r.exact;
-      }
-      var oldname_ = function(prefix, name) {
-        if (prefix) {
-          return prefix + name.charAt(0).toUpperCase() + name.slice(1);
-        }
-        return (name === 'deviceId') ? 'sourceId' : name;
-      };
-      if (r.ideal !== undefined) {
-        cc.optional = cc.optional || [];
-        var oc = {};
-        if (typeof r.ideal === 'number') {
-          oc[oldname_('min', key)] = r.ideal;
-          cc.optional.push(oc);
-          oc = {};
-          oc[oldname_('max', key)] = r.ideal;
-          cc.optional.push(oc);
-        } else {
-          oc[oldname_('', key)] = r.ideal;
-          cc.optional.push(oc);
-        }
-      }
-      if (r.exact !== undefined && typeof r.exact !== 'number') {
-        cc.mandatory = cc.mandatory || {};
-        cc.mandatory[oldname_('', key)] = r.exact;
-      } else {
-        ['min', 'max'].forEach(function(mix) {
-          if (r[mix] !== undefined) {
-            cc.mandatory = cc.mandatory || {};
-            cc.mandatory[oldname_(mix, key)] = r[mix];
-          }
-        });
-      }
-    });
-    if (c.advanced) {
-      cc.optional = (cc.optional || []).concat(c.advanced);
-    }
-    return cc;
-  };
-
-  var shimConstraints_ = function(constraints, func) {
-    constraints = JSON.parse(JSON.stringify(constraints));
-    if (constraints && typeof constraints.audio === 'object') {
-      var remap = function(obj, a, b) {
-        if (a in obj && !(b in obj)) {
-          obj[b] = obj[a];
-          delete obj[a];
-        }
-      };
-      constraints = JSON.parse(JSON.stringify(constraints));
-      remap(constraints.audio, 'autoGainControl', 'googAutoGainControl');
-      remap(constraints.audio, 'noiseSuppression', 'googNoiseSuppression');
-      constraints.audio = constraintsToChrome_(constraints.audio);
-    }
-    if (constraints && typeof constraints.video === 'object') {
-      // Shim facingMode for mobile & surface pro.
-      var face = constraints.video.facingMode;
-      face = face && ((typeof face === 'object') ? face : {ideal: face});
-      var getSupportedFacingModeLies = browserDetails.version < 61;
-
-      if ((face && (face.exact === 'user' || face.exact === 'environment' ||
-                    face.ideal === 'user' || face.ideal === 'environment')) &&
-          !(navigator.mediaDevices.getSupportedConstraints &&
-            navigator.mediaDevices.getSupportedConstraints().facingMode &&
-            !getSupportedFacingModeLies)) {
-        delete constraints.video.facingMode;
-        var matches;
-        if (face.exact === 'environment' || face.ideal === 'environment') {
-          matches = ['back', 'rear'];
-        } else if (face.exact === 'user' || face.ideal === 'user') {
-          matches = ['front'];
-        }
-        if (matches) {
-          // Look for matches in label, or use last cam for back (typical).
-          return navigator.mediaDevices.enumerateDevices()
-          .then(function(devices) {
-            devices = devices.filter(function(d) {
-              return d.kind === 'videoinput';
-            });
-            var dev = devices.find(function(d) {
-              return matches.some(function(match) {
-                return d.label.toLowerCase().indexOf(match) !== -1;
-              });
-            });
-            if (!dev && devices.length && matches.indexOf('back') !== -1) {
-              dev = devices[devices.length - 1]; // more likely the back cam
-            }
-            if (dev) {
-              constraints.video.deviceId = face.exact ? {exact: dev.deviceId} :
-                                                        {ideal: dev.deviceId};
-            }
-            constraints.video = constraintsToChrome_(constraints.video);
-            logging('chrome: ' + JSON.stringify(constraints));
-            return func(constraints);
-          });
-        }
-      }
-      constraints.video = constraintsToChrome_(constraints.video);
-    }
-    logging('chrome: ' + JSON.stringify(constraints));
-    return func(constraints);
-  };
-
-  var shimError_ = function(e) {
-    return {
-      name: {
-        PermissionDeniedError: 'NotAllowedError',
-        InvalidStateError: 'NotReadableError',
-        DevicesNotFoundError: 'NotFoundError',
-        ConstraintNotSatisfiedError: 'OverconstrainedError',
-        TrackStartError: 'NotReadableError',
-        MediaDeviceFailedDueToShutdown: 'NotReadableError',
-        MediaDeviceKillSwitchOn: 'NotReadableError'
-      }[e.name] || e.name,
-      message: e.message,
-      constraint: e.constraintName,
-      toString: function() {
-        return this.name + (this.message && ': ') + this.message;
-      }
-    };
-  };
-
-  var getUserMedia_ = function(constraints, onSuccess, onError) {
-    shimConstraints_(constraints, function(c) {
-      navigator.webkitGetUserMedia(c, onSuccess, function(e) {
-        if (onError) {
-          onError(shimError_(e));
-        }
-      });
-    });
-  };
-
-  navigator.getUserMedia = getUserMedia_;
-
-  // Returns the result of getUserMedia as a Promise.
-  var getUserMediaPromise_ = function(constraints) {
-    return new Promise(function(resolve, reject) {
-      navigator.getUserMedia(constraints, resolve, reject);
-    });
-  };
-
-  if (!navigator.mediaDevices) {
-    navigator.mediaDevices = {
-      getUserMedia: getUserMediaPromise_,
-      enumerateDevices: function() {
-        return new Promise(function(resolve) {
-          var kinds = {audio: 'audioinput', video: 'videoinput'};
-          return window.MediaStreamTrack.getSources(function(devices) {
-            resolve(devices.map(function(device) {
-              return {label: device.label,
-                kind: kinds[device.kind],
-                deviceId: device.id,
-                groupId: ''};
-            }));
-          });
-        });
-      },
-      getSupportedConstraints: function() {
-        return {
-          deviceId: true, echoCancellation: true, facingMode: true,
-          frameRate: true, height: true, width: true
-        };
-      }
-    };
-  }
-
-  // A shim for getUserMedia method on the mediaDevices object.
-  // TODO(KaptenJansson) remove once implemented in Chrome stable.
-  if (!navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia = function(constraints) {
-      return getUserMediaPromise_(constraints);
-    };
-  } else {
-    // Even though Chrome 45 has navigator.mediaDevices and a getUserMedia
-    // function which returns a Promise, it does not accept spec-style
-    // constraints.
-    var origGetUserMedia = navigator.mediaDevices.getUserMedia.
-        bind(navigator.mediaDevices);
-    navigator.mediaDevices.getUserMedia = function(cs) {
-      return shimConstraints_(cs, function(c) {
-        return origGetUserMedia(c).then(function(stream) {
-          if (c.audio && !stream.getAudioTracks().length ||
-              c.video && !stream.getVideoTracks().length) {
-            stream.getTracks().forEach(function(track) {
-              track.stop();
-            });
-            throw new DOMException('', 'NotFoundError');
-          }
-          return stream;
-        }, function(e) {
-          return Promise.reject(shimError_(e));
-        });
-      });
-    };
-  }
-
-  // Dummy devicechange event methods.
-  // TODO(KaptenJansson) remove once implemented in Chrome stable.
-  if (typeof navigator.mediaDevices.addEventListener === 'undefined') {
-    navigator.mediaDevices.addEventListener = function() {
-      logging('Dummy mediaDevices.addEventListener called.');
-    };
-  }
-  if (typeof navigator.mediaDevices.removeEventListener === 'undefined') {
-    navigator.mediaDevices.removeEventListener = function() {
-      logging('Dummy mediaDevices.removeEventListener called.');
-    };
-  }
-};
-
-},{"../utils.js":13}],7:[function(require,module,exports){
-/*
- *  Copyright (c) 2017 The WebRTC project authors. All Rights Reserved.
- *
- *  Use of this source code is governed by a BSD-style license
- *  that can be found in the LICENSE file in the root of the source
- *  tree.
- */
- /* eslint-env node */
-'use strict';
-
-var SDPUtils = require('sdp');
-var utils = require('./utils');
-
-// Wraps the peerconnection event eventNameToWrap in a function
-// which returns the modified event object.
-function wrapPeerConnectionEvent(window, eventNameToWrap, wrapper) {
-  if (!window.RTCPeerConnection) {
-    return;
-  }
-  var proto = window.RTCPeerConnection.prototype;
-  var nativeAddEventListener = proto.addEventListener;
-  proto.addEventListener = function(nativeEventName, cb) {
-    if (nativeEventName !== eventNameToWrap) {
-      return nativeAddEventListener.apply(this, arguments);
-    }
-    var wrappedCallback = function(e) {
-      cb(wrapper(e));
-    };
-    this._eventMap = this._eventMap || {};
-    this._eventMap[cb] = wrappedCallback;
-    return nativeAddEventListener.apply(this, [nativeEventName,
-      wrappedCallback]);
-  };
-
-  var nativeRemoveEventListener = proto.removeEventListener;
-  proto.removeEventListener = function(nativeEventName, cb) {
-    if (nativeEventName !== eventNameToWrap || !this._eventMap
-        || !this._eventMap[cb]) {
-      return nativeRemoveEventListener.apply(this, arguments);
-    }
-    var unwrappedCb = this._eventMap[cb];
-    delete this._eventMap[cb];
-    return nativeRemoveEventListener.apply(this, [nativeEventName,
-      unwrappedCb]);
-  };
-
-  Object.defineProperty(proto, 'on' + eventNameToWrap, {
-    get: function() {
-      return this['_on' + eventNameToWrap];
-    },
-    set: function(cb) {
-      if (this['_on' + eventNameToWrap]) {
-        this.removeEventListener(eventNameToWrap,
-            this['_on' + eventNameToWrap]);
-        delete this['_on' + eventNameToWrap];
-      }
-      if (cb) {
-        this.addEventListener(eventNameToWrap,
-            this['_on' + eventNameToWrap] = cb);
-      }
-    }
-  });
+/* Get the internal hash as a hex string */
+function sha256_encode_hex() {
+	var output = new String();
+	for(var i=0; i<8; i++) {
+		for(var j=28; j>=0; j-=4)
+			output += sha256_hex_digits.charAt((ihash[i] >>> j) & 0x0f);
+	}
+	return output;
 }
 
-module.exports = {
-  shimRTCIceCandidate: function(window) {
-    // foundation is arbitrarily chosen as an indicator for full support for
-    // https://w3c.github.io/webrtc-pc/#rtcicecandidate-interface
-    if (window.RTCIceCandidate && 'foundation' in
-        window.RTCIceCandidate.prototype) {
-      return;
-    }
+/* Main function: returns a hex string representing the SHA256 value of the 
+given data */
+function sha256_digest(data) {
+	sha256_init();
+	sha256_update(data, data.length);
+	sha256_final();
+        return sha256_encode_hex();
+}
+
+/* test if the JS-interpreter is working properly */
+function sha256_self_test()
+{
+	return sha256_digest("message digest") == 
+"f7846f55cf23e14eebeab5b4e1550cad5b509e3348fbc4efa3a1413d393cb650";
+}
 
-    var NativeRTCIceCandidate = window.RTCIceCandidate;
-    window.RTCIceCandidate = function(args) {
-      // Remove the a= which shouldn't be part of the candidate string.
-      if (typeof args === 'object' && args.candidate &&
-          args.candidate.indexOf('a=') === 0) {
-        args = JSON.parse(JSON.stringify(args));
-        args.candidate = args.candidate.substr(2);
-      }
 
-      // Augment the native candidate with the parsed fields.
-      var nativeCandidate = new NativeRTCIceCandidate(args);
-      var parsedCandidate = SDPUtils.parseCandidate(args.candidate);
-      var augmentedCandidate = Object.assign(nativeCandidate,
-          parsedCandidate);
 
-      // Add a serializer that does not serialize the extra attributes.
-      augmentedCandidate.toJSON = function() {
-        return {
-          candidate: augmentedCandidate.candidate,
-          sdpMid: augmentedCandidate.sdpMid,
-          sdpMLineIndex: augmentedCandidate.sdpMLineIndex,
-          usernameFragment: augmentedCandidate.usernameFragment,
-        };
-      };
-      return augmentedCandidate;
-    };
-
-    // Hook up the augmented candidate in onicecandidate and
-    // addEventListener('icecandidate', ...)
-    wrapPeerConnectionEvent(window, 'icecandidate', function(e) {
-      if (e.candidate) {
-        Object.defineProperty(e, 'candidate', {
-          value: new window.RTCIceCandidate(e.candidate),
-          writable: 'false'
-        });
-      }
-      return e;
-    });
-  },
-
-  // shimCreateObjectURL must be called before shimSourceObject to avoid loop.
-
-  shimCreateObjectURL: function(window) {
-    var URL = window && window.URL;
-
-    if (!(typeof window === 'object' && window.HTMLMediaElement &&
-          'srcObject' in window.HTMLMediaElement.prototype &&
-        URL.createObjectURL && URL.revokeObjectURL)) {
-      // Only shim CreateObjectURL using srcObject if srcObject exists.
-      return undefined;
-    }
-
-    var nativeCreateObjectURL = URL.createObjectURL.bind(URL);
-    var nativeRevokeObjectURL = URL.revokeObjectURL.bind(URL);
-    var streams = new Map(), newId = 0;
-
-    URL.createObjectURL = function(stream) {
-      if ('getTracks' in stream) {
-        var url = 'polyblob:' + (++newId);
-        streams.set(url, stream);
-        utils.deprecated('URL.createObjectURL(stream)',
-            'elem.srcObject = stream');
-        return url;
-      }
-      return nativeCreateObjectURL(stream);
-    };
-    URL.revokeObjectURL = function(url) {
-      nativeRevokeObjectURL(url);
-      streams.delete(url);
-    };
-
-    var dsc = Object.getOwnPropertyDescriptor(window.HTMLMediaElement.prototype,
-                                              'src');
-    Object.defineProperty(window.HTMLMediaElement.prototype, 'src', {
-      get: function() {
-        return dsc.get.apply(this);
-      },
-      set: function(url) {
-        this.srcObject = streams.get(url) || null;
-        return dsc.set.apply(this, [url]);
-      }
-    });
-
-    var nativeSetAttribute = window.HTMLMediaElement.prototype.setAttribute;
-    window.HTMLMediaElement.prototype.setAttribute = function() {
-      if (arguments.length === 2 &&
-          ('' + arguments[0]).toLowerCase() === 'src') {
-        this.srcObject = streams.get(arguments[1]) || null;
-      }
-      return nativeSetAttribute.apply(this, arguments);
-    };
-  }
-};
-
-},{"./utils":13,"sdp":2}],8:[function(require,module,exports){
-/*
- *  Copyright (c) 2016 The WebRTC project authors. All Rights Reserved.
- *
- *  Use of this source code is governed by a BSD-style license
- *  that can be found in the LICENSE file in the root of the source
- *  tree.
- */
- /* eslint-env node */
-'use strict';
-
-var utils = require('../utils');
-var shimRTCPeerConnection = require('rtcpeerconnection-shim');
-
-module.exports = {
-  shimGetUserMedia: require('./getusermedia'),
-  shimPeerConnection: function(window) {
-    var browserDetails = utils.detectBrowser(window);
-
-    if (window.RTCIceGatherer) {
-      // ORTC defines an RTCIceCandidate object but no constructor.
-      // Not implemented in Edge.
-      if (!window.RTCIceCandidate) {
-        window.RTCIceCandidate = function(args) {
-          return args;
-        };
-      }
-      // ORTC does not have a session description object but
-      // other browsers (i.e. Chrome) that will support both PC and ORTC
-      // in the future might have this defined already.
-      if (!window.RTCSessionDescription) {
-        window.RTCSessionDescription = function(args) {
-          return args;
-        };
-      }
-      // this adds an additional event listener to MediaStrackTrack that signals
-      // when a tracks enabled property was changed. Workaround for a bug in
-      // addStream, see below. No longer required in 15025+
-      if (browserDetails.version < 15025) {
-        var origMSTEnabled = Object.getOwnPropertyDescriptor(
-            window.MediaStreamTrack.prototype, 'enabled');
-        Object.defineProperty(window.MediaStreamTrack.prototype, 'enabled', {
-          set: function(value) {
-            origMSTEnabled.set.call(this, value);
-            var ev = new Event('enabled');
-            ev.enabled = value;
-            this.dispatchEvent(ev);
-          }
-        });
-      }
-    }
-
-    // ORTC defines the DTMF sender a bit different.
-    // https://github.com/w3c/ortc/issues/714
-    if (window.RTCRtpSender && !('dtmf' in window.RTCRtpSender.prototype)) {
-      Object.defineProperty(window.RTCRtpSender.prototype, 'dtmf', {
-        get: function() {
-          if (this._dtmf === undefined) {
-            if (this.track.kind === 'audio') {
-              this._dtmf = new window.RTCDtmfSender(this);
-            } else if (this.track.kind === 'video') {
-              this._dtmf = null;
-            }
-          }
-          return this._dtmf;
-        }
-      });
-    }
-
-    window.RTCPeerConnection =
-        shimRTCPeerConnection(window, browserDetails.version);
-  },
-  shimReplaceTrack: function(window) {
-    // ORTC has replaceTrack -- https://github.com/w3c/ortc/issues/614
-    if (window.RTCRtpSender &&
-        !('replaceTrack' in window.RTCRtpSender.prototype)) {
-      window.RTCRtpSender.prototype.replaceTrack =
-          window.RTCRtpSender.prototype.setTrack;
-    }
-  }
-};
-
-},{"../utils":13,"./getusermedia":9,"rtcpeerconnection-shim":1}],9:[function(require,module,exports){
-/*
- *  Copyright (c) 2016 The WebRTC project authors. All Rights Reserved.
- *
- *  Use of this source code is governed by a BSD-style license
- *  that can be found in the LICENSE file in the root of the source
- *  tree.
- */
- /* eslint-env node */
-'use strict';
-
-// Expose public methods.
-module.exports = function(window) {
-  var navigator = window && window.navigator;
-
-  var shimError_ = function(e) {
-    return {
-      name: {PermissionDeniedError: 'NotAllowedError'}[e.name] || e.name,
-      message: e.message,
-      constraint: e.constraint,
-      toString: function() {
-        return this.name;
-      }
-    };
-  };
-
-  // getUserMedia error shim.
-  var origGetUserMedia = navigator.mediaDevices.getUserMedia.
-      bind(navigator.mediaDevices);
-  navigator.mediaDevices.getUserMedia = function(c) {
-    return origGetUserMedia(c).catch(function(e) {
-      return Promise.reject(shimError_(e));
-    });
-  };
-};
-
-},{}],10:[function(require,module,exports){
-/*
- *  Copyright (c) 2016 The WebRTC project authors. All Rights Reserved.
- *
- *  Use of this source code is governed by a BSD-style license
- *  that can be found in the LICENSE file in the root of the source
- *  tree.
- */
- /* eslint-env node */
-'use strict';
-
-var utils = require('../utils');
-
-var firefoxShim = {
-  shimOnTrack: function(window) {
-    if (typeof window === 'object' && window.RTCPeerConnection && !('ontrack' in
-        window.RTCPeerConnection.prototype)) {
-      Object.defineProperty(window.RTCPeerConnection.prototype, 'ontrack', {
-        get: function() {
-          return this._ontrack;
-        },
-        set: function(f) {
-          if (this._ontrack) {
-            this.removeEventListener('track', this._ontrack);
-            this.removeEventListener('addstream', this._ontrackpoly);
-          }
-          this.addEventListener('track', this._ontrack = f);
-          this.addEventListener('addstream', this._ontrackpoly = function(e) {
-            e.stream.getTracks().forEach(function(track) {
-              var event = new Event('track');
-              event.track = track;
-              event.receiver = {track: track};
-              event.transceiver = {receiver: event.receiver};
-              event.streams = [e.stream];
-              this.dispatchEvent(event);
-            }.bind(this));
-          }.bind(this));
-        }
-      });
-    }
-    if (typeof window === 'object' && window.RTCPeerConnection &&
-        ('receiver' in window.RTCTrackEvent.prototype) &&
-        !('transceiver' in window.RTCTrackEvent.prototype)) {
-      Object.defineProperty(window.RTCTrackEvent.prototype, 'transceiver', {
-        get: function() {
-          return {receiver: this.receiver};
-        }
-      });
-    }
-  },
-
-  shimSourceObject: function(window) {
-    // Firefox has supported mozSrcObject since FF22, unprefixed in 42.
-    if (typeof window === 'object') {
-      if (window.HTMLMediaElement &&
-        !('srcObject' in window.HTMLMediaElement.prototype)) {
-        // Shim the srcObject property, once, when HTMLMediaElement is found.
-        Object.defineProperty(window.HTMLMediaElement.prototype, 'srcObject', {
-          get: function() {
-            return this.mozSrcObject;
-          },
-          set: function(stream) {
-            this.mozSrcObject = stream;
-          }
-        });
-      }
-    }
-  },
-
-  shimPeerConnection: function(window) {
-    var browserDetails = utils.detectBrowser(window);
-
-    if (typeof window !== 'object' || !(window.RTCPeerConnection ||
-        window.mozRTCPeerConnection)) {
-      return; // probably media.peerconnection.enabled=false in about:config
-    }
-    // The RTCPeerConnection object.
-    if (!window.RTCPeerConnection) {
-      window.RTCPeerConnection = function(pcConfig, pcConstraints) {
-        if (browserDetails.version < 38) {
-          // .urls is not supported in FF < 38.
-          // create RTCIceServers with a single url.
-          if (pcConfig && pcConfig.iceServers) {
-            var newIceServers = [];
-            for (var i = 0; i < pcConfig.iceServers.length; i++) {
-              var server = pcConfig.iceServers[i];
-              if (server.hasOwnProperty('urls')) {
-                for (var j = 0; j < server.urls.length; j++) {
-                  var newServer = {
-                    url: server.urls[j]
-                  };
-                  if (server.urls[j].indexOf('turn') === 0) {
-                    newServer.username = server.username;
-                    newServer.credential = server.credential;
-                  }
-                  newIceServers.push(newServer);
-                }
-              } else {
-                newIceServers.push(pcConfig.iceServers[i]);
-              }
-            }
-            pcConfig.iceServers = newIceServers;
-          }
-        }
-        return new window.mozRTCPeerConnection(pcConfig, pcConstraints);
-      };
-      window.RTCPeerConnection.prototype =
-          window.mozRTCPeerConnection.prototype;
-
-      // wrap static methods. Currently just generateCertificate.
-      if (window.mozRTCPeerConnection.generateCertificate) {
-        Object.defineProperty(window.RTCPeerConnection, 'generateCertificate', {
-          get: function() {
-            return window.mozRTCPeerConnection.generateCertificate;
-          }
-        });
-      }
-
-      window.RTCSessionDescription = window.mozRTCSessionDescription;
-      window.RTCIceCandidate = window.mozRTCIceCandidate;
-    }
-
-    // shim away need for obsolete RTCIceCandidate/RTCSessionDescription.
-    ['setLocalDescription', 'setRemoteDescription', 'addIceCandidate']
-        .forEach(function(method) {
-          var nativeMethod = window.RTCPeerConnection.prototype[method];
-          window.RTCPeerConnection.prototype[method] = function() {
-            arguments[0] = new ((method === 'addIceCandidate') ?
-                window.RTCIceCandidate :
-                window.RTCSessionDescription)(arguments[0]);
-            return nativeMethod.apply(this, arguments);
-          };
-        });
-
-    // support for addIceCandidate(null or undefined)
-    var nativeAddIceCandidate =
-        window.RTCPeerConnection.prototype.addIceCandidate;
-    window.RTCPeerConnection.prototype.addIceCandidate = function() {
-      if (!arguments[0]) {
-        if (arguments[1]) {
-          arguments[1].apply(null);
-        }
-        return Promise.resolve();
-      }
-      return nativeAddIceCandidate.apply(this, arguments);
-    };
-
-    // shim getStats with maplike support
-    var makeMapStats = function(stats) {
-      var map = new Map();
-      Object.keys(stats).forEach(function(key) {
-        map.set(key, stats[key]);
-        map[key] = stats[key];
-      });
-      return map;
-    };
-
-    var modernStatsTypes = {
-      inboundrtp: 'inbound-rtp',
-      outboundrtp: 'outbound-rtp',
-      candidatepair: 'candidate-pair',
-      localcandidate: 'local-candidate',
-      remotecandidate: 'remote-candidate'
-    };
-
-    var nativeGetStats = window.RTCPeerConnection.prototype.getStats;
-    window.RTCPeerConnection.prototype.getStats = function(
-      selector,
-      onSucc,
-      onErr
-    ) {
-      return nativeGetStats.apply(this, [selector || null])
-        .then(function(stats) {
-          if (browserDetails.version < 48) {
-            stats = makeMapStats(stats);
-          }
-          if (browserDetails.version < 53 && !onSucc) {
-            // Shim only promise getStats with spec-hyphens in type names
-            // Leave callback version alone; misc old uses of forEach before Map
-            try {
-              stats.forEach(function(stat) {
-                stat.type = modernStatsTypes[stat.type] || stat.type;
-              });
-            } catch (e) {
-              if (e.name !== 'TypeError') {
-                throw e;
-              }
-              // Avoid TypeError: "type" is read-only, in old versions. 34-43ish
-              stats.forEach(function(stat, i) {
-                stats.set(i, Object.assign({}, stat, {
-                  type: modernStatsTypes[stat.type] || stat.type
-                }));
-              });
-            }
-          }
-          return stats;
-        })
-        .then(onSucc, onErr);
-    };
-  }
-};
-
-// Expose public methods.
-module.exports = {
-  shimOnTrack: firefoxShim.shimOnTrack,
-  shimSourceObject: firefoxShim.shimSourceObject,
-  shimPeerConnection: firefoxShim.shimPeerConnection,
-  shimGetUserMedia: require('./getusermedia')
-};
-
-},{"../utils":13,"./getusermedia":11}],11:[function(require,module,exports){
-/*
- *  Copyright (c) 2016 The WebRTC project authors. All Rights Reserved.
- *
- *  Use of this source code is governed by a BSD-style license
- *  that can be found in the LICENSE file in the root of the source
- *  tree.
- */
- /* eslint-env node */
-'use strict';
-
-var utils = require('../utils');
-var logging = utils.log;
-
-// Expose public methods.
-module.exports = function(window) {
-  var browserDetails = utils.detectBrowser(window);
-  var navigator = window && window.navigator;
-  var MediaStreamTrack = window && window.MediaStreamTrack;
-
-  var shimError_ = function(e) {
-    return {
-      name: {
-        InternalError: 'NotReadableError',
-        NotSupportedError: 'TypeError',
-        PermissionDeniedError: 'NotAllowedError',
-        SecurityError: 'NotAllowedError'
-      }[e.name] || e.name,
-      message: {
-        'The operation is insecure.': 'The request is not allowed by the ' +
-        'user agent or the platform in the current context.'
-      }[e.message] || e.message,
-      constraint: e.constraint,
-      toString: function() {
-        return this.name + (this.message && ': ') + this.message;
-      }
-    };
-  };
-
-  // getUserMedia constraints shim.
-  var getUserMedia_ = function(constraints, onSuccess, onError) {
-    var constraintsToFF37_ = function(c) {
-      if (typeof c !== 'object' || c.require) {
-        return c;
-      }
-      var require = [];
-      Object.keys(c).forEach(function(key) {
-        if (key === 'require' || key === 'advanced' || key === 'mediaSource') {
-          return;
-        }
-        var r = c[key] = (typeof c[key] === 'object') ?
-            c[key] : {ideal: c[key]};
-        if (r.min !== undefined ||
-            r.max !== undefined || r.exact !== undefined) {
-          require.push(key);
-        }
-        if (r.exact !== undefined) {
-          if (typeof r.exact === 'number') {
-            r. min = r.max = r.exact;
-          } else {
-            c[key] = r.exact;
-          }
-          delete r.exact;
-        }
-        if (r.ideal !== undefined) {
-          c.advanced = c.advanced || [];
-          var oc = {};
-          if (typeof r.ideal === 'number') {
-            oc[key] = {min: r.ideal, max: r.ideal};
-          } else {
-            oc[key] = r.ideal;
-          }
-          c.advanced.push(oc);
-          delete r.ideal;
-          if (!Object.keys(r).length) {
-            delete c[key];
-          }
-        }
-      });
-      if (require.length) {
-        c.require = require;
-      }
-      return c;
-    };
-    constraints = JSON.parse(JSON.stringify(constraints));
-    if (browserDetails.version < 38) {
-      logging('spec: ' + JSON.stringify(constraints));
-      if (constraints.audio) {
-        constraints.audio = constraintsToFF37_(constraints.audio);
-      }
-      if (constraints.video) {
-        constraints.video = constraintsToFF37_(constraints.video);
-      }
-      logging('ff37: ' + JSON.stringify(constraints));
-    }
-    return navigator.mozGetUserMedia(constraints, onSuccess, function(e) {
-      onError(shimError_(e));
-    });
-  };
-
-  // Returns the result of getUserMedia as a Promise.
-  var getUserMediaPromise_ = function(constraints) {
-    return new Promise(function(resolve, reject) {
-      getUserMedia_(constraints, resolve, reject);
-    });
-  };
-
-  // Shim for mediaDevices on older versions.
-  if (!navigator.mediaDevices) {
-    navigator.mediaDevices = {getUserMedia: getUserMediaPromise_,
-      addEventListener: function() { },
-      removeEventListener: function() { }
-    };
-  }
-  navigator.mediaDevices.enumerateDevices =
-      navigator.mediaDevices.enumerateDevices || function() {
-        return new Promise(function(resolve) {
-          var infos = [
-            {kind: 'audioinput', deviceId: 'default', label: '', groupId: ''},
-            {kind: 'videoinput', deviceId: 'default', label: '', groupId: ''}
-          ];
-          resolve(infos);
-        });
-      };
-
-  if (browserDetails.version < 41) {
-    // Work around http://bugzil.la/1169665
-    var orgEnumerateDevices =
-        navigator.mediaDevices.enumerateDevices.bind(navigator.mediaDevices);
-    navigator.mediaDevices.enumerateDevices = function() {
-      return orgEnumerateDevices().then(undefined, function(e) {
-        if (e.name === 'NotFoundError') {
-          return [];
-        }
-        throw e;
-      });
-    };
-  }
-  if (browserDetails.version < 49) {
-    var origGetUserMedia = navigator.mediaDevices.getUserMedia.
-        bind(navigator.mediaDevices);
-    navigator.mediaDevices.getUserMedia = function(c) {
-      return origGetUserMedia(c).then(function(stream) {
-        // Work around https://bugzil.la/802326
-        if (c.audio && !stream.getAudioTracks().length ||
-            c.video && !stream.getVideoTracks().length) {
-          stream.getTracks().forEach(function(track) {
-            track.stop();
-          });
-          throw new DOMException('The object can not be found here.',
-                                 'NotFoundError');
-        }
-        return stream;
-      }, function(e) {
-        return Promise.reject(shimError_(e));
-      });
-    };
-  }
-  if (!(browserDetails.version > 55 &&
-      'autoGainControl' in navigator.mediaDevices.getSupportedConstraints())) {
-    var remap = function(obj, a, b) {
-      if (a in obj && !(b in obj)) {
-        obj[b] = obj[a];
-        delete obj[a];
-      }
-    };
-
-    var nativeGetUserMedia = navigator.mediaDevices.getUserMedia.
-        bind(navigator.mediaDevices);
-    navigator.mediaDevices.getUserMedia = function(c) {
-      if (typeof c === 'object' && typeof c.audio === 'object') {
-        c = JSON.parse(JSON.stringify(c));
-        remap(c.audio, 'autoGainControl', 'mozAutoGainControl');
-        remap(c.audio, 'noiseSuppression', 'mozNoiseSuppression');
-      }
-      return nativeGetUserMedia(c);
-    };
-
-    if (MediaStreamTrack && MediaStreamTrack.prototype.getSettings) {
-      var nativeGetSettings = MediaStreamTrack.prototype.getSettings;
-      MediaStreamTrack.prototype.getSettings = function() {
-        var obj = nativeGetSettings.apply(this, arguments);
-        remap(obj, 'mozAutoGainControl', 'autoGainControl');
-        remap(obj, 'mozNoiseSuppression', 'noiseSuppression');
-        return obj;
-      };
-    }
-
-    if (MediaStreamTrack && MediaStreamTrack.prototype.applyConstraints) {
-      var nativeApplyConstraints = MediaStreamTrack.prototype.applyConstraints;
-      MediaStreamTrack.prototype.applyConstraints = function(c) {
-        if (this.kind === 'audio' && typeof c === 'object') {
-          c = JSON.parse(JSON.stringify(c));
-          remap(c, 'autoGainControl', 'mozAutoGainControl');
-          remap(c, 'noiseSuppression', 'mozNoiseSuppression');
-        }
-        return nativeApplyConstraints.apply(this, [c]);
-      };
-    }
-  }
-  navigator.getUserMedia = function(constraints, onSuccess, onError) {
-    if (browserDetails.version < 44) {
-      return getUserMedia_(constraints, onSuccess, onError);
-    }
-    // Replace Firefox 44+'s deprecation warning with unprefixed version.
-    utils.deprecated('navigator.getUserMedia',
-        'navigator.mediaDevices.getUserMedia');
-    navigator.mediaDevices.getUserMedia(constraints).then(onSuccess, onError);
-  };
-};
-
-},{"../utils":13}],12:[function(require,module,exports){
-/*
- *  Copyright (c) 2016 The WebRTC project authors. All Rights Reserved.
- *
- *  Use of this source code is governed by a BSD-style license
- *  that can be found in the LICENSE file in the root of the source
- *  tree.
- */
-'use strict';
-var utils = require('../utils');
-
-var safariShim = {
-  // TODO: DrAlex, should be here, double check against LayoutTests
-
-  // TODO: once the back-end for the mac port is done, add.
-  // TODO: check for webkitGTK+
-  // shimPeerConnection: function() { },
-
-  shimLocalStreamsAPI: function(window) {
-    if (typeof window !== 'object' || !window.RTCPeerConnection) {
-      return;
-    }
-    if (!('getLocalStreams' in window.RTCPeerConnection.prototype)) {
-      window.RTCPeerConnection.prototype.getLocalStreams = function() {
-        if (!this._localStreams) {
-          this._localStreams = [];
-        }
-        return this._localStreams;
-      };
-    }
-    if (!('getStreamById' in window.RTCPeerConnection.prototype)) {
-      window.RTCPeerConnection.prototype.getStreamById = function(id) {
-        var result = null;
-        if (this._localStreams) {
-          this._localStreams.forEach(function(stream) {
-            if (stream.id === id) {
-              result = stream;
-            }
-          });
-        }
-        if (this._remoteStreams) {
-          this._remoteStreams.forEach(function(stream) {
-            if (stream.id === id) {
-              result = stream;
-            }
-          });
-        }
-        return result;
-      };
-    }
-    if (!('addStream' in window.RTCPeerConnection.prototype)) {
-      var _addTrack = window.RTCPeerConnection.prototype.addTrack;
-      window.RTCPeerConnection.prototype.addStream = function(stream) {
-        if (!this._localStreams) {
-          this._localStreams = [];
-        }
-        if (this._localStreams.indexOf(stream) === -1) {
-          this._localStreams.push(stream);
-        }
-        var self = this;
-        stream.getTracks().forEach(function(track) {
-          _addTrack.call(self, track, stream);
-        });
-      };
-
-      window.RTCPeerConnection.prototype.addTrack = function(track, stream) {
-        if (stream) {
-          if (!this._localStreams) {
-            this._localStreams = [stream];
-          } else if (this._localStreams.indexOf(stream) === -1) {
-            this._localStreams.push(stream);
-          }
-        }
-        _addTrack.call(this, track, stream);
-      };
-    }
-    if (!('removeStream' in window.RTCPeerConnection.prototype)) {
-      window.RTCPeerConnection.prototype.removeStream = function(stream) {
-        if (!this._localStreams) {
-          this._localStreams = [];
-        }
-        var index = this._localStreams.indexOf(stream);
-        if (index === -1) {
-          return;
-        }
-        this._localStreams.splice(index, 1);
-        var self = this;
-        var tracks = stream.getTracks();
-        this.getSenders().forEach(function(sender) {
-          if (tracks.indexOf(sender.track) !== -1) {
-            self.removeTrack(sender);
-          }
-        });
-      };
-    }
-  },
-  shimRemoteStreamsAPI: function(window) {
-    if (typeof window !== 'object' || !window.RTCPeerConnection) {
-      return;
-    }
-    if (!('getRemoteStreams' in window.RTCPeerConnection.prototype)) {
-      window.RTCPeerConnection.prototype.getRemoteStreams = function() {
-        return this._remoteStreams ? this._remoteStreams : [];
-      };
-    }
-    if (!('onaddstream' in window.RTCPeerConnection.prototype)) {
-      Object.defineProperty(window.RTCPeerConnection.prototype, 'onaddstream', {
-        get: function() {
-          return this._onaddstream;
-        },
-        set: function(f) {
-          if (this._onaddstream) {
-            this.removeEventListener('addstream', this._onaddstream);
-            this.removeEventListener('track', this._onaddstreampoly);
-          }
-          this.addEventListener('addstream', this._onaddstream = f);
-          this.addEventListener('track', this._onaddstreampoly = function(e) {
-            var stream = e.streams[0];
-            if (!this._remoteStreams) {
-              this._remoteStreams = [];
-            }
-            if (this._remoteStreams.indexOf(stream) >= 0) {
-              return;
-            }
-            this._remoteStreams.push(stream);
-            var event = new Event('addstream');
-            event.stream = e.streams[0];
-            this.dispatchEvent(event);
-          }.bind(this));
-        }
-      });
-    }
-  },
-  shimCallbacksAPI: function(window) {
-    if (typeof window !== 'object' || !window.RTCPeerConnection) {
-      return;
-    }
-    var prototype = window.RTCPeerConnection.prototype;
-    var createOffer = prototype.createOffer;
-    var createAnswer = prototype.createAnswer;
-    var setLocalDescription = prototype.setLocalDescription;
-    var setRemoteDescription = prototype.setRemoteDescription;
-    var addIceCandidate = prototype.addIceCandidate;
-
-    prototype.createOffer = function(successCallback, failureCallback) {
-      var options = (arguments.length >= 2) ? arguments[2] : arguments[0];
-      var promise = createOffer.apply(this, [options]);
-      if (!failureCallback) {
-        return promise;
-      }
-      promise.then(successCallback, failureCallback);
-      return Promise.resolve();
-    };
-
-    prototype.createAnswer = function(successCallback, failureCallback) {
-      var options = (arguments.length >= 2) ? arguments[2] : arguments[0];
-      var promise = createAnswer.apply(this, [options]);
-      if (!failureCallback) {
-        return promise;
-      }
-      promise.then(successCallback, failureCallback);
-      return Promise.resolve();
-    };
-
-    var withCallback = function(description, successCallback, failureCallback) {
-      var promise = setLocalDescription.apply(this, [description]);
-      if (!failureCallback) {
-        return promise;
-      }
-      promise.then(successCallback, failureCallback);
-      return Promise.resolve();
-    };
-    prototype.setLocalDescription = withCallback;
-
-    withCallback = function(description, successCallback, failureCallback) {
-      var promise = setRemoteDescription.apply(this, [description]);
-      if (!failureCallback) {
-        return promise;
-      }
-      promise.then(successCallback, failureCallback);
-      return Promise.resolve();
-    };
-    prototype.setRemoteDescription = withCallback;
-
-    withCallback = function(candidate, successCallback, failureCallback) {
-      var promise = addIceCandidate.apply(this, [candidate]);
-      if (!failureCallback) {
-        return promise;
-      }
-      promise.then(successCallback, failureCallback);
-      return Promise.resolve();
-    };
-    prototype.addIceCandidate = withCallback;
-  },
-  shimGetUserMedia: function(window) {
-    var navigator = window && window.navigator;
-
-    if (!navigator.getUserMedia) {
-      if (navigator.webkitGetUserMedia) {
-        navigator.getUserMedia = navigator.webkitGetUserMedia.bind(navigator);
-      } else if (navigator.mediaDevices &&
-          navigator.mediaDevices.getUserMedia) {
-        navigator.getUserMedia = function(constraints, cb, errcb) {
-          navigator.mediaDevices.getUserMedia(constraints)
-          .then(cb, errcb);
-        }.bind(navigator);
-      }
-    }
-  },
-  shimRTCIceServerUrls: function(window) {
-    // migrate from non-spec RTCIceServer.url to RTCIceServer.urls
-    var OrigPeerConnection = window.RTCPeerConnection;
-    window.RTCPeerConnection = function(pcConfig, pcConstraints) {
-      if (pcConfig && pcConfig.iceServers) {
-        var newIceServers = [];
-        for (var i = 0; i < pcConfig.iceServers.length; i++) {
-          var server = pcConfig.iceServers[i];
-          if (!server.hasOwnProperty('urls') &&
-              server.hasOwnProperty('url')) {
-            utils.deprecated('RTCIceServer.url', 'RTCIceServer.urls');
-            server = JSON.parse(JSON.stringify(server));
-            server.urls = server.url;
-            delete server.url;
-            newIceServers.push(server);
-          } else {
-            newIceServers.push(pcConfig.iceServers[i]);
-          }
-        }
-        pcConfig.iceServers = newIceServers;
-      }
-      return new OrigPeerConnection(pcConfig, pcConstraints);
-    };
-    window.RTCPeerConnection.prototype = OrigPeerConnection.prototype;
-    // wrap static methods. Currently just generateCertificate.
-    Object.defineProperty(window.RTCPeerConnection, 'generateCertificate', {
-      get: function() {
-        return OrigPeerConnection.generateCertificate;
-      }
-    });
-  },
-  shimTrackEventTransceiver: function(window) {
-    // Add event.transceiver member over deprecated event.receiver
-    if (typeof window === 'object' && window.RTCPeerConnection &&
-        ('receiver' in window.RTCTrackEvent.prototype) &&
-        // can't check 'transceiver' in window.RTCTrackEvent.prototype, as it is
-        // defined for some reason even when window.RTCTransceiver is not.
-        !window.RTCTransceiver) {
-      Object.defineProperty(window.RTCTrackEvent.prototype, 'transceiver', {
-        get: function() {
-          return {receiver: this.receiver};
-        }
-      });
-    }
-  }
-};
-
-// Expose public methods.
-module.exports = {
-  shimCallbacksAPI: safariShim.shimCallbacksAPI,
-  shimLocalStreamsAPI: safariShim.shimLocalStreamsAPI,
-  shimRemoteStreamsAPI: safariShim.shimRemoteStreamsAPI,
-  shimGetUserMedia: safariShim.shimGetUserMedia,
-  shimRTCIceServerUrls: safariShim.shimRTCIceServerUrls,
-  shimTrackEventTransceiver: safariShim.shimTrackEventTransceiver
-  // TODO
-  // shimPeerConnection: safariShim.shimPeerConnection
-};
-
-},{"../utils":13}],13:[function(require,module,exports){
-/*
- *  Copyright (c) 2016 The WebRTC project authors. All Rights Reserved.
- *
- *  Use of this source code is governed by a BSD-style license
- *  that can be found in the LICENSE file in the root of the source
- *  tree.
- */
- /* eslint-env node */
-'use strict';
-
-var logDisabled_ = true;
-var deprecationWarnings_ = true;
-
-// Utility methods.
-var utils = {
-  disableLog: function(bool) {
-    if (typeof bool !== 'boolean') {
-      return new Error('Argument type: ' + typeof bool +
-          '. Please use a boolean.');
-    }
-    logDisabled_ = bool;
-    return (bool) ? 'adapter.js logging disabled' :
-        'adapter.js logging enabled';
-  },
-
-  /**
-   * Disable or enable deprecation warnings
-   * @param {!boolean} bool set to true to disable warnings.
-   */
-  disableWarnings: function(bool) {
-    if (typeof bool !== 'boolean') {
-      return new Error('Argument type: ' + typeof bool +
-          '. Please use a boolean.');
-    }
-    deprecationWarnings_ = !bool;
-    return 'adapter.js deprecation warnings ' + (bool ? 'disabled' : 'enabled');
-  },
-
-  log: function() {
-    if (typeof window === 'object') {
-      if (logDisabled_) {
-        return;
-      }
-      if (typeof console !== 'undefined' && typeof console.log === 'function') {
-        console.log.apply(console, arguments);
-      }
-    }
-  },
-
-  /**
-   * Shows a deprecation warning suggesting the modern and spec-compatible API.
-   */
-  deprecated: function(oldMethod, newMethod) {
-    if (!deprecationWarnings_) {
-      return;
-    }
-    console.warn(oldMethod + ' is deprecated, please use ' + newMethod +
-        ' instead.');
-  },
-
-  /**
-   * Extract browser version out of the provided user agent string.
-   *
-   * @param {!string} uastring userAgent string.
-   * @param {!string} expr Regular expression used as match criteria.
-   * @param {!number} pos position in the version string to be returned.
-   * @return {!number} browser version.
-   */
-  extractVersion: function(uastring, expr, pos) {
-    var match = uastring.match(expr);
-    return match && match.length >= pos && parseInt(match[pos], 10);
-  },
-
-  /**
-   * Browser detector.
-   *
-   * @return {object} result containing browser and version
-   *     properties.
-   */
-  detectBrowser: function(window) {
-    var navigator = window && window.navigator;
-
-    // Returned result object.
-    var result = {};
-    result.browser = null;
-    result.version = null;
-
-    // Fail early if it's not a browser
-    if (typeof window === 'undefined' || !window.navigator) {
-      result.browser = 'Not a browser.';
-      return result;
-    }
-
-    // Firefox.
-    if (navigator.mozGetUserMedia) {
-      result.browser = 'firefox';
-      result.version = this.extractVersion(navigator.userAgent,
-          /Firefox\/(\d+)\./, 1);
-    } else if (navigator.webkitGetUserMedia) {
-      // Chrome, Chromium, Webview, Opera, all use the chrome shim for now
-      if (window.webkitRTCPeerConnection) {
-        result.browser = 'chrome';
-        result.version = this.extractVersion(navigator.userAgent,
-          /Chrom(e|ium)\/(\d+)\./, 2);
-      } else { // Safari (in an unpublished version) or unknown webkit-based.
-        if (navigator.userAgent.match(/Version\/(\d+).(\d+)/)) {
-          result.browser = 'safari';
-          result.version = this.extractVersion(navigator.userAgent,
-            /AppleWebKit\/(\d+)\./, 1);
-        } else { // unknown webkit-based browser.
-          result.browser = 'Unsupported webkit-based browser ' +
-              'with GUM support but no WebRTC support.';
-          return result;
-        }
-      }
-    } else if (navigator.mediaDevices &&
-        navigator.userAgent.match(/Edge\/(\d+).(\d+)$/)) { // Edge.
-      result.browser = 'edge';
-      result.version = this.extractVersion(navigator.userAgent,
-          /Edge\/(\d+).(\d+)$/, 2);
-    } else if (navigator.mediaDevices &&
-        navigator.userAgent.match(/AppleWebKit\/(\d+)\./)) {
-        // Safari, with webkitGetUserMedia removed.
-      result.browser = 'safari';
-      result.version = this.extractVersion(navigator.userAgent,
-          /AppleWebKit\/(\d+)\./, 1);
-    } else { // Default fallthrough: not supported.
-      result.browser = 'Not a supported browser.';
-      return result;
-    }
-
-    return result;
-  },
-
-};
-
-// Export.
-module.exports = {
-  log: utils.log,
-  deprecated: utils.deprecated,
-  disableLog: utils.disableLog,
-  disableWarnings: utils.disableWarnings,
-  extractVersion: utils.extractVersion,
-  shimCreateObjectURL: utils.shimCreateObjectURL,
-  detectBrowser: utils.detectBrowser.bind(utils)
-};
-
-},{}]},{},[3])(3)
-});
 myApp.factory('NavigationService', function ($http) {
    
     var navigation = [{
@@ -70308,7 +66188,9 @@ myApp.factory('NavigationService', function ($http) {
 myApp.factory('apiService', function ($http, $q, $timeout) {
     
     //adminurl2 = "http://localhost:8000/";
-    adminurl2 = "http://104.46.103.162:8000/";
+    adminurl2 = "http://104.46.103.162:8099/";
+    adminUrl3 = "http://localhost/api/";
+    adminUrl3 = "http://104.46.103.162:8098/api/";
     return {
 
         // This is a demo Service for POST Method.
@@ -70320,16 +66202,100 @@ myApp.factory('apiService', function ($http, $q, $timeout) {
             }).success(callback);
         },
         // This is a demo Service for POST Method.
-        
-        
-       
+        login:function(formData, callback) {
+            
+            // $http.post(adminurl + "api.php?func=getautocomplete&string=" + request).then(function (response) {
+            //     console.log("Hello",response);
+            //     return response;
+            // });
+            
+            return $http({
+                url:adminUrl3+ "Chatbotuser/loginuser",
+                //headers: {'X-CSRFToken': "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"},
+                method: 'POST',
+                data: formData,
+            });
+           
+        },
+        logout:function(formData, callback) {
+            
+           
+            return $http({
+                //url: "http://wohlig.co.in/chatbotapi/index.php/json/" + 'login/',
+                url:adminUrl3+ "Chatbotuserlogs/logoutuser",
+                //headers: {'X-CSRFToken': "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"},
+                method: 'POST',
+                data: formData,
+                //withCredentials: false,
+                //dataType:"json",
+            });
+            
+        },
+        savebookmark:function(formData, callback) {
+            
+           
+            return $http({
+                url:adminUrl3+ "Chatbotbookmark/savebookmark",
+                method: 'POST',
+                data: formData,
+            });
+            
+        },
+        deletebookmark:function(formData, callback) {
+            
+           
+            return $http({
+                url:adminUrl3+ "Chatbotbookmark/deletebookmark",
+                method: 'POST',
+                data: formData,
+            });
+            
+        },
+        viewbookmark:function(formData, callback) {
+            
+           
+            return $http({
+                url:adminUrl3+ "Chatbotbookmark/viewbookmark",
+                method: 'POST',
+                data: formData,
+            });
+            
+        },
+        getbookmark:function(formData, callback) {
+            
+           
+            return $http({
+                url:adminUrl3+ "Chatbotbookmark/getbookmark",
+                method: 'POST',
+                data: formData,
+            });
+            
+        },
+        sendmail:function(formData, callback) {
+            
+           
+            return $http({
+                url:adminUrl3+ "Chatbotuser/sendmail",
+                method: 'POST',
+                data: formData,
+                // headers : {
+                //     'Content-Type' : 'application/json'
+                // },
+                // transformRequest :  [function (data, headers) {
+                //     //just send data without modifying
+                //     return data;
+                // }],
+                contentType: "application/x-www-form-urlencoded",
+            });
+            
+        },
         getQlikChart:function(formData,callback){
             
             return    $http({
                 url:adminurl2+'chat/',
                 method: 'POST',
                 data:$.param(formData),
-                headers: {'X-CSRFToken': formData.csrfmiddlewaretoken},
+                headers: {'X-CSRFToken': formData.csrfmiddlewaretoken,'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'},
             });
         }
     };
@@ -70418,7 +66384,7 @@ myApp.factory('Menuservice', function($rootScope,$http, $q, $timeout,apiService)
     
 
     })
-    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService, $timeout,$http,apiService,$state,$uibModal,Menuservice,$sce) {
+    .controller('ChatCtrl', function ($scope, $rootScope,TemplateService, NavigationService, $timeout,$http,apiService,$state,$uibModal,Menuservice,$sce,$interval) {
         
         $rootScope.autocompletelist = [];
         $rootScope.chatOpen = false;
@@ -70428,49 +66394,88 @@ myApp.factory('Menuservice', function($rootScope,$http, $q, $timeout,apiService)
         $rootScope.chatmsgid = "";
         
         $rootScope.msgSelected = false;
-        //var mylist = $.jStorage.get("chatlist");
-        var mylist = [];
+        var mylist = $.jStorage.get("chatlist");
+        //var mylist = [];
         if(!mylist || mylist == null)
             $rootScope.chatlist = [];
         else
         {
-            //$rootScope.chatlist = $.jStorage.get("chatlist");
-            $rootScope.chatlist = mylist;
+            $rootScope.chatlist = $.jStorage.get("chatlist");
+            //$rootScope.chatlist = mylist;
         }
         $rootScope.autolistid="";
         $rootScope.autolistvalue="";
         $rootScope.showMsgLoader=false;
         $rootScope.rate_count= 0;
-        
-        // var vm = this;
-        
-        // vm.displayTranscript = displayTranscript;
-        // vm.transcript = '';
-        //  //$rootScope.transcript = "";
-        // // $rootScope.displayTranscript = function() {
-        // //     //vm.transcript = $rootScope.transcript;
-        // //     $(".chatinput").val($rootScope.transcript);
-        // //     console.log("Speech",$rootScope.transcript);
-        // //     //This is just to refresh the content in the view.
-        // //     if (!$scope.$$phase) {
-        // //         $scope.$digest();
-        // //     }
-        // // };
-        // $rootScope.speechEnd = function() {
-        //     console.log("Speech Ended");
-        // };
-        
-        // //vm.displayTranscript = $rootScope.displayTranscript();
-        
-        // $rootScope.speechStarted = function() {
-        //     console.log("speech Started");
-        // };
-        // /**
-        //  * Handle the received transcript here.
-        //  * The result from the Web Speech Recognition will
-        //  * be set inside a $rootScope variable. You can use it
-        //  * as you want.
-        //  */
+        $scope.formSubmitted = false;
+        $scope.loginerror=0;
+        $rootScope.qticket="";
+        $rootScope.isLoggedin = false;
+        if($.jStorage.get("Ticket"))
+            $rootScope.qticket = $.jStorage.get("Ticket");
+        if($.jStorage.get("isLoggedin"))
+            $rootScope.isLoggedin = true;
+        $scope.login = function(username,password)
+        {
+            
+            $scope.formData = {username:username,password:sha256_digest(password)};
+            
+            apiService.login($scope.formData).then(function (callback){
+                $.jStorage.flush();
+                //if(username == "admin@exponentiadata.com" && password == "admin")
+                if(callback.data.value)
+                {
+                    $.jStorage.set("id", callback.data.data._id);
+                    $.jStorage.set("fname", callback.data.data.fname);
+                    $.jStorage.set("lname", callback.data.data.lname);
+                    $.jStorage.set("email", callback.data.data.email);
+                    $.jStorage.set("branch", callback.data.data.branch);
+                    $.jStorage.set("access_role", callback.data.data.accessrole);
+                    $.jStorage.set("sessionid", callback.data.data._id);
+                    $.jStorage.set("isLoggedin", true);
+                    $.jStorage.set("chunk",callback.data.data.chunk);
+                    $.jStorage.set("Ticket",callback.data.data.chunk.Ticket);
+                    $rootScope.qticket = callback.data.data.chunk.Ticket;
+                    $rootScope.chatlist=[];
+                    $rootScope.isLoggedin = true;
+                    $rootScope.firstMsg = true;  
+					location.reload();
+                    //if(!$rootScope.firstMsg)
+                    {
+                        msg = {Text:"Hi, How may I help you ?",type:"SYS_FIRST"};
+                        $rootScope.pushSystemMsg(0,msg);  
+                    }
+                }
+                else if(callback.data.error.message == -1)
+                {
+                    $scope.loginerror = -1;
+                }
+            });
+            
+        };
+        if($rootScope.isLoggedin) {
+			/*
+            $interval(function(){
+
+                apiService.getnewticket($scope.formData).then(function (callback){
+
+                    if(callback.data.value)
+
+                    {
+
+                        $.jStorage.set("chunk",callback.data.data.chunk);
+
+                        $.jStorage.set("Ticket",callback.data.data.chunk.Ticket);
+
+                        $rootScope.qticket = callback.data.data.chunk.Ticket;
+
+                    }
+
+                });
+
+            },1200000);
+			*/
+        }
         function displayTranscript() {
             vm.transcript = $rootScope.transcript;
             console.log("transcript",$rootScope.transcript);
@@ -70490,6 +66495,162 @@ myApp.factory('Menuservice', function($rootScope,$http, $q, $timeout,apiService)
         //         $scope.$digest();
         //     }
         // }
+        $rootScope.saveBookmark = function(name) {
+            $scope.formData = {name:name,chatlist:$.jStorage.get("chatlist"),userid:$.jStorage.get("sessionid")};
+            
+            apiService.savebookmark($scope.formData).then(function (callback){
+                if(callback.data.value)
+                {
+                    $(".savebookmarktext").val("");
+                    $rootScope.bookmarkCancel();
+                    alert("Saved Successfully");
+                }
+            });
+        };
+        $rootScope.deleteBookmark = function(selected) {
+             $scope.formData = {userid:$.jStorage.get("sessionid"),selected:selected._id};
+            apiService.deletebookmark($scope.formData).then(function (callback){
+                //console.log(callback.data.data.chatlist);
+                if(callback.data.data)
+                {
+                    // _.forEach(callback.data.data.chatlist,function(value,key){
+                        
+                    //     if(value.position == "right")
+                    //     {
+                    //         $rootScope.appendMsg(value.msg.id,value.msg);
+                    //     }
+                    //     if(value.position == "left" && value.msg.type != "SYS_FIRST")
+                    //         $rootScope.appendSysMsg(value.msg.id,value.msg);
+                    // });
+                    $rootScope.deletebookmarkCancel();
+                }
+            });
+        };
+        $rootScope.getBookmark = function(selected) {
+             $scope.formData = {userid:$.jStorage.get("sessionid"),selected:selected._id};
+            apiService.getbookmark($scope.formData).then(function (callback){
+                //console.log(callback.data.data.chatlist);
+                if(callback.data.data)
+                {
+                    _.forEach(callback.data.data.chatlist,function(value,key){
+                        
+                        if(value.position == "right")
+                        {
+                            $rootScope.appendMsg(value.msg.id,value.msg);
+                        }
+                        if(value.position == "left" && value.msg.type != "SYS_FIRST")
+                            $rootScope.appendSysMsg(value.msg.id,value.msg);
+                    });
+                    $rootScope.selectbookmarkCancel();
+                }
+            });
+        };
+        $rootScope.sendMail = function(emails,texts,subjecttext) {
+            //var values = new Array();
+            var emailist = "pratik.shah429@gmail.com";
+            var imgarr = new Array();
+            var m_html = "";
+            var isdone=false;
+            
+            $.each($("input[name='formailing[]']:checked"), function(k,v) {
+                //values.push($(this).val());
+                // var imgname = 'scr'+$(this).val()+'.png';
+                var node = document.getElementById('scr'+$(this).val());
+                // var div="#scr"+$(this).val();
+                //var div="#chat_window_1";
+                //console.log(div);
+                
+                imgarr.push($(this).val());
+                if($("input[name='formailing[]']:checked").length == (k+1))
+                {
+                    isdone = true;
+                    //m_html += "</body></html>";
+            
+                    var formData = {Ticket:$.jStorage.get("Ticket"),email:emails,text:texts,subject:subjecttext,bodytag:m_html,images:imgarr};
+                    console.log(formData);
+                    apiService.sendmail(formData).then(function (callback){
+                        
+                    });
+                    $rootScope.mailmodalCancel();
+                }
+                // angular.element(document).ready(function(){
+                    
+                //     domtoimage.toPng(node)
+                //     .then(function (dataUrl) {
+                //         imgarr.push(dataUrl);
+                //         m_html += "<img src='"+(dataUrl)+"'>";
+                //         console.log(m_html);
+                //         if($("input[name='formailing[]']:checked").length == (k+1))
+                //         {
+                //             isdone = true;
+                //             //m_html += "</body></html>";
+                    
+                //             var formData = {email:emails,text:texts,bodytag:m_html,images:imgarr};
+                //             console.log(formData);
+                //             apiService.sendmail(formData).then(function (callback){
+                                
+                //             });
+                //             $rootScope.mailmodalCancel();
+                //         }
+                //     })
+                //     .catch(function (error) {
+                //         console.error('oops, something went wrong!', error);
+                //     });
+                // });
+                // $(div).html2canvas({
+                //     onrendered: function (canvas) {
+                // angular.element(document).ready(function () {
+                //     divid='#scr'+$(this).val();
+                //     //var body = $(div+" object").contents().find('body');
+                //     // $timeout(function(){
+                //     //     var chatHeight = $("ul.chat").height();
+                //     //     $('.panel-body').animate({scrollTop: $(divid).offset().top});
+                //     // });
+                //     domtoimage.toPng(node)
+                //     .then(function (dataUrl) {
+                //         imgarr.push(dataUrl);
+                //         m_html += "<img src='"+(dataUrl)+"'>";
+                //         //console.log(m_html);
+                //         if($("input[name='formailing[]']:checked").length == (k+1))
+                //         {
+                //             isdone = true;
+                //             //m_html += "</body></html>";
+                    
+                //             var formData = {email:emails,text:texts,bodytag:m_html,images:imgarr};
+                //             console.log(formData);
+                //             apiService.sendmail(formData).then(function (callback){
+                                
+                //             });
+                //             $rootScope.mailmodalCancel();
+                //         }
+                //     })
+                //     .catch(function (error) {
+                //         console.error('oops, something went wrong!', error);
+                //     });
+                //     // $(body).html2canvas(   {
+                //     //     onrendered: function( canvas ) {
+                            
+                //     //         imgarr.push(canvas.toDataURL("image/png"));
+                //     //         m_html += "<img src='"+(canvas.toDataURL("image/png"))+"'>";
+                //     //         //console.log(m_html);
+                //     //         if($("input[name='formailing[]']:checked").length == (k+1))
+                //     //         {
+                //     //             isdone = true;
+                //     //             //m_html += "</body></html>";
+                        
+                //     //             var formData = {email:emails,text:texts,bodytag:m_html,images:imgarr};
+                //     //             console.log(formData);
+                //     //             apiService.sendmail(formData).then(function (callback){
+                                    
+                //     //             });
+                //     //             $rootScope.mailmodalCancel();
+                //     //         }
+                //     //     }
+                //     // });
+                // });
+            });
+            
+        };
         $rootScope.scrollChatWindow = function() {
             $timeout(function(){
                 var chatHeight = $("ul.chat").height();
@@ -70528,23 +66689,67 @@ myApp.factory('Menuservice', function($rootScope,$http, $q, $timeout,apiService)
             $rootScope.chatmsgid = id;
             $rootScope.chatmsg = value;
             $rootScope.chatlist.push({id:"id",msg:value,position:"left",curTime: $rootScope.getDatetime()});
-            //$.jStorage.set("chatlist",$rootScope.chatlist);
+            $.jStorage.set("chatlist",$rootScope.chatlist);
             $timeout(function(){
                 $rootScope.scrollChatWindow();
             });
             
         };
+        $scope.logout = function()
+        {
+            $scope.formData = {sessionid:$.jStorage.get("sessionid"),user:$.jStorage.get("id")};
+            apiService.logout($scope.formData).then(function (callback){
+                $.jStorage.flush();
+                $rootScope.isLoggedin = false;
+                $rootScope.chatlist = [];
+                $.jStorage.set("showchat",false);
+                $rootScope.chatOpen = true;
+                  
+            });
+            
+            
+        };
         $rootScope.showChatwindow = function () {
-            // newlist = $.jStorage.get("chatlist");
-            // if(!newlist || newlist == null)
-            // {
-            //     $rootScope.firstMsg = false;
-            // }
-            // else
-            // { 
-            //     $rootScope.firstMsg = true;
-            // }
-            // $.jStorage.set("showchat",true);
+            $( ".chat_window_1" ).resizable({
+                //alsoResize: '.panel-body',
+                minHeight:590,
+                maxHeight:window.innerHeight,
+                maxWidth:$(window).width()-20,
+                handles: 'n, w',
+                resize: function( event, ui ) {
+                    if(ui.position.top <= ui.originalPosition.top)
+                    {
+                        
+                        var height = $(".chat_window_1").height();
+                        //console.log(height+"chat");
+                        var new_height = height - 43 -90;
+                        //console.log(new_height+"panel");
+                        //$(".panel-body").height(new_height);
+                        $(".panel-body").css("height", new_height);
+                        $("#chat_panel").css("height", height);
+                    }
+                    else {
+                        
+                        console.log("down");
+                        // $(".panel-body").css({
+                        //     minHeight: 460
+                        // });
+                        // $(".chat_window_1").css({top:0});
+                    }
+                 }
+            
+            });
+            newlist = $.jStorage.get("chatlist");
+            //console.log(newlist);
+            if(!newlist || newlist == null)
+            {
+                $rootScope.firstMsg = false;
+            }
+            else
+            { 
+                $rootScope.firstMsg = true;
+            }
+            $.jStorage.set("showchat",true);
             if(!$rootScope.firstMsg)
             {
                 $rootScope.firstMsg = true;
@@ -70561,7 +66766,7 @@ myApp.factory('Menuservice', function($rootScope,$http, $q, $timeout,apiService)
             $rootScope.scrollChatWindow();
         };
         $rootScope.minimizeChatwindow = function() {
-            //$.jStorage.set("showchat",false);
+            $.jStorage.set("showchat",false);
             $rootScope.showTimeoutmsg = false;
             $rootScope.autocompletelist = [];
             $('#chat_panel').slideUp();
@@ -70571,6 +66776,30 @@ myApp.factory('Menuservice', function($rootScope,$http, $q, $timeout,apiService)
             $('.panel-heading span.icon_minim').addClass('glyphicon-plus').removeClass('glyphicon-minus');
             $(".clickImage").show( "fadeIn");
         };
+        $rootScope.appendSysMsg = function(id,value) {
+            //console.log(value);
+            if(!value.flag)
+                value.flag = 2;
+            $rootScope.currentProjectUrl = value.url;
+            
+            $rootScope.chatmsgid = id;
+            $rootScope.chatmsg = value;
+            $rootScope.chatlist.push({id:"id",msg:value,position:"left",curTime: $rootScope.getDatetime()});
+            $.jStorage.set("chatlist",$rootScope.chatlist);
+            $timeout(function(){
+                $rootScope.scrollChatWindow();
+            });
+        };
+        $rootScope.appendMsg = function(id,value) {
+            $rootScope.chatmsgid = id;
+            $rootScope.chatmsg = value;
+            $rootScope.autocompletelist = [];
+            $rootScope.chatlist.push({id:"id",msg:value,position:"right",curTime: $rootScope.getDatetime()});
+            //console.log("msgid="+id+"chatmsg="+$rootScope.msgSelected);
+            $.jStorage.set("chatlist",$rootScope.chatlist);
+            $rootScope.msgSelected = false;
+            $rootScope.scrollChatWindow();
+        };
         $rootScope.pushMsg = function(id,value) {
             $rootScope.msgSelected = true;
             $rootScope.chatmsgid = id;
@@ -70579,7 +66808,7 @@ myApp.factory('Menuservice', function($rootScope,$http, $q, $timeout,apiService)
             $rootScope.chatlist.push({id:"id",msg:value,position:"right",curTime: $rootScope.getDatetime()});
             //console.log("msgid="+id+"chatmsg="+$rootScope.msgSelected);
             $rootScope.getSystemMsg(id,value);
-            //$.jStorage.set("chatlist",$rootScope.chatlist);
+            $.jStorage.set("chatlist",$rootScope.chatlist);
             $rootScope.msgSelected = false;
             $rootScope.showMsgLoader=true;
             $rootScope.scrollChatWindow();
@@ -70598,13 +66827,40 @@ myApp.factory('Menuservice', function($rootScope,$http, $q, $timeout,apiService)
             console.log(formData);
 			framedata = {};
             apiService.getQlikChart(formData).then(function (data){
-                console.log(data);
+                //console.log(data);
                 framedata = data.data;
                 framedata.type = "iframe";
+                // if(!framedata.flag)
+                //     framedata.flag = 1;
+                // if(!framedata.flag)
+                //     framedata.flag = 3;
                 $rootScope.currentProjectUrl = framedata.url;
-                console.log(framedata,"Response");
+                //$rootScope.currentProjectUrl += "?qlikTicket="+$rootScope.qticket;
+                //framedata.url += "?qlikTicket="+$rootScope.qticket;
+                if(!framedata.flag)
+                    framedata.flag = 2;
+                // if(framedata.flag == 2)
+                // {
+                //     framedata.newurl = [];
+                //     framedata.newurl.push(framedata.url);
+                //     framedata.newurl.push(framedata.url);
+                //     //framedata.url=framedata.newurl;
+                //     framedata.flag = 5;
+                // }
+                
+                //console.log(framedata,"Response");
                 $rootScope.pushSystemMsg(0,framedata);
                 $rootScope.showMsgLoader = false;
+                if(framedata.flag == 5)
+                {
+                    $timeout(function(){
+                        $('.carousel').carousel({
+                            interval: false,
+                            wrap: false
+                        });
+                        $('.carousel'+($rootScope.chatlist.length-1)).find('.item').first().addClass('active');
+                    },2000);
+                }
                 $timeout(function(){
                     $(".chatinput").val("");
                 });
@@ -70634,38 +66890,38 @@ myApp.factory('Menuservice', function($rootScope,$http, $q, $timeout,apiService)
                 //     //     prefix : '/'
                 //     // }
                 //     // var prefix = window.location.pathname.substr( 0, window.location.pathname.toLowerCase().lastIndexOf( "/extensions" ) + 1 );
-                //     var config = {
-                //         host: "localhost",
-                //         prefix: "/",
-                //         port: 4848,
-                //         isSecure: window.location.protocol === "https:",
-                //         baseUrl: "http://localhost:4848"
-                //     };
-                //     qlikIsolated.getQlik('http://localhost:4848')
-                //     .then(function(qlik){
-                //         // qlik object can be access here 
-                //         //console.log(qlik);
-                //         var app = qlik.openApp('Consumer_Sales.qvf', config);
-                //         //console.log(app);
-                //         //var newobj = app.getObject("qFrame","prgzES");
-                //         //console.log(newobj);
-                //         app.visualization.create('barchart',                       // we want a barchart
-                //         ["City","=Avg([Sales Amount])"], // one dimension, one measure
-                //         {"title":"On the fly barchart"}).then(function(vis){
-                //             vis.show("qFrame");                              // show the chart in a HTML element with id "QV03"
-                //         }, function(error){
-                //             console.log(error);
-                //             /* error info */
-                //         });
+                    // var config = {
+                    //     host: "exponentiadata.co.in",
+                    //     prefix: "/",
+                    //     port: 443,
+                    //     isSecure: window.location.protocol === "https:",
+                    //     baseUrl: "https://104.46.103.162:443"
+                    // };
+                    // qlikIsolated.getQlik('https://104.46.103.162:443')
+                    // .then(function(qlik){
+                    //     // qlik object can be access here 
+                    //     //console.log(qlik);
+                    //     var app = qlik.openApp('Interaction_1.qvf', config);
+                    //     //console.log(app);
+                    //     //var newobj = app.getObject("qFrame","prgzES");
+                    //     //console.log(newobj);
+                    //     app.visualization.create('barchart',                       // we want a barchart
+                    //     ["City","=Avg([Sales Amount])"], // one dimension, one measure
+                    //     {"title":"On the fly barchart"}).then(function(vis){
+                    //         vis.show("qFrame");                              // show the chart in a HTML element with id "QV03"
+                    //     }, function(error){
+                    //         console.log(error);
+                    //         /* error info */
+                    // });
                         
-                //     })
-                //     // qlikIsolated.getObjectIsolated(	$('#qlikdiv'),  // element
-                //     //     'Consumer_Sales.qvf', // app id
-                //     //     'zswLzs',     // object id
-                //     //     '',
-                //     //     //'eRxSeT',     // sheet id (optional, if object id is specified)
-                //     //     'http://localhost:4848'
-                //     // ); 
+                    // });
+                    // qlikIsolated.getObjectIsolated(	$('#qlikdiv'),  // element
+                    //     'Interaction_1.qvf', // app id
+                    //     'zswLzs',     // object id
+                    //     '',
+                    //     //'eRxSeT',     // sheet id (optional, if object id is specified)
+                    //     'http://104.46.103.162:4848'
+                    // ); 
                 // }
                 // if(value == "chart1")
                 // {
@@ -70807,6 +67063,112 @@ myApp.factory('Menuservice', function($rootScope,$http, $q, $timeout,apiService)
                 $('.thumbsdown').css("color", "#444");
             },200);
         };
+        
+        $rootScope.mailmodalInstance = {};
+        $rootScope.mailbookmarkerror = 0;
+        $scope.openMailmodal = function() {
+            if($("input[name='formailing[]']:checked").length == 0)
+            {
+                alert("Please select graph  to mail");
+                $rootScope.mailmodalCancel();
+            }
+            else
+            {
+                $rootScope.$mailmodalInstance = $uibModal.open({
+                    scope: $rootScope,
+                    animation: true,
+                    size: 'lg',
+                    templateUrl: 'views/modal/mailmodal.html',
+                    //controller: 'CommonCtrl'
+                });
+            }
+            //window.open('mailto:test@example.com?subject=subject&body=body');
+        };
+        $rootScope.mailmodalCancel = function() {
+            //console.log("dismissing");
+            $rootScope.$mailmodalInstance.dismiss('cancel');
+        };
+
+        $rootScope.$viewmodalInstance = {};
+        $rootScope.selectbookmarkerror = 0;
+        $rootScope.clearChat = function() {
+            $rootScope.chatlist = [];
+            $.jStorage.set("chatlist",$rootScope.chatlist);
+        };
+        $rootScope.openviewBookmark = function() {
+            $scope.formData = {userid:$.jStorage.get("sessionid")};
+            
+            
+            apiService.viewbookmark($scope.formData).then(function (callback){
+                $("#selectbookmark_list").html("");
+                
+                
+                $rootScope.$viewmodalInstance = $uibModal.open({
+                    scope: $rootScope,
+                    animation: true,
+                    size: 'sm',
+                    templateUrl: 'views/modal/selectbookmark.html',
+                    resolve: {
+                        items: function () {
+                        return callback.data.data;
+                        }
+                    },
+                    controller: 'ViewCtrl'
+                });
+                
+            });
+        };
+        $rootScope.selectbookmarkCancel = function() {
+            //console.log("dismissing");
+            $rootScope.$viewmodalInstance.dismiss('cancel');
+        };
+
+        $rootScope.$deletemodalInstance = {};
+        $rootScope.deletebookmarkerror = 0;
+        
+        $rootScope.opendeleteBookmark = function() {
+            $scope.formData = {userid:$.jStorage.get("sessionid")};
+            
+            
+            apiService.viewbookmark($scope.formData).then(function (callback){
+                $("#selectbookmark_list").html("");
+                
+                
+                $rootScope.$deletemodalInstance = $uibModal.open({
+                    scope: $rootScope,
+                    animation: true,
+                    size: 'sm',
+                    templateUrl: 'views/modal/deletebookmark.html',
+                    resolve: {
+                        items: function () {
+                        return callback.data.data;
+                        }
+                    },
+                    controller: 'DeleteBookmarkCtrl'
+                });
+                
+            });
+        };
+        $rootScope.deletebookmarkCancel = function() {
+            //console.log("dismissing");
+            $rootScope.$deletemodalInstance.dismiss('cancel');
+        };
+        
+        $rootScope.$savemodalInstance = {};
+        $rootScope.savebookmarkerror = 0;
+        $scope.opensaveBookmark = function() {
+            $rootScope.$savemodalInstance = $uibModal.open({
+                scope: $rootScope,
+                animation: true,
+                size: 'sm',
+                templateUrl: 'views/modal/savebookmark.html',
+                //controller: 'CommonCtrl'
+            });
+        };
+        $rootScope.bookmarkCancel = function() {
+            //console.log("dismissing");
+            $rootScope.$savemodalInstance.dismiss('cancel');
+        };
         $rootScope.$dislikemodalInstance = {};
         $rootScope.dislikesuggestionerror = 0;
         $rootScope.dislikeChatClick = function(){
@@ -70838,6 +67200,34 @@ myApp.factory('Menuservice', function($rootScope,$http, $q, $timeout,apiService)
        $timeout(function(){
             //$('#chatTabs a:last').tab('show');
        },200);
+    })
+    
+    .controller('DeleteBookmarkCtrl', function ($scope, $uibModalInstance, items) {
+
+        $scope.items = items;
+        // $scope.selected = {
+        //     item: $scope.items[0]
+        // };
+        var dt = "";
+        _.each($scope.items,function(v,k){
+            dt += "<option value='"+v._id+"'>"+v.name+"</option>";
+            
+        });
+    })
+    .controller('ViewCtrl', function ($scope, $uibModalInstance, items) {
+
+        $scope.items = items;
+        // $scope.selected = {
+        //     item: $scope.items[0]
+        // };
+        var dt = "";
+        _.each($scope.items,function(v,k){
+            console.log(v);
+            dt += "<option value='"+v._id+"'>"+v.name+"</option>";
+            
+        });
+        console.log(dt);
+        //$("select#selectbookmark_list").html(dt);
     })
     // Example API Controller
     .controller('DemoAPICtrl', function ($scope, TemplateService, apiService, NavigationService, $timeout) {
@@ -70873,3 +67263,2929 @@ myApp.controller('languageCtrl', function ($scope, TemplateService, $translate, 
         //  $rootScope.$apply();
     };
 });
+/*
+  html2canvas 0.4.0 <http://html2canvas.hertzen.com>
+  Copyright (c) 2013 Niklas von Hertzen (@niklasvh)
+
+  Released under MIT License
+*/
+
+(function(window, document, undefined){
+
+"use strict";
+
+var _html2canvas = {},
+previousElement,
+computedCSS,
+html2canvas;
+
+function h2clog(a) {
+  if (_html2canvas.logging && window.console && window.console.log) {
+    window.console.log(a);
+  }
+}
+
+_html2canvas.Util = {};
+
+_html2canvas.Util.trimText = (function(isNative){
+  return function(input){
+    if(isNative) { return isNative.apply( input ); }
+    else { return ((input || '') + '').replace( /^\s+|\s+$/g , '' ); }
+  };
+})( String.prototype.trim );
+
+_html2canvas.Util.parseBackgroundImage = function (value) {
+    var whitespace = ' \r\n\t',
+        method, definition, prefix, prefix_i, block, results = [],
+        c, mode = 0, numParen = 0, quote, args;
+
+    var appendResult = function(){
+        if(method) {
+            if(definition.substr( 0, 1 ) === '"') {
+                definition = definition.substr( 1, definition.length - 2 );
+            }
+            if(definition) {
+                args.push(definition);
+            }
+            if(method.substr( 0, 1 ) === '-' &&
+                    (prefix_i = method.indexOf( '-', 1 ) + 1) > 0) {
+                prefix = method.substr( 0, prefix_i);
+                method = method.substr( prefix_i );
+            }
+            results.push({
+                prefix: prefix,
+                method: method.toLowerCase(),
+                value: block,
+                args: args
+            });
+        }
+        args = []; //for some odd reason, setting .length = 0 didn't work in safari
+        method =
+            prefix =
+            definition =
+            block = '';
+    };
+
+    appendResult();
+    for(var i = 0, ii = value.length; i<ii; i++) {
+        c = value[i];
+        if(mode === 0 && whitespace.indexOf( c ) > -1){
+            continue;
+        }
+        switch(c) {
+            case '"':
+                if(!quote) {
+                    quote = c;
+                }
+                else if(quote === c) {
+                    quote = null;
+                }
+                break;
+
+            case '(':
+                if(quote) { break; }
+                else if(mode === 0) {
+                    mode = 1;
+                    block += c;
+                    continue;
+                } else {
+                    numParen++;
+                }
+                break;
+
+            case ')':
+                if(quote) { break; }
+                else if(mode === 1) {
+                    if(numParen === 0) {
+                        mode = 0;
+                        block += c;
+                        appendResult();
+                        continue;
+                    } else {
+                        numParen--;
+                    }
+                }
+                break;
+
+            case ',':
+                if(quote) { break; }
+                else if(mode === 0) {
+                    appendResult();
+                    continue;
+                }
+                else if (mode === 1) {
+                    if(numParen === 0 && !method.match(/^url$/i)) {
+                        args.push(definition);
+                        definition = '';
+                        block += c;
+                        continue;
+                    }
+                }
+                break;
+        }
+
+        block += c;
+        if(mode === 0) { method += c; }
+        else { definition += c; }
+    }
+    appendResult();
+
+    return results;
+};
+
+_html2canvas.Util.Bounds = function getBounds (el) {
+  var clientRect,
+  bounds = {};
+
+  if (el.getBoundingClientRect){
+    clientRect = el.getBoundingClientRect();
+
+
+    // TODO add scroll position to bounds, so no scrolling of window necessary
+    bounds.top = clientRect.top;
+    bounds.bottom = clientRect.bottom || (clientRect.top + clientRect.height);
+    bounds.left = clientRect.left;
+
+    // older IE doesn't have width/height, but top/bottom instead
+    bounds.width = clientRect.width || (clientRect.right - clientRect.left);
+    bounds.height = clientRect.height || (clientRect.bottom - clientRect.top);
+
+    return bounds;
+
+  }
+};
+
+_html2canvas.Util.getCSS = function (el, attribute, index) {
+  // return $(el).css(attribute);
+
+    var val,
+    isBackgroundSizePosition = attribute.match( /^background(Size|Position)$/ );
+
+  function toPX( attribute, val ) {
+    var rsLeft = el.runtimeStyle && el.runtimeStyle[ attribute ],
+    left,
+    style = el.style;
+
+    // Check if we are not dealing with pixels, (Opera has issues with this)
+    // Ported from jQuery css.js
+    // From the awesome hack by Dean Edwards
+    // http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
+
+    // If we're not dealing with a regular pixel number
+    // but a number that has a weird ending, we need to convert it to pixels
+
+    if ( !/^-?[0-9]+\.?[0-9]*(?:px)?$/i.test( val ) && /^-?\d/.test( val ) ) {
+
+      // Remember the original values
+      left = style.left;
+
+      // Put in the new values to get a computed value out
+      if ( rsLeft ) {
+        el.runtimeStyle.left = el.currentStyle.left;
+      }
+      style.left = attribute === "fontSize" ? "1em" : (val || 0);
+      val = style.pixelLeft + "px";
+
+      // Revert the changed values
+      style.left = left;
+      if ( rsLeft ) {
+        el.runtimeStyle.left = rsLeft;
+      }
+
+    }
+
+    if (!/^(thin|medium|thick)$/i.test( val )) {
+      return Math.round(parseFloat( val )) + "px";
+    }
+
+    return val;
+  }
+
+    if (previousElement !== el) {
+      computedCSS = document.defaultView.getComputedStyle(el, null);
+    }
+    val = computedCSS[attribute];
+
+    if (isBackgroundSizePosition) {
+      val = (val || '').split( ',' );
+      val = val[index || 0] || val[0] || 'auto';
+      val = _html2canvas.Util.trimText(val).split(' ');
+
+      if(attribute === 'backgroundSize' && (!val[ 0 ] || val[ 0 ].match( /cover|contain|auto/ ))) {
+        //these values will be handled in the parent function
+
+      } else {
+        val[ 0 ] = ( val[ 0 ].indexOf( "%" ) === -1 ) ? toPX(  attribute + "X", val[ 0 ] ) : val[ 0 ];
+        if(val[ 1 ] === undefined) {
+          if(attribute === 'backgroundSize') {
+            val[ 1 ] = 'auto';
+            return val;
+          }
+          else {
+            // IE 9 doesn't return double digit always
+            val[ 1 ] = val[ 0 ];
+          }
+        }
+        val[ 1 ] = ( val[ 1 ].indexOf( "%" ) === -1 ) ? toPX(  attribute + "Y", val[ 1 ] ) : val[ 1 ];
+      }
+    } else if ( /border(Top|Bottom)(Left|Right)Radius/.test( attribute) ) {
+      var arr = val.split(" ");
+      if ( arr.length <= 1 ) {
+              arr[ 1 ] = arr[ 0 ];
+      }
+      arr[ 0 ] = parseInt( arr[ 0 ], 10 );
+      arr[ 1 ] = parseInt( arr[ 1 ], 10 );
+      val = arr;
+    }
+
+  return val;
+};
+
+_html2canvas.Util.resizeBounds = function( current_width, current_height, target_width, target_height, stretch_mode ){
+  var target_ratio = target_width / target_height,
+    current_ratio = current_width / current_height,
+    output_width, output_height;
+
+  if(!stretch_mode || stretch_mode === 'auto') {
+    output_width = target_width;
+    output_height = target_height;
+
+  } else {
+    if(target_ratio < current_ratio ^ stretch_mode === 'contain') {
+      output_height = target_height;
+      output_width = target_height * current_ratio;
+    } else {
+      output_width = target_width;
+      output_height = target_width / current_ratio;
+    }
+  }
+
+  return { width: output_width, height: output_height };
+};
+
+function backgroundBoundsFactory( prop, el, bounds, image, imageIndex, backgroundSize ) {
+    var bgposition =  _html2canvas.Util.getCSS( el, prop, imageIndex ) ,
+    topPos,
+    left,
+    percentage,
+    val;
+
+    if (bgposition.length === 1){
+      val = bgposition[0];
+
+      bgposition = [];
+
+      bgposition[0] = val;
+      bgposition[1] = val;
+    }
+
+    if (bgposition[0].toString().indexOf("%") !== -1){
+      percentage = (parseFloat(bgposition[0])/100);
+      left = bounds.width * percentage;
+      if(prop !== 'backgroundSize') {
+        left -= (backgroundSize || image).width*percentage;
+      }
+
+    } else {
+      if(prop === 'backgroundSize') {
+        if(bgposition[0] === 'auto') {
+          left = image.width;
+
+        } else {
+          if(bgposition[0].match(/contain|cover/)) {
+            var resized = _html2canvas.Util.resizeBounds( image.width, image.height, bounds.width, bounds.height, bgposition[0] );
+            left = resized.width;
+            topPos = resized.height;
+          } else {
+            left = parseInt (bgposition[0], 10 );
+          }
+        }
+
+      } else {
+        left = parseInt( bgposition[0], 10 );
+      }
+    }
+
+
+    if(bgposition[1] === 'auto') {
+      topPos = left / image.width * image.height;
+    } else if (bgposition[1].toString().indexOf("%") !== -1){
+      percentage = (parseFloat(bgposition[1])/100);
+      topPos =  bounds.height * percentage;
+      if(prop !== 'backgroundSize') {
+        topPos -= (backgroundSize || image).height * percentage;
+      }
+
+    } else {
+      topPos = parseInt(bgposition[1],10);
+    }
+
+    return [left, topPos];
+}
+
+_html2canvas.Util.BackgroundPosition = function( el, bounds, image, imageIndex, backgroundSize ) {
+    var result = backgroundBoundsFactory( 'backgroundPosition', el, bounds, image, imageIndex, backgroundSize );
+    return { left: result[0], top: result[1] };
+};
+_html2canvas.Util.BackgroundSize = function( el, bounds, image, imageIndex ) {
+    var result = backgroundBoundsFactory( 'backgroundSize', el, bounds, image, imageIndex );
+    return { width: result[0], height: result[1] };
+};
+
+_html2canvas.Util.Extend = function (options, defaults) {
+  for (var key in options) {
+    if (options.hasOwnProperty(key)) {
+      defaults[key] = options[key];
+    }
+  }
+  return defaults;
+};
+
+
+/*
+ * Derived from jQuery.contents()
+ * Copyright 2010, John Resig
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ */
+_html2canvas.Util.Children = function( elem ) {
+
+
+  var children;
+  try {
+
+    children = (elem.nodeName && elem.nodeName.toUpperCase() === "IFRAME") ?
+    elem.contentDocument || elem.contentWindow.document : (function( array ){
+      var ret = [];
+
+      if ( array !== null ) {
+
+        (function( first, second ) {
+          var i = first.length,
+          j = 0;
+
+          if ( typeof second.length === "number" ) {
+            for ( var l = second.length; j < l; j++ ) {
+              first[ i++ ] = second[ j ];
+            }
+
+          } else {
+            while ( second[j] !== undefined ) {
+              first[ i++ ] = second[ j++ ];
+            }
+          }
+
+          first.length = i;
+
+          return first;
+        })( ret, array );
+
+      }
+
+      return ret;
+    })( elem.childNodes );
+
+  } catch (ex) {
+    h2clog("html2canvas.Util.Children failed with exception: " + ex.message);
+    children = [];
+  }
+  return children;
+};
+
+_html2canvas.Util.Font = (function () {
+
+  var fontData = {};
+
+  return function(font, fontSize, doc) {
+    if (fontData[font + "-" + fontSize] !== undefined) {
+      return fontData[font + "-" + fontSize];
+    }
+
+    var container = doc.createElement('div'),
+    img = doc.createElement('img'),
+    span = doc.createElement('span'),
+    sampleText = 'Hidden Text',
+    baseline,
+    middle,
+    metricsObj;
+
+    container.style.visibility = "hidden";
+    container.style.fontFamily = font;
+    container.style.fontSize = fontSize;
+    container.style.margin = 0;
+    container.style.padding = 0;
+
+    doc.body.appendChild(container);
+
+    // http://probablyprogramming.com/2009/03/15/the-tiniest-gif-ever (handtinywhite.gif)
+    img.src = "data:image/gif;base64,R0lGODlhAQABAIABAP///wAAACwAAAAAAQABAAACAkQBADs=";
+    img.width = 1;
+    img.height = 1;
+
+    img.style.margin = 0;
+    img.style.padding = 0;
+    img.style.verticalAlign = "baseline";
+
+    span.style.fontFamily = font;
+    span.style.fontSize = fontSize;
+    span.style.margin = 0;
+    span.style.padding = 0;
+
+    span.appendChild(doc.createTextNode(sampleText));
+    container.appendChild(span);
+    container.appendChild(img);
+    baseline = (img.offsetTop - span.offsetTop) + 1;
+
+    container.removeChild(span);
+    container.appendChild(doc.createTextNode(sampleText));
+
+    container.style.lineHeight = "normal";
+    img.style.verticalAlign = "super";
+
+    middle = (img.offsetTop-container.offsetTop) + 1;
+    metricsObj = {
+      baseline: baseline,
+      lineWidth: 1,
+      middle: middle
+    };
+
+    fontData[font + "-" + fontSize] = metricsObj;
+
+    doc.body.removeChild(container);
+
+    return metricsObj;
+  };
+})();
+
+(function(){
+
+  _html2canvas.Generate = {};
+
+  var reGradients = [
+  /^(-webkit-linear-gradient)\(([a-z\s]+)([\w\d\.\s,%\(\)]+)\)$/,
+  /^(-o-linear-gradient)\(([a-z\s]+)([\w\d\.\s,%\(\)]+)\)$/,
+  /^(-webkit-gradient)\((linear|radial),\s((?:\d{1,3}%?)\s(?:\d{1,3}%?),\s(?:\d{1,3}%?)\s(?:\d{1,3}%?))([\w\d\.\s,%\(\)\-]+)\)$/,
+  /^(-moz-linear-gradient)\(((?:\d{1,3}%?)\s(?:\d{1,3}%?))([\w\d\.\s,%\(\)]+)\)$/,
+  /^(-webkit-radial-gradient)\(((?:\d{1,3}%?)\s(?:\d{1,3}%?)),\s(\w+)\s([a-z\-]+)([\w\d\.\s,%\(\)]+)\)$/,
+  /^(-moz-radial-gradient)\(((?:\d{1,3}%?)\s(?:\d{1,3}%?)),\s(\w+)\s?([a-z\-]*)([\w\d\.\s,%\(\)]+)\)$/,
+  /^(-o-radial-gradient)\(((?:\d{1,3}%?)\s(?:\d{1,3}%?)),\s(\w+)\s([a-z\-]+)([\w\d\.\s,%\(\)]+)\)$/
+  ];
+
+  /*
+ * TODO: Add IE10 vendor prefix (-ms) support
+ * TODO: Add W3C gradient (linear-gradient) support
+ * TODO: Add old Webkit -webkit-gradient(radial, ...) support
+ * TODO: Maybe some RegExp optimizations are possible ;o)
+ */
+  _html2canvas.Generate.parseGradient = function(css, bounds) {
+    var gradient, i, len = reGradients.length, m1, stop, m2, m2Len, step, m3, tl,tr,br,bl;
+
+    for(i = 0; i < len; i+=1){
+      m1 = css.match(reGradients[i]);
+      if(m1) {
+        break;
+      }
+    }
+
+    if(m1) {
+      switch(m1[1]) {
+        case '-webkit-linear-gradient':
+        case '-o-linear-gradient':
+
+          gradient = {
+            type: 'linear',
+            x0: null,
+            y0: null,
+            x1: null,
+            y1: null,
+            colorStops: []
+          };
+
+          // get coordinates
+          m2 = m1[2].match(/\w+/g);
+          if(m2){
+            m2Len = m2.length;
+            for(i = 0; i < m2Len; i+=1){
+              switch(m2[i]) {
+                case 'top':
+                  gradient.y0 = 0;
+                  gradient.y1 = bounds.height;
+                  break;
+
+                case 'right':
+                  gradient.x0 = bounds.width;
+                  gradient.x1 = 0;
+                  break;
+
+                case 'bottom':
+                  gradient.y0 = bounds.height;
+                  gradient.y1 = 0;
+                  break;
+
+                case 'left':
+                  gradient.x0 = 0;
+                  gradient.x1 = bounds.width;
+                  break;
+              }
+            }
+          }
+          if(gradient.x0 === null && gradient.x1 === null){ // center
+            gradient.x0 = gradient.x1 = bounds.width / 2;
+          }
+          if(gradient.y0 === null && gradient.y1 === null){ // center
+            gradient.y0 = gradient.y1 = bounds.height / 2;
+          }
+
+          // get colors and stops
+          m2 = m1[3].match(/((?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\)(?:\s\d{1,3}(?:%|px))?)+/g);
+          if(m2){
+            m2Len = m2.length;
+            step = 1 / Math.max(m2Len - 1, 1);
+            for(i = 0; i < m2Len; i+=1){
+              m3 = m2[i].match(/((?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\))\s*(\d{1,3})?(%|px)?/);
+              if(m3[2]){
+                stop = parseFloat(m3[2]);
+                if(m3[3] === '%'){
+                  stop /= 100;
+                } else { // px - stupid opera
+                  stop /= bounds.width;
+                }
+              } else {
+                stop = i * step;
+              }
+              gradient.colorStops.push({
+                color: m3[1],
+                stop: stop
+              });
+            }
+          }
+          break;
+
+        case '-webkit-gradient':
+
+          gradient = {
+            type: m1[2] === 'radial' ? 'circle' : m1[2], // TODO: Add radial gradient support for older mozilla definitions
+            x0: 0,
+            y0: 0,
+            x1: 0,
+            y1: 0,
+            colorStops: []
+          };
+
+          // get coordinates
+          m2 = m1[3].match(/(\d{1,3})%?\s(\d{1,3})%?,\s(\d{1,3})%?\s(\d{1,3})%?/);
+          if(m2){
+            gradient.x0 = (m2[1] * bounds.width) / 100;
+            gradient.y0 = (m2[2] * bounds.height) / 100;
+            gradient.x1 = (m2[3] * bounds.width) / 100;
+            gradient.y1 = (m2[4] * bounds.height) / 100;
+          }
+
+          // get colors and stops
+          m2 = m1[4].match(/((?:from|to|color-stop)\((?:[0-9\.]+,\s)?(?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\)\))+/g);
+          if(m2){
+            m2Len = m2.length;
+            for(i = 0; i < m2Len; i+=1){
+              m3 = m2[i].match(/(from|to|color-stop)\(([0-9\.]+)?(?:,\s)?((?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\))\)/);
+              stop = parseFloat(m3[2]);
+              if(m3[1] === 'from') {
+                stop = 0.0;
+              }
+              if(m3[1] === 'to') {
+                stop = 1.0;
+              }
+              gradient.colorStops.push({
+                color: m3[3],
+                stop: stop
+              });
+            }
+          }
+          break;
+
+        case '-moz-linear-gradient':
+
+          gradient = {
+            type: 'linear',
+            x0: 0,
+            y0: 0,
+            x1: 0,
+            y1: 0,
+            colorStops: []
+          };
+
+          // get coordinates
+          m2 = m1[2].match(/(\d{1,3})%?\s(\d{1,3})%?/);
+
+          // m2[1] == 0%   -> left
+          // m2[1] == 50%  -> center
+          // m2[1] == 100% -> right
+
+          // m2[2] == 0%   -> top
+          // m2[2] == 50%  -> center
+          // m2[2] == 100% -> bottom
+
+          if(m2){
+            gradient.x0 = (m2[1] * bounds.width) / 100;
+            gradient.y0 = (m2[2] * bounds.height) / 100;
+            gradient.x1 = bounds.width - gradient.x0;
+            gradient.y1 = bounds.height - gradient.y0;
+          }
+
+          // get colors and stops
+          m2 = m1[3].match(/((?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\)(?:\s\d{1,3}%)?)+/g);
+          if(m2){
+            m2Len = m2.length;
+            step = 1 / Math.max(m2Len - 1, 1);
+            for(i = 0; i < m2Len; i+=1){
+              m3 = m2[i].match(/((?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\))\s*(\d{1,3})?(%)?/);
+              if(m3[2]){
+                stop = parseFloat(m3[2]);
+                if(m3[3]){ // percentage
+                  stop /= 100;
+                }
+              } else {
+                stop = i * step;
+              }
+              gradient.colorStops.push({
+                color: m3[1],
+                stop: stop
+              });
+            }
+          }
+          break;
+
+        case '-webkit-radial-gradient':
+        case '-moz-radial-gradient':
+        case '-o-radial-gradient':
+
+          gradient = {
+            type: 'circle',
+            x0: 0,
+            y0: 0,
+            x1: bounds.width,
+            y1: bounds.height,
+            cx: 0,
+            cy: 0,
+            rx: 0,
+            ry: 0,
+            colorStops: []
+          };
+
+          // center
+          m2 = m1[2].match(/(\d{1,3})%?\s(\d{1,3})%?/);
+          if(m2){
+            gradient.cx = (m2[1] * bounds.width) / 100;
+            gradient.cy = (m2[2] * bounds.height) / 100;
+          }
+
+          // size
+          m2 = m1[3].match(/\w+/);
+          m3 = m1[4].match(/[a-z\-]*/);
+          if(m2 && m3){
+            switch(m3[0]){
+              case 'farthest-corner':
+              case 'cover': // is equivalent to farthest-corner
+              case '': // mozilla removes "cover" from definition :(
+                tl = Math.sqrt(Math.pow(gradient.cx, 2) + Math.pow(gradient.cy, 2));
+                tr = Math.sqrt(Math.pow(gradient.cx, 2) + Math.pow(gradient.y1 - gradient.cy, 2));
+                br = Math.sqrt(Math.pow(gradient.x1 - gradient.cx, 2) + Math.pow(gradient.y1 - gradient.cy, 2));
+                bl = Math.sqrt(Math.pow(gradient.x1 - gradient.cx, 2) + Math.pow(gradient.cy, 2));
+                gradient.rx = gradient.ry = Math.max(tl, tr, br, bl);
+                break;
+              case 'closest-corner':
+                tl = Math.sqrt(Math.pow(gradient.cx, 2) + Math.pow(gradient.cy, 2));
+                tr = Math.sqrt(Math.pow(gradient.cx, 2) + Math.pow(gradient.y1 - gradient.cy, 2));
+                br = Math.sqrt(Math.pow(gradient.x1 - gradient.cx, 2) + Math.pow(gradient.y1 - gradient.cy, 2));
+                bl = Math.sqrt(Math.pow(gradient.x1 - gradient.cx, 2) + Math.pow(gradient.cy, 2));
+                gradient.rx = gradient.ry = Math.min(tl, tr, br, bl);
+                break;
+              case 'farthest-side':
+                if(m2[0] === 'circle'){
+                  gradient.rx = gradient.ry = Math.max(
+                    gradient.cx,
+                    gradient.cy,
+                    gradient.x1 - gradient.cx,
+                    gradient.y1 - gradient.cy
+                    );
+                } else { // ellipse
+
+                  gradient.type = m2[0];
+
+                  gradient.rx = Math.max(
+                    gradient.cx,
+                    gradient.x1 - gradient.cx
+                    );
+                  gradient.ry = Math.max(
+                    gradient.cy,
+                    gradient.y1 - gradient.cy
+                    );
+                }
+                break;
+              case 'closest-side':
+              case 'contain': // is equivalent to closest-side
+                if(m2[0] === 'circle'){
+                  gradient.rx = gradient.ry = Math.min(
+                    gradient.cx,
+                    gradient.cy,
+                    gradient.x1 - gradient.cx,
+                    gradient.y1 - gradient.cy
+                    );
+                } else { // ellipse
+
+                  gradient.type = m2[0];
+
+                  gradient.rx = Math.min(
+                    gradient.cx,
+                    gradient.x1 - gradient.cx
+                    );
+                  gradient.ry = Math.min(
+                    gradient.cy,
+                    gradient.y1 - gradient.cy
+                    );
+                }
+                break;
+
+            // TODO: add support for "30px 40px" sizes (webkit only)
+            }
+          }
+
+          // color stops
+          m2 = m1[5].match(/((?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\)(?:\s\d{1,3}(?:%|px))?)+/g);
+          if(m2){
+            m2Len = m2.length;
+            step = 1 / Math.max(m2Len - 1, 1);
+            for(i = 0; i < m2Len; i+=1){
+              m3 = m2[i].match(/((?:rgb|rgba)\(\d{1,3},\s\d{1,3},\s\d{1,3}(?:,\s[0-9\.]+)?\))\s*(\d{1,3})?(%|px)?/);
+              if(m3[2]){
+                stop = parseFloat(m3[2]);
+                if(m3[3] === '%'){
+                  stop /= 100;
+                } else { // px - stupid opera
+                  stop /= bounds.width;
+                }
+              } else {
+                stop = i * step;
+              }
+              gradient.colorStops.push({
+                color: m3[1],
+                stop: stop
+              });
+            }
+          }
+          break;
+      }
+    }
+
+    return gradient;
+  };
+
+  _html2canvas.Generate.Gradient = function(src, bounds) {
+    if(bounds.width === 0 || bounds.height === 0) {
+      return;
+    }
+
+    var canvas = document.createElement('canvas'),
+    ctx = canvas.getContext('2d'),
+    gradient, grad, i, len;
+
+    canvas.width = bounds.width;
+    canvas.height = bounds.height;
+
+    // TODO: add support for multi defined background gradients
+    gradient = _html2canvas.Generate.parseGradient(src, bounds);
+
+    if(gradient) {
+      if(gradient.type === 'linear') {
+        grad = ctx.createLinearGradient(gradient.x0, gradient.y0, gradient.x1, gradient.y1);
+
+        for (i = 0, len = gradient.colorStops.length; i < len; i+=1) {
+          try {
+            grad.addColorStop(gradient.colorStops[i].stop, gradient.colorStops[i].color);
+          }
+          catch(e) {
+            h2clog(['failed to add color stop: ', e, '; tried to add: ', gradient.colorStops[i], '; stop: ', i, '; in: ', src]);
+          }
+        }
+
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, bounds.width, bounds.height);
+
+      } else if(gradient.type === 'circle') {
+
+        grad = ctx.createRadialGradient(gradient.cx, gradient.cy, 0, gradient.cx, gradient.cy, gradient.rx);
+
+        for (i = 0, len = gradient.colorStops.length; i < len; i+=1) {
+          try {
+            grad.addColorStop(gradient.colorStops[i].stop, gradient.colorStops[i].color);
+          }
+          catch(e) {
+            h2clog(['failed to add color stop: ', e, '; tried to add: ', gradient.colorStops[i], '; stop: ', i, '; in: ', src]);
+          }
+        }
+
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, bounds.width, bounds.height);
+
+      } else if(gradient.type === 'ellipse') {
+
+        // draw circle
+        var canvasRadial = document.createElement('canvas'),
+        ctxRadial = canvasRadial.getContext('2d'),
+        ri = Math.max(gradient.rx, gradient.ry),
+        di = ri * 2, imgRadial;
+
+        canvasRadial.width = canvasRadial.height = di;
+
+        grad = ctxRadial.createRadialGradient(gradient.rx, gradient.ry, 0, gradient.rx, gradient.ry, ri);
+
+        for (i = 0, len = gradient.colorStops.length; i < len; i+=1) {
+          try {
+            grad.addColorStop(gradient.colorStops[i].stop, gradient.colorStops[i].color);
+          }
+          catch(e) {
+            h2clog(['failed to add color stop: ', e, '; tried to add: ', gradient.colorStops[i], '; stop: ', i, '; in: ', src]);
+          }
+        }
+
+        ctxRadial.fillStyle = grad;
+        ctxRadial.fillRect(0, 0, di, di);
+
+        ctx.fillStyle = gradient.colorStops[i - 1].color;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(canvasRadial, gradient.cx - gradient.rx, gradient.cy - gradient.ry, 2 * gradient.rx, 2 * gradient.ry);
+
+      }
+    }
+
+    return canvas;
+  };
+
+  _html2canvas.Generate.ListAlpha = function(number) {
+    var tmp = "",
+    modulus;
+
+    do {
+      modulus = number % 26;
+      tmp = String.fromCharCode((modulus) + 64) + tmp;
+      number = number / 26;
+    }while((number*26) > 26);
+
+    return tmp;
+  };
+
+  _html2canvas.Generate.ListRoman = function(number) {
+    var romanArray = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"],
+    decimal = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1],
+    roman = "",
+    v,
+    len = romanArray.length;
+
+    if (number <= 0 || number >= 4000) {
+      return number;
+    }
+
+    for (v=0; v < len; v+=1) {
+      while (number >= decimal[v]) {
+        number -= decimal[v];
+        roman += romanArray[v];
+      }
+    }
+
+    return roman;
+
+  };
+
+})();
+_html2canvas.Parse = function (images, options) {
+  window.scroll(0,0);
+
+  var element = (( options.elements === undefined ) ? document.body : options.elements[0]), // select body by default
+  numDraws = 0,
+  doc = element.ownerDocument,
+  support = _html2canvas.Util.Support(options, doc),
+  ignoreElementsRegExp = new RegExp("(" + options.ignoreElements + ")"),
+  body = doc.body,
+  getCSS = _html2canvas.Util.getCSS,
+  pseudoHide = "___html2canvas___pseudoelement",
+  hidePseudoElements = doc.createElement('style');
+
+  hidePseudoElements.innerHTML = '.' + pseudoHide + '-before:before { content: "" !important; display: none !important; }' +
+  '.' + pseudoHide + '-after:after { content: "" !important; display: none !important; }';
+
+  body.appendChild(hidePseudoElements);
+
+  images = images || {};
+
+  function documentWidth () {
+    return Math.max(
+      Math.max(doc.body.scrollWidth, doc.documentElement.scrollWidth),
+      Math.max(doc.body.offsetWidth, doc.documentElement.offsetWidth),
+      Math.max(doc.body.clientWidth, doc.documentElement.clientWidth)
+      );
+  }
+
+  function documentHeight () {
+    return Math.max(
+      Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight),
+      Math.max(doc.body.offsetHeight, doc.documentElement.offsetHeight),
+      Math.max(doc.body.clientHeight, doc.documentElement.clientHeight)
+      );
+  }
+
+  function getCSSInt(element, attribute) {
+    var val = parseInt(getCSS(element, attribute), 10);
+    return (isNaN(val)) ? 0 : val; // borders in old IE are throwing 'medium' for demo.html
+  }
+
+  function renderRect (ctx, x, y, w, h, bgcolor) {
+    if (bgcolor !== "transparent"){
+      ctx.setVariable("fillStyle", bgcolor);
+      ctx.fillRect(x, y, w, h);
+      numDraws+=1;
+    }
+  }
+
+  function textTransform (text, transform) {
+    switch(transform){
+      case "lowercase":
+        return text.toLowerCase();
+      case "capitalize":
+        return text.replace( /(^|\s|:|-|\(|\))([a-z])/g , function (m, p1, p2) {
+          if (m.length > 0) {
+            return p1 + p2.toUpperCase();
+          }
+        } );
+      case "uppercase":
+        return text.toUpperCase();
+      default:
+        return text;
+    }
+  }
+
+  function noLetterSpacing(letter_spacing) {
+    return (/^(normal|none|0px)$/.test(letter_spacing));
+  }
+
+  function drawText(currentText, x, y, ctx){
+    if (currentText !== null && _html2canvas.Util.trimText(currentText).length > 0) {
+      ctx.fillText(currentText, x, y);
+      numDraws+=1;
+    }
+  }
+
+  function setTextVariables(ctx, el, text_decoration, color) {
+    var align = false,
+    bold = getCSS(el, "fontWeight"),
+    family = getCSS(el, "fontFamily"),
+    size = getCSS(el, "fontSize");
+
+    switch(parseInt(bold, 10)){
+      case 401:
+        bold = "bold";
+        break;
+      case 400:
+        bold = "normal";
+        break;
+    }
+
+    ctx.setVariable("fillStyle", color);
+    ctx.setVariable("font", [getCSS(el, "fontStyle"), getCSS(el, "fontVariant"), bold, size, family].join(" "));
+    ctx.setVariable("textAlign", (align) ? "right" : "left");
+
+    if (text_decoration !== "none"){
+      return _html2canvas.Util.Font(family, size, doc);
+    }
+  }
+
+  function renderTextDecoration(ctx, text_decoration, bounds, metrics, color) {
+    switch(text_decoration) {
+      case "underline":
+        // Draws a line at the baseline of the font
+        // TODO As some browsers display the line as more than 1px if the font-size is big, need to take that into account both in position and size
+        renderRect(ctx, bounds.left, Math.round(bounds.top + metrics.baseline + metrics.lineWidth), bounds.width, 1, color);
+        break;
+      case "overline":
+        renderRect(ctx, bounds.left, Math.round(bounds.top), bounds.width, 1, color);
+        break;
+      case "line-through":
+        // TODO try and find exact position for line-through
+        renderRect(ctx, bounds.left, Math.ceil(bounds.top + metrics.middle + metrics.lineWidth), bounds.width, 1, color);
+        break;
+    }
+  }
+
+  function getTextBounds(state, text, textDecoration, isLast) {
+    var bounds;
+    if (support.rangeBounds) {
+      if (textDecoration !== "none" || _html2canvas.Util.trimText(text).length !== 0) {
+        bounds = textRangeBounds(text, state.node, state.textOffset);
+      }
+      state.textOffset += text.length;
+    } else if (state.node && typeof state.node.nodeValue === "string" ){
+      var newTextNode = (isLast) ? state.node.splitText(text.length) : null;
+      bounds = textWrapperBounds(state.node);
+      state.node = newTextNode;
+    }
+    return bounds;
+  }
+
+  function textRangeBounds(text, textNode, textOffset) {
+    var range = doc.createRange();
+    range.setStart(textNode, textOffset);
+    range.setEnd(textNode, textOffset + text.length);
+    return range.getBoundingClientRect();
+  }
+
+  function textWrapperBounds(oldTextNode) {
+    var parent = oldTextNode.parentNode,
+    wrapElement = doc.createElement('wrapper'),
+    backupText = oldTextNode.cloneNode(true);
+
+    wrapElement.appendChild(oldTextNode.cloneNode(true));
+    parent.replaceChild(wrapElement, oldTextNode);
+
+    var bounds = _html2canvas.Util.Bounds(wrapElement);
+    parent.replaceChild(backupText, wrapElement);
+    return bounds;
+  }
+
+  function renderText(el, textNode, stack) {
+    var ctx = stack.ctx,
+    color = getCSS(el, "color"),
+    textDecoration = getCSS(el, "textDecoration"),
+    textAlign = getCSS(el, "textAlign"),
+    metrics,
+    textList,
+    state = {
+      node: textNode,
+      textOffset: 0
+    };
+
+    if (_html2canvas.Util.trimText(textNode.nodeValue).length > 0) {
+      textNode.nodeValue = textTransform(textNode.nodeValue, getCSS(el, "textTransform"));
+      textAlign = textAlign.replace(["-webkit-auto"],["auto"]);
+
+      textList = (!options.letterRendering && /^(left|right|justify|auto)$/.test(textAlign) && noLetterSpacing(getCSS(el, "letterSpacing"))) ?
+      textNode.nodeValue.split(/(\b| )/)
+      : textNode.nodeValue.split("");
+
+      metrics = setTextVariables(ctx, el, textDecoration, color);
+
+      if (options.chinese) {
+        textList.forEach(function(word, index) {
+          if (/.*[\u4E00-\u9FA5].*$/.test(word)) {
+            word = word.split("");
+            word.unshift(index, 1);
+            textList.splice.apply(textList, word);
+          }
+        });
+      }
+
+      textList.forEach(function(text, index) {
+        var bounds = getTextBounds(state, text, textDecoration, (index < textList.length - 1));
+        if (bounds) {
+          drawText(text, bounds.left, bounds.bottom, ctx);
+          renderTextDecoration(ctx, textDecoration, bounds, metrics, color);
+        }
+      });
+    }
+  }
+
+  function listPosition (element, val) {
+    var boundElement = doc.createElement( "boundelement" ),
+    originalType,
+    bounds;
+
+    boundElement.style.display = "inline";
+
+    originalType = element.style.listStyleType;
+    element.style.listStyleType = "none";
+
+    boundElement.appendChild(doc.createTextNode(val));
+
+    element.insertBefore(boundElement, element.firstChild);
+
+    bounds = _html2canvas.Util.Bounds(boundElement);
+    element.removeChild(boundElement);
+    element.style.listStyleType = originalType;
+    return bounds;
+  }
+
+  function elementIndex( el ) {
+    var i = -1,
+    count = 1,
+    childs = el.parentNode.childNodes;
+
+    if (el.parentNode) {
+      while( childs[ ++i ] !== el ) {
+        if ( childs[ i ].nodeType === 1 ) {
+          count++;
+        }
+      }
+      return count;
+    } else {
+      return -1;
+    }
+  }
+
+  function listItemText(element, type) {
+    var currentIndex = elementIndex(element),
+    text;
+    switch(type){
+      case "decimal":
+        text = currentIndex;
+        break;
+      case "decimal-leading-zero":
+        text = (currentIndex.toString().length === 1) ? currentIndex = "0" + currentIndex.toString() : currentIndex.toString();
+        break;
+      case "upper-roman":
+        text = _html2canvas.Generate.ListRoman( currentIndex );
+        break;
+      case "lower-roman":
+        text = _html2canvas.Generate.ListRoman( currentIndex ).toLowerCase();
+        break;
+      case "lower-alpha":
+        text = _html2canvas.Generate.ListAlpha( currentIndex ).toLowerCase();
+        break;
+      case "upper-alpha":
+        text = _html2canvas.Generate.ListAlpha( currentIndex );
+        break;
+    }
+
+    text += ". ";
+    return text;
+  }
+
+  function renderListItem(element, stack, elBounds) {
+    var x,
+    text,
+    ctx = stack.ctx,
+    type = getCSS(element, "listStyleType"),
+    listBounds;
+
+    if (/^(decimal|decimal-leading-zero|upper-alpha|upper-latin|upper-roman|lower-alpha|lower-greek|lower-latin|lower-roman)$/i.test(type)) {
+      text = listItemText(element, type);
+      listBounds = listPosition(element, text);
+      setTextVariables(ctx, element, "none", getCSS(element, "color"));
+
+      if (getCSS(element, "listStylePosition") === "inside") {
+        ctx.setVariable("textAlign", "left");
+        x = elBounds.left;
+      } else {
+        return;
+      }
+
+      drawText(text, x, listBounds.bottom, ctx);
+    }
+  }
+
+  function loadImage (src){
+    var img = images[src];
+    if (img && img.succeeded === true) {
+      return img.img;
+    } else {
+      return false;
+    }
+  }
+
+  function clipBounds(src, dst){
+    var x = Math.max(src.left, dst.left),
+    y = Math.max(src.top, dst.top),
+    x2 = Math.min((src.left + src.width), (dst.left + dst.width)),
+    y2 = Math.min((src.top + src.height), (dst.top + dst.height));
+
+    return {
+      left:x,
+      top:y,
+      width:x2-x,
+      height:y2-y
+    };
+  }
+
+  function setZ(zIndex, parentZ){
+    // TODO fix static elements overlapping relative/absolute elements under same stack, if they are defined after them
+    var newContext;
+    if (!parentZ){
+      newContext = h2czContext(0);
+      return newContext;
+    }
+
+    if (zIndex !== "auto"){
+      newContext = h2czContext(zIndex);
+      parentZ.children.push(newContext);
+      return newContext;
+
+    }
+
+    return parentZ;
+  }
+
+  function renderImage(ctx, element, image, bounds, borders) {
+
+    var paddingLeft = getCSSInt(element, 'paddingLeft'),
+    paddingTop = getCSSInt(element, 'paddingTop'),
+    paddingRight = getCSSInt(element, 'paddingRight'),
+    paddingBottom = getCSSInt(element, 'paddingBottom');
+
+    drawImage(
+      ctx,
+      image,
+      0, //sx
+      0, //sy
+      image.width, //sw
+      image.height, //sh
+      bounds.left + paddingLeft + borders[3].width, //dx
+      bounds.top + paddingTop + borders[0].width, // dy
+      bounds.width - (borders[1].width + borders[3].width + paddingLeft + paddingRight), //dw
+      bounds.height - (borders[0].width + borders[2].width + paddingTop + paddingBottom) //dh
+      );
+  }
+
+  function getBorderData(element) {
+    return ["Top", "Right", "Bottom", "Left"].map(function(side) {
+      return {
+        width: getCSSInt(element, 'border' + side + 'Width'),
+        color: getCSS(element, 'border' + side + 'Color')
+      };
+    });
+  }
+
+  function getBorderRadiusData(element) {
+    return ["TopLeft", "TopRight", "BottomRight", "BottomLeft"].map(function(side) {
+      return getCSS(element, 'border' + side + 'Radius');
+    });
+  }
+
+  var getCurvePoints = (function(kappa) {
+
+    return function(x, y, r1, r2) {
+      var ox = (r1) * kappa, // control point offset horizontal
+      oy = (r2) * kappa, // control point offset vertical
+      xm = x + r1, // x-middle
+      ym = y + r2; // y-middle
+      return {
+        topLeft: bezierCurve({
+          x:x,
+          y:ym
+        }, {
+          x:x,
+          y:ym - oy
+        }, {
+          x:xm - ox,
+          y:y
+        }, {
+          x:xm,
+          y:y
+        }),
+        topRight: bezierCurve({
+          x:x,
+          y:y
+        }, {
+          x:x + ox,
+          y:y
+        }, {
+          x:xm,
+          y:ym - oy
+        }, {
+          x:xm,
+          y:ym
+        }),
+        bottomRight: bezierCurve({
+          x:xm,
+          y:y
+        }, {
+          x:xm,
+          y:y + oy
+        }, {
+          x:x + ox,
+          y:ym
+        }, {
+          x:x,
+          y:ym
+        }),
+        bottomLeft: bezierCurve({
+          x:xm,
+          y:ym
+        }, {
+          x:xm - ox,
+          y:ym
+        }, {
+          x:x,
+          y:y + oy
+        }, {
+          x:x,
+          y:y
+        })
+      };
+    };
+  })(4 * ((Math.sqrt(2) - 1) / 3));
+
+  function bezierCurve(start, startControl, endControl, end) {
+
+    var lerp = function (a, b, t) {
+      return {
+        x:a.x + (b.x - a.x) * t,
+        y:a.y + (b.y - a.y) * t
+      };
+    };
+
+    return {
+      start: start,
+      startControl: startControl,
+      endControl: endControl,
+      end: end,
+      subdivide: function(t) {
+        var ab = lerp(start, startControl, t),
+        bc = lerp(startControl, endControl, t),
+        cd = lerp(endControl, end, t),
+        abbc = lerp(ab, bc, t),
+        bccd = lerp(bc, cd, t),
+        dest = lerp(abbc, bccd, t);
+        return [bezierCurve(start, ab, abbc, dest), bezierCurve(dest, bccd, cd, end)];
+      },
+      curveTo: function(borderArgs) {
+        borderArgs.push(["bezierCurve", startControl.x, startControl.y, endControl.x, endControl.y, end.x, end.y]);
+      },
+      curveToReversed: function(borderArgs) {
+        borderArgs.push(["bezierCurve", endControl.x, endControl.y, startControl.x, startControl.y, start.x, start.y]);
+      }
+    };
+  }
+
+  function parseCorner(borderArgs, radius1, radius2, corner1, corner2, x, y) {
+    if (radius1[0] > 0 || radius1[1] > 0) {
+      borderArgs.push(["line", corner1[0].start.x, corner1[0].start.y]);
+      corner1[0].curveTo(borderArgs);
+      corner1[1].curveTo(borderArgs);
+    } else {
+      borderArgs.push(["line", x, y]);
+    }
+
+    if (radius2[0] > 0 || radius2[1] > 0) {
+      borderArgs.push(["line", corner2[0].start.x, corner2[0].start.y]);
+    }
+  }
+
+  function drawSide(borderData, radius1, radius2, outer1, inner1, outer2, inner2) {
+    var borderArgs = [];
+
+    if (radius1[0] > 0 || radius1[1] > 0) {
+      borderArgs.push(["line", outer1[1].start.x, outer1[1].start.y]);
+      outer1[1].curveTo(borderArgs);
+    } else {
+      borderArgs.push([ "line", borderData.c1[0], borderData.c1[1]]);
+    }
+
+    if (radius2[0] > 0 || radius2[1] > 0) {
+      borderArgs.push(["line", outer2[0].start.x, outer2[0].start.y]);
+      outer2[0].curveTo(borderArgs);
+      borderArgs.push(["line", inner2[0].end.x, inner2[0].end.y]);
+      inner2[0].curveToReversed(borderArgs);
+    } else {
+      borderArgs.push([ "line", borderData.c2[0], borderData.c2[1]]);
+      borderArgs.push([ "line", borderData.c3[0], borderData.c3[1]]);
+    }
+
+    if (radius1[0] > 0 || radius1[1] > 0) {
+      borderArgs.push(["line", inner1[1].end.x, inner1[1].end.y]);
+      inner1[1].curveToReversed(borderArgs);
+    } else {
+      borderArgs.push([ "line", borderData.c4[0], borderData.c4[1]]);
+    }
+
+    return borderArgs;
+  }
+
+  function calculateCurvePoints(bounds, borderRadius, borders) {
+
+    var x = bounds.left,
+    y = bounds.top,
+    width = bounds.width,
+    height = bounds.height,
+
+    tlh = borderRadius[0][0],
+    tlv = borderRadius[0][1],
+    trh = borderRadius[1][0],
+    trv = borderRadius[1][1],
+    brv = borderRadius[2][0],
+    brh = borderRadius[2][1],
+    blh = borderRadius[3][0],
+    blv = borderRadius[3][1],
+
+    topWidth = width - trh,
+    rightHeight = height - brv,
+    bottomWidth = width - brh,
+    leftHeight = height - blv;
+
+    return {
+      topLeftOuter: getCurvePoints(
+        x,
+        y,
+        tlh,
+        tlv
+        ).topLeft.subdivide(0.5),
+
+      topLeftInner: getCurvePoints(
+        x + borders[3].width,
+        y + borders[0].width,
+        Math.max(0, tlh - borders[3].width),
+        Math.max(0, tlv - borders[0].width)
+        ).topLeft.subdivide(0.5),
+
+      topRightOuter: getCurvePoints(
+        x + topWidth,
+        y,
+        trh,
+        trv
+        ).topRight.subdivide(0.5),
+
+      topRightInner: getCurvePoints(
+        x + Math.min(topWidth, width + borders[3].width),
+        y + borders[0].width,
+        (topWidth > width + borders[3].width) ? 0 :trh - borders[3].width,
+        trv - borders[0].width
+        ).topRight.subdivide(0.5),
+
+      bottomRightOuter: getCurvePoints(
+        x + bottomWidth,
+        y + rightHeight,
+        brh,
+        brv
+        ).bottomRight.subdivide(0.5),
+
+      bottomRightInner: getCurvePoints(
+        x + Math.min(bottomWidth, width + borders[3].width),
+        y + Math.min(rightHeight, height + borders[0].width),
+        Math.max(0, brh - borders[1].width),
+        Math.max(0, brv - borders[2].width)
+        ).bottomRight.subdivide(0.5),
+
+      bottomLeftOuter: getCurvePoints(
+        x,
+        y + leftHeight,
+        blh,
+        blv
+        ).bottomLeft.subdivide(0.5),
+
+      bottomLeftInner: getCurvePoints(
+        x + borders[3].width,
+        y + leftHeight,
+        Math.max(0, blh - borders[3].width),
+        Math.max(0, blv - borders[2].width)
+        ).bottomLeft.subdivide(0.5)
+    };
+  }
+
+  function getBorderClip(element, borderPoints, borders, radius, bounds) {
+    var backgroundClip = getCSS(element, 'backgroundClip'),
+    borderArgs = [];
+
+    switch(backgroundClip) {
+      case "content-box":
+      case "padding-box":
+        parseCorner(borderArgs, radius[0], radius[1], borderPoints.topLeftInner, borderPoints.topRightInner, bounds.left + borders[3].width, bounds.top + borders[0].width);
+        parseCorner(borderArgs, radius[1], radius[2], borderPoints.topRightInner, borderPoints.bottomRightInner, bounds.left + bounds.width - borders[1].width, bounds.top + borders[0].width);
+        parseCorner(borderArgs, radius[2], radius[3], borderPoints.bottomRightInner, borderPoints.bottomLeftInner, bounds.left + bounds.width - borders[1].width, bounds.top + bounds.height - borders[2].width);
+        parseCorner(borderArgs, radius[3], radius[0], borderPoints.bottomLeftInner, borderPoints.topLeftInner, bounds.left + borders[3].width, bounds.top + bounds.height - borders[2].width);
+        break;
+
+      default:
+        parseCorner(borderArgs, radius[0], radius[1], borderPoints.topLeftOuter, borderPoints.topRightOuter, bounds.left, bounds.top);
+        parseCorner(borderArgs, radius[1], radius[2], borderPoints.topRightOuter, borderPoints.bottomRightOuter, bounds.left + bounds.width, bounds.top);
+        parseCorner(borderArgs, radius[2], radius[3], borderPoints.bottomRightOuter, borderPoints.bottomLeftOuter, bounds.left + bounds.width, bounds.top + bounds.height);
+        parseCorner(borderArgs, radius[3], radius[0], borderPoints.bottomLeftOuter, borderPoints.topLeftOuter, bounds.left, bounds.top + bounds.height);
+        break;
+    }
+
+    return borderArgs;
+  }
+
+  function parseBorders(element, bounds, borders){
+    var x = bounds.left,
+    y = bounds.top,
+    width = bounds.width,
+    height = bounds.height,
+    borderSide,
+    bx,
+    by,
+    bw,
+    bh,
+    borderArgs,
+    // http://www.w3.org/TR/css3-background/#the-border-radius
+    borderRadius = getBorderRadiusData(element),
+    borderPoints = calculateCurvePoints(bounds, borderRadius, borders),
+    borderData = {
+      clip: getBorderClip(element, borderPoints, borders, borderRadius, bounds),
+      borders: []
+    };
+
+    for (borderSide = 0; borderSide < 4; borderSide++) {
+
+      if (borders[borderSide].width > 0) {
+        bx = x;
+        by = y;
+        bw = width;
+        bh = height - (borders[2].width);
+
+        switch(borderSide) {
+          case 0:
+            // top border
+            bh = borders[0].width;
+
+            borderArgs = drawSide({
+              c1: [bx, by],
+              c2: [bx + bw, by],
+              c3: [bx + bw - borders[1].width, by + bh],
+              c4: [bx + borders[3].width, by + bh]
+            }, borderRadius[0], borderRadius[1],
+            borderPoints.topLeftOuter, borderPoints.topLeftInner, borderPoints.topRightOuter, borderPoints.topRightInner);
+            break;
+          case 1:
+            // right border
+            bx = x + width - (borders[1].width);
+            bw = borders[1].width;
+
+            borderArgs = drawSide({
+              c1: [bx + bw, by],
+              c2: [bx + bw, by + bh + borders[2].width],
+              c3: [bx, by + bh],
+              c4: [bx, by + borders[0].width]
+            }, borderRadius[1], borderRadius[2],
+            borderPoints.topRightOuter, borderPoints.topRightInner, borderPoints.bottomRightOuter, borderPoints.bottomRightInner);
+            break;
+          case 2:
+            // bottom border
+            by = (by + height) - (borders[2].width);
+            bh = borders[2].width;
+
+            borderArgs = drawSide({
+              c1: [bx + bw, by + bh],
+              c2: [bx, by + bh],
+              c3: [bx + borders[3].width, by],
+              c4: [bx + bw - borders[2].width, by]
+            }, borderRadius[2], borderRadius[3],
+            borderPoints.bottomRightOuter, borderPoints.bottomRightInner, borderPoints.bottomLeftOuter, borderPoints.bottomLeftInner);
+            break;
+          case 3:
+            // left border
+            bw = borders[3].width;
+
+            borderArgs = drawSide({
+              c1: [bx, by + bh + borders[2].width],
+              c2: [bx, by],
+              c3: [bx + bw, by + borders[0].width],
+              c4: [bx + bw, by + bh]
+            }, borderRadius[3], borderRadius[0],
+            borderPoints.bottomLeftOuter, borderPoints.bottomLeftInner, borderPoints.topLeftOuter, borderPoints.topLeftInner);
+            break;
+        }
+
+        borderData.borders.push({
+          args: borderArgs,
+          color: borders[borderSide].color
+        });
+
+      }
+    }
+
+    return borderData;
+  }
+
+  function createShape(ctx, args) {
+    var shape = ctx.drawShape();
+    args.forEach(function(border, index) {
+      shape[(index === 0) ? "moveTo" : border[0] + "To" ].apply(null, border.slice(1));
+    });
+    return shape;
+  }
+
+  function renderBorders(ctx, borderArgs, color) {
+    if (color !== "transparent") {
+      ctx.setVariable( "fillStyle", color);
+      createShape(ctx, borderArgs);
+      ctx.fill();
+      numDraws+=1;
+    }
+  }
+
+  function renderFormValue (el, bounds, stack){
+
+    var valueWrap = doc.createElement('valuewrap'),
+    cssPropertyArray = ['lineHeight','textAlign','fontFamily','color','fontSize','paddingLeft','paddingTop','width','height','border','borderLeftWidth','borderTopWidth'],
+    textValue,
+    textNode;
+
+    cssPropertyArray.forEach(function(property) {
+      try {
+        valueWrap.style[property] = getCSS(el, property);
+      } catch(e) {
+        // Older IE has issues with "border"
+        h2clog("html2canvas: Parse: Exception caught in renderFormValue: " + e.message);
+      }
+    });
+
+    valueWrap.style.borderColor = "black";
+    valueWrap.style.borderStyle = "solid";
+    valueWrap.style.display = "block";
+    valueWrap.style.position = "absolute";
+
+    if (/^(submit|reset|button|text|password)$/.test(el.type) || el.nodeName === "SELECT"){
+      valueWrap.style.lineHeight = getCSS(el, "height");
+    }
+
+    valueWrap.style.top = bounds.top + "px";
+    valueWrap.style.left = bounds.left + "px";
+
+    textValue = (el.nodeName === "SELECT") ? (el.options[el.selectedIndex] || 0).text : el.value;
+    if(!textValue) {
+      textValue = el.placeholder;
+    }
+
+    textNode = doc.createTextNode(textValue);
+
+    valueWrap.appendChild(textNode);
+    body.appendChild(valueWrap);
+
+    renderText(el, textNode, stack);
+    body.removeChild(valueWrap);
+  }
+
+  function drawImage (ctx) {
+    ctx.drawImage.apply(ctx, Array.prototype.slice.call(arguments, 1));
+    numDraws+=1;
+  }
+
+  function getPseudoElement(el, which) {
+    var elStyle = window.getComputedStyle(el, which);
+    if(!elStyle || !elStyle.content || elStyle.content === "none" || elStyle.content === "-moz-alt-content") {
+      return;
+    }
+    var content = elStyle.content + '',
+    first = content.substr( 0, 1 );
+    //strips quotes
+    if(first === content.substr( content.length - 1 ) && first.match(/'|"/)) {
+      content = content.substr( 1, content.length - 2 );
+    }
+
+    var isImage = content.substr( 0, 3 ) === 'url',
+    elps = document.createElement( isImage ? 'img' : 'span' );
+
+    elps.className = pseudoHide + "-before " + pseudoHide + "-after";
+
+    Object.keys(elStyle).filter(indexedProperty).forEach(function(prop) {
+      elps.style[prop] = elStyle[prop];
+    });
+
+    if(isImage) {
+      elps.src = _html2canvas.Util.parseBackgroundImage(content)[0].args[0];
+    } else {
+      elps.innerHTML = content;
+    }
+    return elps;
+  }
+
+  function indexedProperty(property) {
+    return (isNaN(window.parseInt(property, 10)));
+  }
+
+  function injectPseudoElements(el, stack) {
+    var before = getPseudoElement(el, ':before'),
+    after = getPseudoElement(el, ':after');
+    if(!before && !after) {
+      return;
+    }
+
+    if(before) {
+      el.className += " " + pseudoHide + "-before";
+      el.parentNode.insertBefore(before, el);
+      parseElement(before, stack, true);
+      el.parentNode.removeChild(before);
+      el.className = el.className.replace(pseudoHide + "-before", "").trim();
+    }
+
+    if (after) {
+      el.className += " " + pseudoHide + "-after";
+      el.appendChild(after);
+      parseElement(after, stack, true);
+      el.removeChild(after);
+      el.className = el.className.replace(pseudoHide + "-after", "").trim();
+    }
+
+  }
+
+  function renderBackgroundRepeat(ctx, image, backgroundPosition, bounds) {
+    var offsetX = Math.round(bounds.left + backgroundPosition.left),
+    offsetY = Math.round(bounds.top + backgroundPosition.top);
+
+    ctx.createPattern(image);
+    ctx.translate(offsetX, offsetY);
+    ctx.fill();
+    ctx.translate(-offsetX, -offsetY);
+  }
+
+  function backgroundRepeatShape(ctx, image, backgroundPosition, bounds, left, top, width, height) {
+    var args = [];
+    args.push(["line", Math.round(left), Math.round(top)]);
+    args.push(["line", Math.round(left + width), Math.round(top)]);
+    args.push(["line", Math.round(left + width), Math.round(height + top)]);
+    args.push(["line", Math.round(left), Math.round(height + top)]);
+    createShape(ctx, args);
+    ctx.save();
+    ctx.clip();
+    renderBackgroundRepeat(ctx, image, backgroundPosition, bounds);
+    ctx.restore();
+  }
+
+  function renderBackgroundColor(ctx, backgroundBounds, bgcolor) {
+    renderRect(
+      ctx,
+      backgroundBounds.left,
+      backgroundBounds.top,
+      backgroundBounds.width,
+      backgroundBounds.height,
+      bgcolor
+      );
+  }
+
+  function renderBackgroundRepeating(el, bounds, ctx, image, imageIndex) {
+    var backgroundSize = _html2canvas.Util.BackgroundSize(el, bounds, image, imageIndex),
+    backgroundPosition = _html2canvas.Util.BackgroundPosition(el, bounds, image, imageIndex, backgroundSize),
+    backgroundRepeat = getCSS(el, "backgroundRepeat").split(",").map(function(value) {
+      return value.trim();
+    });
+
+    image = resizeImage(image, backgroundSize);
+
+    backgroundRepeat = backgroundRepeat[imageIndex] || backgroundRepeat[0];
+
+    switch (backgroundRepeat) {
+      case "repeat-x":
+        backgroundRepeatShape(ctx, image, backgroundPosition, bounds,
+          bounds.left, bounds.top + backgroundPosition.top, 99999, image.height);
+        break;
+
+      case "repeat-y":
+        backgroundRepeatShape(ctx, image, backgroundPosition, bounds,
+          bounds.left + backgroundPosition.left, bounds.top, image.width, 99999);
+        break;
+
+      case "no-repeat":
+        backgroundRepeatShape(ctx, image, backgroundPosition, bounds,
+          bounds.left + backgroundPosition.left, bounds.top + backgroundPosition.top, image.width, image.height);
+        break;
+
+      default:
+        renderBackgroundRepeat(ctx, image, backgroundPosition, {
+          top: bounds.top,
+          left: bounds.left,
+          width: image.width,
+          height: image.height
+        });
+        break;
+    }
+  }
+
+  function renderBackgroundImage(element, bounds, ctx) {
+    var backgroundImage = getCSS(element, "backgroundImage"),
+    backgroundImages = _html2canvas.Util.parseBackgroundImage(backgroundImage),
+    image,
+    imageIndex = backgroundImages.length;
+
+    while(imageIndex--) {
+      backgroundImage = backgroundImages[imageIndex];
+
+      if (!backgroundImage.args || backgroundImage.args.length === 0) {
+        continue;
+      }
+
+      var key = backgroundImage.method === 'url' ?
+      backgroundImage.args[0] :
+      backgroundImage.value;
+
+      image = loadImage(key);
+
+      // TODO add support for background-origin
+      if (image) {
+        renderBackgroundRepeating(element, bounds, ctx, image, imageIndex);
+      } else {
+        h2clog("html2canvas: Error loading background:", backgroundImage);
+      }
+    }
+  }
+
+  function resizeImage(image, bounds) {
+    if(image.width === bounds.width && image.height === bounds.height) {
+      return image;
+    }
+
+    var ctx, canvas = doc.createElement('canvas');
+    canvas.width = bounds.width;
+    canvas.height = bounds.height;
+    ctx = canvas.getContext("2d");
+    drawImage(ctx, image, 0, 0, image.width, image.height, 0, 0, bounds.width, bounds.height );
+    return canvas;
+  }
+
+  function setOpacity(ctx, element, parentStack) {
+    var opacity = getCSS(element, "opacity") * ((parentStack) ? parentStack.opacity : 1);
+    ctx.setVariable("globalAlpha", opacity);
+    return opacity;
+  }
+
+  function createStack(element, parentStack, bounds) {
+
+    var ctx = h2cRenderContext((!parentStack) ? documentWidth() : bounds.width , (!parentStack) ? documentHeight() : bounds.height),
+    stack = {
+      ctx: ctx,
+      zIndex: setZ(getCSS(element, "zIndex"), (parentStack) ? parentStack.zIndex : null),
+      opacity: setOpacity(ctx, element, parentStack),
+      cssPosition: getCSS(element, "position"),
+      borders: getBorderData(element),
+      clip: (parentStack && parentStack.clip) ? _html2canvas.Util.Extend( {}, parentStack.clip ) : null
+    };
+
+    // TODO correct overflow for absolute content residing under a static position
+    if (options.useOverflow === true && /(hidden|scroll|auto)/.test(getCSS(element, "overflow")) === true && /(BODY)/i.test(element.nodeName) === false){
+      stack.clip = (stack.clip) ? clipBounds(stack.clip, bounds) : bounds;
+    }
+
+    stack.zIndex.children.push(stack);
+
+    return stack;
+  }
+
+  function getBackgroundBounds(borders, bounds, clip) {
+    var backgroundBounds = {
+      left: bounds.left + borders[3].width,
+      top: bounds.top + borders[0].width,
+      width: bounds.width - (borders[1].width + borders[3].width),
+      height: bounds.height - (borders[0].width + borders[2].width)
+    };
+
+    if (clip) {
+      backgroundBounds = clipBounds(backgroundBounds, clip);
+    }
+
+    return backgroundBounds;
+  }
+
+  function renderElement(element, parentStack, pseudoElement){
+    var bounds = _html2canvas.Util.Bounds(element),
+    image,
+    bgcolor = (ignoreElementsRegExp.test(element.nodeName)) ? "#efefef" : getCSS(element, "backgroundColor"),
+    stack = createStack(element, parentStack, bounds),
+    borders = stack.borders,
+    ctx = stack.ctx,
+    backgroundBounds = getBackgroundBounds(borders, bounds, stack.clip),
+    borderData = parseBorders(element, bounds, borders);
+
+    createShape(ctx, borderData.clip);
+
+    ctx.save();
+    ctx.clip();
+
+    if (backgroundBounds.height > 0 && backgroundBounds.width > 0){
+      renderBackgroundColor(ctx, bounds, bgcolor);
+      renderBackgroundImage(element, backgroundBounds, ctx);
+    }
+
+    ctx.restore();
+
+    borderData.borders.forEach(function(border) {
+      renderBorders(ctx, border.args, border.color);
+    });
+
+    if (!pseudoElement) {
+      injectPseudoElements(element, stack);
+    }
+
+    switch(element.nodeName){
+      case "IMG":
+        if ((image = loadImage(element.getAttribute('src')))) {
+          renderImage(ctx, element, image, bounds, borders);
+        } else {
+          h2clog("html2canvas: Error loading <img>:" + element.getAttribute('src'));
+        }
+        break;
+      case "INPUT":
+        // TODO add all relevant type's, i.e. HTML5 new stuff
+        // todo add support for placeholder attribute for browsers which support it
+        if (/^(text|url|email|submit|button|reset)$/.test(element.type) && (element.value || element.placeholder).length > 0){
+          renderFormValue(element, bounds, stack);
+        }
+        break;
+      case "TEXTAREA":
+        if ((element.value || element.placeholder || "").length > 0){
+          renderFormValue(element, bounds, stack);
+        }
+        break;
+      case "SELECT":
+        if ((element.options||element.placeholder || "").length > 0){
+          renderFormValue(element, bounds, stack);
+        }
+        break;
+      case "LI":
+        renderListItem(element, stack, backgroundBounds);
+        break;
+      case "CANVAS":
+        renderImage(ctx, element, element, bounds, borders);
+        break;
+    }
+
+    return stack;
+  }
+
+  function isElementVisible(element) {
+    return (getCSS(element, 'display') !== "none" && getCSS(element, 'visibility') !== "hidden" && !element.hasAttribute("data-html2canvas-ignore"));
+  }
+
+  function parseElement (el, stack, pseudoElement) {
+
+    if (isElementVisible(el)) {
+      stack = renderElement(el, stack, pseudoElement) || stack;
+      if (!ignoreElementsRegExp.test(el.nodeName)) {
+        _html2canvas.Util.Children(el).forEach(function(node) {
+          if (node.nodeType === 1) {
+            parseElement(node, stack, pseudoElement);
+          } else if (node.nodeType === 3) {
+            renderText(el, node, stack);
+          }
+        });
+      }
+    }
+  }
+
+  function svgDOMRender(body, stack) {
+    var img = new Image(),
+    docWidth = documentWidth(),
+    docHeight = documentHeight(),
+    html = "";
+
+    function parseDOM(el) {
+      var children = _html2canvas.Util.Children( el ),
+      len = children.length,
+      attr,
+      a,
+      alen,
+      elm,
+      i;
+      for ( i = 0; i < len; i+=1 ) {
+        elm = children[ i ];
+        if ( elm.nodeType === 3 ) {
+          // Text node
+          html += elm.nodeValue.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+        } else if ( elm.nodeType === 1 ) {
+          // Element
+          if ( !/^(script|meta|title)$/.test(elm.nodeName.toLowerCase()) ) {
+
+            html += "<" + elm.nodeName.toLowerCase();
+
+            // add attributes
+            if ( elm.hasAttributes() ) {
+              attr = elm.attributes;
+              alen = attr.length;
+              for ( a = 0; a < alen; a+=1 ) {
+                html += " " + attr[ a ].name + '="' + attr[ a ].value + '"';
+              }
+            }
+
+
+            html += '>';
+
+            parseDOM( elm );
+
+
+            html += "</" + elm.nodeName.toLowerCase() + ">";
+          }
+        }
+
+      }
+
+    }
+
+    parseDOM(body);
+    img.src = [
+    "data:image/svg+xml,",
+    "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='" + docWidth + "' height='" + docHeight + "'>",
+    "<foreignObject width='" + docWidth + "' height='" + docHeight + "'>",
+    "<html xmlns='http://www.w3.org/1999/xhtml' style='margin:0;'>",
+    html.replace(/\#/g,"%23"),
+    "</html>",
+    "</foreignObject>",
+    "</svg>"
+    ].join("");
+
+    img.onload = function() {
+      stack.svgRender = img;
+    };
+
+  }
+
+  function init() {
+    var stack = renderElement(element, null);
+
+    if (support.svgRendering) {
+      svgDOMRender(document.documentElement, stack);
+    }
+
+    Array.prototype.slice.call(element.children, 0).forEach(function(childElement) {
+      parseElement(childElement, stack);
+    });
+
+    stack.backgroundColor = getCSS(document.documentElement, "backgroundColor");
+    body.removeChild(hidePseudoElements);
+    return stack;
+  }
+
+  return init();
+};
+
+function h2czContext(zindex) {
+  return {
+    zindex: zindex,
+    children: []
+  };
+}
+_html2canvas.Preload = function( options ) {
+
+  var images = {
+    numLoaded: 0,   // also failed are counted here
+    numFailed: 0,
+    numTotal: 0,
+    cleanupDone: false
+  },
+  pageOrigin,
+  methods,
+  i,
+  count = 0,
+  element = options.elements[0] || document.body,
+  doc = element.ownerDocument,
+  domImages = doc.images, // TODO probably should limit it to images present in the element only
+  imgLen = domImages.length,
+  link = doc.createElement("a"),
+  supportCORS = (function( img ){
+    return (img.crossOrigin !== undefined);
+  })(new Image()),
+  timeoutTimer;
+
+  link.href = window.location.href;
+  pageOrigin  = link.protocol + link.host;
+
+  function isSameOrigin(url){
+    link.href = url;
+    link.href = link.href; // YES, BELIEVE IT OR NOT, that is required for IE9 - http://jsfiddle.net/niklasvh/2e48b/
+    var origin = link.protocol + link.host;
+    return (origin === pageOrigin);
+  }
+
+  function start(){
+    h2clog("html2canvas: start: images: " + images.numLoaded + " / " + images.numTotal + " (failed: " + images.numFailed + ")");
+    if (!images.firstRun && images.numLoaded >= images.numTotal){
+      h2clog("Finished loading images: # " + images.numTotal + " (failed: " + images.numFailed + ")");
+
+      if (typeof options.complete === "function"){
+        options.complete(images);
+      }
+
+    }
+  }
+
+  // TODO modify proxy to serve images with CORS enabled, where available
+  function proxyGetImage(url, img, imageObj){
+    var callback_name,
+    scriptUrl = options.proxy,
+    script;
+
+    link.href = url;
+    url = link.href; // work around for pages with base href="" set - WARNING: this may change the url
+
+    callback_name = 'html2canvas_' + (count++);
+    imageObj.callbackname = callback_name;
+
+    if (scriptUrl.indexOf("?") > -1) {
+      scriptUrl += "&";
+    } else {
+      scriptUrl += "?";
+    }
+    scriptUrl += 'url=' + encodeURIComponent(url) + '&callback=' + callback_name;
+    script = doc.createElement("script");
+
+    window[callback_name] = function(a){
+      if (a.substring(0,6) === "error:"){
+        imageObj.succeeded = false;
+        images.numLoaded++;
+        images.numFailed++;
+        start();
+      } else {
+        setImageLoadHandlers(img, imageObj);
+        img.src = a;
+      }
+      window[callback_name] = undefined; // to work with IE<9  // NOTE: that the undefined callback property-name still exists on the window object (for IE<9)
+      try {
+        delete window[callback_name];  // for all browser that support this
+      } catch(ex) {}
+      script.parentNode.removeChild(script);
+      script = null;
+      delete imageObj.script;
+      delete imageObj.callbackname;
+    };
+
+    script.setAttribute("type", "text/javascript");
+    script.setAttribute("src", scriptUrl);
+    imageObj.script = script;
+    window.document.body.appendChild(script);
+
+  }
+
+  function loadPseudoElement(element, type) {
+    var style = window.getComputedStyle(element, type),
+    content = style.content;
+    if (content.substr(0, 3) === 'url') {
+      methods.loadImage(_html2canvas.Util.parseBackgroundImage(content)[0].args[0]);
+    }
+    loadBackgroundImages(style.backgroundImage, element);
+  }
+
+  function loadPseudoElementImages(element) {
+    loadPseudoElement(element, ":before");
+    loadPseudoElement(element, ":after");
+  }
+
+  function loadGradientImage(backgroundImage, bounds) {
+    var img = _html2canvas.Generate.Gradient(backgroundImage, bounds);
+
+    if (img !== undefined){
+      images[backgroundImage] = {
+        img: img,
+        succeeded: true
+      };
+      images.numTotal++;
+      images.numLoaded++;
+      start();
+    }
+  }
+
+  function invalidBackgrounds(background_image) {
+    return (background_image && background_image.method && background_image.args && background_image.args.length > 0 );
+  }
+
+  function loadBackgroundImages(background_image, el) {
+    var bounds;
+
+    _html2canvas.Util.parseBackgroundImage(background_image).filter(invalidBackgrounds).forEach(function(background_image) {
+      if (background_image.method === 'url') {
+        methods.loadImage(background_image.args[0]);
+      } else if(background_image.method.match(/\-?gradient$/)) {
+        if(bounds === undefined) {
+          bounds = _html2canvas.Util.Bounds(el);
+        }
+        loadGradientImage(background_image.value, bounds);
+      }
+    });
+  }
+
+  function getImages (el) {
+    var elNodeType = false;
+
+    // Firefox fails with permission denied on pages with iframes
+    try {
+      _html2canvas.Util.Children(el).forEach(function(img) {
+        getImages(img);
+      });
+    }
+    catch( e ) {}
+
+    try {
+      elNodeType = el.nodeType;
+    } catch (ex) {
+      elNodeType = false;
+      h2clog("html2canvas: failed to access some element's nodeType - Exception: " + ex.message);
+    }
+
+    if (elNodeType === 1 || elNodeType === undefined) {
+      loadPseudoElementImages(el);
+      try {
+        loadBackgroundImages(_html2canvas.Util.getCSS(el, 'backgroundImage'), el);
+      } catch(e) {
+        h2clog("html2canvas: failed to get background-image - Exception: " + e.message);
+      }
+      loadBackgroundImages(el);
+    }
+  }
+
+  function setImageLoadHandlers(img, imageObj) {
+    img.onload = function() {
+      if ( imageObj.timer !== undefined ) {
+        // CORS succeeded
+        window.clearTimeout( imageObj.timer );
+      }
+
+      images.numLoaded++;
+      imageObj.succeeded = true;
+      img.onerror = img.onload = null;
+      start();
+    };
+    img.onerror = function() {
+      if (img.crossOrigin === "anonymous") {
+        // CORS failed
+        window.clearTimeout( imageObj.timer );
+
+        // let's try with proxy instead
+        if ( options.proxy ) {
+          var src = img.src;
+          img = new Image();
+          imageObj.img = img;
+          img.src = src;
+
+          proxyGetImage( img.src, img, imageObj );
+          return;
+        }
+      }
+
+      images.numLoaded++;
+      images.numFailed++;
+      imageObj.succeeded = false;
+      img.onerror = img.onload = null;
+      start();
+    };
+  }
+
+  methods = {
+    loadImage: function( src ) {
+      var img, imageObj;
+      if ( src && images[src] === undefined ) {
+        img = new Image();
+        if ( src.match(/data:image\/.*;base64,/i) ) {
+          img.src = src.replace(/url\(['"]{0,}|['"]{0,}\)$/ig, '');
+          imageObj = images[src] = {
+            img: img
+          };
+          images.numTotal++;
+          setImageLoadHandlers(img, imageObj);
+        } else if ( isSameOrigin( src ) || options.allowTaint ===  true ) {
+          imageObj = images[src] = {
+            img: img
+          };
+          images.numTotal++;
+          setImageLoadHandlers(img, imageObj);
+          img.src = src;
+        } else if ( supportCORS && !options.allowTaint && options.useCORS ) {
+          // attempt to load with CORS
+
+          img.crossOrigin = "anonymous";
+          imageObj = images[src] = {
+            img: img
+          };
+          images.numTotal++;
+          setImageLoadHandlers(img, imageObj);
+          img.src = src;
+
+          // work around for https://bugs.webkit.org/show_bug.cgi?id=80028
+          img.customComplete = function () {
+            if (!this.img.complete) {
+              this.timer = window.setTimeout(this.img.customComplete, 100);
+            } else {
+              this.img.onerror();
+            }
+          }.bind(imageObj);
+          img.customComplete();
+
+        } else if ( options.proxy ) {
+          imageObj = images[src] = {
+            img: img
+          };
+          images.numTotal++;
+          proxyGetImage( src, img, imageObj );
+        }
+      }
+
+    },
+    cleanupDOM: function(cause) {
+      var img, src;
+      if (!images.cleanupDone) {
+        if (cause && typeof cause === "string") {
+          h2clog("html2canvas: Cleanup because: " + cause);
+        } else {
+          h2clog("html2canvas: Cleanup after timeout: " + options.timeout + " ms.");
+        }
+
+        for (src in images) {
+          if (images.hasOwnProperty(src)) {
+            img = images[src];
+            if (typeof img === "object" && img.callbackname && img.succeeded === undefined) {
+              // cancel proxy image request
+              window[img.callbackname] = undefined; // to work with IE<9  // NOTE: that the undefined callback property-name still exists on the window object (for IE<9)
+              try {
+                delete window[img.callbackname];  // for all browser that support this
+              } catch(ex) {}
+              if (img.script && img.script.parentNode) {
+                img.script.setAttribute("src", "about:blank");  // try to cancel running request
+                img.script.parentNode.removeChild(img.script);
+              }
+              images.numLoaded++;
+              images.numFailed++;
+              h2clog("html2canvas: Cleaned up failed img: '" + src + "' Steps: " + images.numLoaded + " / " + images.numTotal);
+            }
+          }
+        }
+
+        // cancel any pending requests
+        if(window.stop !== undefined) {
+          window.stop();
+        } else if(document.execCommand !== undefined) {
+          document.execCommand("Stop", false);
+        }
+        if (document.close !== undefined) {
+          document.close();
+        }
+        images.cleanupDone = true;
+        if (!(cause && typeof cause === "string")) {
+          start();
+        }
+      }
+    },
+
+    renderingDone: function() {
+      if (timeoutTimer) {
+        window.clearTimeout(timeoutTimer);
+      }
+    }
+  };
+
+  if (options.timeout > 0) {
+    timeoutTimer = window.setTimeout(methods.cleanupDOM, options.timeout);
+  }
+
+  h2clog('html2canvas: Preload starts: finding background-images');
+  images.firstRun = true;
+
+  getImages(element);
+
+  h2clog('html2canvas: Preload: Finding images');
+  // load <img> images
+  for (i = 0; i < imgLen; i+=1){
+    methods.loadImage( domImages[i].getAttribute( "src" ) );
+  }
+
+  images.firstRun = false;
+  h2clog('html2canvas: Preload: Done.');
+  if ( images.numTotal === images.numLoaded ) {
+    start();
+  }
+
+  return methods;
+
+};
+function h2cRenderContext(width, height) {
+  var storage = [];
+  return {
+    storage: storage,
+    width: width,
+    height: height,
+    clip: function() {
+      storage.push({
+        type: "function",
+        name: "clip",
+        'arguments': arguments
+      });
+    },
+    translate: function() {
+      storage.push({
+        type: "function",
+        name: "translate",
+        'arguments': arguments
+      });
+    },
+    fill: function() {
+      storage.push({
+        type: "function",
+        name: "fill",
+        'arguments': arguments
+      });
+    },
+    save: function() {
+      storage.push({
+        type: "function",
+        name: "save",
+        'arguments': arguments
+      });
+    },
+    restore: function() {
+      storage.push({
+        type: "function",
+        name: "restore",
+        'arguments': arguments
+      });
+    },
+    fillRect: function () {
+      storage.push({
+        type: "function",
+        name: "fillRect",
+        'arguments': arguments
+      });
+    },
+    createPattern: function() {
+      storage.push({
+        type: "function",
+        name: "createPattern",
+        'arguments': arguments
+      });
+    },
+    drawShape: function() {
+
+      var shape = [];
+
+      storage.push({
+        type: "function",
+        name: "drawShape",
+        'arguments': shape
+      });
+
+      return {
+        moveTo: function() {
+          shape.push({
+            name: "moveTo",
+            'arguments': arguments
+          });
+        },
+        lineTo: function() {
+          shape.push({
+            name: "lineTo",
+            'arguments': arguments
+          });
+        },
+        arcTo: function() {
+          shape.push({
+            name: "arcTo",
+            'arguments': arguments
+          });
+        },
+        bezierCurveTo: function() {
+          shape.push({
+            name: "bezierCurveTo",
+            'arguments': arguments
+          });
+        },
+        quadraticCurveTo: function() {
+          shape.push({
+            name: "quadraticCurveTo",
+            'arguments': arguments
+          });
+        }
+      };
+
+    },
+    drawImage: function () {
+      storage.push({
+        type: "function",
+        name: "drawImage",
+        'arguments': arguments
+      });
+    },
+    fillText: function () {
+      storage.push({
+        type: "function",
+        name: "fillText",
+        'arguments': arguments
+      });
+    },
+    setVariable: function (variable, value) {
+      storage.push({
+        type: "variable",
+        name: variable,
+        'arguments': value
+      });
+    }
+  };
+}
+_html2canvas.Renderer = function(parseQueue, options){
+
+  function createRenderQueue(parseQueue) {
+    var queue = [];
+
+    var sortZ = function(zStack){
+      var subStacks = [],
+      stackValues = [];
+
+      zStack.children.forEach(function(stackChild) {
+        if (stackChild.children && stackChild.children.length > 0){
+          subStacks.push(stackChild);
+          stackValues.push(stackChild.zindex);
+        } else {
+          queue.push(stackChild);
+        }
+      });
+
+      stackValues.sort(function(a, b) {
+        return a - b;
+      });
+
+      stackValues.forEach(function(zValue) {
+        var index;
+
+        subStacks.some(function(stack, i){
+          index = i;
+          return (stack.zindex === zValue);
+        });
+        sortZ(subStacks.splice(index, 1)[0]);
+
+      });
+    };
+
+    sortZ(parseQueue.zIndex);
+
+    return queue;
+  }
+
+  function getRenderer(rendererName) {
+    var renderer;
+
+    if (typeof options.renderer === "string" && _html2canvas.Renderer[rendererName] !== undefined) {
+      renderer = _html2canvas.Renderer[rendererName](options);
+    } else if (typeof rendererName === "function") {
+      renderer = rendererName(options);
+    } else {
+      throw new Error("Unknown renderer");
+    }
+
+    if ( typeof renderer !== "function" ) {
+      throw new Error("Invalid renderer defined");
+    }
+    return renderer;
+  }
+
+  return getRenderer(options.renderer)(parseQueue, options, document, createRenderQueue(parseQueue), _html2canvas);
+};
+
+_html2canvas.Util.Support = function (options, doc) {
+
+  function supportSVGRendering() {
+    var img = new Image(),
+    canvas = doc.createElement("canvas"),
+    ctx = (canvas.getContext === undefined) ? false : canvas.getContext("2d");
+    if (ctx === false) {
+      return false;
+    }
+    canvas.width = canvas.height = 10;
+    img.src = [
+    "data:image/svg+xml,",
+    "<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'>",
+    "<foreignObject width='10' height='10'>",
+    "<div xmlns='http://www.w3.org/1999/xhtml' style='width:10;height:10;'>",
+    "sup",
+    "</div>",
+    "</foreignObject>",
+    "</svg>"
+    ].join("");
+    try {
+      ctx.drawImage(img, 0, 0);
+      canvas.toDataURL();
+    } catch(e) {
+      return false;
+    }
+    h2clog('html2canvas: Parse: SVG powered rendering available');
+    return true;
+  }
+
+  // Test whether we can use ranges to measure bounding boxes
+  // Opera doesn't provide valid bounds.height/bottom even though it supports the method.
+
+  function supportRangeBounds() {
+    var r, testElement, rangeBounds, rangeHeight, support = false;
+
+    if (doc.createRange) {
+      r = doc.createRange();
+      if (r.getBoundingClientRect) {
+        testElement = doc.createElement('boundtest');
+        testElement.style.height = "123px";
+        testElement.style.display = "block";
+        doc.body.appendChild(testElement);
+
+        r.selectNode(testElement);
+        rangeBounds = r.getBoundingClientRect();
+        rangeHeight = rangeBounds.height;
+
+        if (rangeHeight === 123) {
+          support = true;
+        }
+        doc.body.removeChild(testElement);
+      }
+    }
+
+    return support;
+  }
+
+  return {
+    rangeBounds: supportRangeBounds(),
+    svgRendering: options.svgRendering && supportSVGRendering()
+  };
+};
+window.html2canvas = function(elements, opts) {
+  elements = (elements.length) ? elements : [elements];
+  var queue,
+  canvas,
+  options = {
+    // general
+    logging: false,
+    elements: elements,
+    background: "#fff",
+
+    // preload options
+    proxy: null,
+    timeout: 0,    // no timeout
+    useCORS: false, // try to load images as CORS (where available), before falling back to proxy
+    allowTaint: false, // whether to allow images to taint the canvas, won't need proxy if set to true
+
+    // parse options
+    svgRendering: false, // use svg powered rendering where available (FF11+)
+    ignoreElements: "IFRAME|OBJECT|PARAM",
+    useOverflow: true,
+    letterRendering: false,
+    chinese: false,
+
+    // render options
+
+    width: null,
+    height: null,
+    taintTest: true, // do a taint test with all images before applying to canvas
+    renderer: "Canvas"
+  };
+
+  options = _html2canvas.Util.Extend(opts, options);
+
+  _html2canvas.logging = options.logging;
+  options.complete = function( images ) {
+
+    if (typeof options.onpreloaded === "function") {
+      if ( options.onpreloaded( images ) === false ) {
+        return;
+      }
+    }
+    queue = _html2canvas.Parse( images, options );
+
+    if (typeof options.onparsed === "function") {
+      if ( options.onparsed( queue ) === false ) {
+        return;
+      }
+    }
+
+    canvas = _html2canvas.Renderer( queue, options );
+
+    if (typeof options.onrendered === "function") {
+      options.onrendered( canvas );
+    }
+
+
+  };
+
+  // for pages without images, we still want this to be async, i.e. return methods before executing
+  window.setTimeout( function(){
+    _html2canvas.Preload( options );
+  }, 0 );
+
+  return {
+    render: function( queue, opts ) {
+      return _html2canvas.Renderer( queue, _html2canvas.Util.Extend(opts, options) );
+    },
+    parse: function( images, opts ) {
+      return _html2canvas.Parse( images, _html2canvas.Util.Extend(opts, options) );
+    },
+    preload: function( opts ) {
+      return _html2canvas.Preload( _html2canvas.Util.Extend(opts, options) );
+    },
+    log: h2clog
+  };
+};
+
+window.html2canvas.log = h2clog; // for renderers
+window.html2canvas.Renderer = {
+  Canvas: undefined // We are assuming this will be used
+};
+_html2canvas.Renderer.Canvas = function(options) {
+
+  options = options || {};
+
+  var doc = document,
+  safeImages = [],
+  testCanvas = document.createElement("canvas"),
+  testctx = testCanvas.getContext("2d"),
+  canvas = options.canvas || doc.createElement('canvas');
+
+
+  function createShape(ctx, args) {
+    ctx.beginPath();
+    args.forEach(function(arg) {
+      ctx[arg.name].apply(ctx, arg['arguments']);
+    });
+    ctx.closePath();
+  }
+
+  function safeImage(item) {
+    if (safeImages.indexOf(item['arguments'][0].src ) === -1) {
+      testctx.drawImage(item['arguments'][0], 0, 0);
+      try {
+        testctx.getImageData(0, 0, 1, 1);
+      } catch(e) {
+        testCanvas = doc.createElement("canvas");
+        testctx = testCanvas.getContext("2d");
+        return false;
+      }
+      safeImages.push(item['arguments'][0].src);
+    }
+    return true;
+  }
+
+  function isTransparent(backgroundColor) {
+    return (backgroundColor === "transparent" || backgroundColor === "rgba(0, 0, 0, 0)");
+  }
+
+  function renderItem(ctx, item) {
+    switch(item.type){
+      case "variable":
+        ctx[item.name] = item['arguments'];
+        break;
+      case "function":
+        if (item.name === "createPattern") {
+          if (item['arguments'][0].width > 0 && item['arguments'][0].height > 0) {
+            try {
+              ctx.fillStyle = ctx.createPattern(item['arguments'][0], "repeat");
+            }
+            catch(e) {
+              h2clog("html2canvas: Renderer: Error creating pattern", e.message);
+            }
+          }
+        } else if (item.name === "drawShape") {
+          createShape(ctx, item['arguments']);
+        } else if (item.name === "drawImage") {
+          if (item['arguments'][8] > 0 && item['arguments'][7] > 0) {
+            if (!options.taintTest || (options.taintTest && safeImage(item))) {
+              ctx.drawImage.apply( ctx, item['arguments'] );
+            }
+          }
+        } else {
+          ctx[item.name].apply(ctx, item['arguments']);
+        }
+        break;
+    }
+  }
+
+  return function(zStack, options, doc, queue, _html2canvas) {
+
+    var ctx = canvas.getContext("2d"),
+    storageContext,
+    i,
+    queueLen,
+    newCanvas,
+    bounds,
+    fstyle;
+
+    canvas.width = canvas.style.width =  options.width || zStack.ctx.width;
+    canvas.height = canvas.style.height = options.height || zStack.ctx.height;
+
+    fstyle = ctx.fillStyle;
+    ctx.fillStyle = (isTransparent(zStack.backgroundColor) && options.background !== undefined) ? options.background : zStack.backgroundColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = fstyle;
+
+
+    if ( options.svgRendering && zStack.svgRender !== undefined ) {
+      // TODO: enable async rendering to support this
+      ctx.drawImage( zStack.svgRender, 0, 0 );
+    } else {
+      for ( i = 0, queueLen = queue.length; i < queueLen; i+=1 ) {
+        storageContext = queue.splice(0, 1)[0];
+        storageContext.canvasPosition = storageContext.canvasPosition || {};
+
+        // set common settings for canvas
+        ctx.textBaseline = "bottom";
+
+        if (storageContext.clip){
+          ctx.save();
+          ctx.beginPath();
+          // console.log(storageContext);
+          ctx.rect(storageContext.clip.left, storageContext.clip.top, storageContext.clip.width, storageContext.clip.height);
+          ctx.clip();
+        }
+
+        if (storageContext.ctx.storage) {
+          storageContext.ctx.storage.forEach(renderItem.bind(null, ctx));
+        }
+
+        if (storageContext.clip){
+          ctx.restore();
+        }
+      }
+    }
+
+    h2clog("html2canvas: Renderer: Canvas renderer done - returning canvas obj");
+
+    queueLen = options.elements.length;
+
+    if (queueLen === 1) {
+      if (typeof options.elements[0] === "object" && options.elements[0].nodeName !== "BODY") {
+        // crop image to the bounds of selected (single) element
+        bounds = _html2canvas.Util.Bounds(options.elements[0]);
+        newCanvas = doc.createElement('canvas');
+        newCanvas.width = bounds.width;
+        newCanvas.height = bounds.height;
+        ctx = newCanvas.getContext("2d");
+
+        ctx.drawImage(canvas, bounds.left, bounds.top, bounds.width, bounds.height, 0, 0, bounds.width, bounds.height);
+        canvas = null;
+        return newCanvas;
+      }
+    }
+
+    return canvas;
+  };
+};
+})(window,document);
+
+/**
+  @license html2canvas v0.34 <http://html2canvas.hertzen.com>
+  Copyright (c) 2011 Niklas von Hertzen. All rights reserved.
+  http://www.twitter.com/niklasvh
+
+  Released under MIT License
+ */
+/*
+ * jQuery helper plugin for examples and tests
+ */
+(function( $ ){
+    $.fn.html2canvas = function(options) {
+        if (options && options.profile && window.console && window.console.profile) {
+            console.profile();
+        }
+        var date = new Date(),
+        html2obj,
+        $message = null,
+        timeoutTimer = false,
+        timer = date.getTime();
+        options = options || {};
+
+        options.onrendered = options.onrendered || function( canvas ) {
+            var $canvas = $(canvas),
+            finishTime = new Date();
+
+            if (options && options.profile && window.console && window.console.profileEnd) {
+                console.profileEnd();
+            }
+            $canvas.css({
+                position: 'absolute',
+                left: 0,
+                top: 0
+            }).appendTo(document.body);
+            $canvas.siblings().toggle();
+
+            $(window).click(function(){
+                $canvas.toggle().siblings().toggle();
+                throwMessage("Canvas Render " + ($canvas.is(':visible') ? "visible" : "hidden"));
+            });
+            throwMessage('Screenshot created in '+ ((finishTime.getTime()-timer)) + " ms<br />",4000);
+
+            // test if canvas is read-able
+            try {
+                $canvas[0].toDataURL();
+            } catch(e) {
+                if ($canvas[0].nodeName.toLowerCase() === "canvas") {
+                    // TODO, maybe add a bit less offensive way to present this, but still something that can easily be noticed
+                    alert("Canvas is tainted, unable to read data");
+                }
+            }
+        };
+
+        html2obj = html2canvas(this, options);
+
+        function throwMessage(msg,duration){
+            window.clearTimeout(timeoutTimer);
+            timeoutTimer = window.setTimeout(function(){
+                $message.fadeOut(function(){
+                    $message.remove();
+                    $message = null;
+                });
+            },duration || 2000);
+            if ($message)
+                $message.remove();
+            $message = $('<div />').html(msg).css({
+                margin:0,
+                padding:10,
+                background: "#000",
+                opacity:0.7,
+                position:"fixed",
+                top:10,
+                right:10,
+                fontFamily: 'Tahoma',
+                color:'#fff',
+                fontSize:12,
+                borderRadius:12,
+                width:'auto',
+                height:'auto',
+                textAlign:'center',
+                textDecoration:'none',
+                display:'none'
+            }).appendTo(document.body).fadeIn();
+            html2obj.log(msg);
+        }
+    };
+})( jQuery );
+
