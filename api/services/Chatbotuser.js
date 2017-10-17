@@ -319,14 +319,12 @@ var model = {
             hostname: 'exponentiadata.co.in',
             path:'/qlikauth/qlikauth.php',
         };
-        http.get(options, function(res) { 
-            res.on("data", function(chunk)
-            {
-                async.each(data.images,
-                    // 2nd param is the function that each item is passed to
-                    function(item, eachCallback){
-                        
-
+        
+        async.each(data.images,
+            // 2nd param is the function that each item is passed to
+            function(item, eachCallback){
+                    
+                    ///setTimeout(function() {   
                         // url-toscreenshot
                         // new Screenshot(item)
                         // .width(420)
@@ -348,37 +346,66 @@ var model = {
                         //console.log("res",res);
                         //console.log(chunk);
                         //url = item.slice( 0, item.indexOf('?') );
+                http.get(options, function(res) { 
+                    res.on("data", function(chunk)
+                    {
+                        console.log(item);
                         url = item;
                         //var stringify = JSON.stringify(chunk);
                         newchunk=JSON.parse(chunk);
                         url = url+"?qlikTicket="+newchunk.Ticket;
+                        //url =url.replace(/(^\w+:|^)\/\//, '');
                         //webshot
-                        console.log(url,"new url");
-                        webshot(url, 'scr'+key+'.png',  function(err) {
-                        // screenshot now saved to hello_world.png
-                            
-                            var filedata = {filename:'scr'+key+'.png',contentType: 'image/png'};
-                            attachments1.push(filedata);
-                            key++;
-                            eachCallback();
-                        });
+                        var dt = new Date();
+                        var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds()+key;
+                        var filename1 = "";
                         var options = {
+                            windowSize:{ width: 1024, height: 768 },
                             shotSize: {
-                                width: 'all'
-                                , height: 'all'
-                            }
-                            , userAgent: 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_2 like Mac OS X; en-us)'
-                            + ' AppleWebKit/531.21.20 (KHTML, like Gecko) Mobile/7B298g'
+                                width: 'window',height: 'window'
+                            },
+                            userAgent: 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_2 like Mac OS X; en-us)'
+                            + ' AppleWebKit/531.21.20 (KHTML, like Gecko) Mobile/7B298g',
+                            renderDelay:40000,
+                            // onLoadFinished: function() {
+                                
+                            //     console.log(url,"new url"+time+"key-"+key);
+                            //     //eachCallback();
+                            // },
+                            //takeShotOnCallback:true,
+                            //timeout:60000
                         };
-                        var renderStream = webshot(url);
-                        var file = fs.createWriteStream('scr'+key+'.png', {encoding: 'binary'});
+                        var filename1 = dt.getTime()+key+'.png';
+                        webshot(url,filename1 , options, function(err) {
+                        // screenshot now saved to hello_world.png
+                            //console.log(url,"new url"+time+"key-"+key);
+                            //eachCallback();
+                            // setTimeout(function(){
+                                
+                            //     //document.write("getTime() : " + dt.getTime() ); 
+                                console.log(url,"new url");
+                                var filedata = {filename:filename1,content: fs.createReadStream(filename1)};
+                                attachments1.push(filedata);
+                                key++;
+                                eachCallback();
+                        //    / },60000);
+                            
+                        });
+                        
+                    }); 
+                }).on('error', function(e) 
+                { 
+                    console.log("Got error: " + e.message); 
+                });
+                        // var renderStream = webshot(url,options);
+                        // var file = fs.createWriteStream('scr'+key+'.png', {encoding: 'binary'});
                         
                         // renderStream.on('data', function(data) {
                         //     file.write(data.toString('binary'), 'binary');
                         //     var filedata = { filename:'scr'+key+'.png',contentType: 'image/png'};
-                        //     // attachments1.push(filedata);
-                        //     // key++;
-                        //     // eachCallback();
+                        //     attachments1.push(filedata);
+                        //     key++;
+                        //     eachCallback();
                         // });
                         // streamToBuffer(renderStream, (err, buffer) => {
                         //     if (err) {
@@ -396,7 +423,7 @@ var model = {
                         // });
                         
                         
-                        
+                        //},60000);
                         
                     },
                     // 3rd param is the function to call when everything's done
@@ -405,7 +432,7 @@ var model = {
                         if(err) {}
                         else
                         {
-                            console.log(attachments1);
+                            //console.log("done",attachments1);
                             //callback(null,{message:1});
                             const sendmail = require('sendmail')({
                                 logger: {
@@ -434,15 +461,12 @@ var model = {
                                 if(!err)
                                     callback(null,{message:1});
                             });
-                            //         callback(null,{message:1});
+                                    //callback(null,{message:1});
                         }
+                    
                     }
                 );
-            }); 
-        }).on('error', function(e) 
-        { 
-            console.log("Got error: " + e.message); 
-        });
+           
         
 
         // _.each(img,function(v,k){
@@ -475,6 +499,24 @@ var model = {
         //         '$mail.Display();']
         //     );
         // }
+    },
+    getnewticket:function (data, callback) {
+        var http = require('http');
+        var options = {
+            hostname: 'exponentiadata.co.in',
+            path:'/qlikauth/qlikauth.php',
+        };
+        http.get(options, function(res) { 
+            res.on("data", function(chunk)
+            {
+                var found = {};
+                found.chunk=JSON.parse(chunk);
+                callback(null, found);
+            }); 
+        }).on('error', function(e) 
+        { 
+            console.log("Got error: " + e.message); 
+        });
     },
 };
 module.exports = _.assign(module.exports, exports, model);
